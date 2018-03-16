@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+<!-- 	首先引入属性配置文件 -->
+	<properties  resource="dataSource.properties"></properties>
+	<classPathEntry location="${classLocation}" />
+	<context id="DB2Tables" targetRuntime="MyBatis3">
+		<!--在创建class时，对注释进行控制 -->
+		<commentGenerator>
+			<property name="suppressDate" value="true" />
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+		<!--jdbc的数据库连接 -->
+		<jdbcConnection driverClass="${driverClass}"
+			connectionURL="${connectionURL}" 
+			userId="${userId}"
+			password="${password}">
+		</jdbcConnection>
+		<!--在数据库类型和java类型之间做转换 -->
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<!-- 设置生成的实体类在哪个包下 -->
+		<!-- targetPackage 指定生成的model生成所在的包名 targetProject：目标项目，指定一个存在的目录下，生成的内容会放到指定目录中，如果目录不存在，MBG不会自动建目录 -->
+		<javaModelGenerator targetPackage="zsc.ordermealsys.pojo"
+			targetProject=".\src\main\java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+			<!-- 是否对model添加 构造函数 -->
+			<property name="constructorBased" value="true" />
+			<!-- 建立的Model对象是否 不可改变 即生成的Model对象不会有 setter方法，只有构造方法 -->
+			<property name="immutable" value="false" />
+		</javaModelGenerator>
+		<!-- 生成实体类对象的映射文件 -->
+		<sqlMapGenerator targetPackage="PojoMappers"
+			targetProject="./src/main/resources">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+		<!-- 创建dao层的映射文件 -->
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="zsc.ordermealsys.dao" targetProject="./src/main/java">
+			<!-- enableSubPackages:是否让schema作为包的后缀 -->
+			<property name="enableSubPackages" value="false" />
+		</javaClientGenerator>
+
+		<table schema="DB2ADMIN" tableName="user" domainObjectName="User" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<!-- 如果设置为true，生成的model类会直接使用column本身的名字，而不会再使用驼峰命名方法，比如BORN_DATE，生成的属性名字就是BORN_DATE,而不会是bornDate -->
+			<property name="useActualColumnNames" value="false" />
+				<!--sqlStatement自动获取生成的主键 -->
+			<generatedKey column="id" sqlStatement="JDBC" identity="true" />
+			
+		</table>
+		<table schema="DB2ADMIN" tableName="store_pic" domainObjectName="StorePic" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<!-- 如果设置为true，生成的model类会直接使用column本身的名字，而不会再使用驼峰命名方法，比如BORN_DATE，生成的属性名字就是BORN_DATE,而不会是bornDate -->
+			<property name="useActualColumnNames" value="false" />
+				<!--sqlStatement自动获取生成的主键 -->
+			<generatedKey column="id" sqlStatement="JDBC" identity="true" />
+			
+			
+			
+ 		<columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />
+		</table>
+		<table schema="DB2ADMIN" tableName="store" domainObjectName="Store" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<!-- 如果设置为true，生成的model类会直接使用column本身的名字，而不会再使用驼峰命名方法，比如BORN_DATE，生成的属性名字就是BORN_DATE,而不会是bornDate -->
+			<property name="useActualColumnNames" value="false" />
+				<!--sqlStatement自动获取生成的主键 -->
+			<generatedKey column="id" sqlStatement="JDBC" identity="true" />
+			
+			
+			
+ 		<columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />
+		</table>
+		<table schema="DB2ADMIN" tableName="shopping_cart" domainObjectName="ShoppingCart" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<!-- 如果设置为true，生成的model类会直接使用column本身的名字，而不会再使用驼峰命名方法，比如BORN_DATE，生成的属性名字就是BORN_DATE,而不会是bornDate -->
+			<property name="useActualColumnNames" value="false" />
+				<!--sqlStatement自动获取生成的主键 -->
+			<generatedKey column="id" sqlStatement="JDBC" identity="true" />
+			
+			
+			
+ 		<columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />
+		</table>
+		<table schema="DB2ADMIN" tableName="refund_pic" domainObjectName="RefundPic" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<!-- 如果设置为true，生成的model类会直接使用column本身的名字，而不会再使用驼峰命名方法，比如BORN_DATE，生成的属性名字就是BORN_DATE,而不会是bornDate -->
+			<property name="useActualColumnNames" value="false" />
+				<!--sqlStatement自动获取生成的主键 -->
+			<generatedKey column="id" sqlStatement="JDBC" identity="true" />
+			
+			
+			
+ 		<columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />
+		</table>
+		<table schema="DB2ADMIN" tableName="refund" domainObjectName="Refund" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<!-- 如果设置为true，生成的model类会直接使用column本身的名字，而不会再使用驼峰命名方法，比如BORN_DATE，生成的属性名字就是BORN_DATE,而不会是bornDate -->
+			<property name="useActualColumnNames" value="false" />
+				<!--sqlStatement自动获取生成的主键 -->
+			<generatedKey column="id" sqlStatement="JDBC" identity="true" />
+			
+			
+			
+ 		<columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />
+		</table>
+		<table schema="DB2ADMIN" tableName="product" domainObjectName="Product" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<!-- 如果设置为true，生成的model类会直接使用column本身的名字，而不会再使用驼峰命名方法，比如BORN_DATE，生成的属性名字就是BORN_DATE,而不会是bornDate -->
+			<property name="useActualColumnNames" value="false" />
+				<!--sqlStatement自动获取生成的主键 -->
+			<generatedKey column="id" sqlStatement="JDBC" identity="true" />
+			
+			
+			
+ 		<columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />
+		</table>
+		<table schema="DB2ADMIN" tableName="order_status" domainObjectName="OrderStatus" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<!-- 如果设置为true，生成的model类会直接使用column本身的名字，而不会再使用驼峰命名方法，比如BORN_DATE，生成的属性名字就是BORN_DATE,而不会是bornDate -->
+			<property name="useActualColumnNames" value="false" />
+				<!--sqlStatement自动获取生成的主键 -->
+			<generatedKey column="id" sqlStatement="JDBC" identity="true" />
+			
+			
+			
+ 		<columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />
+		</table>
+		<table schema="DB2ADMIN" tableName="order_pay" domainObjectName="OrderPay" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<!-- 如果设置为true，生成的model类会直接使用column本身的名字，而不会再使用驼峰命名方法，比如BORN_DATE，生成的属性名字就是BORN_DATE,而不会是bornDate -->
+			<property name="useActualColumnNames" value="false" />
+				<!--sqlStatement自动获取生成的主键 -->
+			<generatedKey column="id" sqlStatement="JDBC" identity="true" />
+			
+			
+			
+ 		<columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />
+		</table>
+		<table schema="DB2ADMIN" tableName="order_item" domainObjectName="OrderItem" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<!-- 如果设置为true，生成的model类会直接使用column本身的名字，而不会再使用驼峰命名方法，比如BORN_DATE，生成的属性名字就是BORN_DATE,而不会是bornDate -->
+			<property name="useActualColumnNames" value="false" />
+				<!--sqlStatement自动获取生成的主键 -->
+			<generatedKey column="id" sqlStatement="JDBC" identity="true" />
+			
+			
+			
+ 		<columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />
+		</table>
+		<table schema="DB2ADMIN" tableName="order" domainObjectName="Order" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<!-- 如果设置为true，生成的model类会直接使用column本身的名字，而不会再使用驼峰命名方法，比如BORN_DATE，生成的属性名字就是BORN_DATE,而不会是bornDate -->
+			<property name="useActualColumnNames" value="false" />
+				<!--sqlStatement自动获取生成的主键 -->
+			<generatedKey column="id" sqlStatement="JDBC" identity="true" />
+			
+			
+			
+ 		<columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />
+		</table>
+		<table schema="DB2ADMIN" tableName="operate" domainObjectName="Operate" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<!-- 如果设置为true，生成的model类会直接使用column本身的名字，而不会再使用驼峰命名方法，比如BORN_DATE，生成的属性名字就是BORN_DATE,而不会是bornDate -->
+			<property name="useActualColumnNames" value="false" />
+				<!--sqlStatement自动获取生成的主键 -->
+			<generatedKey column="id" sqlStatement="JDBC" identity="true" />
+			
+			
+			
+ 		<columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />
+		</table>
+		<table schema="DB2ADMIN" tableName="login" domainObjectName="Login" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<!-- 如果设置为true，生成的model类会直接使用column本身的名字，而不会再使用驼峰命名方法，比如BORN_DATE，生成的属性名字就是BORN_DATE,而不会是bornDate -->
+			<property name="useActualColumnNames" value="false" />
+				<!--sqlStatement自动获取生成的主键 -->
+			<generatedKey column="id" sqlStatement="JDBC" identity="true" />
+			
+			
+			
+ 		<columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />
+		</table>
+		<table schema="DB2ADMIN" tableName="delivery_time" domainObjectName="DeliveryTime" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<!-- 如果设置为true，生成的model类会直接使用column本身的名字，而不会再使用驼峰命名方法，比如BORN_DATE，生成的属性名字就是BORN_DATE,而不会是bornDate -->
+			<property name="useActualColumnNames" value="false" />
+				<!--sqlStatement自动获取生成的主键 -->
+			<generatedKey column="id" sqlStatement="JDBC" identity="true" />
+			
+			
+			
+ 		<columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />
+		</table>
+		<table schema="DB2ADMIN" tableName="delivery_fee" domainObjectName="DeliveryFee" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<!-- 如果设置为true，生成的model类会直接使用column本身的名字，而不会再使用驼峰命名方法，比如BORN_DATE，生成的属性名字就是BORN_DATE,而不会是bornDate -->
+			<property name="useActualColumnNames" value="false" />
+				<!--sqlStatement自动获取生成的主键 -->
+			<generatedKey column="id" sqlStatement="JDBC" identity="true" />
+			
+			
+			
+ 		<columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />
+		</table>
+		<table schema="DB2ADMIN" tableName="comment_pic" domainObjectName="CommentPic" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<!-- 如果设置为true，生成的model类会直接使用column本身的名字，而不会再使用驼峰命名方法，比如BORN_DATE，生成的属性名字就是BORN_DATE,而不会是bornDate -->
+			<property name="useActualColumnNames" value="false" />
+				<!--sqlStatement自动获取生成的主键 -->
+			<generatedKey column="id" sqlStatement="JDBC" identity="true" />
+ 		<columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />
+		</table>
+		<table schema="DB2ADMIN" tableName="comment" domainObjectName="Comment" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<!-- 如果设置为true，生成的model类会直接使用column本身的名字，而不会再使用驼峰命名方法，比如BORN_DATE，生成的属性名字就是BORN_DATE,而不会是bornDate -->
+			<property name="useActualColumnNames" value="false" />
+				<!--sqlStatement自动获取生成的主键 -->
+			<generatedKey column="id" sqlStatement="JDBC" identity="true" />
+ 		<columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />
+		</table>
+		<table schema="DB2ADMIN" tableName="category" domainObjectName="Category" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<!-- 如果设置为true，生成的model类会直接使用column本身的名字，而不会再使用驼峰命名方法，比如BORN_DATE，生成的属性名字就是BORN_DATE,而不会是bornDate -->
+			<property name="useActualColumnNames" value="false" />
+				<!--sqlStatement自动获取生成的主键 -->
+			<generatedKey column="id" sqlStatement="JDBC" identity="true" />
+ 		<columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />
+		</table>
+		<table schema="DB2ADMIN" tableName="address" domainObjectName="Address" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<!-- 如果设置为true，生成的model类会直接使用column本身的名字，而不会再使用驼峰命名方法，比如BORN_DATE，生成的属性名字就是BORN_DATE,而不会是bornDate -->
+			<property name="useActualColumnNames" value="false" />
+				<!--sqlStatement自动获取生成的主键 -->
+			<generatedKey column="id" sqlStatement="JDBC" identity="true" />
+ 		<columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />
+		</table>
+		
+		
+	</context>
+</generatorConfiguration>

@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="zsc.ordermealsys.dao.ProductMapper" >
+  <resultMap id="BaseResultMap" type="zsc.ordermealsys.pojo.Product" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="seller_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="stock" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="sales" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="pro_status" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="del_status" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="delivery_fee" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="box_fee" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="box_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="zsc.ordermealsys.pojo.ProductWithBLOBs" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="seller_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="stock" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="sales" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="pro_status" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="del_status" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="delivery_fee" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="box_fee" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="box_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="main_pic" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="sub_pic1" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="sub_pic2" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="sub_pic3" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="detail" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, seller_name, name, price, stock, sales, pro_status, del_status, create_time, 
+    update_time, delivery_fee, box_fee, box_price
+  </sql>
+  <sql id="Blob_Column_List" >
+    main_pic, sub_pic1, sub_pic2, sub_pic3, detail
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from product
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from product
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="zsc.ordermealsys.pojo.ProductWithBLOBs" useGeneratedKeys="true" keyProperty="id" >
+    insert into product (seller_name, name, price, 
+      stock, sales, pro_status, 
+      del_status, create_time, update_time, 
+      delivery_fee, box_fee, box_price, 
+      main_pic, sub_pic1, sub_pic2, 
+      sub_pic3, detail)
+    values (#{sellerName,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, 
+      #{stock,jdbcType=INTEGER}, #{sales,jdbcType=INTEGER}, #{proStatus,jdbcType=INTEGER}, 
+      #{delStatus,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{deliveryFee,jdbcType=DECIMAL}, #{boxFee,jdbcType=DECIMAL}, #{boxPrice,jdbcType=DECIMAL}, 
+      #{mainPic,jdbcType=LONGVARCHAR}, #{subPic1,jdbcType=LONGVARCHAR}, #{subPic2,jdbcType=LONGVARCHAR}, 
+      #{subPic3,jdbcType=LONGVARCHAR}, #{detail,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="zsc.ordermealsys.pojo.ProductWithBLOBs" useGeneratedKeys="true" keyProperty="id" >
+    insert into product
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sellerName != null" >
+        seller_name,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="stock != null" >
+        stock,
+      </if>
+      <if test="sales != null" >
+        sales,
+      </if>
+      <if test="proStatus != null" >
+        pro_status,
+      </if>
+      <if test="delStatus != null" >
+        del_status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="deliveryFee != null" >
+        delivery_fee,
+      </if>
+      <if test="boxFee != null" >
+        box_fee,
+      </if>
+      <if test="boxPrice != null" >
+        box_price,
+      </if>
+      <if test="mainPic != null" >
+        main_pic,
+      </if>
+      <if test="subPic1 != null" >
+        sub_pic1,
+      </if>
+      <if test="subPic2 != null" >
+        sub_pic2,
+      </if>
+      <if test="subPic3 != null" >
+        sub_pic3,
+      </if>
+      <if test="detail != null" >
+        detail,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sellerName != null" >
+        #{sellerName,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="stock != null" >
+        #{stock,jdbcType=INTEGER},
+      </if>
+      <if test="sales != null" >
+        #{sales,jdbcType=INTEGER},
+      </if>
+      <if test="proStatus != null" >
+        #{proStatus,jdbcType=INTEGER},
+      </if>
+      <if test="delStatus != null" >
+        #{delStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deliveryFee != null" >
+        #{deliveryFee,jdbcType=DECIMAL},
+      </if>
+      <if test="boxFee != null" >
+        #{boxFee,jdbcType=DECIMAL},
+      </if>
+      <if test="boxPrice != null" >
+        #{boxPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="mainPic != null" >
+        #{mainPic,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="subPic1 != null" >
+        #{subPic1,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="subPic2 != null" >
+        #{subPic2,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="subPic3 != null" >
+        #{subPic3,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="detail != null" >
+        #{detail,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="zsc.ordermealsys.pojo.ProductWithBLOBs" >
+    update product
+    <set >
+      <if test="sellerName != null" >
+        seller_name = #{sellerName,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="stock != null" >
+        stock = #{stock,jdbcType=INTEGER},
+      </if>
+      <if test="sales != null" >
+        sales = #{sales,jdbcType=INTEGER},
+      </if>
+      <if test="proStatus != null" >
+        pro_status = #{proStatus,jdbcType=INTEGER},
+      </if>
+      <if test="delStatus != null" >
+        del_status = #{delStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deliveryFee != null" >
+        delivery_fee = #{deliveryFee,jdbcType=DECIMAL},
+      </if>
+      <if test="boxFee != null" >
+        box_fee = #{boxFee,jdbcType=DECIMAL},
+      </if>
+      <if test="boxPrice != null" >
+        box_price = #{boxPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="mainPic != null" >
+        main_pic = #{mainPic,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="subPic1 != null" >
+        sub_pic1 = #{subPic1,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="subPic2 != null" >
+        sub_pic2 = #{subPic2,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="subPic3 != null" >
+        sub_pic3 = #{subPic3,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="detail != null" >
+        detail = #{detail,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="zsc.ordermealsys.pojo.ProductWithBLOBs" >
+    update product
+    set seller_name = #{sellerName,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      stock = #{stock,jdbcType=INTEGER},
+      sales = #{sales,jdbcType=INTEGER},
+      pro_status = #{proStatus,jdbcType=INTEGER},
+      del_status = #{delStatus,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      delivery_fee = #{deliveryFee,jdbcType=DECIMAL},
+      box_fee = #{boxFee,jdbcType=DECIMAL},
+      box_price = #{boxPrice,jdbcType=DECIMAL},
+      main_pic = #{mainPic,jdbcType=LONGVARCHAR},
+      sub_pic1 = #{subPic1,jdbcType=LONGVARCHAR},
+      sub_pic2 = #{subPic2,jdbcType=LONGVARCHAR},
+      sub_pic3 = #{subPic3,jdbcType=LONGVARCHAR},
+      detail = #{detail,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="zsc.ordermealsys.pojo.Product" >
+    update product
+    set seller_name = #{sellerName,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      stock = #{stock,jdbcType=INTEGER},
+      sales = #{sales,jdbcType=INTEGER},
+      pro_status = #{proStatus,jdbcType=INTEGER},
+      del_status = #{delStatus,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      delivery_fee = #{deliveryFee,jdbcType=DECIMAL},
+      box_fee = #{boxFee,jdbcType=DECIMAL},
+      box_price = #{boxPrice,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="zsc.ordermealsys.dao.CommentMapper" >
+  <resultMap id="BaseResultMap" type="zsc.ordermealsys.pojo.Comment" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="pro_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="buyer_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="seller_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="pro_type" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="store_type" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="pro_com_content" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ser_com_content" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, pro_id, buyer_name, seller_name, pro_type, store_type, pro_com_content, ser_com_content, 
+    create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from comment
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from comment
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="zsc.ordermealsys.pojo.Comment" useGeneratedKeys="true" keyProperty="id" >
+    insert into comment (pro_id, buyer_name, seller_name, 
+      pro_type, store_type, pro_com_content, 
+      ser_com_content, create_time, update_time
+      )
+    values (#{proId,jdbcType=INTEGER}, #{buyerName,jdbcType=VARCHAR}, #{sellerName,jdbcType=VARCHAR}, 
+      #{proType,jdbcType=INTEGER}, #{storeType,jdbcType=INTEGER}, #{proComContent,jdbcType=VARCHAR}, 
+      #{serComContent,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="zsc.ordermealsys.pojo.Comment" useGeneratedKeys="true" keyProperty="id" >
+    insert into comment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="proId != null" >
+        pro_id,
+      </if>
+      <if test="buyerName != null" >
+        buyer_name,
+      </if>
+      <if test="sellerName != null" >
+        seller_name,
+      </if>
+      <if test="proType != null" >
+        pro_type,
+      </if>
+      <if test="storeType != null" >
+        store_type,
+      </if>
+      <if test="proComContent != null" >
+        pro_com_content,
+      </if>
+      <if test="serComContent != null" >
+        ser_com_content,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="proId != null" >
+        #{proId,jdbcType=INTEGER},
+      </if>
+      <if test="buyerName != null" >
+        #{buyerName,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerName != null" >
+        #{sellerName,jdbcType=VARCHAR},
+      </if>
+      <if test="proType != null" >
+        #{proType,jdbcType=INTEGER},
+      </if>
+      <if test="storeType != null" >
+        #{storeType,jdbcType=INTEGER},
+      </if>
+      <if test="proComContent != null" >
+        #{proComContent,jdbcType=VARCHAR},
+      </if>
+      <if test="serComContent != null" >
+        #{serComContent,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="zsc.ordermealsys.pojo.Comment" >
+    update comment
+    <set >
+      <if test="proId != null" >
+        pro_id = #{proId,jdbcType=INTEGER},
+      </if>
+      <if test="buyerName != null" >
+        buyer_name = #{buyerName,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerName != null" >
+        seller_name = #{sellerName,jdbcType=VARCHAR},
+      </if>
+      <if test="proType != null" >
+        pro_type = #{proType,jdbcType=INTEGER},
+      </if>
+      <if test="storeType != null" >
+        store_type = #{storeType,jdbcType=INTEGER},
+      </if>
+      <if test="proComContent != null" >
+        pro_com_content = #{proComContent,jdbcType=VARCHAR},
+      </if>
+      <if test="serComContent != null" >
+        ser_com_content = #{serComContent,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="zsc.ordermealsys.pojo.Comment" >
+    update comment
+    set pro_id = #{proId,jdbcType=INTEGER},
+      buyer_name = #{buyerName,jdbcType=VARCHAR},
+      seller_name = #{sellerName,jdbcType=VARCHAR},
+      pro_type = #{proType,jdbcType=INTEGER},
+      store_type = #{storeType,jdbcType=INTEGER},
+      pro_com_content = #{proComContent,jdbcType=VARCHAR},
+      ser_com_content = #{serComContent,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

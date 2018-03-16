@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="zsc.ordermealsys.dao.OrderMapper" >
+  <resultMap id="BaseResultMap" type="zsc.ordermealsys.pojo.Order" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="seller_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="buyer_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="total_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="delivery_type" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="order_type" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="pay_status" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="order_notes" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="delivery_time" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="delete_status" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="delivery_fee" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="order_status" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="pay_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="transact_closing_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="transact_comple_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="box_total_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, seller_name, buyer_name, total_price, create_time, delivery_type, order_type, 
+    pay_status, order_notes, delivery_time, delete_status, delivery_fee, order_status, 
+    pay_time, transact_closing_time, transact_comple_time, update_time, box_total_price
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from order
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from order
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="zsc.ordermealsys.pojo.Order" useGeneratedKeys="true" keyProperty="id" >
+    insert into order (seller_name, buyer_name, total_price, 
+      create_time, delivery_type, order_type, 
+      pay_status, order_notes, delivery_time, 
+      delete_status, delivery_fee, order_status, 
+      pay_time, transact_closing_time, transact_comple_time, 
+      update_time, box_total_price)
+    values (#{sellerName,jdbcType=VARCHAR}, #{buyerName,jdbcType=VARCHAR}, #{totalPrice,jdbcType=DECIMAL}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{deliveryType,jdbcType=INTEGER}, #{orderType,jdbcType=INTEGER}, 
+      #{payStatus,jdbcType=INTEGER}, #{orderNotes,jdbcType=VARCHAR}, #{deliveryTime,jdbcType=VARCHAR}, 
+      #{deleteStatus,jdbcType=INTEGER}, #{deliveryFee,jdbcType=DECIMAL}, #{orderStatus,jdbcType=INTEGER}, 
+      #{payTime,jdbcType=TIMESTAMP}, #{transactClosingTime,jdbcType=TIMESTAMP}, #{transactCompleTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{boxTotalPrice,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="zsc.ordermealsys.pojo.Order" useGeneratedKeys="true" keyProperty="id" >
+    insert into order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sellerName != null" >
+        seller_name,
+      </if>
+      <if test="buyerName != null" >
+        buyer_name,
+      </if>
+      <if test="totalPrice != null" >
+        total_price,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="deliveryType != null" >
+        delivery_type,
+      </if>
+      <if test="orderType != null" >
+        order_type,
+      </if>
+      <if test="payStatus != null" >
+        pay_status,
+      </if>
+      <if test="orderNotes != null" >
+        order_notes,
+      </if>
+      <if test="deliveryTime != null" >
+        delivery_time,
+      </if>
+      <if test="deleteStatus != null" >
+        delete_status,
+      </if>
+      <if test="deliveryFee != null" >
+        delivery_fee,
+      </if>
+      <if test="orderStatus != null" >
+        order_status,
+      </if>
+      <if test="payTime != null" >
+        pay_time,
+      </if>
+      <if test="transactClosingTime != null" >
+        transact_closing_time,
+      </if>
+      <if test="transactCompleTime != null" >
+        transact_comple_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="boxTotalPrice != null" >
+        box_total_price,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sellerName != null" >
+        #{sellerName,jdbcType=VARCHAR},
+      </if>
+      <if test="buyerName != null" >
+        #{buyerName,jdbcType=VARCHAR},
+      </if>
+      <if test="totalPrice != null" >
+        #{totalPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deliveryType != null" >
+        #{deliveryType,jdbcType=INTEGER},
+      </if>
+      <if test="orderType != null" >
+        #{orderType,jdbcType=INTEGER},
+      </if>
+      <if test="payStatus != null" >
+        #{payStatus,jdbcType=INTEGER},
+      </if>
+      <if test="orderNotes != null" >
+        #{orderNotes,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryTime != null" >
+        #{deliveryTime,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteStatus != null" >
+        #{deleteStatus,jdbcType=INTEGER},
+      </if>
+      <if test="deliveryFee != null" >
+        #{deliveryFee,jdbcType=DECIMAL},
+      </if>
+      <if test="orderStatus != null" >
+        #{orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="payTime != null" >
+        #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="transactClosingTime != null" >
+        #{transactClosingTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="transactCompleTime != null" >
+        #{transactCompleTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="boxTotalPrice != null" >
+        #{boxTotalPrice,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="zsc.ordermealsys.pojo.Order" >
+    update order
+    <set >
+      <if test="sellerName != null" >
+        seller_name = #{sellerName,jdbcType=VARCHAR},
+      </if>
+      <if test="buyerName != null" >
+        buyer_name = #{buyerName,jdbcType=VARCHAR},
+      </if>
+      <if test="totalPrice != null" >
+        total_price = #{totalPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deliveryType != null" >
+        delivery_type = #{deliveryType,jdbcType=INTEGER},
+      </if>
+      <if test="orderType != null" >
+        order_type = #{orderType,jdbcType=INTEGER},
+      </if>
+      <if test="payStatus != null" >
+        pay_status = #{payStatus,jdbcType=INTEGER},
+      </if>
+      <if test="orderNotes != null" >
+        order_notes = #{orderNotes,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryTime != null" >
+        delivery_time = #{deliveryTime,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteStatus != null" >
+        delete_status = #{deleteStatus,jdbcType=INTEGER},
+      </if>
+      <if test="deliveryFee != null" >
+        delivery_fee = #{deliveryFee,jdbcType=DECIMAL},
+      </if>
+      <if test="orderStatus != null" >
+        order_status = #{orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="payTime != null" >
+        pay_time = #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="transactClosingTime != null" >
+        transact_closing_time = #{transactClosingTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="transactCompleTime != null" >
+        transact_comple_time = #{transactCompleTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="boxTotalPrice != null" >
+        box_total_price = #{boxTotalPrice,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="zsc.ordermealsys.pojo.Order" >
+    update order
+    set seller_name = #{sellerName,jdbcType=VARCHAR},
+      buyer_name = #{buyerName,jdbcType=VARCHAR},
+      total_price = #{totalPrice,jdbcType=DECIMAL},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      delivery_type = #{deliveryType,jdbcType=INTEGER},
+      order_type = #{orderType,jdbcType=INTEGER},
+      pay_status = #{payStatus,jdbcType=INTEGER},
+      order_notes = #{orderNotes,jdbcType=VARCHAR},
+      delivery_time = #{deliveryTime,jdbcType=VARCHAR},
+      delete_status = #{deleteStatus,jdbcType=INTEGER},
+      delivery_fee = #{deliveryFee,jdbcType=DECIMAL},
+      order_status = #{orderStatus,jdbcType=INTEGER},
+      pay_time = #{payTime,jdbcType=TIMESTAMP},
+      transact_closing_time = #{transactClosingTime,jdbcType=TIMESTAMP},
+      transact_comple_time = #{transactCompleTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      box_total_price = #{boxTotalPrice,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
