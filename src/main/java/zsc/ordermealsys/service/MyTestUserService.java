@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 import zsc.ordermealsys.common.ServerResponse;
 import zsc.ordermealsys.controller.UserController;
 import zsc.ordermealsys.dao.UserMapper;
-import zsc.ordermealsys.impl.UserServiceImpl;
 import zsc.ordermealsys.pojo.User;
+import zsc.ordermealsys.service.impl.UserServiceImpl;
 /*误删*/
 /*误删*/
 /*误删*/
@@ -44,7 +44,7 @@ public class MyTestUserService {
 		/*User us=new User();
 		us.setUserName("dm");
 		us.setEmail("007");*/
-		u.login("shn", "1234");
+		u.login("shn", "123");
 		//u.register(us);
 	
 		/*System.out.print(userDao.checkUsername("shn"));*/

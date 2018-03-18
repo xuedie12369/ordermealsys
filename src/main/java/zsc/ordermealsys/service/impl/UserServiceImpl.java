@@ -1,4 +1,4 @@
-package zsc.ordermealsys.impl;
+package zsc.ordermealsys.service.impl;
 
 import java.util.UUID;
 
