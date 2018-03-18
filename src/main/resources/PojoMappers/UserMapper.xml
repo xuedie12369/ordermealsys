@@ -284,7 +284,64 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
-	<select id="checkUserName" resultType="int">
-		select count(1) from user where user_name=#{username}
-	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+  <!-- ******************************** -->
+  <!-- 以下为自主添加SQL查询语句，非系统自动生成 -->
+  <!-- ******************************** -->
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <select id="checkEmail" resultType="int" parameterType="string">
+  	select count(1) from user where email=#{email}
+  </select>
+  
+  <select id="selectLogin" resultType="zsc.ordermealsys.pojo.User" >
+  	select  
+  	<include refid="Base_Column_List"/>
+  	from user
+  	where user_name=#{user_name}
+  	and pwd=#{pwd}
+  </select>
+  
+  <select id="selectQuestionByUsername" resultType="string" parameterType="string">
+  	select
+  	question
+  	from user
+  	where user_name=#{user_name}
+  </select>
+  
+  <select id="checkAnswer" resultType="int" parameterType="map">
+  	select
+  	count(1)
+  	from user
+  	where user_name=#{user_name}
+  	and question=#{question}
+  	and answer=#{answer}
+  </select>
+  
+  <update id="updatePasswordByUsername" parameterType="map">
+  	update user
+  	SET password=#{passwordNew},update_time=now()
+  	where user_name=#{user_name}
+  </update>
+  <select id="checkUsername" resultType="int" >
+  		 select count(1) from user where user_name=#{user_name}
+  </select>
+  
 </mapper>
