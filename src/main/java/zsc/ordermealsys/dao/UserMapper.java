@@ -1,9 +1,11 @@
 package zsc.ordermealsys.dao;
 
+import org.apache.ibatis.annotations.Param;
+
 import zsc.ordermealsys.pojo.User;
 
 public interface UserMapper {
-    int deleteByPrimaryKey(Integer id);
+	int deleteByPrimaryKey(Integer id);
 
     int insert(User record);
 
@@ -16,5 +18,18 @@ public interface UserMapper {
     int updateByPrimaryKeyWithBLOBs(User record);
 
     int updateByPrimaryKey(User record);
-    int checkUserName(String username);
+    
+    int checkUsername(String username);
+    
+    int checkEmail(String email);
+    
+    User selectLogin(@Param("username") String username, @Param("password") String password);
+    
+    String selectQuestionByUsername(String username);
+    
+    int checkAnswer(@Param("username") String username, @Param("question") String question, @Param("answer") String answer);
+    
+    int updatePasswordByUsername(@Param("username")String username,@Param("passwordNew")String passwordNew);
+    
+    
 }

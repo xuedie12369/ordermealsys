@@ -39,6 +39,7 @@ public class User {
     private Date updateTime;
 
     private String pic;
+    
 
     public User(Integer id, String userName, String pwd, String payPwd, String tel, String nickName, Integer sex, Date birth, Integer age, String email, Integer grade, Integer type, BigDecimal balance, Date creatTime, Integer defAdd, Integer status, Date updateTime, String pic) {
         this.id = id;
