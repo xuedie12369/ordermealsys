@@ -110,4 +110,11 @@
       updatetime = #{updatetime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <select id="selectCategoryChildrenByParentId" resultType="zsc.ordermealsys.pojo.Category" parameterType="int">
+    select
+    <include refid="Base_Column_List"/>
+    from category
+    where parent_id = #{parentId}
+  </select>
 </mapper>

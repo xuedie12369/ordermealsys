@@ -7,6 +7,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import zsc.ordermealsys.common.Const;
+import zsc.ordermealsys.dao.CategoryMapper;
 import zsc.ordermealsys.pojo.User;
 
 public class MyTest {
@@ -20,9 +21,14 @@ public class MyTest {
 	// TODO Auto-generated methotd stub
 		ApplicationContext ac=new ClassPathXmlApplicationContext("applicationContext.xml");
 			CategoryManageController c=ac.getBean(CategoryManageController.class);
+			/*CategoryManageController c=new CategoryManageController();*/
 			User u=new User();
-			u.setRole(1);
+ 			u.setRole(1);
+ 			u.setId(2);
 			u.setUserName("shn");
-			/*c.addCategory(u, "shn", 1);*/
+			c.selectCategoryChildrenByParentId(2);
+		/*	c.updateCategory(u, "3", 3);*/
+		/* CategoryMapper cc=	ac.getBean(CategoryMapper.class);*/
+		/*	System.out.print(cc.selectOne(3));*/
 	}
 }
