@@ -2,8 +2,11 @@ package zsc.ordermealsys.service.impl;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import zsc.ordermealsys.common.ServerResponse;
 import zsc.ordermealsys.dao.CategoryMapper;
@@ -35,15 +38,15 @@ public class CategoryServiceImpl implements ICategoryService {
 	}
 
 	@Override
-	public ServerResponse updateCategoryName(Integer parent_id, String categoryName) {
+	public ServerResponse updateCategoryName(Integer parentId, String categoryName) {
 		// TODO Auto-generated method stub
-		if (parent_id == null || categoryName.isEmpty()) {
+		if (parentId == null || categoryName.isEmpty()) {
 			return ServerResponse.createByErrorMessage("添加品类参数错误");
 		}
 		Category category = new Category();
 		category.setId(2);
 		category.setName(categoryName);
-		category.setParentId(parent_id);
+		category.setParentId(parentId);
 		int rowCount = categoryMapper.updateByPrimaryKeySelective(category);
 		System.out.print("受影响的行数" + rowCount);
 		if (rowCount > 0) {
@@ -54,7 +57,7 @@ public class CategoryServiceImpl implements ICategoryService {
 
 
 	@Override
-	public ServerResponse<List<Category>> selectCategoryChildrenByParentId(Integer parentId) {
+	public ServerResponse<List<Category>> selectCategoryChildrenByParentId( Integer parentId) {
 		// TODO Auto-generated method stub
 		List<Category> listCategory=categoryMapper.selectCategoryChildrenByParentId(parentId);
 		if(listCategory.isEmpty())
@@ -65,7 +68,7 @@ public class CategoryServiceImpl implements ICategoryService {
 	}
 
 	@Override
-	public ServerResponse<List<Integer>> selectCategoryAndChildrenById(Integer parent_id) {
+	public ServerResponse<List<Integer>> selectCategoryAndChildrenById(Integer parentId) {
 		// TODO Auto-generated method stub
 		return null;
 	}

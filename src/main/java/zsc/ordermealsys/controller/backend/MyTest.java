@@ -26,7 +26,7 @@ public class MyTest {
  			u.setRole(1);
  			u.setId(2);
 			u.setUserName("shn");
-			c.selectCategoryChildrenByParentId(2);
+			/*c.selectCategoryChildrenByParentId(u, 2);*/
 		/*	c.updateCategory(u, "3", 3);*/
 		/* CategoryMapper cc=	ac.getBean(CategoryMapper.class);*/
 		/*	System.out.print(cc.selectOne(3));*/
