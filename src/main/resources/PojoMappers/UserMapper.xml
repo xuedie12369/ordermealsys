@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="zsc.ordermealsys.pojo.User" >
     <constructor >
       <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="username" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="pwd" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="pay_pwd" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="tel" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -14,7 +14,7 @@
       <arg column="age" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="email" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="grade" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="type" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="role" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="balance" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
       <arg column="creat_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
       <arg column="def_add" jdbcType="INTEGER" javaType="java.lang.Integer" />
@@ -25,7 +25,7 @@
   <resultMap id="ResultMapWithBLOBs" type="zsc.ordermealsys.pojo.User" >
     <constructor >
       <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="username" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="pwd" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="pay_pwd" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="tel" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -35,7 +35,7 @@
       <arg column="age" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="email" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="grade" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="type" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="role" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="balance" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
       <arg column="creat_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
       <arg column="def_add" jdbcType="INTEGER" javaType="java.lang.Integer" />
@@ -45,7 +45,7 @@
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    id, user_name, pwd, pay_pwd, tel, nick_name, sex, birth, age, email, grade, type, 
+    id, username, pwd, pay_pwd, tel, nick_name, sex, birth, age, email, grade, role, 
     balance, creat_time, def_add, status, update_time
   </sql>
   <sql id="Blob_Column_List" >
@@ -64,16 +64,16 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="zsc.ordermealsys.pojo.User" useGeneratedKeys="true" keyProperty="id" >
-    insert into user (user_name, pwd, pay_pwd, 
+    insert into user (username, pwd, pay_pwd, 
       tel, nick_name, sex, 
       birth, age, email, grade, 
-      type, balance, creat_time, 
+      role, balance, creat_time, 
       def_add, status, update_time, 
       pic)
     values (#{userName,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, #{payPwd,jdbcType=VARCHAR}, 
       #{tel,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, 
       #{birth,jdbcType=DATE}, #{age,jdbcType=INTEGER}, #{email,jdbcType=VARCHAR}, #{grade,jdbcType=INTEGER}, 
-      #{type,jdbcType=INTEGER}, #{balance,jdbcType=DECIMAL}, #{creatTime,jdbcType=TIMESTAMP}, 
+      #{role,jdbcType=INTEGER}, #{balance,jdbcType=DECIMAL}, #{creatTime,jdbcType=TIMESTAMP}, 
       #{defAdd,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, 
       #{pic,jdbcType=LONGVARCHAR})
   </insert>
@@ -81,7 +81,7 @@
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="userName != null" >
-        user_name,
+        username,
       </if>
       <if test="pwd != null" >
         pwd,
@@ -110,8 +110,8 @@
       <if test="grade != null" >
         grade,
       </if>
-      <if test="type != null" >
-        type,
+      <if test="role != null" >
+        role,
       </if>
       <if test="balance != null" >
         balance,
@@ -163,8 +163,8 @@
       <if test="grade != null" >
         #{grade,jdbcType=INTEGER},
       </if>
-      <if test="type != null" >
-        #{type,jdbcType=INTEGER},
+      <if test="role != null" >
+        #{role,jdbcType=INTEGER},
       </if>
       <if test="balance != null" >
         #{balance,jdbcType=DECIMAL},
@@ -190,7 +190,7 @@
     update user
     <set >
       <if test="userName != null" >
-        user_name = #{userName,jdbcType=VARCHAR},
+        username = #{userName,jdbcType=VARCHAR},
       </if>
       <if test="pwd != null" >
         pwd = #{pwd,jdbcType=VARCHAR},
@@ -219,8 +219,8 @@
       <if test="grade != null" >
         grade = #{grade,jdbcType=INTEGER},
       </if>
-      <if test="type != null" >
-        type = #{type,jdbcType=INTEGER},
+      <if test="role != null" >
+        role = #{role,jdbcType=INTEGER},
       </if>
       <if test="balance != null" >
         balance = #{balance,jdbcType=DECIMAL},
@@ -245,7 +245,7 @@
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="zsc.ordermealsys.pojo.User" >
     update user
-    set user_name = #{userName,jdbcType=VARCHAR},
+    set username = #{userName,jdbcType=VARCHAR},
       pwd = #{pwd,jdbcType=VARCHAR},
       pay_pwd = #{payPwd,jdbcType=VARCHAR},
       tel = #{tel,jdbcType=VARCHAR},
@@ -255,7 +255,7 @@
       age = #{age,jdbcType=INTEGER},
       email = #{email,jdbcType=VARCHAR},
       grade = #{grade,jdbcType=INTEGER},
-      type = #{type,jdbcType=INTEGER},
+      role = #{role,jdbcType=INTEGER},
       balance = #{balance,jdbcType=DECIMAL},
       creat_time = #{creatTime,jdbcType=TIMESTAMP},
       def_add = #{defAdd,jdbcType=INTEGER},
@@ -266,7 +266,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="zsc.ordermealsys.pojo.User" >
     update user
-    set user_name = #{userName,jdbcType=VARCHAR},
+    set username = #{userName,jdbcType=VARCHAR},
       pwd = #{pwd,jdbcType=VARCHAR},
       pay_pwd = #{payPwd,jdbcType=VARCHAR},
       tel = #{tel,jdbcType=VARCHAR},
@@ -276,7 +276,7 @@
       age = #{age,jdbcType=INTEGER},
       email = #{email,jdbcType=VARCHAR},
       grade = #{grade,jdbcType=INTEGER},
-      type = #{type,jdbcType=INTEGER},
+      role = #{role,jdbcType=INTEGER},
       balance = #{balance,jdbcType=DECIMAL},
       creat_time = #{creatTime,jdbcType=TIMESTAMP},
       def_add = #{defAdd,jdbcType=INTEGER},
@@ -315,7 +315,7 @@
   	select  
   	<include refid="Base_Column_List"/>
   	from user
-  	where user_name=#{user_name}
+  	where username=#{username}
   	and pwd=#{pwd}
   </select>
   
@@ -323,14 +323,14 @@
   	select
   	question
   	from user
-  	where user_name=#{user_name}
+  	where username=#{username}
   </select>
   
   <select id="checkAnswer" resultType="int" parameterType="map">
   	select
   	count(1)
   	from user
-  	where user_name=#{user_name}
+  	where username=#{username}
   	and question=#{question}
   	and answer=#{answer}
   </select>
@@ -338,10 +338,10 @@
   <update id="updatePasswordByUsername" parameterType="map">
   	update user
   	SET password=#{passwordNew},update_time=now()
-  	where user_name=#{username}
+  	where username=#{username}
   </update>
   <select id="checkUsername" resultType="int" >
-  		 select count(1) from user where user_name=#{username}
+  		 select count(1) from user where username=#{username}
   </select>
   
 </mapper>

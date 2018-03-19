@@ -26,7 +26,7 @@ public class User {
 
     private Integer grade;
 
-    private Integer type;
+    private Integer role;
 
     private BigDecimal balance;
 
@@ -41,7 +41,7 @@ public class User {
     private String pic;
     
 
-    public User(Integer id, String userName, String pwd, String payPwd, String tel, String nickName, Integer sex, Date birth, Integer age, String email, Integer grade, Integer type, BigDecimal balance, Date creatTime, Integer defAdd, Integer status, Date updateTime, String pic) {
+    public User(Integer id, String userName, String pwd, String payPwd, String tel, String nickName, Integer sex, Date birth, Integer age, String email, Integer grade, Integer role, BigDecimal balance, Date creatTime, Integer defAdd, Integer status, Date updateTime, String pic) {
         this.id = id;
         this.userName = userName;
         this.pwd = pwd;
@@ -53,7 +53,7 @@ public class User {
         this.age = age;
         this.email = email;
         this.grade = grade;
-        this.type = type;
+        this.role = role;
         this.balance = balance;
         this.creatTime = creatTime;
         this.defAdd = defAdd;
@@ -154,12 +154,12 @@ public class User {
         this.grade = grade;
     }
 
-    public Integer getType() {
-        return type;
+    public Integer getRole() {
+        return role;
     }
 
-    public void setType(Integer type) {
-        this.type = type;
+    public void setRole(Integer role) {
+        this.role = role;
     }
 
     public BigDecimal getBalance() {

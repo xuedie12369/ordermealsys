@@ -40,7 +40,7 @@ public class ServerResponse<T> implements Serializable {
 	//获取用户状态
 	public int getStatus(){
 		return status;
-	}
+	} 
 	//获取用户数据
 	public T getData(){
 		return data;
