@@ -31,7 +31,7 @@ public class UserServiceImpl implements IUserService{
 	/**
 	 * 登录接口的实现方式
 	 */
-	public 	ServerResponse<User>  login(String username,String password) {
+	public 	ServerResponse<User>  login(String username,String pwd) {
 		// TODO Auto-generated method stub
 		int resultCount=userMapper.checkUsername(username);
 		if(resultCount==0){
@@ -41,7 +41,7 @@ public class UserServiceImpl implements IUserService{
 		//密码登录MD5
 		//String md5Password=MD5Util.MD5EncodeUtf8(password);
 		
-		User user=userMapper.selectLogin(username, password);
+		User user=userMapper.selectLogin(username, pwd);
 		if(user==null){
 			System.out.println("pwd failed");
 			return ServerResponse.createByErrorMessage("密码错误！");
