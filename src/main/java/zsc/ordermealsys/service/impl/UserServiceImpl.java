@@ -14,7 +14,7 @@ import zsc.ordermealsys.service.IUserService;
 import zsc.ordermealsys.util.MD5Util;
 import zsc.ordermealsys.dao.UserMapper;
 import zsc.ordermealsys.pojo.User;
-@Service("iUserService")
+@Service("userServiceImpl")
 public class UserServiceImpl implements IUserService{
 	@Autowired
 	private UserMapper userMapper;
@@ -173,5 +173,17 @@ public class UserServiceImpl implements IUserService{
 			return ServerResponse.createByErrorMessage("token错误，请重新获取重置密码的token！");
 		}
 		return ServerResponse.createByErrorMessage("修改密码失败！");
+	}
+
+	@Override
+	public ServerResponse<Integer> checkAdminRole(User user) {
+		// TODO Auto-generated method stub
+		if(user!=null&&user.getRole().intValue()==Const.Role.ROLE_ADMIN)
+		{
+			return ServerResponse.createBySuccess();
+		}
+		
+		
+		return null;
 	}
 }

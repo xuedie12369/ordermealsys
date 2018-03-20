@@ -10,6 +10,7 @@ public class Product {
 
     private String name;
 
+
     private BigDecimal price;
 
     private Integer stock;
@@ -30,7 +31,7 @@ public class Product {
 
     private BigDecimal boxPrice;
 
-    public Product(Integer id, String sellerName, String name, BigDecimal price, Integer stock, Integer sales, Integer proStatus, Integer delStatus, Date createTime, Date updateTime, BigDecimal deliveryFee, BigDecimal boxFee, BigDecimal boxPrice) {
+    public Product(Integer id, String sellerName, String name,BigDecimal price, Integer stock, Integer sales, Integer proStatus, Integer delStatus, Date createTime, Date updateTime, BigDecimal deliveryFee, BigDecimal boxFee, BigDecimal boxPrice) {
         this.id = id;
         this.sellerName = sellerName;
         this.name = name;
