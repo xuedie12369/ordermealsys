@@ -9,7 +9,24 @@ public class Product {
     private String sellerName;
 
     private String name;
+    public String getMain_pic() {
+		return main_pic;
+	}
 
+	public void setMain_pic(String main_pic) {
+		this.main_pic = main_pic;
+	}
+
+	public String getSub_pic() {
+		return sub_pic;
+	}
+
+	public void setSub_pic(String sub_pic) {
+		this.sub_pic = sub_pic;
+	}
+
+	private String main_pic;
+    private String sub_pic;
     private BigDecimal price;
 
     private Integer stock;
@@ -30,7 +47,7 @@ public class Product {
 
     private BigDecimal boxPrice;
 
-    public Product(Integer id, String sellerName, String name, BigDecimal price, Integer stock, Integer sales, Integer proStatus, Integer delStatus, Date createTime, Date updateTime, BigDecimal deliveryFee, BigDecimal boxFee, BigDecimal boxPrice) {
+    public Product(Integer id, String sellerName, String name,BigDecimal price, Integer stock, Integer sales, Integer proStatus, Integer delStatus, Date createTime, Date updateTime, BigDecimal deliveryFee, BigDecimal boxFee, BigDecimal boxPrice) {
         this.id = id;
         this.sellerName = sellerName;
         this.name = name;

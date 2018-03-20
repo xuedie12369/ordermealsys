@@ -7,11 +7,11 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
 
-import zsc.ordermealsys.common.ServerResponse;
-import zsc.ordermealsys.controller.UserController;
+import zsc.ordermealsys.dao.ProductMapper;
 import zsc.ordermealsys.dao.UserMapper;
-import zsc.ordermealsys.service.impl.*;
-import zsc.ordermealsys.pojo.User;
+import zsc.ordermealsys.pojo.ProductWithBLOBs;
+import zsc.ordermealsys.service.impl.ProductServiceImpl;
+import zsc.ordermealsys.service.impl.UserServiceImpl;
 /*误删*/
 /*误删*/
 /*误删*/
@@ -40,13 +40,17 @@ public class MyTestUserService {
 	public  void main() {
 		// TODO Auto-generated method stub
 		ApplicationContext ac=new ClassPathXmlApplicationContext("applicationContext.xml");
-		UserServiceImpl u= ac.getBean(UserServiceImpl.class);
+		/*UserServiceImpl u= ac.getBean(UserServiceImpl.class);*/
+		ProductServiceImpl productServiceImpl= ac.getBean(ProductServiceImpl.class);
+		ProductWithBLOBs s=new ProductWithBLOBs();
+		s.setName("产名称");
+		productServiceImpl.saveOrUpdate(s);
 		/*User us=new User();
 		us.setUserName("dm");
 		us.setEmail("007");*/
-		int count=u.getUserMapper().checkUsername("shn");
+		/*int count=u.getUserMapper().checkUsername("shn");*/
 		//u.register(us);
-		System.out.print(count);
+	/**/
 		/*System.out.print(userDao.checkUsername("shn"));*/
 	}
 
