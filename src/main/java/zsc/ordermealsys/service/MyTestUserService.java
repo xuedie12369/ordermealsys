@@ -41,10 +41,11 @@ public class MyTestUserService {
 		// TODO Auto-generated method stub
 		ApplicationContext ac=new ClassPathXmlApplicationContext("applicationContext.xml");
 		/*UserServiceImpl u= ac.getBean(UserServiceImpl.class);*/
-		ProductServiceImpl productServiceImpl= ac.getBean(ProductServiceImpl.class);
+		IProductService iProductService= ac.getBean(IProductService.class);
 		ProductWithBLOBs s=new ProductWithBLOBs();
 		s.setName("产名称");
-		productServiceImpl.saveOrUpdate(s);
+		/*iProductService.saveOrUpdate(s);*/
+		iProductService.setSaleStatus(2, 1);
 		/*User us=new User();
 		us.setUserName("dm");
 		us.setEmail("007");*/

@@ -8,7 +8,7 @@ import zsc.ordermealsys.dao.ProductMapper;
 import zsc.ordermealsys.pojo.Product;
 import zsc.ordermealsys.pojo.ProductWithBLOBs;
 import zsc.ordermealsys.service.IProductService;
-@Service("productServiceImpl")
+@Service("iProductService")
 public class ProductServiceImpl implements IProductService {
 @Autowired
 	ProductMapper productMapper;
@@ -50,5 +50,27 @@ public	ServerResponse saveOrUpdate(ProductWithBLOBs product)
 		}
 		return ServerResponse.createByErrorMessage("新增/更新产品参数不正确");
 	}
+@Override
+public ServerResponse delete(ProductWithBLOBs product) {
+	// TODO Auto-generated method stub
+	return null;
+}
+@Override
+public ServerResponse setSaleStatus(Integer productId, Integer proStatus) {
+	// TODO Auto-generated method stub
+	if(productId!=null&&proStatus!=null)
+	{
+		Product product=new Product();
+		product.setProStatus(proStatus);
+		product.setId(productId);
+		int rowCount=productMapper.updateByPrimaryKey(product);
+		if(rowCount>0)
+		{
+			return ServerResponse.createBySuccessMessage("更新产品状态成功");
+		}
+	}
+	 return ServerResponse.createByErrorMessage("修改产品状态失败");
+}
+
 
 }
