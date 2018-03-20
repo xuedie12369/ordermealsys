@@ -22,7 +22,11 @@ public class ProductManageController {
 	private IUserService iUserService;
 	@Autowired
 	IProductService iProductService;
-	@RequestMapping("saveOrUpdate")
+	/**
+	 * 保存/更新产品
+	 * 作者:邵海楠
+	 */
+	@RequestMapping("saveOrUpdate.do")
 	@ResponseBody
 	public ServerResponse productSaveOrUpdate(HttpSession session,ProductWithBLOBs product)
 	{
@@ -37,6 +41,14 @@ public class ProductManageController {
 	   }
 		return ServerResponse.createByErrorMessage("无权限操作");
 	}
+	/**
+	 * 设置产品状态（即设置产品的上下架）
+	 * 作者:邵海楠
+	 * @param session
+	 * @param productId
+	 * @param proStatus
+	 * @return
+	 */
     @RequestMapping("set_sale_proStatus.do")
 	@ResponseBody
 	public ServerResponse setSaleproStatus(HttpSession session,Integer productId,Integer proStatus)
@@ -52,5 +64,22 @@ public class ProductManageController {
 	   }
 		return ServerResponse.createByErrorMessage("无权限操作");
 	}
-
+    
+    
+    @RequestMapping("detail.do")
+   	@ResponseBody
+   	public ServerResponse getDetail(HttpSession session,Integer productId)
+   	{
+   	   User user=(User) session.getAttribute(Const.CURRENT_USER);
+   	   if(user==null)
+   	   {
+   		   return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录，请先登录");
+   	   }
+   	   if(iUserService.checkAdminRole(user).isSuccess())
+   	   {
+   		    return iProductService.manageProductDetail(productId);
+   	   }
+   		return ServerResponse.createByErrorMessage("无权限操作");
+   	}
+    
 }

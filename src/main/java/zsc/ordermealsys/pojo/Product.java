@@ -9,24 +9,8 @@ public class Product {
     private String sellerName;
 
     private String name;
-    public String getMain_pic() {
-		return main_pic;
-	}
 
-	public void setMain_pic(String main_pic) {
-		this.main_pic = main_pic;
-	}
 
-	public String getSub_pic() {
-		return sub_pic;
-	}
-
-	public void setSub_pic(String sub_pic) {
-		this.sub_pic = sub_pic;
-	}
-
-	private String main_pic;
-    private String sub_pic;
     private BigDecimal price;
 
     private Integer stock;

@@ -45,7 +45,9 @@ public class MyTestUserService {
 		ProductWithBLOBs s=new ProductWithBLOBs();
 		s.setName("产名称");
 		/*iProductService.saveOrUpdate(s);*/
-		iProductService.setSaleStatus(2, 1);
+/*//		iProductService.setSaleStatus(2, 3);
+*/		
+		iProductService.manageProductDetail(1);
 		/*User us=new User();
 		us.setUserName("dm");
 		us.setEmail("007");*/
