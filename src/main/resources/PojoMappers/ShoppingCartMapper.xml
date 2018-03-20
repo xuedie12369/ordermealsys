@@ -144,4 +144,11 @@
   	from shopping_cart where buyer_name=#{buyerName}
   	and product_id=#{productId}
   </select>
+  
+  <select id="selectCartByUserId" resultMap="BaseResultMap" parameterType="int">
+  	select
+  	<include refid="Base_Column_List"/>
+  	from shopping_cart
+  	where buyer_name=#{buyer_name}
+  </select>
 </mapper>

@@ -9,6 +9,8 @@ public class ShoppingCart {
     private String buyerName;
 
     private String sellerName;
+    
+    private Integer checked;
 
     private Integer productId;
 
@@ -98,4 +100,12 @@ public class ShoppingCart {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+
+	public Integer getChecked() {
+		return checked;
+	}
+
+	public void setChecked(Integer checked) {
+		this.checked = checked;
+	}
 }
