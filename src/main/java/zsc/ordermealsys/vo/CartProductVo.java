@@ -9,12 +9,12 @@ public class CartProductVo {
 
 	//结合了产品和购物车的抽象对象
 	private Integer id;
-	private String buyerName;
+	private Integer userId;
 	private Integer productId;
 	private Integer productNum;//购物车中商品的数量
 	private String productName;
-	private String productSubtitle;//商品副标题
-	private String productMainImage;//商品主图
+	//private String productSubtitle;//商品副标题
+	private String productMainPic;//商品主图
 	private BigDecimal productPrice;
 	private Integer productStatus;//商品状态
 	private BigDecimal productTotalPrice;//商品总价
@@ -54,21 +54,13 @@ public class CartProductVo {
 	public void setProductName(String productName) {
 		this.productName = productName;
 	}
-
-	public String getProductSubtitle() {
-		return productSubtitle;
+	
+	public String getProductMainPic() {
+		return productMainPic;
 	}
 
-	public void setProductSubtitle(String productSubtitle) {
-		this.productSubtitle = productSubtitle;
-	}
-
-	public String getProductMainImage() {
-		return productMainImage;
-	}
-
-	public void setProductMainImage(String productMainImage) {
-		this.productMainImage = productMainImage;
+	public void setProductMainPic(String productMainPic) {
+		this.productMainPic = productMainPic;
 	}
 
 	public BigDecimal getProductPrice() {
@@ -119,12 +111,12 @@ public class CartProductVo {
 		this.limitQuantity = limitQuantity;
 	}
 
-	public String getBuyerName() {
-		return buyerName;
+	public Integer getUserId() {
+		return userId;
 	}
 
-	public void setBuyerName(String buyerName) {
-		this.buyerName = buyerName;
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 	
 }

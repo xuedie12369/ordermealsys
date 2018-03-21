@@ -19,7 +19,9 @@ public interface ShoppingCartMapper {
 
     int updateByPrimaryKey(ShoppingCart record);
     
-    ShoppingCart selectCartByUserIdProductId(@Param("buyerName")String buyerName,@Param("productId")Integer productId);
+    ShoppingCart selectCartByUserIdProductId(@Param("userId")Integer userId,@Param("productId")Integer productId);
     
-    List<ShoppingCart>selectCartByBuyerName(String buyer_name);
+    List<ShoppingCart>selectCartByUserId(Integer userId);
+    
+    int selectCartProductCheckedStatusByUserId(Integer userId);
 }

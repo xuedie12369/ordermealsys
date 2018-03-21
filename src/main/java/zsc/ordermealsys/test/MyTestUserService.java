@@ -27,8 +27,8 @@ import zsc.ordermealsys.service.impl.UserServiceImpl;
 @Service
 public class MyTestUserService {
 	@Resource
- UserMapper userDao;
-	
+	UserMapper userDao;
+
 	public UserMapper getUserDao() {
 		return userDao;
 	}
@@ -46,7 +46,7 @@ public class MyTestUserService {
 		us.setEmail("007");*/
 		u.login("shn", "123");
 		//u.register(us);
-	
+
 		/*System.out.print(userDao.checkUsername("shn"));*/
 	}
 
@@ -81,8 +81,8 @@ import zsc.ordermealsys.service.impl.UserServiceImpl;
 @Service
 public class MyTestUserService {
 	@Resource
- UserMapper userDao;
-	
+ 	UserMapper userDao;
+
 	public UserMapper getUserDao() {
 		return userDao;
 	}
@@ -100,17 +100,17 @@ public class MyTestUserService {
 		s.setName("产名称");
 		iProductService.saveOrUpdate(s);
 //		iProductService.setSaleStatus(2, 3);
-		
+
 		iProductService.manageProductDetail(1);
 		User us=new User();
 		us.setUserName("dm");
 		us.setEmail("007");
 		int count=u.getUserMapper().checkUsername("shn");
 		//u.register(us);
-	
+
 		System.out.print(userDao.checkUsername("shn"));
 	}
 
 }
 >>>>>>> origin/master:src/main/java/zsc/ordermealsys/service/MyTestUserService.java
-*/
+ */

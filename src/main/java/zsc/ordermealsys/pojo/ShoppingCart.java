@@ -5,6 +5,8 @@ import java.util.Date;
 
 public class ShoppingCart {
     private Integer id;
+    
+    private Integer userId;
 
     private String buyerName;
 
@@ -107,5 +109,13 @@ public class ShoppingCart {
 
 	public void setChecked(Integer checked) {
 		this.checked = checked;
+	}
+
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 }
