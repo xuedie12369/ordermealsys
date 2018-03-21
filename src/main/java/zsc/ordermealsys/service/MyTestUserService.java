@@ -51,7 +51,8 @@ public class MyTestUserService {
 		/*iProductService.saveOrUpdate(s);*/
 /*//		iProductService.setSaleStatus(2, 3);
 */		
-		iProductService.getProductList(1, 10);
+		/*iProductService.getProductList(1, 10);*/
+		iProductService.searchProduct("萝卜", 2, 1, 2);
 		/*User us=new User();
 		us.setUserName("dm");
 		us.setEmail("007");*/

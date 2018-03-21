@@ -134,8 +134,12 @@ private ProductDetailVo assembleProductDetailVo(ProductWithBLOBs product){
     productDetailVo.setUpdateTime(DateTimeUtil.dateToStr(product.getUpdateTime()));
     return productDetailVo;
 }
+/**
+ * 获得产品列表
+ * 作者:邵海楠
+ */
 @Override
-public ServerResponse<PageInfo> getProductList(int pageNum, int pageSize) {
+public ServerResponse<PageInfo> getProductList(Integer pageNum, Integer pageSize) {
 	// TODO Auto-generated method stub
 	//startPage-start
 	//填充自己的sql逻辑
@@ -167,6 +171,31 @@ private ProductVo assembleProductVo(ProductWithBLOBs product)
 	productVo.setPicHost(PropertiesUtil.getProperty("ftp.server.http.prefix","http://img.ordermealsys.com/"));
 	productVo.setPro_status(product.getProStatus());
 	return productVo;
+}
+
+/**
+ * 查询产品
+ */
+@Override
+public ServerResponse searchProduct(String name, Integer id, Integer pageNum, Integer pageSize) {
+	// TODO Auto-generated method stub
+	
+	PageHelper.startPage(pageNum,pageSize);
+	List<ProductVo> productVoList=new ArrayList<ProductVo>();
+	if(name!=null)
+	{
+		name=new StringBuilder().append("%").append(name).append("%").toString();
+	}
+	List<ProductWithBLOBs> productList=productMapper.searchProduct(name, id);
+	/*把产品对象模型转换为业务对象模型*/
+	for(ProductWithBLOBs productWithBLOBs:productList)
+	{
+		productVoList.add(assembleProductVo(productWithBLOBs));
+	}
+	PageInfo pageResult=new PageInfo(productList);
+	pageResult.setList(productVoList);
+	System.out.print(productVoList.get(0).getName());
+	return ServerResponse.createBySuccessMessage(pageResult);
 }
 
 }
