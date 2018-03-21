@@ -1,5 +1,7 @@
 package zsc.ordermealsys.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import zsc.ordermealsys.pojo.ShoppingCart;
@@ -17,5 +19,9 @@ public interface ShoppingCartMapper {
 
     int updateByPrimaryKey(ShoppingCart record);
     
-    ShoppingCart selectCartByUserIdProductId(@Param("buyerName")String buyerName,@Param("productId")Integer productId);
+    ShoppingCart selectCartByUserIdProductId(@Param("userId")Integer userId,@Param("productId")Integer productId);
+    
+    List<ShoppingCart>selectCartByUserId(Integer userId);
+    
+    int selectCartProductCheckedStatusByUserId(Integer userId);
 }

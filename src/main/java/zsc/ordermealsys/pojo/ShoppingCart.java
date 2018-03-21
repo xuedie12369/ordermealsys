@@ -5,10 +5,14 @@ import java.util.Date;
 
 public class ShoppingCart {
     private Integer id;
+    
+    private Integer userId;
 
     private String buyerName;
 
     private String sellerName;
+    
+    private Integer checked;
 
     private Integer productId;
 
@@ -98,4 +102,20 @@ public class ShoppingCart {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+
+	public Integer getChecked() {
+		return checked;
+	}
+
+	public void setChecked(Integer checked) {
+		this.checked = checked;
+	}
+
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
 }

@@ -15,3 +15,4 @@ public interface IProductService {
 	ServerResponse getProductList(Integer pageNum, Integer pageSize);
 	ServerResponse searchProduct(@Param("name")String name,@Param("id")Integer id,@Param("pageNum")Integer pageNum,@Param("pageSize")Integer pageSize);
 }
+
