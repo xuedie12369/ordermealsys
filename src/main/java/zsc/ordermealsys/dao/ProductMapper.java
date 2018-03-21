@@ -1,8 +1,12 @@
 package zsc.ordermealsys.dao;
 
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
 import zsc.ordermealsys.pojo.Product;
 import zsc.ordermealsys.pojo.ProductWithBLOBs;
-
+@Service("productMapper")
 public interface ProductMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -17,4 +21,5 @@ public interface ProductMapper {
     int updateByPrimaryKeyWithBLOBs(ProductWithBLOBs record);
 
     int updateByPrimaryKey(Product record);
+    List<ProductWithBLOBs> selectList();
 }

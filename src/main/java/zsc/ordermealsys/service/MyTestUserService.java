@@ -24,6 +24,10 @@ import zsc.ordermealsys.service.impl.UserServiceImpl;
 /*误删*/
 /*误删*/
 /*误删*/
+/**
+ * @author Administrator
+ *
+ */
 @Service
 public class MyTestUserService {
 	@Resource
@@ -42,12 +46,12 @@ public class MyTestUserService {
 		ApplicationContext ac=new ClassPathXmlApplicationContext("applicationContext.xml");
 		/*UserServiceImpl u= ac.getBean(UserServiceImpl.class);*/
 		IProductService iProductService= ac.getBean(IProductService.class);
-		ProductWithBLOBs s=new ProductWithBLOBs();
-		s.setName("产名称");
+	/*	ProductWithBLOBs s=new ProductWithBLOBs();*/
+	/*	s.setName("产名称");*/
 		/*iProductService.saveOrUpdate(s);*/
 /*//		iProductService.setSaleStatus(2, 3);
 */		
-		iProductService.manageProductDetail(1);
+		iProductService.getProductList(1, 10);
 		/*User us=new User();
 		us.setUserName("dm");
 		us.setEmail("007");*/

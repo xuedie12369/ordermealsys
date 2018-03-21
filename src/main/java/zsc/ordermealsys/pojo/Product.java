@@ -5,13 +5,34 @@ import java.util.Date;
 
 public class Product {
     private Integer id;
+    private Integer categoryId;
 
-    private String sellerName;
+	private String sellerName;
 
     private String name;
 
+    public Product(Integer id, Integer categoryId, String sellerName, String name, BigDecimal price, Integer stock,
+			Integer sales, Integer proStatus, Integer delStatus, Date createTime, Date updateTime,
+			BigDecimal deliveryFee, BigDecimal boxFee, BigDecimal boxPrice) {
+		super();
+		this.id = id;
+		this.categoryId = categoryId;
+		this.sellerName = sellerName;
+		this.name = name;
+		this.price = price;
+		this.stock = stock;
+		this.sales = sales;
+		this.proStatus = proStatus;
+		this.delStatus = delStatus;
+		this.createTime = createTime;
+		this.updateTime = updateTime;
+		this.deliveryFee = deliveryFee;
+		this.boxFee = boxFee;
+		this.boxPrice = boxPrice;
+		System.out.print("构造参数的分类ID"+categoryId);
+	}
 
-    private BigDecimal price;
+	private BigDecimal price;
 
     private Integer stock;
 
@@ -31,22 +52,7 @@ public class Product {
 
     private BigDecimal boxPrice;
 
-    public Product(Integer id, String sellerName, String name,BigDecimal price, Integer stock, Integer sales, Integer proStatus, Integer delStatus, Date createTime, Date updateTime, BigDecimal deliveryFee, BigDecimal boxFee, BigDecimal boxPrice) {
-        this.id = id;
-        this.sellerName = sellerName;
-        this.name = name;
-        this.price = price;
-        this.stock = stock;
-        this.sales = sales;
-        this.proStatus = proStatus;
-        this.delStatus = delStatus;
-        this.createTime = createTime;
-        this.updateTime = updateTime;
-        this.deliveryFee = deliveryFee;
-        this.boxFee = boxFee;
-        this.boxPrice = boxPrice;
-    }
-
+ 
     public Product() {
         super();
     }
@@ -154,4 +160,11 @@ public class Product {
     public void setBoxPrice(BigDecimal boxPrice) {
         this.boxPrice = boxPrice;
     }
+    public Integer getCategoryId() {
+  		return categoryId;
+  	}
+
+  	public void setCategoryId(Integer categoryId) {
+  		this.categoryId = categoryId;
+  	}
 }

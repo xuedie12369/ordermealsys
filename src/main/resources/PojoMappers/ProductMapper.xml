@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="zsc.ordermealsys.pojo.Product" >
     <constructor >
       <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="category_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
       <arg column="seller_name" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="name" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="main_pic" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -23,6 +24,7 @@
   <resultMap id="ResultMapWithBLOBs" type="zsc.ordermealsys.pojo.ProductWithBLOBs" >
     <constructor >
       <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="category_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
       <arg column="seller_name" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="name" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
@@ -41,7 +43,7 @@
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    id, seller_name, name, price, stock, sales, pro_status, del_status, create_time, 
+    id, category_id,seller_name, name, price, stock, sales, pro_status, del_status, create_time, 
     update_time, delivery_fee, box_fee, box_price
   </sql>
   <sql id="Blob_Column_List" >
@@ -60,12 +62,12 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="zsc.ordermealsys.pojo.ProductWithBLOBs" useGeneratedKeys="true" keyProperty="id" >
-    insert into product (seller_name, name, price, 
+    insert into product (category_id,seller_name, name, price, 
       stock, sales, pro_status, 
       del_status, create_time, update_time, 
       delivery_fee, box_fee, box_price, 
       main_pic, sub_pic, detail)
-    values (#{sellerName,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, 
+    values (#{categoryId,jdbcType=INTEGER},#{sellerName,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, 
       #{stock,jdbcType=INTEGER}, #{sales,jdbcType=INTEGER}, #{proStatus,jdbcType=INTEGER}, 
       #{delStatus,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
       #{deliveryFee,jdbcType=DECIMAL}, #{boxFee,jdbcType=DECIMAL}, #{boxPrice,jdbcType=DECIMAL}, 
@@ -75,6 +77,9 @@
   <insert id="insertSelective" parameterType="zsc.ordermealsys.pojo.ProductWithBLOBs" useGeneratedKeys="true" keyProperty="id" >
     insert into product
     <trim prefix="(" suffix=")" suffixOverrides="," >
+    <if test="category_id != null" >
+        category_id,
+      </if>
       <if test="sellerName != null" >
         seller_name,
       </if>
@@ -174,6 +179,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="zsc.ordermealsys.pojo.ProductWithBLOBs" >
     update product
     <set >
+  	 <if test="category_id != null" >
+        category_id = #{categoryId,jdbcType=INTEGER},
+      </if>
       <if test="sellerName != null" >
         seller_name = #{sellerName,jdbcType=VARCHAR},
       </if>
@@ -225,7 +233,8 @@
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="zsc.ordermealsys.pojo.ProductWithBLOBs" >
     update product
-    set seller_name = #{sellerName,jdbcType=VARCHAR},
+    set  category_id = #{categoryId,jdbcType=DECIMAL},
+    seller_name = #{sellerName,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
       price = #{price,jdbcType=DECIMAL},
       stock = #{stock,jdbcType=INTEGER},
@@ -245,7 +254,9 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="zsc.ordermealsys.pojo.Product" >
     update product
-    set seller_name = #{sellerName,jdbcType=VARCHAR},
+    set 
+    category_id = #{categoryId,jdbcType=INTEGER},
+    seller_name = #{sellerName,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
       price = #{price,jdbcType=DECIMAL},
       stock = #{stock,jdbcType=INTEGER},
@@ -259,4 +270,12 @@
       box_price = #{boxPrice,jdbcType=DECIMAL}
     where id = #{id,jdbcType=INTEGER}
   </update>
+	 <select id="selectList" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from product order by id asc 
+  </select>
 </mapper>
+

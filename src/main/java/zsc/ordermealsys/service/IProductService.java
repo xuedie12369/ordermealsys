@@ -1,5 +1,7 @@
 package zsc.ordermealsys.service;
 
+import com.github.pagehelper.PageInfo;
+
 import zsc.ordermealsys.common.ServerResponse;
 import zsc.ordermealsys.pojo.ProductWithBLOBs;
 
@@ -8,4 +10,6 @@ public interface IProductService {
 	public	ServerResponse delete(ProductWithBLOBs product);
 	public  ServerResponse setSaleStatus(Integer productId,Integer proStatus);
 	ServerResponse manageProductDetail(Integer productId);
+	ServerResponse getProductList(int pageNum, int pageSize);
+	
 }
