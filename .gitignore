@@ -1,2 +1,3 @@
 /target/
 src/main/java/zsc/ordermealsys/controller/backend/CategoryManageController.java
+src/main/java/zsc/ordermealsys/service/MyTestUserService.java

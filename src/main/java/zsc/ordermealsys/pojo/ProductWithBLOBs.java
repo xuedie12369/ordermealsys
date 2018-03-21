@@ -12,13 +12,13 @@ public class ProductWithBLOBs extends Product {
 
     private String detail;
 
-    public ProductWithBLOBs(Integer id, String sellerName, String name, BigDecimal price, Integer stock, Integer sales, Integer proStatus, Integer delStatus, Date createTime, Date updateTime, BigDecimal deliveryFee, BigDecimal boxFee, BigDecimal boxPrice, String mainPic, String subPic, String detail) {
-        super(id, sellerName, name, price, stock, sales, proStatus, delStatus, createTime, updateTime, deliveryFee, boxFee, boxPrice);
+    public ProductWithBLOBs(Integer id,Integer categoryId, String sellerName, String name, BigDecimal price, Integer stock, Integer sales, Integer proStatus, Integer delStatus, Date createTime, Date updateTime, BigDecimal deliveryFee, BigDecimal boxFee, BigDecimal boxPrice, String mainPic, String subPic, String detail) {
+        super(id, categoryId,sellerName, name, price, stock, sales, proStatus, delStatus, createTime, updateTime, deliveryFee, boxFee, boxPrice);
         this.mainPic = mainPic;
         this.subPic = subPic;
         this.detail = detail;
+        
     }
-
     public ProductWithBLOBs() {
         super();
     }

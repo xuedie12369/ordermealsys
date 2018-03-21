@@ -1,7 +1,13 @@
 package zsc.ordermealsys.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 
 import zsc.ordermealsys.common.ServerResponse;
 import zsc.ordermealsys.dao.CategoryMapper;
@@ -13,6 +19,7 @@ import zsc.ordermealsys.service.IProductService;
 import zsc.ordermealsys.util.DateTimeUtil;
 import zsc.ordermealsys.util.PropertiesUtil;
 import zsc.ordermealsys.vo.ProductDetailVo;
+import zsc.ordermealsys.vo.ProductVo;
 @Service("iProductService")
 public class ProductServiceImpl implements IProductService {
 @Autowired
@@ -111,7 +118,7 @@ private ProductDetailVo assembleProductDetailVo(ProductWithBLOBs product){
     productDetailVo.setPrice(product.getPrice());
     productDetailVo.setMain_pic(product.getMainPic());
     productDetailVo.setSub_pic(product.getSubPic());
-    productDetailVo.setCategoryId(product.getId());
+    productDetailVo.setCategoryId(product.getCategoryId());
     productDetailVo.setDetail(product.getDetail());
     productDetailVo.setName(product.getName());
     productDetailVo.setProStatus(product.getProStatus());
@@ -127,8 +134,69 @@ private ProductDetailVo assembleProductDetailVo(ProductWithBLOBs product){
     productDetailVo.setUpdateTime(DateTimeUtil.dateToStr(product.getUpdateTime()));
     return productDetailVo;
 }
+/**
+ * 获得产品列表
+ * 作者:邵海楠
+ */
+@Override
+public ServerResponse<PageInfo> getProductList(Integer pageNum, Integer pageSize) {
+	// TODO Auto-generated method stub
+	//startPage-start
+	//填充自己的sql逻辑
+	//pageHelper--收尾
+	PageHelper.startPage(pageNum,pageSize);
+	List<ProductVo> productVoList=new ArrayList<ProductVo>();
+	List<ProductWithBLOBs> productList=productMapper.selectList();
+	/*把产品对象模型转换为业务对象模型*/
+	for(ProductWithBLOBs productWithBLOBs:productList)
+	{
+		productVoList.add(assembleProductVo(productWithBLOBs));
+	}
+	PageInfo pageResult=new PageInfo(productList);
+	pageResult.setList(productVoList);
+	return ServerResponse.createBySuccessMessage(pageResult);
+}
+/**
+ * 数据库模型转为业务模型
+ * @param product
+ * @return
+ */
+private ProductVo assembleProductVo(ProductWithBLOBs product)
+{
+	ProductVo productVo =new ProductVo();
+	productVo.setCategoryId(product.getCategoryId());
+	productVo.setId(product.getId());
+	productVo.setMainPic(product.getMainPic());
+	productVo.setName(product.getName());
+	productVo.setPicHost(PropertiesUtil.getProperty("ftp.server.http.prefix","http://img.ordermealsys.com/"));
+	productVo.setPro_status(product.getProStatus());
+	return productVo;
+}
 
-
-
+/**
+ * 查询产品
+ */
+@Override
+public ServerResponse searchProduct(String name, Integer id, Integer pageNum, Integer pageSize) {
+	// TODO Auto-generated method stub
+	
+	PageHelper.startPage(pageNum,pageSize);
+	List<ProductVo> productVoList=new ArrayList<ProductVo>();
+	if(name!=null)
+	{
+		name=new StringBuilder().append("%").append(name).append("%").toString();
+	}
+	List<ProductWithBLOBs> productList=productMapper.searchProduct(name, id);
+	/*把产品对象模型转换为业务对象模型*/
+	for(ProductWithBLOBs productWithBLOBs:productList)
+	{
+		productVoList.add(assembleProductVo(productWithBLOBs));
+	}
+	PageInfo pageResult=new PageInfo(productList);
+	pageResult.setList(productVoList);
+	System.out.print(productVoList.get(0).getName());
+	return ServerResponse.createBySuccessMessage(pageResult);
+}
 
 }
+
