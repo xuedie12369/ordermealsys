@@ -14,8 +14,8 @@ public class SHNTest {
 		// TODO Auto-generated method stub
 		ApplicationContext ac=new ClassPathXmlApplicationContext("applicationContext.xml");
 		IProductService iProductService= ac.getBean(IProductService.class);
-		iProductService.getProductDetail(1);
-		
+//		iProductService.getProductDetail(1);
+		iProductService.getProductByKeywordCategory("7", null, 1, 10, null);
 		ProductWithBLOBs s=new ProductWithBLOBs();
 	}
 

@@ -3,7 +3,10 @@ package zsc.ordermealsys.controller.portal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.github.pagehelper.PageInfo;
 
 import zsc.ordermealsys.common.ServerResponse;
 import zsc.ordermealsys.service.IProductService;
@@ -24,6 +27,17 @@ public class ProductController {
     public ServerResponse<ProductDetailVo> detail(Integer productId){
         return iProductService.getProductDetail(productId);
     }
+	
+	/**
+	 * 通过关键字或者分类查找产品
+	 * @param keyword
+	 * @param categoryId
+	 * @param pageNum
+	 * @param pageSize
+	 * @param orderBy
+	 * @return
+	 */
+	
 	 @RequestMapping("list.do")
 	    @ResponseBody
 	    public ServerResponse<PageInfo> list(@RequestParam(value = "keyword",required = false)String keyword,
