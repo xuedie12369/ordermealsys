@@ -1,5 +1,8 @@
 package zsc.ordermealsys.controller.backend;
 
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,14 +10,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.google.common.collect.Maps;
 
 import zsc.ordermealsys.common.Const;
 import zsc.ordermealsys.common.ResponseCode;
 import zsc.ordermealsys.common.ServerResponse;
 import zsc.ordermealsys.pojo.ProductWithBLOBs;
 import zsc.ordermealsys.pojo.User;
+import zsc.ordermealsys.service.IFileService;
 import zsc.ordermealsys.service.IProductService;
 import zsc.ordermealsys.service.IUserService;
+import zsc.ordermealsys.util.PropertiesUtil;
 
 @Controller
 @RequestMapping("/manage/product")
@@ -23,7 +31,8 @@ public class ProductManageController {
 	private IUserService iUserService;
 	@Autowired
 	IProductService iProductService;
-
+	@Autowired
+	IFileService iFileService;
 	/**
 	 * 保存/更新产品 作者:邵海楠
 	 */
@@ -97,20 +106,60 @@ public class ProductManageController {
 			return ServerResponse.createByErrorMessage("无权限操作");
 		}
 	}
-	
+/**
+ * 查找产品
+ * 作者：邵海楠
+ * @param session
+ * @param productName
+ * @param productId
+ * @param pageNum
+ * @param pageSize
+ * @return
+ */
 	@RequestMapping("search.do")
 	@ResponseBody
-	  public ServerResponse productSearch(HttpSession session,String productName,Integer productId, @RequestParam(value = "pageNum",defaultValue = "1") int pageNum,@RequestParam(value = "pageSize",defaultValue = "10") int pageSize){
-        User user = (User)session.getAttribute(Const.CURRENT_USER);
-        if(user == null){
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登录,请登录管理员");
+	public ServerResponse productSearch(HttpSession session, String productName, Integer productId,
+			@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+			@RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
+		User user = (User) session.getAttribute(Const.CURRENT_USER);
+		if (user == null) {
+			return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录,请登录管理员");
 
-        }
-        if(iUserService.checkAdminRole(user).isSuccess()){
-            //填充业务
-            return iProductService.searchProduct(productName,productId,pageNum,pageSize);
-        }else{
-            return ServerResponse.createByErrorMessage("无权限操作");
-        }
-    }
+		}
+		if (iUserService.checkAdminRole(user).isSuccess()) {
+			// 填充业务
+			return iProductService.searchProduct(productName, productId, pageNum, pageSize);
+		} else {
+			return ServerResponse.createByErrorMessage("无权限操作");
+		}
+	}
+	
+	/**
+	 * 上传图片，但是只上传到web-app下的ordermealsys下的upload目录下
+	 * 没有完成，把通过转移到ftp服务器的功能
+	 * @param file
+	 * @param request
+	 * @return
+	 */
+@RequestMapping("upload.do")
+	public ServerResponse upload(MultipartFile file,HttpServletRequest request)
+	{
+		System.out.println("这里是上传文件的函数");
+	   String path=request.getSession().getServletContext().getRealPath("upload");
+	   String targetFileName= iFileService.upload(file, path);
+	   String url=PropertiesUtil.getProperty("ftp.server.ip")+targetFileName;
+		Map fileMap=Maps.newHashMap();
+		fileMap.put(url, targetFileName);
+		fileMap.put("uri", url);
+		return ServerResponse.createBySuccess(fileMap);
+	}
+
+@RequestMapping("tijiao")
+public void tijiao()
+{
+	System.out.print("运行了提交");
+}
+	
+
+
 }
