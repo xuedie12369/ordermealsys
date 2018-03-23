@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class ShoppingCart {
+	
     private Integer id;
     
     private Integer userId;
@@ -24,10 +25,12 @@ public class ShoppingCart {
 
     private Date updateTime;
 
-    public ShoppingCart(Integer id, String buyerName, String sellerName, Integer productId, BigDecimal productPrice, Integer productNum, Date createTime, Date updateTime) {
+    public ShoppingCart(Integer id, Integer userId, String buyerName, String sellerName, Integer checked, Integer productId, BigDecimal productPrice, Integer productNum, Date createTime, Date updateTime) {
         this.id = id;
+        this.userId=userId;
         this.buyerName = buyerName;
         this.sellerName = sellerName;
+        this.checked=checked;
         this.productId = productId;
         this.productPrice = productPrice;
         this.productNum = productNum;

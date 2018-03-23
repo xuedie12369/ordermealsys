@@ -1,347 +1,350 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="zsc.ordermealsys.dao.UserMapper" >
-  <resultMap id="BaseResultMap" type="zsc.ordermealsys.pojo.User" >
-    <constructor >
-      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="username" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="pwd" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="pay_pwd" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="tel" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="nick_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="sex" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="birth" jdbcType="DATE" javaType="java.util.Date" />
-      <arg column="age" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="email" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="grade" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="role" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="balance" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-      <arg column="creat_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="def_add" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="status" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-    </constructor>
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="zsc.ordermealsys.pojo.User" >
-    <constructor >
-      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="username" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="pwd" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="pay_pwd" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="tel" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="nick_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="sex" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="birth" jdbcType="DATE" javaType="java.util.Date" />
-      <arg column="age" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="email" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="grade" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="role" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="balance" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-      <arg column="creat_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="def_add" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="status" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="pic" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
-    </constructor>
-  </resultMap>
-  <sql id="Base_Column_List" >
-    id, username, pwd, pay_pwd, tel, nick_name, sex, birth, age, email, grade, role, 
-    balance, creat_time, def_add, status, update_time
-  </sql>
-  <sql id="Blob_Column_List" >
-    pic
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from user
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from user
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="zsc.ordermealsys.pojo.User" useGeneratedKeys="true" keyProperty="id" >
-    insert into user (username, pwd, pay_pwd, 
-      tel, nick_name, sex, 
-      birth, age, email, grade, 
-      role, balance, creat_time, 
-      def_add, status, update_time, 
-      pic)
-    values (#{userName,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, #{payPwd,jdbcType=VARCHAR}, 
-      #{tel,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, 
-      #{birth,jdbcType=DATE}, #{age,jdbcType=INTEGER}, #{email,jdbcType=VARCHAR}, #{grade,jdbcType=INTEGER}, 
-      #{role,jdbcType=INTEGER}, #{balance,jdbcType=DECIMAL}, #{creatTime,jdbcType=TIMESTAMP}, 
-      #{defAdd,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, 
-      #{pic,jdbcType=LONGVARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="zsc.ordermealsys.pojo.User" useGeneratedKeys="true" keyProperty="id" >
-    insert into user
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="userName != null" >
-        username,
-      </if>
-      <if test="pwd != null" >
-        pwd,
-      </if>
-      <if test="payPwd != null" >
-        pay_pwd,
-      </if>
-      <if test="tel != null" >
-        tel,
-      </if>
-      <if test="nickName != null" >
-        nick_name,
-      </if>
-      <if test="sex != null" >
-        sex,
-      </if>
-      <if test="birth != null" >
-        birth,
-      </if>
-      <if test="age != null" >
-        age,
-      </if>
-      <if test="email != null" >
-        email,
-      </if>
-      <if test="grade != null" >
-        grade,
-      </if>
-      <if test="role != null" >
-        role,
-      </if>
-      <if test="balance != null" >
-        balance,
-      </if>
-      <if test="creatTime != null" >
-        creat_time,
-      </if>
-      <if test="defAdd != null" >
-        def_add,
-      </if>
-      <if test="status != null" >
-        status,
-      </if>
-      <if test="updateTime != null" >
-        update_time,
-      </if>
-      <if test="pic != null" >
-        pic,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="userName != null" >
-        #{userName,jdbcType=VARCHAR},
-      </if>
-      <if test="pwd != null" >
-        #{pwd,jdbcType=VARCHAR},
-      </if>
-      <if test="payPwd != null" >
-        #{payPwd,jdbcType=VARCHAR},
-      </if>
-      <if test="tel != null" >
-        #{tel,jdbcType=VARCHAR},
-      </if>
-      <if test="nickName != null" >
-        #{nickName,jdbcType=VARCHAR},
-      </if>
-      <if test="sex != null" >
-        #{sex,jdbcType=INTEGER},
-      </if>
-      <if test="birth != null" >
-        #{birth,jdbcType=DATE},
-      </if>
-      <if test="age != null" >
-        #{age,jdbcType=INTEGER},
-      </if>
-      <if test="email != null" >
-        #{email,jdbcType=VARCHAR},
-      </if>
-      <if test="grade != null" >
-        #{grade,jdbcType=INTEGER},
-      </if>
-      <if test="role != null" >
-        #{role,jdbcType=INTEGER},
-      </if>
-      <if test="balance != null" >
-        #{balance,jdbcType=DECIMAL},
-      </if>
-      <if test="creatTime != null" >
-        #{creatTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="defAdd != null" >
-        #{defAdd,jdbcType=INTEGER},
-      </if>
-      <if test="status != null" >
-        #{status,jdbcType=INTEGER},
-      </if>
-      <if test="updateTime != null" >
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="pic != null" >
-        #{pic,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="zsc.ordermealsys.pojo.User" >
-    update user
-    <set >
-      <if test="userName != null" >
-        username = #{userName,jdbcType=VARCHAR},
-      </if>
-      <if test="pwd != null" >
-        pwd = #{pwd,jdbcType=VARCHAR},
-      </if>
-      <if test="payPwd != null" >
-        pay_pwd = #{payPwd,jdbcType=VARCHAR},
-      </if>
-      <if test="tel != null" >
-        tel = #{tel,jdbcType=VARCHAR},
-      </if>
-      <if test="nickName != null" >
-        nick_name = #{nickName,jdbcType=VARCHAR},
-      </if>
-      <if test="sex != null" >
-        sex = #{sex,jdbcType=INTEGER},
-      </if>
-      <if test="birth != null" >
-        birth = #{birth,jdbcType=DATE},
-      </if>
-      <if test="age != null" >
-        age = #{age,jdbcType=INTEGER},
-      </if>
-      <if test="email != null" >
-        email = #{email,jdbcType=VARCHAR},
-      </if>
-      <if test="grade != null" >
-        grade = #{grade,jdbcType=INTEGER},
-      </if>
-      <if test="role != null" >
-        role = #{role,jdbcType=INTEGER},
-      </if>
-      <if test="balance != null" >
-        balance = #{balance,jdbcType=DECIMAL},
-      </if>
-      <if test="creatTime != null" >
-        creat_time = #{creatTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="defAdd != null" >
-        def_add = #{defAdd,jdbcType=INTEGER},
-      </if>
-      <if test="status != null" >
-        status = #{status,jdbcType=INTEGER},
-      </if>
-      <if test="updateTime != null" >
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="pic != null" >
-        pic = #{pic,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="zsc.ordermealsys.pojo.User" >
-    update user
-    set username = #{userName,jdbcType=VARCHAR},
-      pwd = #{pwd,jdbcType=VARCHAR},
-      pay_pwd = #{payPwd,jdbcType=VARCHAR},
-      tel = #{tel,jdbcType=VARCHAR},
-      nick_name = #{nickName,jdbcType=VARCHAR},
-      sex = #{sex,jdbcType=INTEGER},
-      birth = #{birth,jdbcType=DATE},
-      age = #{age,jdbcType=INTEGER},
-      email = #{email,jdbcType=VARCHAR},
-      grade = #{grade,jdbcType=INTEGER},
-      role = #{role,jdbcType=INTEGER},
-      balance = #{balance,jdbcType=DECIMAL},
-      creat_time = #{creatTime,jdbcType=TIMESTAMP},
-      def_add = #{defAdd,jdbcType=INTEGER},
-      status = #{status,jdbcType=INTEGER},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      pic = #{pic,jdbcType=LONGVARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="zsc.ordermealsys.pojo.User" >
-    update user
-    set username = #{userName,jdbcType=VARCHAR},
-      pwd = #{pwd,jdbcType=VARCHAR},
-      pay_pwd = #{payPwd,jdbcType=VARCHAR},
-      tel = #{tel,jdbcType=VARCHAR},
-      nick_name = #{nickName,jdbcType=VARCHAR},
-      sex = #{sex,jdbcType=INTEGER},
-      birth = #{birth,jdbcType=DATE},
-      age = #{age,jdbcType=INTEGER},
-      email = #{email,jdbcType=VARCHAR},
-      grade = #{grade,jdbcType=INTEGER},
-      role = #{role,jdbcType=INTEGER},
-      balance = #{balance,jdbcType=DECIMAL},
-      creat_time = #{creatTime,jdbcType=TIMESTAMP},
-      def_add = #{defAdd,jdbcType=INTEGER},
-      status = #{status,jdbcType=INTEGER},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-  <!-- ******************************** -->
-  <!-- 以下为自主添加SQL查询语句，非系统自动生成 -->
-  <!-- ******************************** -->
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  <select id="checkEmail" resultType="int" parameterType="string">
-  	select count(1) from user where email=#{email}
-  </select>
-  
-  <select id="selectLogin" resultType="zsc.ordermealsys.pojo.User" >
-  	select  
-  	<include refid="Base_Column_List"/>
-  	from user
-  	where username=#{username}
-  	and pwd=#{pwd}
-  </select>
-  
-  <select id="selectQuestionByUsername" resultType="string" parameterType="string">
-  	select
-  	question
-  	from user
-  	where username=#{username}
-  </select>
-  
-  <select id="checkAnswer" resultType="int" parameterType="map">
-  	select
-  	count(1)
-  	from user
-  	where username=#{username}
-  	and question=#{question}
-  	and answer=#{answer}
-  </select>
-  
-  <update id="updatePasswordByUsername" parameterType="map">
-  	update user
-  	SET password=#{passwordNew},update_time=now()
-  	where username=#{username}
-  </update>
-  <select id="checkUsername" resultType="int" >
-  		 select count(1) from user where username=#{username}
-  </select>
-  
+<mapper namespace="zsc.ordermealsys.dao.UserMapper">
+	<resultMap id="BaseResultMap" type="zsc.ordermealsys.pojo.User">
+		<constructor>
+			<idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+			<arg column="username" jdbcType="VARCHAR" javaType="java.lang.String" />
+			<arg column="pwd" jdbcType="VARCHAR" javaType="java.lang.String" />
+			<arg column="pay_pwd" jdbcType="VARCHAR" javaType="java.lang.String" />
+			<arg column="tel" jdbcType="VARCHAR" javaType="java.lang.String" />
+			<arg column="nick_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+			<arg column="sex" jdbcType="INTEGER" javaType="java.lang.Integer" />
+			<arg column="birth" jdbcType="DATE" javaType="java.util.Date" />
+			<arg column="age" jdbcType="INTEGER" javaType="java.lang.Integer" />
+			<arg column="email" jdbcType="VARCHAR" javaType="java.lang.String" />
+			<arg column="grade" jdbcType="INTEGER" javaType="java.lang.Integer" />
+			<arg column="role" jdbcType="INTEGER" javaType="java.lang.Integer" />
+			<arg column="balance" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+			<arg column="creat_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+			<arg column="def_add" jdbcType="INTEGER" javaType="java.lang.Integer" />
+			<arg column="status" jdbcType="INTEGER" javaType="java.lang.Integer" />
+			<arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+		</constructor>
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs" type="zsc.ordermealsys.pojo.User">
+		<constructor>
+			<idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+			<arg column="username" jdbcType="VARCHAR" javaType="java.lang.String" />
+			<arg column="pwd" jdbcType="VARCHAR" javaType="java.lang.String" />
+			<arg column="pay_pwd" jdbcType="VARCHAR" javaType="java.lang.String" />
+			<arg column="tel" jdbcType="VARCHAR" javaType="java.lang.String" />
+			<arg column="nick_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+			<arg column="sex" jdbcType="INTEGER" javaType="java.lang.Integer" />
+			<arg column="birth" jdbcType="DATE" javaType="java.util.Date" />
+			<arg column="age" jdbcType="INTEGER" javaType="java.lang.Integer" />
+			<arg column="email" jdbcType="VARCHAR" javaType="java.lang.String" />
+			<arg column="grade" jdbcType="INTEGER" javaType="java.lang.Integer" />
+			<arg column="role" jdbcType="INTEGER" javaType="java.lang.Integer" />
+			<arg column="balance" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+			<arg column="creat_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+			<arg column="def_add" jdbcType="INTEGER" javaType="java.lang.Integer" />
+			<arg column="status" jdbcType="INTEGER" javaType="java.lang.Integer" />
+			<arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+			<arg column="pic" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+		</constructor>
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, username, pwd, pay_pwd, tel, nick_name, sex, birth, age, email,
+		grade, role,
+		balance, creat_time, def_add, status, update_time
+	</sql>
+	<sql id="Blob_Column_List">
+		pic
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from user
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from user
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="zsc.ordermealsys.pojo.User"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into user (username, pwd, pay_pwd,
+		tel, nick_name, sex,
+		birth, age, email, grade,
+		role, balance, creat_time,
+		def_add, status, update_time,
+		pic)
+		values (#{userName,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR},
+		#{payPwd,jdbcType=VARCHAR},
+		#{tel,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER},
+		#{birth,jdbcType=DATE}, #{age,jdbcType=INTEGER},
+		#{email,jdbcType=VARCHAR}, #{grade,jdbcType=INTEGER},
+		#{role,jdbcType=INTEGER}, #{balance,jdbcType=DECIMAL},
+		#{creatTime,jdbcType=TIMESTAMP},
+		#{defAdd,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP},
+		#{pic,jdbcType=LONGVARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="zsc.ordermealsys.pojo.User"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="userName != null">
+				username,
+			</if>
+			<if test="pwd != null">
+				pwd,
+			</if>
+			<if test="payPwd != null">
+				pay_pwd,
+			</if>
+			<if test="tel != null">
+				tel,
+			</if>
+			<if test="nickName != null">
+				nick_name,
+			</if>
+			<if test="sex != null">
+				sex,
+			</if>
+			<if test="birth != null">
+				birth,
+			</if>
+			<if test="age != null">
+				age,
+			</if>
+			<if test="email != null">
+				email,
+			</if>
+			<if test="grade != null">
+				grade,
+			</if>
+			<if test="role != null">
+				role,
+			</if>
+			<if test="balance != null">
+				balance,
+			</if>
+			<if test="creatTime != null">
+				creat_time,
+			</if>
+			<if test="defAdd != null">
+				def_add,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="updateTime != null">
+				update_time,
+			</if>
+			<if test="pic != null">
+				pic,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="userName != null">
+				#{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="pwd != null">
+				#{pwd,jdbcType=VARCHAR},
+			</if>
+			<if test="payPwd != null">
+				#{payPwd,jdbcType=VARCHAR},
+			</if>
+			<if test="tel != null">
+				#{tel,jdbcType=VARCHAR},
+			</if>
+			<if test="nickName != null">
+				#{nickName,jdbcType=VARCHAR},
+			</if>
+			<if test="sex != null">
+				#{sex,jdbcType=INTEGER},
+			</if>
+			<if test="birth != null">
+				#{birth,jdbcType=DATE},
+			</if>
+			<if test="age != null">
+				#{age,jdbcType=INTEGER},
+			</if>
+			<if test="email != null">
+				#{email,jdbcType=VARCHAR},
+			</if>
+			<if test="grade != null">
+				#{grade,jdbcType=INTEGER},
+			</if>
+			<if test="role != null">
+				#{role,jdbcType=INTEGER},
+			</if>
+			<if test="balance != null">
+				#{balance,jdbcType=DECIMAL},
+			</if>
+			<if test="creatTime != null">
+				#{creatTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="defAdd != null">
+				#{defAdd,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="pic != null">
+				#{pic,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="zsc.ordermealsys.pojo.User">
+		update user
+		<set>
+			<if test="userName != null">
+				username = #{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="pwd != null">
+				pwd = #{pwd,jdbcType=VARCHAR},
+			</if>
+			<if test="payPwd != null">
+				pay_pwd = #{payPwd,jdbcType=VARCHAR},
+			</if>
+			<if test="tel != null">
+				tel = #{tel,jdbcType=VARCHAR},
+			</if>
+			<if test="nickName != null">
+				nick_name = #{nickName,jdbcType=VARCHAR},
+			</if>
+			<if test="sex != null">
+				sex = #{sex,jdbcType=INTEGER},
+			</if>
+			<if test="birth != null">
+				birth = #{birth,jdbcType=DATE},
+			</if>
+			<if test="age != null">
+				age = #{age,jdbcType=INTEGER},
+			</if>
+			<if test="email != null">
+				email = #{email,jdbcType=VARCHAR},
+			</if>
+			<if test="grade != null">
+				grade = #{grade,jdbcType=INTEGER},
+			</if>
+			<if test="role != null">
+				role = #{role,jdbcType=INTEGER},
+			</if>
+			<if test="balance != null">
+				balance = #{balance,jdbcType=DECIMAL},
+			</if>
+			<if test="creatTime != null">
+				creat_time = #{creatTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="defAdd != null">
+				def_add = #{defAdd,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="updateTime != null">
+				update_time = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="pic != null">
+				pic = #{pic,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="zsc.ordermealsys.pojo.User">
+		update user
+		set username = #{userName,jdbcType=VARCHAR},
+		pwd = #{pwd,jdbcType=VARCHAR},
+		pay_pwd = #{payPwd,jdbcType=VARCHAR},
+		tel = #{tel,jdbcType=VARCHAR},
+		nick_name = #{nickName,jdbcType=VARCHAR},
+		sex = #{sex,jdbcType=INTEGER},
+		birth = #{birth,jdbcType=DATE},
+		age = #{age,jdbcType=INTEGER},
+		email = #{email,jdbcType=VARCHAR},
+		grade = #{grade,jdbcType=INTEGER},
+		role = #{role,jdbcType=INTEGER},
+		balance = #{balance,jdbcType=DECIMAL},
+		creat_time = #{creatTime,jdbcType=TIMESTAMP},
+		def_add = #{defAdd,jdbcType=INTEGER},
+		status = #{status,jdbcType=INTEGER},
+		update_time = #{updateTime,jdbcType=TIMESTAMP},
+		pic = #{pic,jdbcType=LONGVARCHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="zsc.ordermealsys.pojo.User">
+		update user
+		set username = #{userName,jdbcType=VARCHAR},
+		pwd = #{pwd,jdbcType=VARCHAR},
+		pay_pwd = #{payPwd,jdbcType=VARCHAR},
+		tel = #{tel,jdbcType=VARCHAR},
+		nick_name = #{nickName,jdbcType=VARCHAR},
+		sex = #{sex,jdbcType=INTEGER},
+		birth = #{birth,jdbcType=DATE},
+		age = #{age,jdbcType=INTEGER},
+		email = #{email,jdbcType=VARCHAR},
+		grade = #{grade,jdbcType=INTEGER},
+		role = #{role,jdbcType=INTEGER},
+		balance = #{balance,jdbcType=DECIMAL},
+		creat_time = #{creatTime,jdbcType=TIMESTAMP},
+		def_add = #{defAdd,jdbcType=INTEGER},
+		status = #{status,jdbcType=INTEGER},
+		update_time = #{updateTime,jdbcType=TIMESTAMP}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+
+
+
+
+
+
+
+
+	<!-- ************************************** -->
+	<!-- 以下为自主添加SQL查询语句，非系统自动生成 -->
+	<!-- ************************************** -->
+
+
+
+
+
+
+	<select id="checkEmail" resultType="int" parameterType="string">
+		select count(1) from user where email=#{email}
+	</select>
+
+	<select id="selectLogin" resultType="zsc.ordermealsys.pojo.User">
+		select
+		<include refid="Base_Column_List" />
+		from user
+		where username=#{username}
+		and pwd=#{pwd}
+	</select>
+
+	<select id="selectQuestionByUsername" resultType="string"
+		parameterType="string">
+		select
+		question
+		from user
+		where username=#{username}
+	</select>
+
+	<select id="checkAnswer" resultType="int" parameterType="map">
+		select
+		count(1)
+		from user
+		where username=#{username}
+		and question=#{question}
+		and answer=#{answer}
+	</select>
+
+	<update id="updatePasswordByUsername" parameterType="map">
+		update user
+		SET password=#{passwordNew},update_time=now()
+		where username=#{username}
+	</update>
+	<select id="checkUsername" resultType="int">
+		select count(1) from user where username=#{username}
+	</select>
+
 </mapper>

@@ -15,7 +15,6 @@ import zsc.ordermealsys.common.ResponseCode;
 import zsc.ordermealsys.common.ServerResponse;
 import zsc.ordermealsys.dao.ProductMapper;
 import zsc.ordermealsys.dao.ShoppingCartMapper;
-import zsc.ordermealsys.pojo.Product;
 import zsc.ordermealsys.pojo.ProductWithBLOBs;
 import zsc.ordermealsys.pojo.ShoppingCart;
 import zsc.ordermealsys.service.ICartService;
@@ -70,10 +69,7 @@ public class CartServiceImpl implements ICartService{
 					cartProductVo.setProductNum(buyLimitCount);
 					//计算总价
 					cartProductVo.setProductTotalPrice(BigDecimalUtil.mul(product.getPrice().doubleValue(),cartProductVo.getProductNum()));
-					cartProductVo.setProductChecked(cartItem.getChecked());
-					
-					
-					
+					cartProductVo.setProductChecked(cartItem.getChecked());				
 					cartItem.setChecked(1);
 				}
 				if(cartItem.getChecked() == Const.ShoppingCart.CHECKED){
@@ -84,13 +80,14 @@ public class CartServiceImpl implements ICartService{
 			}
 		}
 		cartVo.setCartTotalPrice(cartTotalPrice);
+		System.out.println("总价为："+cartVo.getCartTotalPrice().toString());
 		cartVo.setCartProductVoList(cartProductVoList);
-		//cartVo.setAllChecked(this.getAllCheckedStatus(userId));//判断是否全选
+		cartVo.setAllChecked(this.getAllCheckedStatus(userId));//判断是否全选
 		cartVo.setImageHost(PropertiesUtil.getProperty("ftp.server.http.prefix"));
 		return cartVo;
 	}
 
-	
+	//判断购物车中的商品是否被全选
 	private boolean getAllCheckedStatus(Integer userId){
 		if(userId == null){
 			return false;
@@ -98,17 +95,25 @@ public class CartServiceImpl implements ICartService{
 		return shoppingCartMapper.selectCartProductCheckedStatusByUserId(userId) == 0;
 	}
 	
+	//购物车中商品的查询功能（查）
+	public ServerResponse<ShoppingCartVo> list (Integer userId){
+		ShoppingCartVo cartVo = this.getShoppingCartVoLimit(userId);
+		System.out.println("购物车查找成功");
+		System.out.println(cartVo.getCartTotalPrice().toString());
+		return ServerResponse.createBySuccess(cartVo);
+	}
 	
-	
-	
-	
+	//购物车添加商品功能（增）
 	public ServerResponse<ShoppingCartVo> add(Integer userId,Integer productId,Integer count){
+		
 		//校验productId和count是否为空，若为空则返回参数错误
 		if(productId == null || count == null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.ILLEGAL_ARGUMENT.getCode(),ResponseCode.ILLEGAL_ARGUMENT.getDesc());
         }
 		
+		System.out.println("校验非空没问题");
 		ShoppingCart cart=shoppingCartMapper.selectCartByUserIdProductId(userId, productId);
+		System.out.println("调用dao层方法返回结果没错误");
 		if(cart==null){
 			//这个商品不在这个购物车里，需要新增一个这个商品的记录
 			ShoppingCart cartItem=new ShoppingCart();
@@ -124,18 +129,11 @@ public class CartServiceImpl implements ICartService{
 			cart.setProductNum(count);
 			shoppingCartMapper.updateByPrimaryKeySelective(cart);
 		}
-		ShoppingCartVo shoppingCartVo=this.getShoppingCartVoLimit(userId);
-		System.out.println("添加记录成功");
-		return ServerResponse.createBySuccess(shoppingCartVo);
-		//return this.list(userId);
-		
-		//return null;
+		return this.list(userId);
 	}
 	
-	
-	
-	
-	/*public ServerResponse<ShoppingCartVo> update(Integer userId,Integer productId,Integer count){
+	//更新购物车中商品的功能（改）
+	public ServerResponse<ShoppingCartVo> update(Integer userId,Integer productId,Integer count){
 		if(productId == null || count == null){
 			return ServerResponse.createByErrorCodeMessage(ResponseCode.ILLEGAL_ARGUMENT.getCode(),ResponseCode.ILLEGAL_ARGUMENT.getDesc());
 		}
@@ -143,41 +141,41 @@ public class CartServiceImpl implements ICartService{
 		if(cart != null){
 			cart.setProductNum(count);
 		}
-		shoppingCartMapper.updateByPrimaryKey(cart);
+		shoppingCartMapper.updateByPrimaryKeySelective(cart);
+		System.out.println("购物车中商品修改成功");
+		//shoppingCartMapper.updateByPrimaryKey(cart);
 		return this.list(userId);
 	}
 
+	
+	//删除购物车中指定商品的功能（删）
 	public ServerResponse<ShoppingCartVo> deleteProduct(Integer userId,String productIds){
+		
 		List<String> productList = Splitter.on(",").splitToList(productIds);
 		if(CollectionUtils.isEmpty(productList)){
 			return ServerResponse.createByErrorCodeMessage(ResponseCode.ILLEGAL_ARGUMENT.getCode(),ResponseCode.ILLEGAL_ARGUMENT.getDesc());
 		}
 		shoppingCartMapper.deleteByUserIdProductIds(userId,productList);
+		System.out.println("购物车删除成功");
 		return this.list(userId);
 	}
-
-
-	public ServerResponse<ShoppingCartVo> list (Integer userId){
-		ShoppingCartVo cartVo = this.getCartVoLimit(userId);
-		return ServerResponse.createBySuccess(cartVo);
-	}
-
-
-
+	
+	
 	public ServerResponse<ShoppingCartVo> selectOrUnSelect (Integer userId,Integer productId,Integer checked){
 		shoppingCartMapper.checkedOrUncheckedProduct(userId,productId,checked);
 		return this.list(userId);
 	}
 
+	
 	public ServerResponse<Integer> getCartProductCount(Integer userId){
 		if(userId == null){
 			return ServerResponse.createBySuccess(0);
 		}
 		return ServerResponse.createBySuccess(shoppingCartMapper.selectCartProductCount(userId));
 	}
-*/
 
 
+	
 
 
 
