@@ -5,7 +5,7 @@ public class Order_Pay {
 
     private String orderId;
 
-    private String buyerName;
+    private Integer userId;
 
     private String sellerName;
 
@@ -17,10 +17,10 @@ public class Order_Pay {
 
     private Integer payStatus;
 
-    public Order_Pay(Integer id, String orderId, String buyerName, String sellerName, String thirdPartyUsername, String serialNumber, String payPlatformName, Integer payStatus) {
+    public Order_Pay(Integer id, String orderId, Integer userId, String sellerName, String thirdPartyUsername, String serialNumber, String payPlatformName, Integer payStatus) {
         this.id = id;
         this.orderId = orderId;
-        this.buyerName = buyerName;
+        this.userId = userId;
         this.sellerName = sellerName;
         this.thirdPartyUsername = thirdPartyUsername;
         this.serialNumber = serialNumber;
@@ -48,12 +48,12 @@ public class Order_Pay {
         this.orderId = orderId == null ? null : orderId.trim();
     }
 
-    public String getBuyerName() {
-        return buyerName;
+    public Integer getuserId() {
+        return userId;
     }
 
-    public void setBuyerName(String buyerName) {
-        this.buyerName = buyerName == null ? null : buyerName.trim();
+    public void setuserId(Integer userId) {
+        this.userId = userId == null ? null : userId;
     }
 
     public String getSellerName() {

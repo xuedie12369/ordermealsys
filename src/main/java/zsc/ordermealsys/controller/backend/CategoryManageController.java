@@ -21,7 +21,7 @@ import zsc.ordermealsys.service.impl.CategoryServiceImpl;
 public class CategoryManageController {
 	@Autowired
 	IUserService iUserService;
-	@Autowired
+//	@Autowired
 	ICategoryService iCategoryService;
 
 	/*

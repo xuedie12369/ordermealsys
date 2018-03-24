@@ -19,9 +19,9 @@ public class OrderServiceImpl  implements IOrderService {
 	public ServerResponse pay(Long orderId, Integer userId, String path) {
 		// TODO Auto-generated method stub
 		Map<String,String> resultMap=Maps.newHashMap();
-	/* Order o=orderMapper.selectByUserIDAndOrderId(userId, orderId);
-		System.out.print(o.getSellerName()+o.getId());
-	*/	
+	 Order o=orderMapper.selectByUserIDAndOrderId(userId, orderId);
+		System.out.print(o.getSellerName()+o.getUserId());
+		
 		
 		return null;
 	}

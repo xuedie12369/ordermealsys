@@ -16,9 +16,15 @@ public class OrderServiceTest {
 	ApplicationContext ac=new ClassPathXmlApplicationContext("applicationContext.xml");
 //	OrderServiceImpl orderServiceImpl= ac.getBean(OrderServiceImpl.class);
 	OrderMapper orderMapper=ac.getBean(OrderMapper.class);
+<<<<<<< HEAD
 	/*Order o=orderMapper.selectByUserIDAndOrderId(1, 2L);
 		System.out.print(o.getSellerName()+o.getUserId());
 	*/	
+=======
+	Order o=orderMapper.selectByUserIDAndOrderId(1, 2L);
+		System.out.print(o.getSellerName()+o.getUserId());
+		
+>>>>>>> 8518eda0b9ac1c2304ea86dab0700810978668d3
 		
 	
 	}
