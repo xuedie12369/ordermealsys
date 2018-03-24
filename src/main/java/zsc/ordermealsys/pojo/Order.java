@@ -7,10 +7,53 @@ public class Order {
     private Integer id;
 
     private String sellerName;
+    private Integer userId;
+    private Long orderNo;
+    public Order(Integer id, String sellerName, Integer userId, Long orderNo, BigDecimal totalPrice, Date createTime,
+			Integer deliveryType, Integer orderType, Integer payStatus, String orderNotes, String deliveryTime,
+			Integer deleteStatus, BigDecimal deliveryFee, Integer orderStatus, Date payTime, Date transactClosingTime,
+			Date transactCompleTime, Date updateTime, BigDecimal boxTotalPrice) {
+		super();
+		this.id = id;
+		this.sellerName = sellerName;
+		this.userId = userId;
+		this.orderNo = orderNo;
+		this.totalPrice = totalPrice;
+		this.createTime = createTime;
+		this.deliveryType = deliveryType;
+		this.orderType = orderType;
+		this.payStatus = payStatus;
+		this.orderNotes = orderNotes;
+		this.deliveryTime = deliveryTime;
+		this.deleteStatus = deleteStatus;
+		this.deliveryFee = deliveryFee;
+		this.orderStatus = orderStatus;
+		this.payTime = payTime;
+		this.transactClosingTime = transactClosingTime;
+		this.transactCompleTime = transactCompleTime;
+		this.updateTime = updateTime;
+		this.boxTotalPrice = boxTotalPrice;
+	}
 
-    private String buyerName;
+	public Long getOrderNo() {
+		return orderNo;
+	}
 
-    private BigDecimal totalPrice;
+	public void setOrderNo(Long orderNo) {
+		this.orderNo = orderNo;
+	}
+
+	
+	
+	public Integer getuserId() {
+		return userId;
+	}
+
+	public void setuserId(Integer userId) {
+		this.userId = userId;
+	}
+
+	private BigDecimal totalPrice;
 
     private Date createTime;
 
@@ -40,27 +83,7 @@ public class Order {
 
     private BigDecimal boxTotalPrice;
 
-    public Order(Integer id, String sellerName, String buyerName, BigDecimal totalPrice, Date createTime, Integer deliveryType, Integer orderType, Integer payStatus, String orderNotes, String deliveryTime, Integer deleteStatus, BigDecimal deliveryFee, Integer orderStatus, Date payTime, Date transactClosingTime, Date transactCompleTime, Date updateTime, BigDecimal boxTotalPrice) {
-        this.id = id;
-        this.sellerName = sellerName;
-        this.buyerName = buyerName;
-        this.totalPrice = totalPrice;
-        this.createTime = createTime;
-        this.deliveryType = deliveryType;
-        this.orderType = orderType;
-        this.payStatus = payStatus;
-        this.orderNotes = orderNotes;
-        this.deliveryTime = deliveryTime;
-        this.deleteStatus = deleteStatus;
-        this.deliveryFee = deliveryFee;
-        this.orderStatus = orderStatus;
-        this.payTime = payTime;
-        this.transactClosingTime = transactClosingTime;
-        this.transactCompleTime = transactCompleTime;
-        this.updateTime = updateTime;
-        this.boxTotalPrice = boxTotalPrice;
-    }
-
+   
     public Order() {
         super();
     }
@@ -81,14 +104,7 @@ public class Order {
         this.sellerName = sellerName == null ? null : sellerName.trim();
     }
 
-    public String getBuyerName() {
-        return buyerName;
-    }
-
-    public void setBuyerName(String buyerName) {
-        this.buyerName = buyerName == null ? null : buyerName.trim();
-    }
-
+    
     public BigDecimal getTotalPrice() {
         return totalPrice;
     }
