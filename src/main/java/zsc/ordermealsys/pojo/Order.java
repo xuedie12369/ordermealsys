@@ -8,7 +8,7 @@ public class Order {
 
     private String sellerName;
 
-    private String buyerName;
+    private Integer userId;
 
     private BigDecimal totalPrice;
 
@@ -40,10 +40,10 @@ public class Order {
 
     private BigDecimal boxTotalPrice;
 
-    public Order(Integer id, String sellerName, String buyerName, BigDecimal totalPrice, Date createTime, Integer deliveryType, Integer orderType, Integer payStatus, String orderNotes, String deliveryTime, Integer deleteStatus, BigDecimal deliveryFee, Integer orderStatus, Date payTime, Date transactClosingTime, Date transactCompleTime, Date updateTime, BigDecimal boxTotalPrice) {
+    public Order(Integer id, String sellerName, Integer userId, BigDecimal totalPrice, Date createTime, Integer deliveryType, Integer orderType, Integer payStatus, String orderNotes, String deliveryTime, Integer deleteStatus, BigDecimal deliveryFee, Integer orderStatus, Date payTime, Date transactClosingTime, Date transactCompleTime, Date updateTime, BigDecimal boxTotalPrice) {
         this.id = id;
         this.sellerName = sellerName;
-        this.buyerName = buyerName;
+        this.userId = userId;
         this.totalPrice = totalPrice;
         this.createTime = createTime;
         this.deliveryType = deliveryType;
@@ -81,12 +81,12 @@ public class Order {
         this.sellerName = sellerName == null ? null : sellerName.trim();
     }
 
-    public String getBuyerName() {
-        return buyerName;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setBuyerName(String buyerName) {
-        this.buyerName = buyerName == null ? null : buyerName.trim();
+    public void setUserId(Integer userId) {
+        this.userId = userId == null ? null : userId;
     }
 
     public BigDecimal getTotalPrice() {

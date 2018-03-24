@@ -21,7 +21,6 @@ import zsc.ordermealsys.service.IProductService;
 import zsc.ordermealsys.util.DateTimeUtil;
 import zsc.ordermealsys.util.PropertiesUtil;
 import zsc.ordermealsys.vo.ProductDetailVo;
-import zsc.ordermealsys.vo.ProductListVo;
 import zsc.ordermealsys.vo.ProductVo;
 
 @Service("iProductService")
@@ -212,59 +211,4 @@ public class ProductServiceImpl implements IProductService {
 		return ServerResponse.createBySuccess(productDetailVo);
 	}
 
-	@Override
-	 public ServerResponse<PageInfo> getProductByKeywordCategory(String keyword,Integer categoryId,int pageNum,int pageSize,String orderBy){
-        if(keyword==null && categoryId == null){
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.ILLEGAL_ARGUMENT.getCode(),ResponseCode.ILLEGAL_ARGUMENT.getDesc());
-        }
-        List<Integer> categoryIdList = new ArrayList<Integer>();
-
-        if(categoryId != null){
-            Category category = categoryMapper.selectByPrimaryKey(categoryId);
-            if(category == null && keyword.isEmpty()){
-                //没有该分类,并且还没有关键字,这个时候返回一个空的结果集,不报错
-                PageHelper.startPage(pageNum,pageSize);
-                List<ProductListVo> productListVoList = new ArrayList<ProductListVo>();
-                PageInfo pageInfo = new PageInfo(productListVoList);
-                return ServerResponse.createBySuccess(pageInfo);
-            }
-//            categoryIdList = iCategoryService.selectCategoryAndChildrenById(category.getId()).getData();
-        }
-        if(keyword!=null||keyword!=""){
-            keyword = new StringBuilder().append("%").append(keyword).append("%").toString();
-        }
-
-        PageHelper.startPage(pageNum,pageSize);
-        //排序处理
-    /*    if(StringUtils.isNotBlank(orderBy)){
-            if(Const.ProductListOrderBy.PRICE_ASC_DESC.contains(orderBy)){
-                String[] orderByArray = orderBy.split("_");
-                PageHelper.orderBy(orderByArray[0]+" "+orderByArray[1]);
-            }
-        }*/
-//        List<Product> productList = productMapper.selectByNameAndCategoryIds(StringUtils.isBlank(keyword)?null:keyword,categoryIdList.size()==0?null:categoryIdList);
-        List<ProductWithBLOBs> productList=productMapper.searchProduct(keyword, categoryId);
-        List<ProductListVo> productListVoList =new ArrayList<ProductListVo>();
-        for(ProductWithBLOBs product : productList){
-            ProductListVo productListVo = assembleProductListVo(product);
-            productListVoList.add(productListVo);
-        }
-
-        PageInfo pageInfo = new PageInfo(productList);
-        pageInfo.setList(productListVoList);
-        System.out.print(productListVoList.get(0).getMainPic()+"主图"+"adasfasf");
-        return ServerResponse.createBySuccess(pageInfo);
-    }
-
-	 private ProductListVo assembleProductListVo(ProductWithBLOBs product){
-	        ProductListVo productListVo = new ProductListVo();
-	        productListVo.setId(product.getId());
-	        productListVo.setName(product.getName());
-	        productListVo.setCategoryId(product.getCategoryId());
-	        productListVo.setPicHost(PropertiesUtil.getProperty("ftp.server.http.prefix","http://img.happymmall.com/"));
-	        productListVo.setMainPic(product.getMainPic());
-	        productListVo.setPrice(product.getPrice());
-	        productListVo.setProSatus(product.getProStatus());
-	        return productListVo;
-	    }
 }

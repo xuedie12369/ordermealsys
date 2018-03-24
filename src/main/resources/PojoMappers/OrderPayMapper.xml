@@ -4,8 +4,8 @@
   <resultMap id="BaseResultMap" type="zsc.ordermealsys.pojo.OrderPay" >
     <constructor >
       <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="order_id" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="buyer_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="order_id" jdbcType="INTEGER" javaType="java.lang.INTEGER" />
+      <arg column="user_Id" jdbcType="INTEGER" javaType="java.lang.INTEGER" />
       <arg column="seller_name" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="third_party_username" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="serial_number" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -16,7 +16,7 @@
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    id, order_id, buyer_name, seller_name, third_party_username, serial_number, pay_platform_name, 
+    id, order_id, user_Id, seller_name, third_party_username, serial_number, pay_platform_name, 
     pay_status, create_time, update_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -30,11 +30,11 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="zsc.ordermealsys.pojo.OrderPay" useGeneratedKeys="true" keyProperty="id" >
-    insert into order_pay (order_id, buyer_name, seller_name, 
+    insert into order_pay (order_id, user_Id, seller_name, 
       third_party_username, serial_number, pay_platform_name, 
       pay_status, create_time, update_time
       )
-    values (#{orderId,jdbcType=VARCHAR}, #{buyerName,jdbcType=VARCHAR}, #{sellerName,jdbcType=VARCHAR}, 
+    values (#{orderId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{sellerName,jdbcType=VARCHAR}, 
       #{thirdPartyUsername,jdbcType=VARCHAR}, #{serialNumber,jdbcType=VARCHAR}, #{payPlatformName,jdbcType=VARCHAR}, 
       #{payStatus,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
       )
@@ -45,8 +45,8 @@
       <if test="orderId != null" >
         order_id,
       </if>
-      <if test="buyerName != null" >
-        buyer_name,
+      <if test="userId != null" >
+        user_Id,
       </if>
       <if test="sellerName != null" >
         seller_name,
@@ -74,8 +74,8 @@
       <if test="orderId != null" >
         #{orderId,jdbcType=VARCHAR},
       </if>
-      <if test="buyerName != null" >
-        #{buyerName,jdbcType=VARCHAR},
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
       </if>
       <if test="sellerName != null" >
         #{sellerName,jdbcType=VARCHAR},
@@ -104,10 +104,10 @@
     update order_pay
     <set >
       <if test="orderId != null" >
-        order_id = #{orderId,jdbcType=VARCHAR},
+        order_id = #{orderId,jdbcType=INTEGER},
       </if>
-      <if test="buyerName != null" >
-        buyer_name = #{buyerName,jdbcType=VARCHAR},
+      <if test="userId != null" >
+        user_Id = #{userId,jdbcType=INTEGER},
       </if>
       <if test="sellerName != null" >
         seller_name = #{sellerName,jdbcType=VARCHAR},
@@ -135,8 +135,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="zsc.ordermealsys.pojo.OrderPay" >
     update order_pay
-    set order_id = #{orderId,jdbcType=VARCHAR},
-      buyer_name = #{buyerName,jdbcType=VARCHAR},
+    set order_id = #{orderId,jdbcType=INTEGER},
+      user_Id = #{userId,jdbcType=INTEGER},
       seller_name = #{sellerName,jdbcType=VARCHAR},
       third_party_username = #{thirdPartyUsername,jdbcType=VARCHAR},
       serial_number = #{serialNumber,jdbcType=VARCHAR},
