@@ -22,9 +22,9 @@ public class MyTestShoppingCartService {
 	public void main(){
 		ApplicationContext ac=new ClassPathXmlApplicationContext("applicationContext.xml");
 		CartServiceImpl iCartService=ac.getBean(CartServiceImpl.class);
-		//iCartService.add(1, 1, 5);
+		/*iCartService.add(1, 1, 5);
 		iCartService.list(1);
-		//iCartService.update(1, 1, 5);
-		//iCartService.deleteProduct(1, "1");
+		iCartService.update(1, 1, 5);*/
+		iCartService.deleteProduct(1, "1");
 	}
 }
