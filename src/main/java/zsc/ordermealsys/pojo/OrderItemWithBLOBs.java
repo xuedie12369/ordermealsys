@@ -8,8 +8,8 @@ public class OrderItemWithBLOBs extends OrderItem {
 
     private String productDetail;
 
-    public OrderItemWithBLOBs(Integer id, String orderId, String productId, String buyerName, String sellerName, BigDecimal price, Integer num, Date createTime, Date updateTime, String productPic, String productDetail) {
-        super(id, orderId, productId, buyerName, sellerName, price, num, createTime, updateTime);
+    public OrderItemWithBLOBs(Integer id, Long  orderNo, String productId, Integer buyerName, String sellerName, BigDecimal price, Integer num, Date createTime, Date updateTime, String productPic, String productDetail) {
+        super(id, orderNo, productId, buyerName, sellerName, price, num, createTime, updateTime);
         this.productPic = productPic;
         this.productDetail = productDetail;
     }

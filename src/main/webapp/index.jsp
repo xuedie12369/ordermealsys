@@ -7,7 +7,18 @@
 <title>Insert title here</title>
 </head>
 <body>
-		<a  href="myServlet"> 实得分的双方各d </a>
+		<a   href="myServlet"> 实得分的双方各d </a>
 	 实得分的双方各d 
+	 文件上传
+	 <form name="form1" action="manage/product/upload.do"  method="post" enctype="multipart/form-data">
+	 	<input name="file" type="file" ></input>
+	 
+	 <input name="" type="submit" value="上传文件" ></input>
+	 <img alt="" src="ordermealsys/upload/1.jpg">
+	 </form>
+	 
+	 
+	 
+	 
 </body>
 </html>

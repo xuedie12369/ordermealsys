@@ -6,11 +6,11 @@ import java.util.Date;
 public class OrderItem {
     private Integer id;
 
-    private String orderId;
+    private Long orderNo;
 
     private String productId;
 
-    private String buyerName;
+    private Integer userId;
 
     private String sellerName;
 
@@ -22,11 +22,11 @@ public class OrderItem {
 
     private Date updateTime;
 
-    public OrderItem(Integer id, String orderId, String productId, String buyerName, String sellerName, BigDecimal price, Integer num, Date createTime, Date updateTime) {
+    public OrderItem(Integer id, Long orderNo, String productId, Integer userId, String sellerName, BigDecimal price, Integer num, Date createTime, Date updateTime) {
         this.id = id;
-        this.orderId = orderId;
+        this.orderNo = orderNo;
         this.productId = productId;
-        this.buyerName = buyerName;
+        this.userId = userId;
         this.sellerName = sellerName;
         this.price = price;
         this.num = num;
@@ -46,12 +46,12 @@ public class OrderItem {
         this.id = id;
     }
 
-    public String getOrderId() {
-        return orderId;
+    public Long getorderNo() {
+        return orderNo;
     }
 
-    public void setOrderId(String orderId) {
-        this.orderId = orderId == null ? null : orderId.trim();
+    public void setorderNo(Long orderNo) {
+        this.orderNo = orderNo == null ? null : orderNo;
     }
 
     public String getProductId() {
@@ -62,12 +62,12 @@ public class OrderItem {
         this.productId = productId == null ? null : productId.trim();
     }
 
-    public String getBuyerName() {
-        return buyerName;
+    public Integer getuserId() {
+        return userId;
     }
 
-    public void setBuyerName(String buyerName) {
-        this.buyerName = buyerName == null ? null : buyerName.trim();
+    public void setuserId(Integer userId) {
+        this.userId = userId == null ? null : userId;
     }
 
     public String getSellerName() {

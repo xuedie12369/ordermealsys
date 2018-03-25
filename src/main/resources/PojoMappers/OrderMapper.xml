@@ -4,8 +4,10 @@
   <resultMap id="BaseResultMap" type="zsc.ordermealsys.pojo.Order" >
     <constructor >
       <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      
       <arg column="seller_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="buyer_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+     <arg column="order_no" jdbcType="BIGINT" javaType="java.lang.Long" />
       <arg column="total_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
       <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
       <arg column="delivery_type" jdbcType="INTEGER" javaType="java.lang.Integer" />
@@ -24,28 +26,26 @@
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    id, seller_name, buyer_name, total_price, create_time, delivery_type, order_type, 
+    id,order_no, seller_name, user_id, total_price, create_time, delivery_type, order_type, 
     pay_status, order_notes, delivery_time, delete_status, delivery_fee, order_status, 
     pay_time, transact_closing_time, transact_comple_time, update_time, box_total_price
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
-    <include refid="Base_Column_List" />
-    from order
-    where id = #{id,jdbcType=INTEGER}
+     <include refid="Base_Column_List" /> 
+   from `order` where id=#{id}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from order
-    where id = #{id,jdbcType=INTEGER}
+    delete from `order` where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="zsc.ordermealsys.pojo.Order" useGeneratedKeys="true" keyProperty="id" >
-    insert into order (seller_name, buyer_name, total_price, 
+    insert into `order` (order_no,seller_name, user_id, total_price, 
       create_time, delivery_type, order_type, 
       pay_status, order_notes, delivery_time, 
       delete_status, delivery_fee, order_status, 
       pay_time, transact_closing_time, transact_comple_time, 
       update_time, box_total_price)
-    values (#{sellerName,jdbcType=VARCHAR}, #{buyerName,jdbcType=VARCHAR}, #{totalPrice,jdbcType=DECIMAL}, 
+    values (#{orderNo,jdbcType=BIGINT},#{sellerName,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, #{totalPrice,jdbcType=DECIMAL}, 
       #{createTime,jdbcType=TIMESTAMP}, #{deliveryType,jdbcType=INTEGER}, #{orderType,jdbcType=INTEGER}, 
       #{payStatus,jdbcType=INTEGER}, #{orderNotes,jdbcType=VARCHAR}, #{deliveryTime,jdbcType=VARCHAR}, 
       #{deleteStatus,jdbcType=INTEGER}, #{deliveryFee,jdbcType=DECIMAL}, #{orderStatus,jdbcType=INTEGER}, 
@@ -53,13 +53,17 @@
       #{updateTime,jdbcType=TIMESTAMP}, #{boxTotalPrice,jdbcType=DECIMAL})
   </insert>
   <insert id="insertSelective" parameterType="zsc.ordermealsys.pojo.Order" useGeneratedKeys="true" keyProperty="id" >
-    insert into order
+    insert into `order`
     <trim prefix="(" suffix=")" suffixOverrides="," >
+    	
+    	<if test="orderNo != null" >
+        order_no,
+      </if>
       <if test="sellerName != null" >
         seller_name,
       </if>
-      <if test="buyerName != null" >
-        buyer_name,
+      <if test="userId != null" >
+        user_id,
       </if>
       <if test="totalPrice != null" >
         total_price,
@@ -111,8 +115,8 @@
       <if test="sellerName != null" >
         #{sellerName,jdbcType=VARCHAR},
       </if>
-      <if test="buyerName != null" >
-        #{buyerName,jdbcType=VARCHAR},
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
       </if>
       <if test="totalPrice != null" >
         #{totalPrice,jdbcType=DECIMAL},
@@ -162,13 +166,16 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="zsc.ordermealsys.pojo.Order" >
-    update order
+    update `order`
     <set >
+     <if test="orderNo != null" >
+        order_no = #{orderNo,jdbcType=BIGINT},
+      </if>
       <if test="sellerName != null" >
         seller_name = #{sellerName,jdbcType=VARCHAR},
       </if>
-      <if test="buyerName != null" >
-        buyer_name = #{buyerName,jdbcType=VARCHAR},
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
       </if>
       <if test="totalPrice != null" >
         total_price = #{totalPrice,jdbcType=DECIMAL},
@@ -219,9 +226,10 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="zsc.ordermealsys.pojo.Order" >
-    update order
-    set seller_name = #{sellerName,jdbcType=VARCHAR},
-      buyer_name = #{buyerName,jdbcType=VARCHAR},
+    update `order`
+    set  order_no = #{orderNo,jdbcType=BIGINT},
+     seller_name = #{sellerName,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER},
       total_price = #{totalPrice,jdbcType=DECIMAL},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       delivery_type = #{deliveryType,jdbcType=INTEGER},
@@ -239,4 +247,16 @@
       box_total_price = #{boxTotalPrice,jdbcType=DECIMAL}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <!-- 自写部分 -->
+  
+  <select id="selectOrder" resultType="int">
+  	select count(1) from `order`
+  </select>
+  
+  <select id="selectByUserIdAndOrderId" resultMap="BaseResultMap"  >
+    select 
+     <include refid="Base_Column_List" /> 
+   from `order` where order_no=#{order_no} and user_id=#{userId}
+  </select>
 </mapper>
