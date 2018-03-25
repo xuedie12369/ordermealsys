@@ -188,7 +188,7 @@
   </update>
   
   
-  <select id="getByOrderNoAndUserId" resultMap="ResultMapWithBLOBs"  >
+  <select id="getByOrderNoAndUserId" resultType="zsc.ordermealsys.pojo.OrderItemWithBLOBs"  >
     select 
     <include refid="Base_Column_List" />
     ,

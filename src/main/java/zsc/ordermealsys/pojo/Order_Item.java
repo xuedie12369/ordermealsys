@@ -1,89 +1,127 @@
 package zsc.ordermealsys.pojo;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 public class Order_Item {
-    private Integer id;
+	
+	
+	public class OrderItem {
+	    private Integer id;
 
-    private String orderId;
+	    private Long orderNo;
 
-    private String productId;
+	    private Integer productId;
 
-    private String buyerName;
+	    private String name;
 
-    private String sellerName;
+	    private Integer userId;
 
-    private BigDecimal price;
+	    private String sellerName;
 
-    private Integer num;
+	    private BigDecimal price;
 
-    public Order_Item(Integer id, String orderId, String productId, String buyerName, String sellerName, BigDecimal price, Integer num) {
-        this.id = id;
-        this.orderId = orderId;
-        this.productId = productId;
-        this.buyerName = buyerName;
-        this.sellerName = sellerName;
-        this.price = price;
-        this.num = num;
-    }
+	    private Integer num;
 
-    public Order_Item() {
-        super();
-    }
+	    private Date createTime;
 
-    public Integer getId() {
-        return id;
-    }
+	    private Date updateTime;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	    public OrderItem(Integer id, Long orderNo, Integer productId, String name, Integer userId, String sellerName, BigDecimal price, Integer num, Date createTime, Date updateTime) {
+	        this.id = id;
+	        this.orderNo = orderNo;
+	        this.productId = productId;
+	        this.name = name;
+	        this.userId = userId;
+	        this.sellerName = sellerName;
+	        this.price = price;
+	        this.num = num;
+	        this.createTime = createTime;
+	        this.updateTime = updateTime;
+	    }
 
-    public String getOrderId() {
-        return orderId;
-    }
+	    public OrderItem() {
+	        super();
+	    }
 
-    public void setOrderId(String orderId) {
-        this.orderId = orderId == null ? null : orderId.trim();
-    }
+	    public Integer getId() {
+	        return id;
+	    }
 
-    public String getProductId() {
-        return productId;
-    }
+	    public void setId(Integer id) {
+	        this.id = id;
+	    }
 
-    public void setProductId(String productId) {
-        this.productId = productId == null ? null : productId.trim();
-    }
+	    public Long getOrderNo() {
+	        return orderNo;
+	    }
 
-    public String getBuyerName() {
-        return buyerName;
-    }
+	    public void setOrderNo(Long orderNo) {
+	        this.orderNo = orderNo;
+	    }
 
-    public void setBuyerName(String buyerName) {
-        this.buyerName = buyerName == null ? null : buyerName.trim();
-    }
+	    public Integer getProductId() {
+	        return productId;
+	    }
 
-    public String getSellerName() {
-        return sellerName;
-    }
+	    public void setProductId(Integer productId) {
+	        this.productId = productId;
+	    }
 
-    public void setSellerName(String sellerName) {
-        this.sellerName = sellerName == null ? null : sellerName.trim();
-    }
+	    public String getName() {
+	        return name;
+	    }
 
-    public BigDecimal getPrice() {
-        return price;
-    }
+	    public void setName(String name) {
+	        this.name = name == null ? null : name.trim();
+	    }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
+	    public Integer getUserId() {
+	        return userId;
+	    }
 
-    public Integer getNum() {
-        return num;
-    }
+	    public void setUserId(Integer userId) {
+	        this.userId = userId;
+	    }
 
-    public void setNum(Integer num) {
-        this.num = num;
-    }
-}
+	    public String getSellerName() {
+	        return sellerName;
+	    }
+
+	    public void setSellerName(String sellerName) {
+	        this.sellerName = sellerName == null ? null : sellerName.trim();
+	    }
+
+	    public BigDecimal getPrice() {
+	        return price;
+	    }
+
+	    public void setPrice(BigDecimal price) {
+	        this.price = price;
+	    }
+
+	    public Integer getNum() {
+	        return num;
+	    }
+
+	    public void setNum(Integer num) {
+	        this.num = num;
+	    }
+
+	    public Date getCreateTime() {
+	        return createTime;
+	    }
+
+	    public void setCreateTime(Date createTime) {
+	        this.createTime = createTime;
+	    }
+
+	    public Date getUpdateTime() {
+	        return updateTime;
+	    }
+
+	    public void setUpdateTime(Date updateTime) {
+	        this.updateTime = updateTime;
+	    }
+
+   }

@@ -8,7 +8,9 @@ public class OrderItem {
 
     private Long orderNo;
 
-    private String productId;
+    private Integer productId;
+
+    private String name;
 
     private Integer userId;
 
@@ -22,16 +24,19 @@ public class OrderItem {
 
     private Date updateTime;
 
-    public OrderItem(Integer id, Long orderNo, String productId, Integer userId, String sellerName, BigDecimal price, Integer num, Date createTime, Date updateTime) {
+    public OrderItem(Integer id, Long orderNo, Integer productId, String name, Integer userId, String sellerName, BigDecimal price, Integer num, Date createTime, Date updateTime) {
         this.id = id;
         this.orderNo = orderNo;
         this.productId = productId;
+        this.name = name;
         this.userId = userId;
         this.sellerName = sellerName;
         this.price = price;
         this.num = num;
         this.createTime = createTime;
         this.updateTime = updateTime;
+        
+        System.out.print(this.name+"构造参数的name");
     }
 
     public OrderItem() {
@@ -46,28 +51,36 @@ public class OrderItem {
         this.id = id;
     }
 
-    public Long getorderNo() {
+    public Long getOrderNo() {
         return orderNo;
     }
 
-    public void setorderNo(Long orderNo) {
-        this.orderNo = orderNo == null ? null : orderNo;
+    public void setOrderNo(Long orderNo) {
+        this.orderNo = orderNo;
     }
 
-    public String getProductId() {
+    public Integer getProductId() {
         return productId;
     }
 
-    public void setProductId(String productId) {
-        this.productId = productId == null ? null : productId.trim();
+    public void setProductId(Integer productId) {
+        this.productId = productId;
     }
 
-    public Integer getuserId() {
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
+    }
+
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setuserId(Integer userId) {
-        this.userId = userId == null ? null : userId;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public String getSellerName() {
@@ -109,5 +122,4 @@ public class OrderItem {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
-
 }

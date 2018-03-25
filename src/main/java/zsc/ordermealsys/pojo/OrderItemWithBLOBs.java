@@ -8,10 +8,12 @@ public class OrderItemWithBLOBs extends OrderItem {
 
     private String productDetail;
 
-    public OrderItemWithBLOBs(Integer id, Long  orderNo, String productId, Integer buyerName, String sellerName, BigDecimal price, Integer num, Date createTime, Date updateTime, String productPic, String productDetail) {
-        super(id, orderNo, productId, buyerName, sellerName, price, num, createTime, updateTime);
+    public OrderItemWithBLOBs(Integer id, Long orderNo, Integer productId, String name, Integer userId, String sellerName, BigDecimal price, Integer num, Date createTime, Date updateTime, String productPic, String productDetail) {
+        super(id, orderNo, productId, name, userId, sellerName, price, num, createTime, updateTime);
         this.productPic = productPic;
         this.productDetail = productDetail;
+        
+        System.out.print("这里是构造参数");
     }
 
     public OrderItemWithBLOBs() {

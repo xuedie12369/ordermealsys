@@ -51,10 +51,13 @@ public class OrderServiceImpl implements IOrderService {
 	            return ServerResponse.createByErrorMessage("用户没有该订单");
 	        }
 		 resultMap.put("orderNo", order.getOrderNo().toString());
-		 
-	 List<OrderItemWithBLOBs>	 orderItemList = orderItemMapper.getByOrderNoAndUserId(1L, 11);
-		 
-		 System.out.print(orderItemList.get(1).getPrice().toString());
+	 List<OrderItemWithBLOBs>	 orderItemList =new ArrayList<OrderItemWithBLOBs>();
+	 for(OrderItemWithBLOBs orderItemWithBLOBs :orderItemMapper.getByOrderNoAndUserId(1L, 11))
+	 {
+		 orderItemList.add(orderItemWithBLOBs);
+		 System.out.print(orderItemWithBLOBs.getPrice().toString()+"添加的"+orderItemWithBLOBs.getProductDetail()+"maij xingm ");
+			
+	 }
 		
 		return null;
 	}
