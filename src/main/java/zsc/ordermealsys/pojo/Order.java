@@ -14,6 +14,7 @@ public class Order {
 			Integer deleteStatus, BigDecimal deliveryFee, Integer orderStatus, Date payTime, Date transactClosingTime,
 			Date transactCompleTime, Date updateTime, BigDecimal boxTotalPrice) {
 		super();
+		System.out.print("执行了order表的 构造函数");
 		this.id = id;
 		this.sellerName = sellerName;
 		this.userId = userId;

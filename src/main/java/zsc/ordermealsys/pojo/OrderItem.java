@@ -35,8 +35,6 @@ public class OrderItem {
         this.num = num;
         this.createTime = createTime;
         this.updateTime = updateTime;
-        
-        System.out.print(this.name+"构造参数的name");
     }
 
     public OrderItem() {

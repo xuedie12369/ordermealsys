@@ -12,8 +12,6 @@ public class OrderItemWithBLOBs extends OrderItem {
         super(id, orderNo, productId, name, userId, sellerName, price, num, createTime, updateTime);
         this.productPic = productPic;
         this.productDetail = productDetail;
-        
-        System.out.print("这里是构造参数");
     }
 
     public OrderItemWithBLOBs() {

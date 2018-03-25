@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="zsc.ordermealsys.dao.OrderItemMapper" >
-  <resultMap id="BaseResultMap" type="zsc.ordermealsys.pojo.OrderItem" >
+  <resultMap id="BaseResultMap" type="zsc.ordermealsys.pojo.OrderItemWithBLOBs" >
     <constructor >
       <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="order_no" jdbcType="BIGINT" javaType="java.lang.Long" />
-      <arg column="product_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="product_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="name" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="seller_name" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
@@ -18,7 +19,8 @@
     <constructor >
       <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="order_no" jdbcType="BIGINT" javaType="java.lang.Long" />
-      <arg column="product_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="product_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="name" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="seller_name" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
@@ -30,7 +32,7 @@
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    id, order_no, product_id, user_id, seller_name, price, num, create_time, update_time
+    id, order_no, product_id, name, user_id, seller_name, price, num, create_time, update_time
   </sql>
   <sql id="Blob_Column_List" >
     product_pic, product_detail
@@ -48,14 +50,14 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="zsc.ordermealsys.pojo.OrderItemWithBLOBs" useGeneratedKeys="true" keyProperty="id" >
-    insert into order_item (order_no, product_id, user_id, 
-      seller_name, price, num, 
-      create_time, update_time, product_pic, 
-      product_detail)
-    values (#{orderNo,jdbcType=BIGINT}, #{productId,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, 
-      #{sellerName,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{num,jdbcType=INTEGER}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{productPic,jdbcType=LONGVARCHAR}, 
-      #{productDetail,jdbcType=LONGVARCHAR})
+    insert into order_item (order_no, product_id, name, 
+      user_id, seller_name, price, 
+      num, create_time, update_time, 
+      product_pic, product_detail)
+    values (#{orderNo,jdbcType=BIGINT}, #{productId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=INTEGER}, #{sellerName,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, 
+      #{num,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{productPic,jdbcType=LONGVARCHAR}, #{productDetail,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="zsc.ordermealsys.pojo.OrderItemWithBLOBs" useGeneratedKeys="true" keyProperty="id" >
     insert into order_item
@@ -65,6 +67,9 @@
       </if>
       <if test="productId != null" >
         product_id,
+      </if>
+      <if test="name != null" >
+        name,
       </if>
       <if test="userId != null" >
         user_id,
@@ -93,10 +98,13 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="orderNo != null" >
-        #{orderNo,jdbcType=Long},
+        #{orderNo,jdbcType=BIGINT},
       </if>
       <if test="productId != null" >
-        #{productId,jdbcType=VARCHAR},
+        #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
       </if>
       <if test="userId != null" >
         #{userId,jdbcType=INTEGER},
@@ -131,7 +139,10 @@
         order_no = #{orderNo,jdbcType=BIGINT},
       </if>
       <if test="productId != null" >
-        product_id = #{productId,jdbcType=VARCHAR},
+        product_id = #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
       </if>
       <if test="userId != null" >
         user_id = #{userId,jdbcType=INTEGER},
@@ -163,7 +174,8 @@
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="zsc.ordermealsys.pojo.OrderItemWithBLOBs" >
     update order_item
     set order_no = #{orderNo,jdbcType=BIGINT},
-      product_id = #{productId,jdbcType=VARCHAR},
+      product_id = #{productId,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
       user_id = #{userId,jdbcType=INTEGER},
       seller_name = #{sellerName,jdbcType=VARCHAR},
       price = #{price,jdbcType=DECIMAL},
@@ -174,10 +186,11 @@
       product_detail = #{productDetail,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="zsc.ordermealsys.pojo.OrderItem" >
+  <update id="updateByPrimaryKey" parameterType="zsc.ordermealsys.pojo.OrderItemWithBLOBs" >
     update order_item
     set order_no = #{orderNo,jdbcType=BIGINT},
-      product_id = #{productId,jdbcType=VARCHAR},
+      product_id = #{productId,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
       user_id = #{userId,jdbcType=INTEGER},
       seller_name = #{sellerName,jdbcType=VARCHAR},
       price = #{price,jdbcType=DECIMAL},
@@ -186,14 +199,11 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  
-  
-  <select id="getByOrderNoAndUserId" resultType="zsc.ordermealsys.pojo.OrderItemWithBLOBs"  >
-    select 
-    <include refid="Base_Column_List" />
+  <select id="getByOrderNoAndUserId" resultMap="ResultMapWithBLOBs">
+  	select 
+  	<include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
-    from order_item
-    where order_no = #{orderNo} and user_id =#{userId}
+  	 from order_item where order_no=#{orderNo} and user_id=#{userId} 
   </select>
 </mapper>

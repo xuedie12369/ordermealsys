@@ -7,13 +7,16 @@ public class Order_ItemWithBLOBs extends Order_Item {
 
     private String productDetail;
 
-    public Order_ItemWithBLOBs(Integer id, String orderId, String productId, String buyerName, String sellerName, BigDecimal price, Integer num, String productPic, String productDetail) {
-        super(id, orderId, productId, buyerName, sellerName, price, num);
-        this.productPic = productPic;
-        this.productDetail = productDetail;
-    }
+   
+    public Order_ItemWithBLOBs(String productPic, String productDetail) {
+    	
+		super();
 
-    public Order_ItemWithBLOBs() {
+		this.productPic = productPic;
+		this.productDetail = productDetail;
+	}
+
+	public Order_ItemWithBLOBs() {
         super();
     }
 
