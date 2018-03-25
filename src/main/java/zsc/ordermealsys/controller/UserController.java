@@ -18,6 +18,7 @@ import zsc.ordermealsys.pojo.User;
 public class UserController {
 	@Autowired
 	private IUserService iUserService;
+	
 	/**
 	 * 用户登录
 	 * @param username
