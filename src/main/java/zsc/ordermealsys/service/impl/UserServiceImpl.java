@@ -49,7 +49,7 @@ public class UserServiceImpl implements IUserService{
 		
 		user.setPwd(org.apache.commons.lang3.StringUtils.EMPTY);
 		System.out.println("success");
-		return ServerResponse.createBySuccessMessage("登录成功！",user);
+		return ServerResponse.createBySuccess("登录成功！",user);
 		
 	}
 	

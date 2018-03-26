@@ -1,195 +1,306 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="zsc.ordermealsys.dao.AddressMapper" >
-  <resultMap id="BaseResultMap" type="zsc.ordermealsys.pojo.Address" >
-    <constructor >
-      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="consignee_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="sex" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="tel" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="nation" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="province" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="city" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="county" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="town" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="post_code" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="detailed_add" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-    </constructor>
-  </resultMap>
-  <sql id="Base_Column_List" >
-    id, user_name, consignee_name, sex, tel, nation, province, city, county, town, post_code, 
-    detailed_add, create_time, update_time
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from address
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from address
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="zsc.ordermealsys.pojo.Address" useGeneratedKeys="true" keyProperty="id" >
-    insert into address (user_name, consignee_name, sex, 
-      tel, nation, province, 
-      city, county, town, 
-      post_code, detailed_add, create_time, 
-      update_time)
-    values (#{userName,jdbcType=VARCHAR}, #{consigneeName,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, 
-      #{tel,jdbcType=VARCHAR}, #{nation,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, 
-      #{city,jdbcType=VARCHAR}, #{county,jdbcType=VARCHAR}, #{town,jdbcType=VARCHAR}, 
-      #{postCode,jdbcType=VARCHAR}, #{detailedAdd,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP})
-  </insert>
-  <insert id="insertSelective" parameterType="zsc.ordermealsys.pojo.Address" useGeneratedKeys="true" keyProperty="id" >
-    insert into address
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="userName != null" >
-        user_name,
-      </if>
-      <if test="consigneeName != null" >
-        consignee_name,
-      </if>
-      <if test="sex != null" >
-        sex,
-      </if>
-      <if test="tel != null" >
-        tel,
-      </if>
-      <if test="nation != null" >
-        nation,
-      </if>
-      <if test="province != null" >
-        province,
-      </if>
-      <if test="city != null" >
-        city,
-      </if>
-      <if test="county != null" >
-        county,
-      </if>
-      <if test="town != null" >
-        town,
-      </if>
-      <if test="postCode != null" >
-        post_code,
-      </if>
-      <if test="detailedAdd != null" >
-        detailed_add,
-      </if>
-      <if test="createTime != null" >
-        create_time,
-      </if>
-      <if test="updateTime != null" >
-        update_time,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="userName != null" >
-        #{userName,jdbcType=VARCHAR},
-      </if>
-      <if test="consigneeName != null" >
-        #{consigneeName,jdbcType=VARCHAR},
-      </if>
-      <if test="sex != null" >
-        #{sex,jdbcType=INTEGER},
-      </if>
-      <if test="tel != null" >
-        #{tel,jdbcType=VARCHAR},
-      </if>
-      <if test="nation != null" >
-        #{nation,jdbcType=VARCHAR},
-      </if>
-      <if test="province != null" >
-        #{province,jdbcType=VARCHAR},
-      </if>
-      <if test="city != null" >
-        #{city,jdbcType=VARCHAR},
-      </if>
-      <if test="county != null" >
-        #{county,jdbcType=VARCHAR},
-      </if>
-      <if test="town != null" >
-        #{town,jdbcType=VARCHAR},
-      </if>
-      <if test="postCode != null" >
-        #{postCode,jdbcType=VARCHAR},
-      </if>
-      <if test="detailedAdd != null" >
-        #{detailedAdd,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null" >
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="zsc.ordermealsys.pojo.Address" >
-    update address
-    <set >
-      <if test="userName != null" >
-        user_name = #{userName,jdbcType=VARCHAR},
-      </if>
-      <if test="consigneeName != null" >
-        consignee_name = #{consigneeName,jdbcType=VARCHAR},
-      </if>
-      <if test="sex != null" >
-        sex = #{sex,jdbcType=INTEGER},
-      </if>
-      <if test="tel != null" >
-        tel = #{tel,jdbcType=VARCHAR},
-      </if>
-      <if test="nation != null" >
-        nation = #{nation,jdbcType=VARCHAR},
-      </if>
-      <if test="province != null" >
-        province = #{province,jdbcType=VARCHAR},
-      </if>
-      <if test="city != null" >
-        city = #{city,jdbcType=VARCHAR},
-      </if>
-      <if test="county != null" >
-        county = #{county,jdbcType=VARCHAR},
-      </if>
-      <if test="town != null" >
-        town = #{town,jdbcType=VARCHAR},
-      </if>
-      <if test="postCode != null" >
-        post_code = #{postCode,jdbcType=VARCHAR},
-      </if>
-      <if test="detailedAdd != null" >
-        detailed_add = #{detailedAdd,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null" >
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="zsc.ordermealsys.pojo.Address" >
-    update address
-    set user_name = #{userName,jdbcType=VARCHAR},
-      consignee_name = #{consigneeName,jdbcType=VARCHAR},
-      sex = #{sex,jdbcType=INTEGER},
-      tel = #{tel,jdbcType=VARCHAR},
-      nation = #{nation,jdbcType=VARCHAR},
-      province = #{province,jdbcType=VARCHAR},
-      city = #{city,jdbcType=VARCHAR},
-      county = #{county,jdbcType=VARCHAR},
-      town = #{town,jdbcType=VARCHAR},
-      post_code = #{postCode,jdbcType=VARCHAR},
-      detailed_add = #{detailedAdd,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+<mapper namespace="zsc.ordermealsys.dao.AddressMapper">
+	<resultMap id="BaseResultMap"
+		type="zsc.ordermealsys.pojo.Address">
+		<constructor>
+			<idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+			<arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+			<arg column="consignee_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+			<arg column="sex" jdbcType="INTEGER" javaType="java.lang.Integer" />
+			<arg column="tel" jdbcType="VARCHAR" javaType="java.lang.String" />
+			<arg column="nation" jdbcType="VARCHAR" javaType="java.lang.String" />
+			<arg column="province" jdbcType="VARCHAR" javaType="java.lang.String" />
+			<arg column="city" jdbcType="VARCHAR" javaType="java.lang.String" />
+			<arg column="county" jdbcType="VARCHAR" javaType="java.lang.String" />
+			<arg column="town" jdbcType="VARCHAR" javaType="java.lang.String" />
+			<arg column="post_code" jdbcType="VARCHAR" javaType="java.lang.String" />
+			<arg column="detailed_add" jdbcType="VARCHAR" javaType="java.lang.String" />
+			<arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+			<arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+		</constructor>
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, user_id, consignee_name, sex, tel, nation, province,
+		city, county,
+		town, post_code,
+		detailed_add, create_time, update_time
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from address
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		address
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="zsc.ordermealsys.pojo.Address"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into address (user_id,
+		consignee_name, sex,
+		tel, nation, province,
+		city, county, town,
+		post_code, detailed_add, create_time,
+		update_time)
+		values
+		(#{userId,jdbcType=INTEGER}, #{consigneeName,jdbcType=VARCHAR},
+		#{sex,jdbcType=INTEGER},
+		#{tel,jdbcType=VARCHAR},
+		#{nation,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR},
+		#{city,jdbcType=VARCHAR}, #{county,jdbcType=VARCHAR},
+		#{town,jdbcType=VARCHAR},
+		#{postCode,jdbcType=VARCHAR},
+		#{detailedAdd,jdbcType=VARCHAR}, now(),
+		#{updateTime,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="zsc.ordermealsys.pojo.Address"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into address
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="consigneeName != null">
+				consignee_name,
+			</if>
+			<if test="sex != null">
+				sex,
+			</if>
+			<if test="tel != null">
+				tel,
+			</if>
+			<if test="nation != null">
+				nation,
+			</if>
+			<if test="province != null">
+				province,
+			</if>
+			<if test="city != null">
+				city,
+			</if>
+			<if test="county != null">
+				county,
+			</if>
+			<if test="town != null">
+				town,
+			</if>
+			<if test="postCode != null">
+				post_code,
+			</if>
+			<if test="detailedAdd != null">
+				detailed_add,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="updateTime != null">
+				update_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="userId != null">
+				#{userId,jdbcType=INTEGER},
+			</if>
+			<if test="consigneeName != null">
+				#{consigneeName,jdbcType=VARCHAR},
+			</if>
+			<if test="sex != null">
+				#{sex,jdbcType=INTEGER},
+			</if>
+			<if test="tel != null">
+				#{tel,jdbcType=VARCHAR},
+			</if>
+			<if test="nation != null">
+				#{nation,jdbcType=VARCHAR},
+			</if>
+			<if test="province != null">
+				#{province,jdbcType=VARCHAR},
+			</if>
+			<if test="city != null">
+				#{city,jdbcType=VARCHAR},
+			</if>
+			<if test="county != null">
+				#{county,jdbcType=VARCHAR},
+			</if>
+			<if test="town != null">
+				#{town,jdbcType=VARCHAR},
+			</if>
+			<if test="postCode != null">
+				#{postCode,jdbcType=VARCHAR},
+			</if>
+			<if test="detailedAdd != null">
+				#{detailedAdd,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="zsc.ordermealsys.pojo.Address">
+		update address
+		<set>
+			<if test="userId != null">
+				user_id = #{userId,jdbcType=INTEGER},
+			</if>
+			<if test="consigneeName != null">
+				consignee_name = #{consigneeName,jdbcType=VARCHAR},
+			</if>
+			<if test="sex != null">
+				sex = #{sex,jdbcType=INTEGER},
+			</if>
+			<if test="tel != null">
+				tel = #{tel,jdbcType=VARCHAR},
+			</if>
+			<if test="nation != null">
+				nation = #{nation,jdbcType=VARCHAR},
+			</if>
+			<if test="province != null">
+				province = #{province,jdbcType=VARCHAR},
+			</if>
+			<if test="city != null">
+				city = #{city,jdbcType=VARCHAR},
+			</if>
+			<if test="county != null">
+				county = #{county,jdbcType=VARCHAR},
+			</if>
+			<if test="town != null">
+				town = #{town,jdbcType=VARCHAR},
+			</if>
+			<if test="postCode != null">
+				post_code = #{postCode,jdbcType=VARCHAR},
+			</if>
+			<if test="detailedAdd != null">
+				detailed_add = #{detailedAdd,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				update_time = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="zsc.ordermealsys.pojo.Address">
+		update address
+		set
+		user_id = #{userId,jdbcType=INTEGER},
+		consignee_name =
+		#{consigneeName,jdbcType=VARCHAR},
+		sex = #{sex,jdbcType=INTEGER},
+		tel =
+		#{tel,jdbcType=VARCHAR},
+		nation = #{nation,jdbcType=VARCHAR},
+		province =
+		#{province,jdbcType=VARCHAR},
+		city = #{city,jdbcType=VARCHAR},
+		county =
+		#{county,jdbcType=VARCHAR},
+		town = #{town,jdbcType=VARCHAR},
+		post_code =
+		#{postCode,jdbcType=VARCHAR},
+		detailed_add =
+		#{detailedAdd,jdbcType=VARCHAR},
+		create_time =
+		#{createTime,jdbcType=TIMESTAMP},
+		update_time =
+		#{updateTime,jdbcType=TIMESTAMP}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<delete id="deleteByAddressIdUserId" parameterType="map">
+		delete from
+		address
+		where id=#{addressId}
+		and user_id=#{userId}
+	</delete>
+
+	<update id="updateByAddress" parameterType="zsc.ordermealsys.pojo.Address">
+		update address
+		<set>
+			<if test="userId != null">
+				user_id = #{userId,jdbcType=INTEGER},
+			</if>
+			<if test="consigneeName != null">
+				consignee_name = #{consigneeName,jdbcType=VARCHAR},
+			</if>
+			<if test="sex != null">
+				sex = #{sex,jdbcType=INTEGER},
+			</if>
+			<if test="tel != null">
+				tel = #{tel,jdbcType=VARCHAR},
+			</if>
+			<if test="nation != null">
+				nation = #{nation,jdbcType=VARCHAR},
+			</if>
+			<if test="province != null">
+				province = #{province,jdbcType=VARCHAR},
+			</if>
+			<if test="city != null">
+				city = #{city,jdbcType=VARCHAR},
+			</if>
+			<if test="county != null">
+				county = #{county,jdbcType=VARCHAR},
+			</if>
+			<if test="town != null">
+				town = #{town,jdbcType=VARCHAR},
+			</if>
+			<if test="postCode != null">
+				post_code = #{postCode,jdbcType=VARCHAR},
+			</if>
+			<if test="detailedAdd != null">
+				detailed_add = #{detailedAdd,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime == null">
+				update_time = now(),
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+		and
+		user_id = #{userId,jdbcType=INTEGER}
+	</update>
+	
+	<select id="selectByAddressIdUserId" resultMap="BaseResultMap" parameterType="map">
+		select
+		<include refid="Base_Column_List"/>
+		from address
+		where id=#{addressId}
+		and user_id=#{userId}
+	</select>
+	
+	<select id="selectByUserId" resultMap="BaseResultMap" parameterType="map">
+		select 
+		<include refid="Base_Column_List"/>
+		from address
+		where user_id=#{userId}
+	</select>
+
 </mapper>
