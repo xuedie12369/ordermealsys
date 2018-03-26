@@ -2,11 +2,8 @@ package zsc.ordermealsys.service.impl;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.xml.ws.Response;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
@@ -16,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import com.alipay.api.AlipayResponse;
 import com.alipay.api.response.AlipayTradePrecreateResponse;
-import com.alipay.demo.trade.Main;
 import com.alipay.demo.trade.config.Configs;
 import com.alipay.demo.trade.model.ExtendParams;
 import com.alipay.demo.trade.model.GoodsDetail;
@@ -27,13 +23,17 @@ import com.alipay.demo.trade.service.impl.AlipayTradeServiceImpl;
 import com.alipay.demo.trade.utils.ZxingUtils;
 import com.google.common.collect.Maps;
 
+import zsc.ordermealsys.common.Const;
 import zsc.ordermealsys.common.ServerResponse;
 import zsc.ordermealsys.dao.OrderItemMapper;
 import zsc.ordermealsys.dao.OrderMapper;
+import zsc.ordermealsys.dao.OrderPayMapper;
 import zsc.ordermealsys.pojo.Order;
 import zsc.ordermealsys.pojo.OrderItemWithBLOBs;
+import zsc.ordermealsys.pojo.OrderPay;
 import zsc.ordermealsys.service.IOrderService;
 import zsc.ordermealsys.util.BigDecimalUtil;
+import zsc.ordermealsys.util.DateTimeUtil;
 import zsc.ordermealsys.util.PropertiesUtil;
 @Service("iOrderService")
 public class OrderServiceImpl implements IOrderService {
@@ -87,7 +87,34 @@ public class OrderServiceImpl implements IOrderService {
 		*/
 	}
 	
-	
+	 public ServerResponse aliCallback(Map<String,String> params){
+	        Long orderNo = Long.parseLong(params.get("out_trade_no"));
+	        String tradeNo = params.get("trade_no");
+	        String tradeStatus = params.get("trade_status");
+	        Order order = orderMapper.selectByOrderNo(orderNo);
+	        if(order == null){
+	            return ServerResponse.createByErrorMessage("非美食猎人的订单,回调忽略");
+	        }
+	        if(order.getPayStatus() >= Const.OrderStatusEnum.PAID.getCode()){
+	            return ServerResponse.createBySuccess("支付宝重复调用");
+	        }
+	        if(Const.AlipayCallback.TRADE_STATUS_TRADE_SUCCESS.equals(tradeStatus)){
+	            order.setPayTime(DateTimeUtil.strToDate(params.get("gmt_payment")));
+	            order.setPayStatus(Const.OrderStatusEnum.PAID.getCode());
+	            orderMapper.updateByPrimaryKeySelective(order);
+	        }
+
+	        OrderPay OrderPay = new OrderPay();
+	        OrderPay.setUserId(order.getUserId());
+	        OrderPay.setOrderNo(order.getOrderNo());
+	        OrderPay.setPayPlatformName(Const.PayPlatformEnum.ALIPAY.getCode());
+	        OrderPay.setSerialNumber(tradeNo);
+	        OrderPay.getPayStatus(tradeStatus);
+
+	        OrderPayMapper.insert(OrderPay);
+
+	        return ServerResponse.createBySuccess();
+	    }
 	 
 	 // 测试当面付2.0生成支付二维码
 	    public String test_trade_precreate(Order order,Integer userId,String path ) {
@@ -97,7 +124,7 @@ public class OrderServiceImpl implements IOrderService {
 	        String outTradeNo =order.getOrderNo().toString();
 
 	        // (必填) 订单标题，粗略描述用户的支付目的。如“xxx品牌xxx门店当面付扫码消费”
-	        String subject =new StringBuilder("美食猎人订餐系统订单编号:").append(order.getOrderNo()).toString();
+	        String subject =new StringBuilder("订单编号:").append(order.getOrderNo()).toString();
 
 	        // (必填) 订单总金额，单位为元，不能超过1亿元
 	        // 如果同时传入了【打折金额】,【不可打折金额】,【订单总金额】三者,则必须满足如下条件:【订单总金额】=【打折金额】+【不可打折金额】

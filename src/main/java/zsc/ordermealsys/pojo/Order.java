@@ -45,14 +45,16 @@ public class Order {
 	}
 
 	
-	
-	public Integer getuserId() {
+
+	public Integer getUserId() {
 		return userId;
 	}
 
-	public void setuserId(Integer userId) {
+	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
+
+
 
 	private BigDecimal totalPrice;
 

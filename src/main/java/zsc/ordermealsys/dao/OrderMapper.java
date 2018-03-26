@@ -22,5 +22,5 @@ public interface OrderMapper {
     //自写部分
     Order selectByUserIdAndOrderId(@Param("userId")Integer userId,@Param("order_no")Long order_no);
     
-    
+    Order selectByOrderNo(Long order_no);
 }

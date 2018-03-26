@@ -4,20 +4,19 @@
   <resultMap id="BaseResultMap" type="zsc.ordermealsys.pojo.OrderPay" >
     <constructor >
       <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="order_id" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="buyer_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="seller_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="third_party_username" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="serial_number" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="pay_platform_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="order_no" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="third_party_username" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="serial_number" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="pay_platform_name" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="pay_status" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
       <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    id, order_id, buyer_name, seller_name, third_party_username, serial_number, pay_platform_name, 
-    pay_status, create_time, update_time
+    id, order_no, user_id, third_party_username, serial_number, pay_platform_name, pay_status, 
+    create_time, update_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -30,26 +29,21 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="zsc.ordermealsys.pojo.OrderPay" useGeneratedKeys="true" keyProperty="id" >
-    insert into order_pay (order_id, buyer_name, seller_name, 
-      third_party_username, serial_number, pay_platform_name, 
-      pay_status, create_time, update_time
-      )
-    values (#{orderId,jdbcType=VARCHAR}, #{buyerName,jdbcType=VARCHAR}, #{sellerName,jdbcType=VARCHAR}, 
-      #{thirdPartyUsername,jdbcType=VARCHAR}, #{serialNumber,jdbcType=VARCHAR}, #{payPlatformName,jdbcType=VARCHAR}, 
-      #{payStatus,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
-      )
+    insert into order_pay (order_no, user_id, third_party_username, 
+      serial_number, pay_platform_name, pay_status, 
+      create_time, update_time)
+    values (#{orderNo,jdbcType=BIGINT}, #{userId,jdbcType=INTEGER}, #{thirdPartyUsername,jdbcType=INTEGER}, 
+      #{serialNumber,jdbcType=BIGINT}, #{payPlatformName,jdbcType=INTEGER}, #{payStatus,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="zsc.ordermealsys.pojo.OrderPay" useGeneratedKeys="true" keyProperty="id" >
     insert into order_pay
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="orderId != null" >
-        order_id,
+      <if test="orderNo != null" >
+        order_no,
       </if>
-      <if test="buyerName != null" >
-        buyer_name,
-      </if>
-      <if test="sellerName != null" >
-        seller_name,
+      <if test="userId != null" >
+        user_id,
       </if>
       <if test="thirdPartyUsername != null" >
         third_party_username,
@@ -71,23 +65,20 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="orderId != null" >
-        #{orderId,jdbcType=VARCHAR},
+      <if test="orderNo != null" >
+        #{orderNo,jdbcType=BIGINT},
       </if>
-      <if test="buyerName != null" >
-        #{buyerName,jdbcType=VARCHAR},
-      </if>
-      <if test="sellerName != null" >
-        #{sellerName,jdbcType=VARCHAR},
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
       </if>
       <if test="thirdPartyUsername != null" >
-        #{thirdPartyUsername,jdbcType=VARCHAR},
+        #{thirdPartyUsername,jdbcType=INTEGER},
       </if>
       <if test="serialNumber != null" >
-        #{serialNumber,jdbcType=VARCHAR},
+        #{serialNumber,jdbcType=BIGINT},
       </if>
       <if test="payPlatformName != null" >
-        #{payPlatformName,jdbcType=VARCHAR},
+        #{payPlatformName,jdbcType=INTEGER},
       </if>
       <if test="payStatus != null" >
         #{payStatus,jdbcType=INTEGER},
@@ -103,23 +94,20 @@
   <update id="updateByPrimaryKeySelective" parameterType="zsc.ordermealsys.pojo.OrderPay" >
     update order_pay
     <set >
-      <if test="orderId != null" >
-        order_id = #{orderId,jdbcType=VARCHAR},
+      <if test="orderNo != null" >
+        order_no = #{orderNo,jdbcType=BIGINT},
       </if>
-      <if test="buyerName != null" >
-        buyer_name = #{buyerName,jdbcType=VARCHAR},
-      </if>
-      <if test="sellerName != null" >
-        seller_name = #{sellerName,jdbcType=VARCHAR},
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
       </if>
       <if test="thirdPartyUsername != null" >
-        third_party_username = #{thirdPartyUsername,jdbcType=VARCHAR},
+        third_party_username = #{thirdPartyUsername,jdbcType=INTEGER},
       </if>
       <if test="serialNumber != null" >
-        serial_number = #{serialNumber,jdbcType=VARCHAR},
+        serial_number = #{serialNumber,jdbcType=BIGINT},
       </if>
       <if test="payPlatformName != null" >
-        pay_platform_name = #{payPlatformName,jdbcType=VARCHAR},
+        pay_platform_name = #{payPlatformName,jdbcType=INTEGER},
       </if>
       <if test="payStatus != null" >
         pay_status = #{payStatus,jdbcType=INTEGER},
@@ -135,12 +123,11 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="zsc.ordermealsys.pojo.OrderPay" >
     update order_pay
-    set order_id = #{orderId,jdbcType=VARCHAR},
-      buyer_name = #{buyerName,jdbcType=VARCHAR},
-      seller_name = #{sellerName,jdbcType=VARCHAR},
-      third_party_username = #{thirdPartyUsername,jdbcType=VARCHAR},
-      serial_number = #{serialNumber,jdbcType=VARCHAR},
-      pay_platform_name = #{payPlatformName,jdbcType=VARCHAR},
+    set order_no = #{orderNo,jdbcType=BIGINT},
+      user_id = #{userId,jdbcType=INTEGER},
+      third_party_username = #{thirdPartyUsername,jdbcType=INTEGER},
+      serial_number = #{serialNumber,jdbcType=BIGINT},
+      pay_platform_name = #{payPlatformName,jdbcType=INTEGER},
       pay_status = #{payStatus,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}

@@ -259,4 +259,12 @@
      <include refid="Base_Column_List" /> 
    from `order` where order_no=#{order_no} and user_id=#{userId}
   </select>
+  
+  
+  
+  <select id="selectByOrderNo" resultMap="BaseResultMap"  >
+    select 
+     <include refid="Base_Column_List" /> 
+   from `order` where order_no=#{order_no} 
+  </select>
 </mapper>

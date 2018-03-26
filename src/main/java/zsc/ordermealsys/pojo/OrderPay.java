@@ -5,17 +5,15 @@ import java.util.Date;
 public class OrderPay {
     private Integer id;
 
-    private String orderId;
+    private Long orderNo;
 
-    private String buyerName;
+    private Integer userId;
 
-    private String sellerName;
+    private Integer thirdPartyUsername;
 
-    private String thirdPartyUsername;
+    private Long serialNumber;
 
-    private String serialNumber;
-
-    private String payPlatformName;
+    private Integer payPlatformName;
 
     private Integer payStatus;
 
@@ -23,11 +21,10 @@ public class OrderPay {
 
     private Date updateTime;
 
-    public OrderPay(Integer id, String orderId, String buyerName, String sellerName, String thirdPartyUsername, String serialNumber, String payPlatformName, Integer payStatus, Date createTime, Date updateTime) {
+    public OrderPay(Integer id, Long orderNo, Integer userId, Integer thirdPartyUsername, Long serialNumber, Integer payPlatformName, Integer payStatus, Date createTime, Date updateTime) {
         this.id = id;
-        this.orderId = orderId;
-        this.buyerName = buyerName;
-        this.sellerName = sellerName;
+        this.orderNo = orderNo;
+        this.userId = userId;
         this.thirdPartyUsername = thirdPartyUsername;
         this.serialNumber = serialNumber;
         this.payPlatformName = payPlatformName;
@@ -48,52 +45,44 @@ public class OrderPay {
         this.id = id;
     }
 
-    public String getOrderId() {
-        return orderId;
+    public Long getOrderNo() {
+        return orderNo;
     }
 
-    public void setOrderId(String orderId) {
-        this.orderId = orderId == null ? null : orderId.trim();
+    public void setOrderNo(Long orderNo) {
+        this.orderNo = orderNo;
     }
 
-    public String getBuyerName() {
-        return buyerName;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setBuyerName(String buyerName) {
-        this.buyerName = buyerName == null ? null : buyerName.trim();
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
-    public String getSellerName() {
-        return sellerName;
-    }
-
-    public void setSellerName(String sellerName) {
-        this.sellerName = sellerName == null ? null : sellerName.trim();
-    }
-
-    public String getThirdPartyUsername() {
+    public Integer getThirdPartyUsername() {
         return thirdPartyUsername;
     }
 
-    public void setThirdPartyUsername(String thirdPartyUsername) {
-        this.thirdPartyUsername = thirdPartyUsername == null ? null : thirdPartyUsername.trim();
+    public void setThirdPartyUsername(Integer thirdPartyUsername) {
+        this.thirdPartyUsername = thirdPartyUsername;
     }
 
-    public String getSerialNumber() {
+    public Long getSerialNumber() {
         return serialNumber;
     }
 
-    public void setSerialNumber(String serialNumber) {
-        this.serialNumber = serialNumber == null ? null : serialNumber.trim();
+    public void setSerialNumber(Long serialNumber) {
+        this.serialNumber = serialNumber;
     }
 
-    public String getPayPlatformName() {
+    public Integer getPayPlatformName() {
         return payPlatformName;
     }
 
-    public void setPayPlatformName(String payPlatformName) {
-        this.payPlatformName = payPlatformName == null ? null : payPlatformName.trim();
+    public void setPayPlatformName(Integer payPlatformName) {
+        this.payPlatformName = payPlatformName;
     }
 
     public Integer getPayStatus() {

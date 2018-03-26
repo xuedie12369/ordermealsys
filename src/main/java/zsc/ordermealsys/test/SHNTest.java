@@ -18,7 +18,7 @@ public class SHNTest {
 //		iProductService.getProductDetail(1);
 //		iProductService.getProductByKeywordCategory("7", null, 1, 10, null);
 //		iOrderService.selectByUserIdAndOrderId();
-		iOrderService.pay(1L, 11, "upload");
+		iOrderService.pay(17L, 11, "upload");
 		ProductWithBLOBs s=new ProductWithBLOBs();
 	}
 
