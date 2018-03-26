@@ -35,6 +35,7 @@ public class ShippingServiceImpl implements IShippingService{
 	public ServerResponse<String> del(Integer userId,Integer addressId){
 		int resultCount=addressMapper.deleteByAddressIdUserId(userId, addressId);
 		if(resultCount>0){
+			System.out.println("删除地址成功");
 			return ServerResponse.createBySuccess("删除地址成功");
 		}
 		return ServerResponse.createByErrorMessage("删除地址失败");
@@ -44,6 +45,7 @@ public class ShippingServiceImpl implements IShippingService{
 		address.setUserId(userId);
 		int rowCount=addressMapper.updateByAddress(address);
 		if(rowCount>0){
+			System.out.println("更新地址成功");
 			return ServerResponse.createBySuccess("更新地址成功");
 		}
 		return ServerResponse.createByErrorMessage("更新地址失败");
@@ -54,6 +56,8 @@ public class ShippingServiceImpl implements IShippingService{
 		if(address==null){
 			return ServerResponse.createByErrorMessage("无法查询到该地址");
 		}
+		System.out.println("查询地址成功");
+		System.out.println(address.getConsigneeName().toString());
 		return ServerResponse.createBySuccess("查询地址成功",address);
 	}
 	

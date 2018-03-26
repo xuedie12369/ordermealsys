@@ -2,11 +2,14 @@ package zsc.ordermealsys.service;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.stereotype.Service;
+
 import com.github.pagehelper.PageInfo;
 
 import zsc.ordermealsys.common.ServerResponse;
 import zsc.ordermealsys.pojo.Address;
 
+@Service("iShippingService")
 public interface IShippingService {
 	ServerResponse add(Integer session,Address address);
 	ServerResponse<String> del(Integer userId,Integer addressId);

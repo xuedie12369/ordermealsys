@@ -1,8 +1,11 @@
 package zsc.ordermealsys.service;
 
+import org.springframework.stereotype.Service;
+
 import zsc.ordermealsys.common.ServerResponse;
 import zsc.ordermealsys.vo.ShoppingCartVo;
 
+@Service("iCartService")
 public interface ICartService {
 	ServerResponse<ShoppingCartVo> add(Integer userId,Integer productId,Integer count);
 	ServerResponse<ShoppingCartVo> update(Integer userId,Integer productId,Integer count);
