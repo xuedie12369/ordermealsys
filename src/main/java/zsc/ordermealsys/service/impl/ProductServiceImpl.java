@@ -104,7 +104,7 @@ public ServerResponse manageProductDetail(Integer productId) {
 	}
 	ProductDetailVo productDetailVo=assembleProductDetailVo(product);
 	System.out.print(productDetailVo.getMain_pic()+productDetailVo.getCreateTime());
-	return ServerResponse.createBySuccessMessage(productDetailVo);
+	return ServerResponse.createBySuccess(productDetailVo);
 	
 }
 /**
@@ -154,7 +154,7 @@ public ServerResponse<PageInfo> getProductList(Integer pageNum, Integer pageSize
 	}
 	PageInfo pageResult=new PageInfo(productList);
 	pageResult.setList(productVoList);
-	return ServerResponse.createBySuccessMessage(pageResult);
+	return ServerResponse.createBySuccess(pageResult);
 }
 /**
  * 数据库模型转为业务模型
@@ -195,7 +195,7 @@ public ServerResponse searchProduct(String name, Integer id, Integer pageNum, In
 	PageInfo pageResult=new PageInfo(productList);
 	pageResult.setList(productVoList);
 	System.out.print(productVoList.get(0).getName());
-	return ServerResponse.createBySuccessMessage(pageResult);
+	return ServerResponse.createBySuccess(pageResult);
 }
 
 }

@@ -5,7 +5,7 @@ import java.util.Date;
 public class Address {
     private Integer id;
 
-    private String userName;
+    private Integer userId;
 
     private String consigneeName;
 
@@ -31,9 +31,9 @@ public class Address {
 
     private Date updateTime;
 
-    public Address(Integer id, String userName, String consigneeName, Integer sex, String tel, String nation, String province, String city, String county, String town, String postCode, String detailedAdd, Date createTime, Date updateTime) {
+    public Address(Integer id, Integer userId, String consigneeName, Integer sex, String tel, String nation, String province, String city, String county, String town, String postCode, String detailedAdd, Date createTime, Date updateTime) {
         this.id = id;
-        this.userName = userName;
+        this.userId = userId;
         this.consigneeName = consigneeName;
         this.sex = sex;
         this.tel = tel;
@@ -60,12 +60,12 @@ public class Address {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName == null ? null : userName.trim();
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public String getConsigneeName() {

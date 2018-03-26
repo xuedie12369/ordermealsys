@@ -64,7 +64,7 @@ public class CategoryServiceImpl implements ICategoryService {
 		{
 			System.out.print("未查询到子节点");
 		}
-		return ServerResponse.createBySuccessMessage(listCategory);
+		return ServerResponse.createBySuccess(listCategory);
 	}
 
 	@Override
