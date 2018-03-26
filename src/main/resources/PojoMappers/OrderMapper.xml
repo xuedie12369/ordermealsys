@@ -257,7 +257,7 @@
   <select id="selectByUserIdAndOrderId" resultMap="BaseResultMap"  >
     select 
      <include refid="Base_Column_List" /> 
-   from `order` where order_no=#{order_no} and user_id=#{userId}
+   from `order` where order_no=#{orderNo} and user_id=#{userId}
   </select>
   
   
@@ -265,6 +265,6 @@
   <select id="selectByOrderNo" resultMap="BaseResultMap"  >
     select 
      <include refid="Base_Column_List" /> 
-   from `order` where order_no=#{order_no} 
+   from `order` where order_no=#{orderNo} 
   </select>
 </mapper>

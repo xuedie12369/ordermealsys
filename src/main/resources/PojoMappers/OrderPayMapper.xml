@@ -7,9 +7,9 @@
       <arg column="order_no" jdbcType="BIGINT" javaType="java.lang.Long" />
       <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="third_party_username" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="serial_number" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="serial_number" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="pay_platform_name" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="pay_status" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="pay_status" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
       <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
     </constructor>
@@ -33,7 +33,7 @@
       serial_number, pay_platform_name, pay_status, 
       create_time, update_time)
     values (#{orderNo,jdbcType=BIGINT}, #{userId,jdbcType=INTEGER}, #{thirdPartyUsername,jdbcType=INTEGER}, 
-      #{serialNumber,jdbcType=BIGINT}, #{payPlatformName,jdbcType=INTEGER}, #{payStatus,jdbcType=INTEGER}, 
+      #{serialNumber,jdbcType=VARCHAR}, #{payPlatformName,jdbcType=INTEGER}, #{payStatus,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="zsc.ordermealsys.pojo.OrderPay" useGeneratedKeys="true" keyProperty="id" >
@@ -75,13 +75,13 @@
         #{thirdPartyUsername,jdbcType=INTEGER},
       </if>
       <if test="serialNumber != null" >
-        #{serialNumber,jdbcType=BIGINT},
+        #{serialNumber,jdbcType=VARCHAR},
       </if>
       <if test="payPlatformName != null" >
         #{payPlatformName,jdbcType=INTEGER},
       </if>
       <if test="payStatus != null" >
-        #{payStatus,jdbcType=INTEGER},
+        #{payStatus,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null" >
         #{createTime,jdbcType=TIMESTAMP},
@@ -104,13 +104,13 @@
         third_party_username = #{thirdPartyUsername,jdbcType=INTEGER},
       </if>
       <if test="serialNumber != null" >
-        serial_number = #{serialNumber,jdbcType=BIGINT},
+        serial_number = #{serialNumber,jdbcType=VARCHAR},
       </if>
       <if test="payPlatformName != null" >
         pay_platform_name = #{payPlatformName,jdbcType=INTEGER},
       </if>
       <if test="payStatus != null" >
-        pay_status = #{payStatus,jdbcType=INTEGER},
+        pay_status = #{payStatus,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null" >
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -126,9 +126,9 @@
     set order_no = #{orderNo,jdbcType=BIGINT},
       user_id = #{userId,jdbcType=INTEGER},
       third_party_username = #{thirdPartyUsername,jdbcType=INTEGER},
-      serial_number = #{serialNumber,jdbcType=BIGINT},
+      serial_number = #{serialNumber,jdbcType=VARCHAR},
       pay_platform_name = #{payPlatformName,jdbcType=INTEGER},
-      pay_status = #{payStatus,jdbcType=INTEGER},
+      pay_status = #{payStatus,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}

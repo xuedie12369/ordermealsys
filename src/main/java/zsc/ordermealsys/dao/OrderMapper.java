@@ -20,7 +20,7 @@ public interface OrderMapper {
     int updateByPrimaryKey(Order record);
     
     //自写部分
-    Order selectByUserIdAndOrderId(@Param("userId")Integer userId,@Param("order_no")Long order_no);
+    Order selectByUserIdAndOrderId(@Param("userId")Integer userId,@Param("orderNo")Long orderNo);
     
     Order selectByOrderNo(Long order_no);
 }

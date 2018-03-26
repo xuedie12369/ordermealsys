@@ -11,17 +11,17 @@ public class OrderPay {
 
     private Integer thirdPartyUsername;
 
-    private Long serialNumber;
+    private String serialNumber;
 
     private Integer payPlatformName;
 
-    private Integer payStatus;
+    private String payStatus;
 
     private Date createTime;
 
     private Date updateTime;
 
-    public OrderPay(Integer id, Long orderNo, Integer userId, Integer thirdPartyUsername, Long serialNumber, Integer payPlatformName, Integer payStatus, Date createTime, Date updateTime) {
+    public OrderPay(Integer id, Long orderNo, Integer userId, Integer thirdPartyUsername, String serialNumber, Integer payPlatformName, String payStatus, Date createTime, Date updateTime) {
         this.id = id;
         this.orderNo = orderNo;
         this.userId = userId;
@@ -69,12 +69,12 @@ public class OrderPay {
         this.thirdPartyUsername = thirdPartyUsername;
     }
 
-    public Long getSerialNumber() {
+    public String getSerialNumber() {
         return serialNumber;
     }
 
-    public void setSerialNumber(Long serialNumber) {
-        this.serialNumber = serialNumber;
+    public void setSerialNumber(String serialNumber) {
+        this.serialNumber = serialNumber == null ? null : serialNumber.trim();
     }
 
     public Integer getPayPlatformName() {
@@ -85,12 +85,12 @@ public class OrderPay {
         this.payPlatformName = payPlatformName;
     }
 
-    public Integer getPayStatus() {
+    public String getPayStatus() {
         return payStatus;
     }
 
-    public void setPayStatus(Integer payStatus) {
-        this.payStatus = payStatus;
+    public void setPayStatus(String payStatus) {
+        this.payStatus = payStatus == null ? null : payStatus.trim();
     }
 
     public Date getCreateTime() {

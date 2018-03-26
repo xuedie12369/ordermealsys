@@ -1,5 +1,7 @@
 package zsc.ordermealsys.service;
 
+import java.util.Map;
+
 import org.springframework.stereotype.Service;
 
 import zsc.ordermealsys.common.ServerResponse;
@@ -9,4 +11,6 @@ public interface IOrderService {
 	Order selectByUserIdAndOrderId();
 	int selectOrder();
 	ServerResponse pay(Long order_no, Integer userId, String path);
+	public ServerResponse aliCallback(Map<String, String> params);
+	public ServerResponse queryOrderPayStatus(Integer userId,Long orderNo);
 }
