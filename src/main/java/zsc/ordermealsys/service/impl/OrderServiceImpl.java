@@ -50,10 +50,6 @@ import zsc.ordermealsys.util.PropertiesUtil;
 
 import zsc.ordermealsys.vo.OrderItemWithBLOBsVo;
 import zsc.ordermealsys.vo.OrderVo;
-@Service("iOrderService")
-public class OrderServiceImpl implements IOrderService {
-	private static Log       log = LogFactory.getLog(OrderServiceImpl.class);
-
 
 
 @Service("iOrderService")
@@ -94,7 +90,6 @@ public class OrderServiceImpl implements IOrderService {
 	@Override
 	public ServerResponse pay(Long order_no, Integer userId, String path) {
 		// TODO Auto-generated method stub
-<<<<<<< HEAD
 		Map<String ,String> resultMap = Maps.newHashMap();
 		Order order = orderMapper.selectByUserIdAndOrderId(userId,order_no);
 		if(order == null){
@@ -123,36 +118,7 @@ public class OrderServiceImpl implements IOrderService {
 		 */
 	}
 
-	public ServerResponse aliCallback(Map<String,String> params){
-		Long orderNo = Long.parseLong(params.get("out_trade_no"));
-		String tradeNo = params.get("trade_no");
-		String tradeStatus = params.get("trade_status");
-		Order order = orderMapper.selectByOrderNo(orderNo);
-		if(order == null){
-			return ServerResponse.createByErrorMessage("非美食猎人的订单,回调忽略");
-		}
-		if(order.getPayStatus() >= Const.OrderStatusEnum.PAID.getCode()){
-			return ServerResponse.createBySuccess("支付宝重复调用");
-		}
-		if(Const.AlipayCallback.TRADE_STATUS_TRADE_SUCCESS.equals(tradeStatus)){
-			order.setPayTime(DateTimeUtil.strToDate(params.get("gmt_payment")));
-			order.setPayStatus(Const.OrderStatusEnum.PAID.getCode());
-			orderMapper.updateByPrimaryKeySelective(order);
-		}
-
-		OrderPay OrderPay = new OrderPay();
-		OrderPay.setUserId(order.getUserId());
-		OrderPay.setOrderNo(order.getOrderNo());
-		OrderPay.setPayPlatformName(Const.PayPlatformEnum.ALIPAY.getCode());
-		OrderPay.setSerialNumber(tradeNo);
-		OrderPay.getPayStatus(tradeStatus);
-
-		OrderPayMapper.insert(OrderPay);
-
-		return ServerResponse.createBySuccess();
-	}
-
-	// 测试当面付2.0生成支付二维码
+// 测试当面付2.0生成支付二维码
 	public String test_trade_precreate(Order order,Integer userId,String path ) {
 		String qrfilePath="";
 		// (必填) 商户网站订单系统中唯一订单号，64个字符以内，只能包含字母、数字、下划线，
@@ -553,7 +519,7 @@ public class OrderServiceImpl implements IOrderService {
 		 * 
 		 * }
 		 */
-	}
+	
 
 	/**
 	 * 支付宝支付后的回调函数 作者：邵海楠
@@ -590,7 +556,7 @@ public class OrderServiceImpl implements IOrderService {
 	}
 
 	// 测试当面付2.0生成支付二维码
-	public String test_trade_precreate(Order order, Integer userId, String path) {
+/*	public String test_trade_precreate(Order order, Integer userId, String path) {
 		String qrfilePath = "";
 		// (必填) 商户网站订单系统中唯一订单号，64个字符以内，只能包含字母、数字、下划线，
 		// 需保证商户系统端不能重复，建议通过数据库sequence生成，
@@ -644,11 +610,11 @@ public class OrderServiceImpl implements IOrderService {
 			goodsDetailList.add(goods1);
 		}
 
-		/*
+		
 		 * // 继续创建并添加第一条商品信息，用户购买的产品为“黑人牙刷”，单价为5.00元，购买了两件 GoodsDetail goods2 =
 		 * GoodsDetail.newInstance("goods_id002", "xxx牙刷", 500, 2);
 		 * goodsDetailList.add(goods2);
-		 */
+		 
 
 		// 创建扫码支付请求builder，设置请求参数
 		AlipayTradePrecreateRequestBuilder builder = new AlipayTradePrecreateRequestBuilder().setSubject(subject)
@@ -659,16 +625,16 @@ public class OrderServiceImpl implements IOrderService {
 				.setGoodsDetailList(goodsDetailList);
 
 		// 加载属性配置文件（从demo的main类的static块复制来的）
-		/**
+		*//**
 		 * 一定要在创建AlipayTradeService之前调用Configs.init()设置默认参数
 		 * Configs会读取classpath下的zfbinfo.properties文件配置信息，
 		 * 如果找不到该文件则确认该文件是否在classpath目录
-		 */
+		 *//*
 		Configs.init("zfbinfo.properties");
 
-		/**
+		*//**
 		 * 使用Configs提供的默认参数 AlipayTradeService可以使用单例或者为静态成员对象，不需要反复new
-		 */
+		 *//*
 		AlipayTradeService tradeService = new AlipayTradeServiceImpl.ClientBuilder().build();
 
 		AlipayF2FPrecreateResult result = tradeService.tradePrecreate(builder);
@@ -712,9 +678,10 @@ public class OrderServiceImpl implements IOrderService {
 		}
 		return qrfilePath;
 	}
-
+*/
+//	重复
 	// 简单打印应答
-	private void dumpResponse(AlipayResponse response) {
+/*	private void dumpResponse(AlipayResponse response) {
 		if (response != null) {
 			log.info(String.format("code:%s, msg:%s", response.getCode(), response.getMsg()));
 			if (StringUtils.isNotEmpty(response.getSubCode())) {
@@ -722,7 +689,7 @@ public class OrderServiceImpl implements IOrderService {
 			}
 			log.info("body:" + response.getBody());
 		}
-	}
+	}*/
 
 	@Override
 	public ServerResponse queryOrderPayStatus(Integer userId, Long orderNo) {

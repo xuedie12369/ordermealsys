@@ -59,8 +59,8 @@ public class OrderController {
 		return iOrderService.pay(orderId,user.getId(),path);
 	}
 
-
-	@RequestMapping("alipay_callback.do")
+//重复的
+/*	@RequestMapping("alipay_callback.do")
 	@ResponseBody
 	public Object alipayCallback(HttpServletRequest request)
 	{
@@ -106,7 +106,7 @@ public class OrderController {
 	}
 
 	
-	
+	*/
 	
 	
 	
@@ -123,13 +123,13 @@ public class OrderController {
 		if(user ==null){
 			return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
 		}
-		return iOrderService.createOrder(user.getId(), addressId);
+		return iOrderService.createOrder(user.getId());
 	}
 
 
+//重复的
 
-
-	public ServerResponse pay(HttpSession session, Long orderId, HttpServletRequest request) {
+/*	public ServerResponse pay(HttpSession session, Long orderId, HttpServletRequest request) {
 		User user = (User) session.getAttribute(Const.CURRENT_USER);
 		if (user == null) {
 			return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),
@@ -138,7 +138,7 @@ public class OrderController {
 		String path = request.getSession().getServletContext().getRealPath("upload");
 		return iOrderService.pay(orderId, user.getId(), path);
 	}
-
+*/
 	@RequestMapping("alipay_callback.do")
 	@ResponseBody
 	public Object alipayCallback(HttpServletRequest request) {
