@@ -248,7 +248,42 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   
-  <!-- 自写部分 -->
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <!-- 邵海楠自写部分 -->
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   <select id="selectOrder" resultType="int">
   	select count(1) from `order`
@@ -267,4 +302,21 @@
      <include refid="Base_Column_List" /> 
    from `order` where order_no=#{order_no} 
   </select>
+  
+  
+  
+  
+  
+  
+  <!-- 黄俊淞自写部分 -->
+  
+  <select id="selectCheckedCartByUserId" parameterType="int" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List"/>
+  	from shopping_cart
+  	where user_id=#{userId}
+  	and checked=1
+  </select>
+  
+  
 </mapper>

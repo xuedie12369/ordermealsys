@@ -4,8 +4,8 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class OrderItem {
-    private Integer id;
-
+	private Integer id;
+	
     private Long orderNo;
 
     private Integer productId;
@@ -25,8 +25,8 @@ public class OrderItem {
     private Date updateTime;
 
     public OrderItem(Integer id, Long orderNo, Integer productId, String name, Integer userId, String sellerName, BigDecimal price, Integer num, Date createTime, Date updateTime) {
-        this.id = id;
-        this.orderNo = orderNo;
+        this.id=id;
+    	this.orderNo = orderNo;
         this.productId = productId;
         this.name = name;
         this.userId = userId;
@@ -39,14 +39,6 @@ public class OrderItem {
 
     public OrderItem() {
         super();
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public Long getOrderNo() {

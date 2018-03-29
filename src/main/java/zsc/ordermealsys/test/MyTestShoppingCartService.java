@@ -6,40 +6,60 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import zsc.ordermealsys.dao.AddressMapper;
+import zsc.ordermealsys.dao.OrderMapper;
 import zsc.ordermealsys.dao.ShoppingCartMapper;
 import zsc.ordermealsys.pojo.Address;
+import zsc.ordermealsys.service.ICartService;
+import zsc.ordermealsys.service.IOrderService;
 import zsc.ordermealsys.service.IShippingService;
 import zsc.ordermealsys.service.impl.CartServiceImpl;
+import zsc.ordermealsys.service.impl.OrderServiceImpl;
 
 
 public class MyTestShoppingCartService {
 	
+//	@Resource
+//	AddressMapper addressMapper;
+//	@Resource
+//	ShoppingCartMapper cartMapper;
 	@Resource
-	AddressMapper addressMapper;
-	/*public ShoppingCartMapper getShoppingMapperDao(){
-		return cartMapper;
-	}	
-	public void ShoppingMapperDao(ShoppingCartMapper cartMapper) {
-		this.cartMapper = cartMapper;
-	} */
+	OrderMapper orderMapper;
 	
-	public AddressMapper getShoppingMapperDao(){
-		return addressMapper;
-	}	
-	public void AddressMapperDao(AddressMapper addressMapper) {
-		this.addressMapper = addressMapper;
-	} 
+//	public ShoppingCartMapper getShoppingMapperDao(){
+//		return cartMapper;
+//	}	
+//	public void ShoppingMapperDao(ShoppingCartMapper cartMapper) {
+//		this.cartMapper = cartMapper;
+//	} 
+	
+	public OrderMapper getOrderMapperDao(){
+		return orderMapper;
+	}
+	public void OrderMapperDao(OrderMapper orderMapper){
+		this.orderMapper=orderMapper;
+	}
+	
+//	public AddressMapper getShoppingMapperDao(){
+//		return addressMapper;
+//	}	
+//	public void AddressMapperDao(AddressMapper addressMapper) {
+//		this.addressMapper = addressMapper;
+//	} 
 	
 	@Test
 	public void main(){
 		ApplicationContext ac=new ClassPathXmlApplicationContext("applicationContext.xml");
-		//CartServiceImpl iCartService=ac.getBean(CartServiceImpl.class);
-		/*iCartService.add(1, 1, 5);
-		iCartService.list(1);
-		iCartService.update(1, 1, 5);*/
-		//iCartService.deleteProduct(1, "1");
-		IShippingService iShippingService=ac.getBean(IShippingService.class);
-		Address ad=new Address();
+		OrderServiceImpl o=ac.getBean(OrderServiceImpl.class);
+		o.createOrder(1);
+//		IOrderService iOrderService=ac.getBean(IOrderService.class);
+//		iOrderService.createOrder(1);
+//		ICartService iCartService=ac.getBean(ICartService.class);
+//		iCartService.add(1, 1, 5);
+//		iCartService.list(1);
+//		iCartService.update(1, 1, 5);
+//		iCartService.deleteProduct(1, "1");
+//		IShippingService iShippingService=ac.getBean(IShippingService.class);
+//		Address ad=new Address();
 		/*ad.setConsigneeName("黄俊淞");
 		ad.setSex(1);
 		ad.setTel("18718005465");
