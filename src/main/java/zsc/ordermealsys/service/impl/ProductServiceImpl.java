@@ -97,7 +97,7 @@ public class ProductServiceImpl implements IProductService {
 		}
 		ProductDetailVo productDetailVo = assembleProductDetailVo(product);
 		System.out.print(productDetailVo.getMain_pic() + productDetailVo.getCreateTime());
-		return ServerResponse.createBySuccessMessage(productDetailVo);
+		return ServerResponse.createBySuccess(productDetailVo);
 
 	}
 
@@ -149,7 +149,7 @@ public class ProductServiceImpl implements IProductService {
 		}
 		PageInfo pageResult = new PageInfo(productList);
 		pageResult.setList(productVoList);
-		return ServerResponse.createBySuccessMessage(pageResult);
+		return ServerResponse.createBySuccess(pageResult);
 	}
 
 	/**
@@ -189,7 +189,7 @@ public class ProductServiceImpl implements IProductService {
 		PageInfo pageResult = new PageInfo(productList);
 		pageResult.setList(productVoList);
 		System.out.print(productVoList.get(0).getName());
-		return ServerResponse.createBySuccessMessage(pageResult);
+		return ServerResponse.createBySuccess(pageResult);
 	}
 
 	@Override
@@ -267,4 +267,11 @@ public class ProductServiceImpl implements IProductService {
 	        productListVo.setProSatus(product.getProStatus());
 	        return productListVo;
 	    }
+
+	@Override
+	public ServerResponse<List<ProductWithBLOBs>> listAll() {
+		// TODO Auto-generated method stub
+		
+		return ServerResponse.createBySuccess(productMapper.selectList());
+	}
 }

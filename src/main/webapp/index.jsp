@@ -1,24 +1,33 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
-		<a   href="myServlet"> 实得分的双方各d </a>
-	 实得分的双方各d 
-	 文件上传
-	 <form name="form1" action="manage/product/upload.do"  method="post" enctype="multipart/form-data">
-	 	<input name="file" type="file" ></input>
-	 
-	 <input name="" type="submit" value="上传文件" ></input>
-	 <img alt="" src="ordermealsys/upload/1.jpg">
-	 </form>
-	 
-	 
-	 
-	 
-</body>
+  <head>
+    <base href="<%=basePath%>">
+    
+    <title>My JSP 'index.jsp' starting page</title>
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+	<!--
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	-->
+		<link rel="stylesheet" type="text/css" href="http://s0.meituan.net/bs/fe-web-meituan/b61fdf7/css/com_header.css">
+	<link rel="stylesheet" href="css/main.css" />
+  </head>
+  
+  <body id="main">
+
+<!-- 引入header -->
+<%@include file="header.jsp" %>
+<!-- 引入商品列表 -->
+<%@include file="productList.jsp" %>
+<!-- 引入footer -->
+<%@include file="footer.jsp" %>
+  </body>
 </html>

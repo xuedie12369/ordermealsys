@@ -91,7 +91,7 @@
 		useGeneratedKeys="true" keyProperty="id">
 		insert into product
 		<trim prefix="(" suffix=")" suffixOverrides=",">
-			<if test="category_id != null">
+			<if test="categoryId != null">
 				category_id,
 			</if>
 			<if test="sellerName != null">
@@ -193,7 +193,7 @@
 	<update id="updateByPrimaryKeySelective" parameterType="zsc.ordermealsys.pojo.ProductWithBLOBs">
 		update product
 		<set>
-			<if test="category_id != null">
+			<if test="categoryId != null">
 				category_id = #{categoryId,jdbcType=INTEGER},
 			</if>
 			<if test="sellerName != null">
@@ -308,6 +308,8 @@
 		<include refid="Blob_Column_List" />
 		from product order by id asc
 	</select>
+	
+	
 	<select id="searchProduct" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
 		select
 		<include refid="Base_Column_List" />

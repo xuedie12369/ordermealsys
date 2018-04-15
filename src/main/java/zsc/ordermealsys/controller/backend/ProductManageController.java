@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -36,10 +37,13 @@ public class ProductManageController {
 	/**
 	 * 保存/更新产品 作者:邵海楠
 	 */
-	@RequestMapping("saveOrUpdate.do")
+	@RequestMapping(value="saveOrUpdate.do",method=RequestMethod.POST)
 	@ResponseBody
 	public ServerResponse productSaveOrUpdate(HttpSession session, ProductWithBLOBs product) {
+		System.out.print("进入添加产品函数");
 		User user = (User) session.getAttribute(Const.CURRENT_USER);
+		
+		System.out.print("用户账号是:"+user.getUserName());
 		if (user == null) {
 			return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录，请先登录");
 		}

@@ -6,15 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import zsc.ordermealsys.common.Const;
 import zsc.ordermealsys.common.ServerResponse;
-import zsc.ordermealsys.service.IUserService;
 import zsc.ordermealsys.pojo.User;
+import zsc.ordermealsys.service.IUserService;
 
 @Controller
-@RequestMapping("/user/")
+@RequestMapping("user/")
 public class UserController {
 	@Autowired
 	private IUserService iUserService;
@@ -28,12 +29,14 @@ public class UserController {
 	 */
 	@RequestMapping(value="login.do",method=RequestMethod.POST)
 	@ResponseBody
-	public ServerResponse<User> login(String username,String password, HttpSession session){
+	public ServerResponse<User> login(String username,String password,HttpSession session){
 		ServerResponse<User> response=iUserService.login(username, password);
+		System.out.print("用户名是:"+username);
 		if(response.isSuccess()){
+			System.out.print("执行了登录方法");
 			session.setAttribute(Const.CURRENT_USER,response.getData());
 		}
-		return response;
+		return  response;
 	}
 	
 	/**
@@ -53,9 +56,10 @@ public class UserController {
 	 * @param user
 	 * @return
 	 */
-	@RequestMapping(value="register.do",method=RequestMethod.GET)
+	@RequestMapping(value="register.do",method=RequestMethod.POST)
 	@ResponseBody
 	public ServerResponse<String> register(User user){
+		System.out.print(user.getEmail()+"这是邮箱");
 		return iUserService.register(user);
 	}
 	

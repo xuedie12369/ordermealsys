@@ -1,5 +1,7 @@
 package zsc.ordermealsys.controller.portal;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.PageInfo;
 
 import zsc.ordermealsys.common.ServerResponse;
+import zsc.ordermealsys.pojo.ProductWithBLOBs;
 import zsc.ordermealsys.service.IProductService;
 import zsc.ordermealsys.vo.ProductDetailVo;
 
@@ -47,6 +50,13 @@ public class ProductController {
 	                                         @RequestParam(value = "orderBy",defaultValue = "") String orderBy){
 	        return iProductService.getProductByKeywordCategory(keyword,categoryId,pageNum,pageSize,orderBy);
 	    }
-
+		
+	 	@RequestMapping("listAll.do")
+	    @ResponseBody
+	    public ServerResponse<List<ProductWithBLOBs>> listAll()
+	    {
+	 		System.out.print(iProductService.listAll().getData().size()+"这是大小 ");
+		 return iProductService.listAll();
+	    }
 
 }

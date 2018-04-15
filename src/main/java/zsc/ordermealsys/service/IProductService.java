@@ -1,5 +1,7 @@
 package zsc.ordermealsys.service;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.github.pagehelper.PageInfo;
@@ -17,7 +19,7 @@ public interface IProductService {
 	ServerResponse searchProduct(@Param("name")String name,@Param("id")Integer id,@Param("pageNum")Integer pageNum,@Param("pageSize")Integer pageSize);
 	ServerResponse<ProductDetailVo> getProductDetail(Integer productId);
 	ServerResponse<PageInfo> getProductByKeywordCategory(String keyword,Integer categoryId,int pageNum,int pageSize,String orderBy);
-
+	ServerResponse<List<ProductWithBLOBs>> listAll();
 
 
 }
