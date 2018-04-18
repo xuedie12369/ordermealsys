@@ -88,7 +88,7 @@ public class ProductManageController {
 	}
 
 	/**
-	 * 获得产品列表
+	 * 管理员获得产品列表
 	 * 
 	 * @param session
 	 * @param pageNum
@@ -110,6 +110,7 @@ public class ProductManageController {
 			return ServerResponse.createByErrorMessage("无权限操作");
 		}
 	}
+
 /**
  * 查找产品
  * 作者：邵海楠

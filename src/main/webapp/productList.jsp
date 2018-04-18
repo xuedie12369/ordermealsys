@@ -11,7 +11,7 @@
 	<link rel="stylesheet" type="text/css" href="http://s0.meituan.net/bs/fe-web-meituan/c19c6e9/css/main.css">
 		<link rel="stylesheet" type="text/css" href="http://s1.meituan.net/bs/fe-web-meituan/2946ee4/css/index.css">
 
-<script type="application/javascript">
+ <script type="application/javascript">
 	$(function() {
 		/*    var fd = new FormData(document.querySelector("form")); */
 		$.ajax({
@@ -51,7 +51,7 @@
 
 	});
 </script>
-
+ 
 
 
 

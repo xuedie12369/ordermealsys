@@ -274,4 +274,6 @@ public class ProductServiceImpl implements IProductService {
 		
 		return ServerResponse.createBySuccess(productMapper.selectList());
 	}
+
+	
 }

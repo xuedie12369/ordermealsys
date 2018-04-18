@@ -40,13 +40,11 @@ public class UserServiceImpl implements IUserService{
 		}
 		//密码登录MD5
 		//String md5Password=MD5Util.MD5EncodeUtf8(password);
-		
 		User user=userMapper.selectLogin(username, pwd);
 		if(user==null){
 			System.out.println("pwd failed");
 			return ServerResponse.createByErrorMessage("密码错误！");
 		}
-		
 		user.setPwd(org.apache.commons.lang3.StringUtils.EMPTY);
 		System.out.println("success");
 		return ServerResponse.createBySuccess("登录成功！",user);
@@ -178,7 +176,7 @@ public class UserServiceImpl implements IUserService{
 	@Override
 	public ServerResponse<Integer> checkAdminRole(User user) {
 		// TODO Auto-generated method stub
-		if(user!=null&&user.getRole().intValue()==Const.Role.ROLE_ADMIN)
+		if(user!=null&&user.getRole()==Const.Role.ROLE_ADMIN)
 		{
 			return ServerResponse.createBySuccess();
 		}

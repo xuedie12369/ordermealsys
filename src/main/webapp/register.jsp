@@ -55,6 +55,7 @@
 					/* 	  var html = $("#testTmpl").render(data.data); */
 						/* 	$("#list1").append(html); */
 						/* $("#wenwebzhi").value(data.data.birth) */
+						 alert("注册成功");
 						 window.location.href = "index.jsp"; 
 					}
 					else

@@ -20,9 +20,10 @@ public interface ProductMapper {
     int updateByPrimaryKeySelective(ProductWithBLOBs record);
 
     int updateByPrimaryKeyWithBLOBs(ProductWithBLOBs record);
-
+    
     int updateByPrimaryKey(Product record);
     List<ProductWithBLOBs> selectList();
+    List<ProductWithBLOBs> selectListByUserId(Integer userId);
     List<ProductWithBLOBs> searchProduct(@Param("name")String name,@Param("id")Integer id);
 
 

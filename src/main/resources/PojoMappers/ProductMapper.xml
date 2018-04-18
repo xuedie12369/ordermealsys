@@ -310,6 +310,8 @@
 	</select>
 	
 	
+	
+		
 	<select id="searchProduct" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
 		select
 		<include refid="Base_Column_List" />
