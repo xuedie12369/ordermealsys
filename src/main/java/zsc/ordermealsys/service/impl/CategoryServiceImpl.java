@@ -73,6 +73,17 @@ public class CategoryServiceImpl implements ICategoryService {
 		return null;
 	}
 
+	@Override
+	public ServerResponse<List<Category>> list() {
+		// TODO Auto-generated method stub
+		List<Category> listCategory=categoryMapper.list();
+		if(listCategory.isEmpty())
+		{
+			System.out.print("查询到分类");
+		}
+		return ServerResponse.createBySuccess(listCategory);
+	}
+
 
 
 }

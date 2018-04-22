@@ -41,6 +41,7 @@ public class ProductManageController {
 	@ResponseBody
 	public ServerResponse productSaveOrUpdate(HttpSession session, ProductWithBLOBs product) {
 		System.out.print("进入添加产品函数");
+		System.out.print("分类的ID是:"+product.getCategoryId());
 		User user = (User) session.getAttribute(Const.CURRENT_USER);
 		
 		System.out.print("用户账号是:"+user.getUserName());

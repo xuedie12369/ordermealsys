@@ -111,10 +111,32 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <!-- 自己写的 -->
+  
   <select id="selectCategoryChildrenByParentId" resultType="zsc.ordermealsys.pojo.Category" parameterType="int">
     select
     <include refid="Base_Column_List"/>
     from category
     where parent_id = #{parentId}
   </select>
+  
+  <select id="list" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from category
+  </select>
+  
+  
+  
+  
+  
 </mapper>
