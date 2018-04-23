@@ -275,5 +275,11 @@ public class ProductServiceImpl implements IProductService {
 		return ServerResponse.createBySuccess(productMapper.selectList());
 	}
 
+	@Override
+	public ServerResponse<ProductDetailVo> searchProductById(Integer productId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 }
