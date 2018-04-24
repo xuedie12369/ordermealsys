@@ -35,6 +35,11 @@ public class UserController {
 		if(response.isSuccess()){
 			System.out.print("执行了登录方法");
 			session.setAttribute(Const.CURRENT_USER,response.getData());
+			
+			/*SHN加的*/
+			session.setAttribute(Const.CURRENT_USER_Role,response.getData().getRole());
+			session.setAttribute(Const.USERNAME,response.getData().getUserName());
+			/*SHN加的结束*/
 		}
 		return  response;
 	}

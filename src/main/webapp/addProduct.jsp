@@ -75,18 +75,18 @@ div {
 				if (data.status == 0) {
 					console.log(data.status)
 					var html = $("#categoryListTmpl").render(data.data);
-				$("#categoryLi").append(html);
+					$("#categoryLi").append(html);
 					/* 给分类项目设置点击响应事件结束 */
-			$(".categoryItem").click(function() {
-			var categoryId = this.dataset.categoryid;
-			var categoryBtn = document.getElementById("categoryBtn");
-			var categoryIdTag = document.getElementById("categoryId");
-			categoryBtn.innerText = this.innerText;
-			categoryIdTag.value=categoryId;
-			/* 给分类项目设置点击响应事件结束 */
+					$(".categoryItem").click(function() {
+						var categoryId = this.dataset.categoryid;
+						var categoryBtn = document.getElementById("categoryBtn");
+						var categoryIdTag = document.getElementById("categoryId");
+						categoryBtn.innerText = this.innerText;
+						categoryIdTag.value = categoryId;
+						/* 给分类项目设置点击响应事件结束 */
 
-		});
-					
+					});
+
 				} else {
 					alert(data.msg);
 				}
@@ -160,7 +160,7 @@ div {
 
 
 	<form id="addProductForm" enctype="multipart/form-data" method="post">
-		
+
 		<div style="text-align: center;margin-top: 30px;">
 			<form role="form" enctype="multipart/form-data" id="addProductForm"
 				method="post">
@@ -177,14 +177,14 @@ div {
 						<div class="btn-group form-group form-inline " style="width:14.5%">
 
 							<button class="btn btn-info dropdown-toggle btn-block "
-								data-toggle="dropdown" type="button" id="categoryBtn"  value="-1" >
+								data-toggle="dropdown" type="button" id="categoryBtn" value="-1">
 								点击选择分类<span class="caret"></span>
 							</button>
-							
+
 
 							<ul class="dropdown-menu " style="text-align: center;"
 								id="categoryLi">
-								<input type="hidden" id="categoryId" name="categoryId" >
+								<input type="hidden" id="categoryId" name="categoryId">
 							</ul>
 						</div>
 				</div>

@@ -4,7 +4,15 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class User {
-    private Integer id;
+    @Override
+	public String toString() {
+		return "id=" + id + ", userName=" + userName + ", pwd=" + pwd + ", payPwd=" + payPwd + ", tel=" + tel
+				+ ", nickName=" + nickName + ", sex=" + sex + ", birth=" + birth + ", age=" + age + ", email=" + email
+				+ ", grade=" + grade + ", role=" + role + ", balance=" + balance + ", creatTime=" + creatTime
+				+ ", defAdd=" + defAdd + ", status=" + status + ", updateTime=" + updateTime + ", pic=" + pic + "";
+	}
+
+	private Integer id;
 
     private String userName;
 

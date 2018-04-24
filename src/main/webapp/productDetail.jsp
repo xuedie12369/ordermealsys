@@ -27,7 +27,7 @@
 						style="float: left; height: 250px;">
 						<div class="form-group">
 							<div class=" col-sm-9">
-								<h5>商品名称:{{:name}}</h5>
+								<h5>名称:{{:name}}</h5>
 								<input type="hidden" id="productId" value="1" />
 							</div>
 							<div class=" col-sm-9">
@@ -67,6 +67,11 @@
 </div>
 		
 </script>
+
+
+
+
+
 <!--改变购物车项目的处理函数开始-->
 <script>
 	function changeNum() {
@@ -136,6 +141,7 @@
 	})
 </script>
 <!-- 异步添加商品到购物车 -->
+
 <script>
 	function addToCart() {
 		$("#addToCart").click(function() {
@@ -178,7 +184,7 @@
 
 <body>
 
-	<div class=" form-inline" style="height: ;" style="height: 600px;">
+	<div class=" form-inline" style="height: ;" style="height: 600px; ">
 		<div id="productDetail"></div>
 
 	</div>

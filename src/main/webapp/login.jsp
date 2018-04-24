@@ -2161,7 +2161,6 @@ body, html {
 				success : function(data) {
 					if (data.status == 0) {
 						console.log(data.data.birth)
-						alert(data.data.birth)
 					/* 	  var html = $("#testTmpl").render(data.data); */
 						/* 	$("#list1").append(html); */
 						/* $("#wenwebzhi").value(data.data.birth) */
