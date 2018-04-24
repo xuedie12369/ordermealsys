@@ -56,6 +56,7 @@ public class OrderController {
 			return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
 		}
 		String path = request.getSession().getServletContext().getRealPath("upload");
+		System.out.println("这里是controller里面的支付宝二维码路径："+path);
 		return iOrderService.pay(orderId,user.getId(),path);
 	}
 

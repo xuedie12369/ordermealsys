@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import zsc.ordermealsys.controller.portal.OrderController;
 import zsc.ordermealsys.dao.OrderMapper;
 import zsc.ordermealsys.pojo.Order;
 import zsc.ordermealsys.service.impl.OrderServiceImpl;
@@ -21,7 +22,8 @@ public class OrderServiceTest {
 		System.out.print(o.getSellerName()+o.getOrderNo());
 	*/
 	OrderServiceImpl iOrderService=ac.getBean(OrderServiceImpl.class);
-	iOrderService.pay(18L, 11, "uplaod");
+	iOrderService.pay(19L, 11, "upload");
+	
 	}
 	
 	
