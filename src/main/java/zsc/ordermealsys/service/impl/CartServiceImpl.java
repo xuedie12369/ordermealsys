@@ -67,14 +67,8 @@ public class CartServiceImpl implements ICartService{
 						shoppingCartMapper.updateByPrimaryKeySelective(cartForNum);
 					}
 					cartProductVo.setProductNum(buyLimitCount);
-					//计算总价
-					cartProductVo.setProductTotalPrice(BigDecimalUtil.mul(product.getPrice().doubleValue(),cartProductVo.getProductNum()));
 					cartProductVo.setProductChecked(cartItem.getChecked());				
 					cartItem.setChecked(1);
-				}
-				if(cartItem.getChecked() == Const.ShoppingCart.CHECKED){
-					//如果已经勾选,增加到整个的购物车总价中
-					cartTotalPrice = BigDecimalUtil.add(cartTotalPrice.doubleValue(),cartProductVo.getProductTotalPrice().doubleValue());
 				}
 				cartProductVoList.add(cartProductVo);	
 			}

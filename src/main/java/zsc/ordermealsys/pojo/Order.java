@@ -7,8 +7,41 @@ public class Order {
     private Integer id;
 
     private String sellerName;
+    
     private Integer userId;
+    
     private Long orderNo;
+    
+    private BigDecimal totalPrice;
+
+    private Date createTime;
+
+    private Integer deliveryType;
+
+    private Integer orderType;
+
+    private Integer payStatus;
+
+    private String orderNotes;
+
+    private String deliveryTime;
+
+    private Integer deleteStatus;
+
+    private BigDecimal deliveryFee;
+
+    private Integer orderStatus;
+
+    private Date payTime;
+
+    private Date transactClosingTime;
+
+    private Date transactCompleTime;
+
+    private Date updateTime;
+
+    private BigDecimal boxTotalPrice;
+    
     public Order(Integer id, String sellerName, Integer userId, Long orderNo, BigDecimal totalPrice, Date createTime,
 			Integer deliveryType, Integer orderType, Integer payStatus, String orderNotes, String deliveryTime,
 			Integer deleteStatus, BigDecimal deliveryFee, Integer orderStatus, Date payTime, Date transactClosingTime,
@@ -44,8 +77,6 @@ public class Order {
 		this.orderNo = orderNo;
 	}
 
-	
-
 	public Integer getUserId() {
 		return userId;
 	}
@@ -53,39 +84,6 @@ public class Order {
 	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
-
-
-
-	private BigDecimal totalPrice;
-
-    private Date createTime;
-
-    private Integer deliveryType;
-
-    private Integer orderType;
-
-    private Integer payStatus;
-
-    private String orderNotes;
-
-    private String deliveryTime;
-
-    private Integer deleteStatus;
-
-    private BigDecimal deliveryFee;
-
-    private Integer orderStatus;
-
-    private Date payTime;
-
-    private Date transactClosingTime;
-
-    private Date transactCompleTime;
-
-    private Date updateTime;
-
-    private BigDecimal boxTotalPrice;
-
    
     public Order() {
         super();
@@ -107,7 +105,6 @@ public class Order {
         this.sellerName = sellerName == null ? null : sellerName.trim();
     }
 
-    
     public BigDecimal getTotalPrice() {
         return totalPrice;
     }

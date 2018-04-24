@@ -24,4 +24,6 @@ public interface OrderItemMapper {
     
     //自写部分
     List<OrderItemWithBLOBs> getByOrderNoAndUserId(@Param("orderNo")Long orderNo,@Param("userId")Integer userId);
+    
+    void batchInsert(@Param("orderItemList")List<OrderItemWithBLOBs> orderItemList);
 }
