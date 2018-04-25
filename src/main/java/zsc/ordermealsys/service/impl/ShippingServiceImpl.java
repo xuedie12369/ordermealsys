@@ -61,17 +61,17 @@ public class ShippingServiceImpl implements IShippingService{
 		return ServerResponse.createBySuccess("查询地址成功",address);
 	}
 	
-	public ServerResponse<Address> selectAllAddressByUserId(Integer userId){
+	public ServerResponse<List<Address>> selectAllAddressByUserId(Integer userId){
 		List<Address> address=addressMapper.selectByUserId(userId);
 		if(address==null){
 			return ServerResponse.createByErrorMessage("无法查询到该地址");
 		} 
 		System.out.println("查询地址成功");
 		for(int i=0;i<address.size();i++){
-			System.out.println(address.get(i).getConsigneeName().toString());
-			return ServerResponse.createBySuccess("查询地址成功",address.get(i));
+			System.out.println(address.get(i).getNation().toString());
+//			return ServerResponse.createBySuccess(address.get(i));
 		}
-		return null;
+		return ServerResponse.createBySuccess("查询地址成功", address);
 	}
 	
 	public ServerResponse<PageInfo>list(Integer userId,int pageNum,int pageSize){

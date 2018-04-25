@@ -14,6 +14,7 @@ import zsc.ordermealsys.service.IOrderService;
 import zsc.ordermealsys.service.IShippingService;
 import zsc.ordermealsys.service.impl.CartServiceImpl;
 import zsc.ordermealsys.service.impl.OrderServiceImpl;
+import zsc.ordermealsys.service.impl.ShippingServiceImpl;
 
 
 public class MyTestShoppingCartService {
@@ -22,8 +23,10 @@ public class MyTestShoppingCartService {
 //	AddressMapper addressMapper;
 //	@Resource
 //	ShoppingCartMapper cartMapper;
+//	@Resource
+//	OrderMapper orderMapper;
 	@Resource
-	OrderMapper orderMapper;
+	AddressMapper addressMapper;
 	
 //	public ShoppingCartMapper getShoppingMapperDao(){
 //		return cartMapper;
@@ -32,11 +35,18 @@ public class MyTestShoppingCartService {
 //		this.cartMapper = cartMapper;
 //	} 
 	
-	public OrderMapper getOrderMapperDao(){
-		return orderMapper;
+//	public OrderMapper getOrderMapperDao(){
+//		return orderMapper;
+//	}
+//	public void OrderMapperDao(OrderMapper orderMapper){
+//		this.orderMapper=orderMapper;
+//	}
+	
+	public AddressMapper getAddressMapperDao(){
+		return addressMapper;
 	}
-	public void OrderMapperDao(OrderMapper orderMapper){
-		this.orderMapper=orderMapper;
+	public void AddressMapperDao(AddressMapper addressMapper){
+		this.addressMapper=addressMapper;
 	}
 	
 //	public AddressMapper getShoppingMapperDao(){
@@ -49,8 +59,11 @@ public class MyTestShoppingCartService {
 	@Test
 	public void main(){
 		ApplicationContext ac=new ClassPathXmlApplicationContext("applicationContext.xml");
-		OrderServiceImpl iOrderService=ac.getBean(OrderServiceImpl.class);
-		iOrderService.createOrder(1);
+//		OrderServiceImpl iOrderService=ac.getBean(OrderServiceImpl.class);
+		ShippingServiceImpl iShippingService=ac.getBean(ShippingServiceImpl.class);
+
+//		iOrderService.createOrder(1);
+		iShippingService.selectAllAddressByUserId(1);
 //		IOrderService iOrderService=ac.getBean(IOrderService.class);
 //		iOrderService.createOrder(1);
 //		ICartService iCartService=ac.getBean(ICartService.class);
