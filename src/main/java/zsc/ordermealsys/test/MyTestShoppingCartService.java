@@ -49,8 +49,8 @@ public class MyTestShoppingCartService {
 	@Test
 	public void main(){
 		ApplicationContext ac=new ClassPathXmlApplicationContext("applicationContext.xml");
-		OrderServiceImpl o=ac.getBean(OrderServiceImpl.class);
-		o.createOrder(1);
+		OrderServiceImpl iOrderService=ac.getBean(OrderServiceImpl.class);
+		iOrderService.createOrder(1);
 //		IOrderService iOrderService=ac.getBean(IOrderService.class);
 //		iOrderService.createOrder(1);
 //		ICartService iCartService=ac.getBean(ICartService.class);

@@ -328,18 +328,5 @@
 		</where>
 		 order by id asc
 	</select>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<select id=""></select>
 </mapper>
 

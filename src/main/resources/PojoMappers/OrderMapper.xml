@@ -269,22 +269,6 @@
   
   <!-- 邵海楠自写部分 -->
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   <select id="selectOrder" resultType="int">
   	select count(1) from `order`
   </select>
@@ -318,5 +302,27 @@
   	and checked=1
   </select>
   
+  <select id="selectByUserIdAndOrderNo" resultMap="BaseResultMap" parameterType="map">
+    SELECT
+    <include refid="Base_Column_List"></include>
+    from order
+    where order_no = #{orderNo}
+    and user_id = #{userId}
+  </select>
+  
+   <select id="selectByUserId" resultMap="BaseResultMap" parameterType="int">
+    SELECT
+      <include refid="Base_Column_List"/>
+    from order
+    where user_id = #{userId}
+    order by create_time desc
+  </select>
+  
+   <select id="selectAllOrder" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    from order
+    ORDER BY  create_time desc
+  </select>
   
 </mapper>

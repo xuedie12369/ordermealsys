@@ -15,6 +15,7 @@ import zsc.ordermealsys.common.ResponseCode;
 import zsc.ordermealsys.common.ServerResponse;
 import zsc.ordermealsys.dao.ProductMapper;
 import zsc.ordermealsys.dao.ShoppingCartMapper;
+import zsc.ordermealsys.pojo.Product;
 import zsc.ordermealsys.pojo.ProductWithBLOBs;
 import zsc.ordermealsys.pojo.ShoppingCart;
 import zsc.ordermealsys.service.ICartService;
@@ -109,12 +110,14 @@ public class CartServiceImpl implements ICartService{
 		ShoppingCart cart=shoppingCartMapper.selectCartByUserIdProductId(userId, productId);
 		System.out.println("调用dao层方法返回结果没错误");
 		if(cart==null){
+			Product product=productMapper.selectByPrimaryKey(productId);
 			//这个商品不在这个购物车里，需要新增一个这个商品的记录
 			ShoppingCart cartItem=new ShoppingCart();
 			cartItem.setProductNum(count);
 			cartItem.setChecked(Const.ShoppingCart.CHECKED);
 			cartItem.setProductId(productId);
 			cartItem.setUserId(userId);
+			cartItem.setProductPrice(product.getPrice());
 			shoppingCartMapper.insert(cartItem);
 		}else{
 			//这个产品已经在购物车里了

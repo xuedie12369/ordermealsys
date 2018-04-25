@@ -9,7 +9,6 @@ public class ProductWithBLOBs extends Product {
 
     private String subPic;
 
-
     private String detail;
 
     public ProductWithBLOBs(Integer id,Integer categoryId, String sellerName, String name, BigDecimal price, Integer stock, Integer sales, Integer proStatus, Integer delStatus, Date createTime, Date updateTime, BigDecimal deliveryFee, BigDecimal boxFee, BigDecimal boxPrice, String mainPic, String subPic, String detail) {

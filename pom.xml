@@ -21,11 +21,11 @@
 <version>1.4.3</version>
 </dependency>
 
-		 <dependency>
+		<dependency>
 			<groupId>org.apache.tomcat</groupId>
 			<artifactId>tomcat-servlet-api</artifactId>
 			<version>7.0.64</version>
- 			<scope>provided</scope> 
+			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
