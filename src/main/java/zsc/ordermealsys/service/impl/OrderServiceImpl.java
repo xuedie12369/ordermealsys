@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import com.alipay.api.AlipayResponse;
+import com.alipay.api.request.AlipayTradePagePayRequest;
 import com.alipay.api.response.AlipayTradePrecreateResponse;
 import com.alipay.demo.trade.config.Configs;
 import com.alipay.demo.trade.model.ExtendParams;
@@ -183,7 +184,8 @@ public class OrderServiceImpl implements IOrderService {
 				.setSubject(subject).setTotalAmount(totalAmount).setOutTradeNo(outTradeNo)
 				.setUndiscountableAmount(undiscountableAmount).setSellerId(sellerId).setBody(body)
 				.setOperatorId(operatorId).setStoreId(storeId).setExtendParams(extendParams)
-				.setTimeoutExpress(timeoutExpress).setNotifyUrl(PropertiesUtil.getProperty("alipay.callback.url"))//支付宝服务器主动通知商户服务器里指定的页面http路径,根据需要设置
+//				.setTimeoutExpress(timeoutExpress).setNotifyUrl(PropertiesUtil.getProperty("alipay.callback.url"))//支付宝服务器主动通知商户服务器里指定的页面http路径,根据需要设置
+				.setTimeoutExpress(timeoutExpress).setNotifyUrl("http://e458cr.natappfree.cc/ordermealsys/order/alipay_callback.do")//支付宝服务器主动通知商户服务器里指定的页面http路径,根据需要设置
 				.setGoodsDetailList(goodsDetailList);
 
 
@@ -202,17 +204,12 @@ public class OrderServiceImpl implements IOrderService {
 
 
 
-
-
-
 		AlipayF2FPrecreateResult result = tradeService.tradePrecreate(builder);
 		switch (result.getTradeStatus()) {
 		case SUCCESS:
 			log.info("支付宝预下单成功: )");
-
 			AlipayTradePrecreateResponse response = result.getResponse();
 			dumpResponse(response);
-
 			//自己加的部分，集成特别重要的部分
 			File folder=new File(path);
 			if(!folder.exists())

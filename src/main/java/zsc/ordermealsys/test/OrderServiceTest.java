@@ -22,7 +22,7 @@ public class OrderServiceTest {
 		System.out.print(o.getSellerName()+o.getOrderNo());
 	*/
 	OrderServiceImpl iOrderService=ac.getBean(OrderServiceImpl.class);
-	iOrderService.pay(19L, 11, "upload");
+	iOrderService.pay(46L, 11, "upload");
 	
 	}
 	
