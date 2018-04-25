@@ -1,5 +1,7 @@
 package zsc.ordermealsys.service;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
@@ -16,4 +18,5 @@ public interface IShippingService {
 	ServerResponse update(Integer userId,Address address);
 	ServerResponse<Address> select(Integer userId,Integer addressId);
 	ServerResponse<PageInfo>list(Integer userId,int pageNum,int pageSize);
+	ServerResponse<List<Address>> selectAllAddressByUserId(Integer userId);
 }
