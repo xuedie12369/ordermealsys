@@ -46,7 +46,7 @@
 		#{checked,jdbcType=INTEGER},
 		#{productPrice,jdbcType=DECIMAL},
 		#{productNum,jdbcType=INTEGER},
-		#{createTime,jdbcType=TIMESTAMP},
+		now(),
 		#{updateTime,jdbcType=TIMESTAMP})
 	</insert>
 	<insert id="insertSelective" parameterType="zsc.ordermealsys.pojo.ShoppingCart"
@@ -234,7 +234,7 @@
 		user_id=#{userId}
 	</select>
 	
-	<select id="selectCheckedCartByUserId">
+	<select id="selectCheckedCartByUserId" resultMap="BaseResultMap" parameterType="int">
 		select
 		<include refid="Base_Column_List"/>
 		from shopping_cart

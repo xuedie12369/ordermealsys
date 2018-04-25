@@ -22,6 +22,8 @@ public interface ProductMapper {
     int updateByPrimaryKeyWithBLOBs(ProductWithBLOBs record);
 
     int updateByPrimaryKey(Product record);
+    
     List<ProductWithBLOBs> selectList();
+    
     List<ProductWithBLOBs> searchProduct(@Param("name")String name,@Param("id")Integer id);
 }
