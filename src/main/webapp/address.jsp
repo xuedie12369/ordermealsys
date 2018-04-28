@@ -15,7 +15,7 @@
 	rel="stylesheet" />
 <script src="js/jquery-3.2.1.js"></script>
 <!-- 引入jsrender插件 -->
-<script src="//www.jsviews.com/download/jsviews.js"></script>
+<script src="js/jsviews.js"></script>
 <script src="js/simsCheckbox.js" type="text/javascript"></script>
 
 <!-- 地址模块模板-->
@@ -68,6 +68,7 @@
 
 </script>
 <script type="text/javascript"> 	
+
 var username='<%=session.getAttribute("username")%>';
 if(username==null)
 {

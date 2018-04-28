@@ -7,14 +7,14 @@
 		<link rel="stylesheet" type="text/css" href="css/main.css">
 		<link rel="stylesheet" type="text/css" href="css/orders.css">
 		<!--详情页的-->
-		<link rel="stylesheet" href="https://shadow.elemecdn.com/faas/desktop/profile.2f9006.css" />
+		<link rel="stylesheet" href="css/order.css" />
 		<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
 		<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
 		<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<!--详情页的-->
 
 		<!--引入js模板-->
-		<script src="//www.jsviews.com/download/jsviews.js"></script>
+		<script src="js/jsviews.js"></script>
 
 		<!--引入模板-->
 
@@ -109,7 +109,7 @@
 													<!-- ngSwitchWhen: basketTitle -->
 													<!-- ngSwitchWhen: food -->
 													<!-- ngSwitchWhen: extra -->
-													<div ng-switch-when="extra" class="orderprogress-totalrow ng-scope"><span class="cell name ng-binding" ng-bind="row.extra.name">在线支付立减优惠</span> <span class="cell quantity"></span> <span class="cell price ng-binding minus" ng-class="{minus: row.extra.price < 0}" ng-bind="row.extra.price | number:2">-4.00</span></div>
+													<div ng-switch-when="extra" class="orderprogress-totalrow ng-scope"><span class="cell name ng-binding" ng-bind="row.extra.name">配送费</span> <span class="cell quantity"></span> <span class="cell price ng-binding minus" ng-class="{minus: row.extra.price < 0}" ng-bind="row.extra.price | number:2">-4.00</span></div>
 												</div>
 												<!-- end ngRepeat: row in totalList -->
 												<div ng-repeat="row in totalList" ng-switch="" on="row.type" class="ng-scope">
@@ -232,9 +232,9 @@
 							<div class="orders-head">
 								<ul class="orders-ul clearfix">
 									<li class="order-condition active">全部订单</li>
-									<li class="order-condition ">待付款<span class="num">3</span></li>
+									<li class="order-condition ">待付款<span class="num"></span></li>
 									<li class="order-condition">已付款</li>
-									<li class="order-condition">待评价<span class="num">4</span></li>
+									<li class="order-condition">待评价<span class="num"></span></li>
 									<li class="order-condition">退款/售后</li>
 								</ul>
 							</div>
@@ -325,7 +325,7 @@
 																		<!-- ngSwitchWhen: basketTitle -->
 																		<!-- ngSwitchWhen: food -->
 																		<!-- ngSwitchWhen: extra -->
-																		<div ng-switch-when="extra" class="orderprogress-totalrow ng-scope"><span class="cell name ng-binding" ng-bind="row.extra.name">在线支付立减优惠</span> <span class="cell quantity"></span> <span class="cell price ng-binding minus" ng-class="{minus: row.extra.price < 0}" ng-bind="row.extra.price | number:2">-4.00</span></div>
+																		<div ng-switch-when="extra" class="orderprogress-totalrow ng-scope"><span class="cell name ng-binding" ng-bind="row.extra.name">配送费</span> <span class="cell quantity"></span> <span class="cell price ng-binding minus" ng-class="{minus: row.extra.price < 0}" ng-bind="row.extra.price | number:2">-4.00</span></div>
 																	</div>
 																	<!-- end ngRepeat: row in totalList -->
 																	<div ng-repeat="row in totalList" ng-switch="" on="row.type" class="ng-scope">

@@ -64,6 +64,7 @@ public class CartController {
 	@RequestMapping("delete_product.do")
 	@ResponseBody
 	public ServerResponse<ShoppingCartVo> deleteProduct(HttpSession session, String productIds){
+		System.out.println(productIds+"这是产品ID");
 		User user=(User)session.getAttribute(Const.CURRENT_USER);
 		if(user==null){
 			return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), 
