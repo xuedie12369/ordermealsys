@@ -106,9 +106,7 @@ public class CartServiceImpl implements ICartService{
             return ServerResponse.createByErrorCodeMessage(ResponseCode.ILLEGAL_ARGUMENT.getCode(),ResponseCode.ILLEGAL_ARGUMENT.getDesc());
         }
 		
-		System.out.println("校验非空没问题");
 		ShoppingCart cart=shoppingCartMapper.selectCartByUserIdProductId(userId, productId);
-		System.out.println("调用dao层方法返回结果没错误");
 		if(cart==null){
 			Product product=productMapper.selectByPrimaryKey(productId);
 			//这个商品不在这个购物车里，需要新增一个这个商品的记录

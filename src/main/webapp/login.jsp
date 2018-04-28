@@ -27,6 +27,7 @@
 						/* 	$("#list1").append(html); */
 						/* $("#wenwebzhi").value(data.data.birth) */
 					 window.location.href = "index.jsp";  
+					 window.event.returnValue=false; 
 					}
 					else
 					{

@@ -9,24 +9,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <base href="<%=basePath%>">
     
     <title>My JSP 'index.jsp' starting page</title>
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
-		<link rel="stylesheet" type="text/css" href="http://s0.meituan.net/bs/fe-web-meituan/b61fdf7/css/com_header.css">
-	<link rel="stylesheet" href="css/main.css" />
+	<style>
+		.btn 
+		{
+			padding: 9px 14.7px;
+		}
+	</style>
+
   </head>
   
   <body id="main">
-
+	
 <!-- 引入header -->
-<%@include file="header.jsp" %>
+<%@include file="header1.jsp" %>
+<!-- 引入轮播图 -->
+<%@include file="broadcastImage.jsp" %>
+<!-- 引入分类 -->
+<%@include file="category1.jsp" %>
 <!-- 引入商品列表 -->
-<%@include file="productList.jsp" %>
+<%@include file="productList1.jsp" %>
+<%-- <!-- 引入分页 -->
+<%@include file="paging.jsp" %> --%>
 <!-- 引入footer -->
 <%@include file="footer.jsp" %>
   </body>

@@ -163,7 +163,9 @@ public class OrderServiceImpl implements IOrderService {
 		// 商品明细列表，需填写购买商品详细信息，
 		List<GoodsDetail> goodsDetailList = new ArrayList<GoodsDetail>();
 
-		//自己加的部分
+		
+		
+		
 		List<OrderItemWithBLOBs> orderItemList=new ArrayList<OrderItemWithBLOBs>();
 		orderItemList=orderItemMapper.getByOrderNoAndUserId(order.getOrderNo(), userId);
 
