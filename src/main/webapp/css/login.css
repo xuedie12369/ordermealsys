@@ -1,5 +1,5 @@
 /*--
-Author: 小贝壳网站模板
+Author: 灏忚礉澹崇綉绔欐ā鏉�
 Author URL: http://www.smallseashell.com
 License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
@@ -45,6 +45,7 @@ body a,form li,input[type="submit"],input[type="text"],.sixth-login input[type="
 }
 .login-form{
 	background: url(../images/bright.png) repeat;
+	background-size: 100%
 	padding:2em 0;
 }
 .first-login,.second-login,.fourth-login,.fifth-login,.sixth-login,.seventh-login,.eight-login,.nineth-login,.third-login{

@@ -131,7 +131,8 @@
 					<!-- 异步添加商品到购物车 -->
 					addToCart();
 				} else {
-					alert(data.msg);
+					alert(data.msg); 
+					
 				}
 			},
 			error : function() {
@@ -165,6 +166,7 @@
 					} else {
 						/* console.log(jsonObject); */
 						alert(data.msg);
+						 window.location.href = "login.jsp";
 					}
 				},
 				error : function() {
@@ -183,12 +185,25 @@
 
 
 <body>
+	<!-- 引入header -->
+	<%@include file="header.jsp"%>
 
-	<div class=" form-inline" style="height: ;" style="height: 600px; ">
-		<div id="productDetail"></div>
+	<div class=" form-inline" style="height: 600px;margin-top: 2px;border-top: 2.1px solid #ddd">
+		
+		
+		
+		<div id="productDetail" style="height: 30px;margin-top:30px;">
+		
+		
+		
+		</div>
 
 	</div>
 
+
+
+		<!-- 引入footer -->
+<%@include file="footer.jsp" %>
 </body>
 
 </html>

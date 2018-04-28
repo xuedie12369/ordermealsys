@@ -27,11 +27,11 @@
 		{
 			padding: 9px 12px;
 		}
-		.btn-info
+		/* .btn-info
 		{
 			background: #13d1be;
 			
-		}
+		} */
 		.btn-info :hover
 		{
 			background-color: #13d1be;

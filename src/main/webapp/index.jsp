@@ -21,15 +21,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body id="main">
 	
 <!-- 引入header -->
-<%@include file="header1.jsp" %>
+<%@include file="header.jsp" %>
 <!-- 引入轮播图 -->
 <%@include file="broadcastImage.jsp" %>
 <!-- 引入分类 -->
 <%@include file="category1.jsp" %>
 <!-- 引入商品列表 -->
 <%@include file="productList1.jsp" %>
-<%-- <!-- 引入分页 -->
-<%@include file="paging.jsp" %> --%>
+
 <!-- 引入footer -->
 <%@include file="footer.jsp" %>
   </body>

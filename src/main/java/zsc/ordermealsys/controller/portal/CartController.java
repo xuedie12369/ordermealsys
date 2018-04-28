@@ -26,11 +26,11 @@ public class CartController {
 	@ResponseBody
 	public ServerResponse<ShoppingCartVo> list(HttpSession session){
 		User user=(User)session.getAttribute(Const.CURRENT_USER);
-		System.out.print("当前登录的用户ID是:"+user.getId());
 		if(user==null){
 			return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), 
 					ResponseCode.NEED_LOGIN.getDesc());
 		}
+		
 		return iCartService.list(user.getId());
 	}
 

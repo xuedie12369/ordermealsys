@@ -107,7 +107,6 @@ sub{
 }
 ins,a,a:hover,a:link,a:visited{
     text-decoration: none;
-    color: rgba(0,0,0,.6);
 }
 a:focus,*:focus{
     outline-color: transparent;
