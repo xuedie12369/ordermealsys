@@ -2,6 +2,7 @@ package zsc.ordermealsys.pojo;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 public class Order {
     private Integer id;
@@ -31,6 +32,8 @@ public class Order {
     private BigDecimal deliveryFee;
 
     private Integer orderStatus;
+    
+    private List<OrderItemWithBLOBs> orderItem;
 
     private Date payTime;
 
@@ -224,4 +227,12 @@ public class Order {
     public void setBoxTotalPrice(BigDecimal boxTotalPrice) {
         this.boxTotalPrice = boxTotalPrice;
     }
+
+	public List<OrderItemWithBLOBs> getOrderItem() {
+		return orderItem;
+	}
+
+	public void setOrderItem(List<OrderItemWithBLOBs> orderItem) {
+		this.orderItem = orderItem;
+	}
 }

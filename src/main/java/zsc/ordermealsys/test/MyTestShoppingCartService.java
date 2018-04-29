@@ -6,6 +6,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import zsc.ordermealsys.dao.AddressMapper;
+import zsc.ordermealsys.dao.OrderItemMapper;
 import zsc.ordermealsys.dao.OrderMapper;
 import zsc.ordermealsys.dao.ShoppingCartMapper;
 import zsc.ordermealsys.pojo.Address;
@@ -26,7 +27,26 @@ public class MyTestShoppingCartService {
 //	@Resource
 //	OrderMapper orderMapper;
 	@Resource
-	AddressMapper addressMapper;
+//	AddressMapper addressMapper;
+	
+	OrderMapper orderMapper;
+	OrderItemMapper orderItemMapper;
+	
+	public OrderMapper getOrderMapperDao(){
+		return orderMapper;
+	}
+	
+	public OrderItemMapper getOrderItemMapperDao(){
+		return orderItemMapper;
+	}
+	
+	public void OrderMapperDao(OrderMapper orderMapper){
+		this.orderMapper=orderMapper;
+	}
+	
+	public void OrderItemMapperDao(OrderItemMapper orderItemMapper){
+		this.orderItemMapper=orderItemMapper;
+	}
 	
 //	public ShoppingCartMapper getShoppingMapperDao(){
 //		return cartMapper;
@@ -42,12 +62,12 @@ public class MyTestShoppingCartService {
 //		this.orderMapper=orderMapper;
 //	}
 	
-	public AddressMapper getAddressMapperDao(){
-		return addressMapper;
-	}
-	public void AddressMapperDao(AddressMapper addressMapper){
-		this.addressMapper=addressMapper;
-	}
+//	public AddressMapper getAddressMapperDao(){
+//		return addressMapper;
+//	}
+//	public void AddressMapperDao(AddressMapper addressMapper){
+//		this.addressMapper=addressMapper;
+//	}
 	
 //	public AddressMapper getShoppingMapperDao(){
 //		return addressMapper;
@@ -59,11 +79,12 @@ public class MyTestShoppingCartService {
 	@Test
 	public void main(){
 		ApplicationContext ac=new ClassPathXmlApplicationContext("applicationContext.xml");
-//		OrderServiceImpl iOrderService=ac.getBean(OrderServiceImpl.class);
-		ShippingServiceImpl iShippingService=ac.getBean(ShippingServiceImpl.class);
-
+		OrderServiceImpl iOrderService=ac.getBean(OrderServiceImpl.class);
+//		ShippingServiceImpl iShippingService=ac.getBean(ShippingServiceImpl.class);
+		
+		iOrderService.queryOrder(1);
 //		iOrderService.createOrder(1);
-		iShippingService.selectAllAddressByUserId(1);
+//		iShippingService.selectAllAddressByUserId(1);
 //		IOrderService iOrderService=ac.getBean(IOrderService.class);
 //		iOrderService.createOrder(1);
 //		ICartService iCartService=ac.getBean(ICartService.class);

@@ -37,6 +37,7 @@ import zsc.ordermealsys.dao.OrderMapper;
 import zsc.ordermealsys.dao.OrderPayMapper;
 import zsc.ordermealsys.dao.ProductMapper;
 import zsc.ordermealsys.dao.ShoppingCartMapper;
+import zsc.ordermealsys.dao.UserMapper;
 import zsc.ordermealsys.pojo.Order;
 import zsc.ordermealsys.pojo.OrderExample;
 import zsc.ordermealsys.pojo.OrderItemWithBLOBs;
@@ -45,6 +46,7 @@ import zsc.ordermealsys.pojo.OrderItem;
 import zsc.ordermealsys.pojo.Product;
 import zsc.ordermealsys.pojo.ProductWithBLOBs;
 import zsc.ordermealsys.pojo.ShoppingCart;
+import zsc.ordermealsys.pojo.User;
 import zsc.ordermealsys.service.IOrderService;
 import zsc.ordermealsys.util.BigDecimalUtil;
 import zsc.ordermealsys.util.DateTimeUtil;
@@ -63,13 +65,10 @@ public class OrderServiceImpl implements IOrderService {
 
 	@Autowired
 	OrderMapper orderMapper;
-	@Autowired
 	OrderItemMapper orderItemMapper;
-
-	@Autowired
 	ShoppingCartMapper shoppingCartMapper;
-	@Autowired
 	ProductMapper productMapper;
+	UserMapper userMapper;
 
 
 
@@ -280,14 +279,6 @@ public class OrderServiceImpl implements IOrderService {
 
 
 
-
-
-
-
-
-
-
-
 	//1.生成订单
 	public  ServerResponse createOrder(Integer userId){
 		
@@ -471,8 +462,17 @@ public class OrderServiceImpl implements IOrderService {
 		return orderItemVo;
 	}
 
-	
-	
+	//根据用户ID查询全部订单
+	public ServerResponse<List<Order>> queryOrder(Integer userId){
+		
+		List<Order> OrderList=orderMapper.selectByUserId(userId);
+		for(int i=0;i<OrderList.size();i++){
+			Long orderNo=OrderList.get(i).getOrderNo();
+			List<OrderItemWithBLOBs> orderItemList=orderItemMapper.getByOrderNo(orderNo);
+			OrderList.get(i).setOrderItem(orderItemList);
+		}
+		return ServerResponse.createBySuccess(OrderList);
+	}
 	
 	
 	
@@ -525,6 +525,7 @@ public class OrderServiceImpl implements IOrderService {
 		if(!serverResponse.isSuccess()){
 			return serverResponse;
 		}
+		
 		List<OrderItemWithBLOBs> orderItemList =( List<OrderItemWithBLOBs> ) serverResponse.getData();
 
 		List<OrderItemWithBLOBsVo> orderItemVoList = Lists.newArrayList();
@@ -541,6 +542,7 @@ public class OrderServiceImpl implements IOrderService {
 		return ServerResponse.createBySuccess(orderProductVo);
 	}
 
+	//获取订单详情
 	public ServerResponse<OrderVo> getOrderDetail(Integer userId,Long orderNo){
 		Order order = orderMapper.selectByUserIdAndOrderNo(userId,orderNo);
 		if(order != null){
@@ -551,6 +553,7 @@ public class OrderServiceImpl implements IOrderService {
 		return  ServerResponse.createByErrorMessage("没有找到该订单");
 	}
 
+	//获取订单列表
 	public ServerResponse<PageInfo> getOrderList(Integer userId,int pageNum,int pageSize){
 		PageHelper.startPage(pageNum,pageSize);
 		List<Order> orderList = orderMapper.selectByUserId(userId);
