@@ -2,11 +2,13 @@ package zsc.ordermealsys.dao;
 
 import java.util.List;
 
+
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Service;
 
 import zsc.ordermealsys.pojo.OrderItem;
 import zsc.ordermealsys.pojo.OrderItemWithBLOBs;
-
+@Service("orderItemMapper")
 public interface OrderItemMapper {
     int deleteByPrimaryKey(Integer id);
 

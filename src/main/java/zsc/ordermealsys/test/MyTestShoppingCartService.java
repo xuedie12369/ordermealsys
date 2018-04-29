@@ -80,8 +80,10 @@ public class MyTestShoppingCartService {
 	public void main(){
 		ApplicationContext ac=new ClassPathXmlApplicationContext("applicationContext.xml");
 		OrderServiceImpl iOrderService=ac.getBean(OrderServiceImpl.class);
+//		OrderItemMapper orderMapper=ac.getBean(OrderItemMapper.class);
 //		ShippingServiceImpl iShippingService=ac.getBean(ShippingServiceImpl.class);
 		
+//		orderMapper.getByOrderNo((long) 47);
 		iOrderService.queryOrder(1);
 //		iOrderService.createOrder(1);
 //		iShippingService.selectAllAddressByUserId(1);

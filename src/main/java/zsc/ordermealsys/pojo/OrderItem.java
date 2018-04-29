@@ -6,7 +6,14 @@ import java.util.Date;
 public class OrderItem {
 	private Integer id;
 	
-    private Long orderNo;
+    @Override
+	public String toString() {
+		return "OrderItem [id=" + id + ", orderNo=" + orderNo + ", productId=" + productId + ", name=" + name
+				+ ", userId=" + userId + ", sellerName=" + sellerName + ", price=" + price + ", num=" + num
+				+ ", createTime=" + createTime + ", updateTime=" + updateTime + "]";
+	}
+
+	private Long orderNo;
 
     private Integer productId;
 

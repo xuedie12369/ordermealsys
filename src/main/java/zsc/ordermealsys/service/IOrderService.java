@@ -1,5 +1,6 @@
 package zsc.ordermealsys.service;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -33,7 +34,13 @@ public interface IOrderService {
 	
 	 //backend
     ServerResponse<PageInfo> manageList(int pageNum,int pageSize);
+    
     ServerResponse<OrderVo> manageDetail(Long orderNo);
+    
     ServerResponse<PageInfo> manageSearch(Long orderNo,int pageNum,int pageSize);
+    
     ServerResponse<String> manageSendGoods(Long orderNo);
+    
+    ServerResponse<List<Order>> queryOrder(Integer userId);
+    
 }
