@@ -39,4 +39,5 @@ public interface UserMapper {
     ServerResponse<List<Category>> getChildrenParallelCategory(@Param("parentId")Integer parentId);
     
     
+    
 }
