@@ -109,7 +109,16 @@ public class OrderController {
         return iOrderService.getOrderDetail(user.getId(),orderNo);
     }
 
- 
+	@RequestMapping("queryorder.do")
+    @ResponseBody
+	public ServerResponse queryorder(HttpSession session){
+		User user = (User)session.getAttribute(Const.CURRENT_USER);
+		if(user ==null){
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
+        }
+		Integer userId=user.getId();
+		return iOrderService.queryOrder(userId);
+	}
 	
 	
 	

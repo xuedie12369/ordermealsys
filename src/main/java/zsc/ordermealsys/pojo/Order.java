@@ -5,7 +5,18 @@ import java.util.Date;
 import java.util.List;
 
 public class Order {
-    private Integer id;
+    @Override
+	public String toString() {
+		return "Order [id=" + id + ", sellerName=" + sellerName + ", userId=" + userId + ", orderNo=" + orderNo
+				+ ", totalPrice=" + totalPrice + ", createTime=" + createTime + ", deliveryType=" + deliveryType
+				+ ", orderType=" + orderType + ", payStatus=" + payStatus + ", orderNotes=" + orderNotes
+				+ ", deliveryTime=" + deliveryTime + ", deleteStatus=" + deleteStatus + ", deliveryFee=" + deliveryFee
+				+ ", orderStatus=" + orderStatus + ", orderItem=" + orderItem + ", payTime=" + payTime
+				+ ", transactClosingTime=" + transactClosingTime + ", transactCompleTime=" + transactCompleTime
+				+ ", updateTime=" + updateTime + ", boxTotalPrice=" + boxTotalPrice + "]";
+	}
+
+	private Integer id;
 
     private String sellerName;
     

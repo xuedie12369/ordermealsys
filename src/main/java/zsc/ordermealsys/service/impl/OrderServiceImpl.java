@@ -66,6 +66,7 @@ public class OrderServiceImpl implements IOrderService {
 
 	@Autowired
 	OrderMapper orderMapper;
+	@Autowired
 	OrderItemMapper orderItemMapper;
 	ShoppingCartMapper shoppingCartMapper;
 	ProductMapper productMapper;
@@ -460,8 +461,10 @@ public class OrderServiceImpl implements IOrderService {
 		List<Order> OrderList=orderMapper.selectByUserId(userId);
 		for(int i=0;i<OrderList.size();i++){
 			Long orderNo=OrderList.get(i).getOrderNo();
+			System.out.println(OrderList.get(i).getOrderNo().toString());
+
 			List<OrderItemWithBLOBs> orderItemList=orderItemMapper.getByOrderNo(orderNo);
-		
+			
 			OrderList.get(i).setOrderItem(orderItemList);
 			for(int j=0;j<orderItemList.size();j++){
 				System.out.println(OrderList.get(i).getOrderItem().get(j).getName().toString());

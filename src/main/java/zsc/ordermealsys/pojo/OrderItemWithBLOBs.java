@@ -6,7 +6,12 @@ import java.util.Date;
 public class OrderItemWithBLOBs extends OrderItem {
     private String productPic;
 
-    private String productDetail;
+    @Override
+	public String toString() {
+		return "OrderItemWithBLOBs [productPic=" + productPic + ", productDetail=" + productDetail + "]";
+	}
+
+	private String productDetail;
 
     public OrderItemWithBLOBs(Integer id, Long orderNo, Integer productId, String name, Integer userId, String sellerName, BigDecimal price, Integer num, Date createTime, Date updateTime, String productPic, String productDetail) {
         super(id, orderNo, productId, name, userId, sellerName, price, num, createTime, updateTime);
