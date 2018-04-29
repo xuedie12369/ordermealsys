@@ -33,7 +33,7 @@
 		<!--详情页的-->
 
 		<!--引入js模板-->
-		<script src="//www.jsviews.com/download/jsviews.js"></script>
+		<script src="js/jsviews.js"></script>
 
 		<!--引入模板-->
 

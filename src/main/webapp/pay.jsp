@@ -15,12 +15,12 @@
 <script id="qrTmpl" type="text/x-jsrender">
 		<p>
 				<a href="#" class="btn btn-info btn-lg">
-					<span class="glyphicon   glyphicon-ok"></span> 订单编号:111
+					<span class="glyphicon   glyphicon-ok"></span> 订单编号:{{:orderNo}} 下单成功，请扫描下方二维码支付
 				</a>
 			</p>
 		<div class="col-sm-6 col-md-3" style="margin-left: 38%;" >
 			<a href="#" class="thumbnail"  >
-			<img src="qr-18.png" alt="" style="text-align: center;">
+			<img src="{{:qrUrl}}" alt="" style="text-align: center;">
 			</a>
 		</div>
 </script>
@@ -32,6 +32,19 @@
 	
 
 	$(function() {
+		var url = location.search.substr(1);
+		var id = -1;
+		if (url != null) {
+			var params = url.split("&");
+			for (var i = 0; i < params.length; i++) {
+				var attrMap = params[i].split("=");
+				if (attrMap[0] == "id") {
+					id = attrMap[1];
+				}
+			}
+		}
+		alert(id)
+		
 		/*    var fd = new FormData(document.querySelector("form")); */
 		$.ajax({
 			type : "GET",
@@ -40,10 +53,21 @@
 			contentType : "application/x-www-form-urlencoded",
 			/* 	data : $('#J-normal-form').serialize(), */
 			/*  data: fd,  */
+			data : {
+				orderId: id
+			},
 			dataType : "json",
 			success : function(data) {
-				var html = $("#qrTmpl").render(dataSrouce);
-				$("#qr").append(html);
+				if(data.status==0)
+				{
+				var html = $("#qrTmpl").render(data.data);
+					$("#qr").append(html); 
+				}
+				else
+				{
+				alert(data.msg)
+				}
+				console.log(data);
 				console.log(data.data);
 			},
 			error : function() {

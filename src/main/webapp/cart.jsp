@@ -9,7 +9,7 @@
 <link rel="stylesheet" type="text/css"
 	href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
 <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
-<script src="//www.jsviews.com/download/jsviews.js"></script>
+<script src="js/jsviews.js"></script>
 <style>
 .th {
 	text-align: center;

@@ -92,10 +92,11 @@ public class OrderServiceImpl implements IOrderService {
 	}
 
 	@Override
-	public ServerResponse pay(Long order_no, Integer userId, String path) {
+	public ServerResponse pay(Long orderNo, Integer userId, String path) {
 		// TODO Auto-generated method stub
 		Map<String ,String> resultMap = Maps.newHashMap();
-		Order order = orderMapper.selectByUserIdAndOrderNo(userId,order_no);
+		System.out.print("调用之前userID是:"+userId);
+		Order order = orderMapper.selectByUserIdAndOrderId(userId, orderNo);
 		if(order == null){
 
 			return ServerResponse.createByErrorMessage("用户没有该订单");
@@ -233,6 +234,7 @@ public class OrderServiceImpl implements IOrderService {
 
 
 			//没有写把二维码上传到ftp服务器的代码，待完善
+			
 			log.info("filePath:" + qrfilePath);
 			//                ZxingUtils.getQRCodeImge(response.getQrCode(), 256, filePath);
 			break;
@@ -250,6 +252,7 @@ public class OrderServiceImpl implements IOrderService {
 			log.error("不支持的交易状态，交易返回异常!!!");
 			break;
 		}
+		qrfilePath=qrfilePath.substring(qrfilePath.lastIndexOf("\\")+1); 
 		return  qrfilePath;
 	}
 
@@ -497,7 +500,7 @@ public class OrderServiceImpl implements IOrderService {
 
 	//2.取消订单功能
 	public ServerResponse<String> cancel(Integer userId,Long orderNo){
-		Order order  = orderMapper.selectByUserIdAndOrderNo(userId,orderNo);
+		Order order  = orderMapper.selectByUserIdAndOrderId(userId,orderNo);
 		if(order == null){
 			return ServerResponse.createByErrorMessage("该用户此订单不存在");
 		}
@@ -541,7 +544,7 @@ public class OrderServiceImpl implements IOrderService {
 	}
 
 	public ServerResponse<OrderVo> getOrderDetail(Integer userId,Long orderNo){
-		Order order = orderMapper.selectByUserIdAndOrderNo(userId,orderNo);
+		Order order = orderMapper.selectByUserIdAndOrderId(userId, orderNo);
 		if(order != null){
 			List<OrderItemWithBLOBs> orderItemList = orderItemMapper.getByOrderNoAndUserId(orderNo,userId);
 			OrderVo orderVo = assembleOrderVo(order,orderItemList);
@@ -835,23 +838,12 @@ public class OrderServiceImpl implements IOrderService {
 		return qrfilePath;
 	}
 	   */
-	//	重复
-	// 简单打印应答
-	/*	private void dumpResponse(AlipayResponse response) {
-		if (response != null) {
-			log.info(String.format("code:%s, msg:%s", response.getCode(), response.getMsg()));
-			if (StringUtils.isNotEmpty(response.getSubCode())) {
-				log.info(String.format("subCode:%s, subMsg:%s", response.getSubCode(), response.getSubMsg()));
-			}
-			log.info("body:" + response.getBody());
-		}
-	}*/
-
+	
 	@Override
 	public ServerResponse queryOrderPayStatus(Integer userId, Long orderNo) {
 		// TODO Auto-generated method stub
 
-		Order	 order=orderMapper.selectByUserIdAndOrderNo(userId, orderNo);
+		Order	 order=orderMapper.selectByUserIdAndOrderId(userId, orderNo);
 		System.out.print("订单是:"+order.getSellerName());
 		if(order == null){
 			return ServerResponse.createByErrorMessage("用户没有该订单");
