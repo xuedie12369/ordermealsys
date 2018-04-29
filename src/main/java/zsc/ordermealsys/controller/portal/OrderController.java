@@ -109,9 +109,10 @@ public class OrderController {
         return iOrderService.getOrderDetail(user.getId(),orderNo);
     }
 
-	@RequestMapping("queryorder.do")
+	@RequestMapping("queryOrder.do")
     @ResponseBody
-	public ServerResponse queryorder(HttpSession session){
+	public ServerResponse queryOrder(HttpSession session){
+		System.out.print("进来");
 		User user = (User)session.getAttribute(Const.CURRENT_USER);
 		if(user ==null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
