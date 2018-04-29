@@ -72,11 +72,6 @@ public class OrderServiceImpl implements IOrderService {
 	@Autowired
 	ProductMapper productMapper;
 
-
-
-
-
-
 	public Order selectByUserIdAndOrderId() {
 		Order o = orderMapper.selectByPrimaryKey(1);
 		System.out.print(o.getSellerName() + "卖家姓名");
@@ -267,22 +262,6 @@ public class OrderServiceImpl implements IOrderService {
 			log.info("body:" + response.getBody());
 		}
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

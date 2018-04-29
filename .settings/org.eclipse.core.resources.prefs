@@ -4,6 +4,7 @@ encoding//src/main/java/zfbinfo.properties=UTF-8
 encoding//src/main/resources=UTF-8
 encoding//src/main/resources/zfbinfo.properties=UTF-8
 encoding//src/main/webapp/MyJsp.jsp=UTF-8
+encoding//src/main/webapp/addAddress.jsp=UTF-8
 encoding//src/main/webapp/addProduct.jsp=UTF-8
 encoding//src/main/webapp/address.jsp=UTF-8
 encoding//src/main/webapp/broadcastImage.jsp=UTF-8

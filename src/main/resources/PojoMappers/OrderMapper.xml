@@ -312,7 +312,7 @@
    <select id="selectByUserId" resultMap="BaseResultMap" parameterType="int">
     SELECT
       <include refid="Base_Column_List"/>
-    from order
+    from `order`
     where user_id = #{userId}
     order by create_time desc
   </select>
@@ -320,7 +320,7 @@
    <select id="selectAllOrder" resultMap="BaseResultMap">
     SELECT
     <include refid="Base_Column_List"/>
-    from order
+    from `order`
     ORDER BY  create_time desc
   </select>
   

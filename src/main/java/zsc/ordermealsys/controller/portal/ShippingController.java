@@ -28,6 +28,8 @@ public class ShippingController {
 	@RequestMapping("add.do")
 	@ResponseBody
 	public ServerResponse add(HttpSession session, Address address) {
+		
+		System.out.println("地址的内容是:"+address.toString());
 		User user = (User) session.getAttribute(Const.CURRENT_USER);
 		if (user == null) {
 			return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),

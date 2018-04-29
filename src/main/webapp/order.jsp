@@ -155,30 +155,41 @@
 
 		</script>
 
-		<script type="text/javascript" charset="utf-8">
-			$(function() {
-				window.dataSrouce = {
-					jihe: [{
-							age: "1"
-						},
-						{
-							age: "2"
-						},
-						{
-							age: "1"
-						}, {
-							age: "2"
-						},
-
-					]
-
-				}
-
-				var html = $("#productListTmpl").render(dataSrouce.jihe);
+		
+<!-- 异步查询数据库商品 -->
+ <script type="application/javascript">
+	$(function() {
+		/*    var fd = new FormData(document.querySelector("form")); */
+		$.ajax({
+			type : "GET",
+			url :'/order/list.do',
+			/*contentType : "application/json; charset=utf-8", */
+			contentType : "application/x-www-form-urlencoded",
+			/* 	data : $('#J-normal-form').serialize(), */
+			/*  data: fd,  */
+			dataType : "json",
+			success : function(data) {
+				if (data.status == 0) {
+					console.log(data.data)
+					var html = $("#productListTmpl").render(dataSrouce.jihe);
 				$("#productDiv").html(html);
-//				$("#productDiv").append(html);
-			});
-		</script>
+				} else {
+					/* console.log(jsonObject); */
+					alert(data.msg);
+				}
+			},
+			error : function() {
+				alert("提交数据失败");
+			}
+		});
+
+	});
+</script>
+ 
+
+
+
+
 
 	</head>
 

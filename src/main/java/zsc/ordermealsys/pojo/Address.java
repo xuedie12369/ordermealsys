@@ -3,7 +3,15 @@ package zsc.ordermealsys.pojo;
 import java.util.Date;
 
 public class Address {
-    private Integer id;
+    @Override
+	public String toString() {
+		return "Address [id=" + id + ", userId=" + userId + ", consigneeName=" + consigneeName + ", sex=" + sex
+				+ ", tel=" + tel + ", nation=" + nation + ", province=" + province + ", city=" + city + ", county="
+				+ county + ", town=" + town + ", postCode=" + postCode + ", detailedAdd=" + detailedAdd
+				+ ", createTime=" + createTime + ", updateTime=" + updateTime + "]";
+	}
+
+	private Integer id;
 
     private Integer userId;
 
