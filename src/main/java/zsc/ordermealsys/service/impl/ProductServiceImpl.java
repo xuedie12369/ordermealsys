@@ -62,9 +62,14 @@ public class ProductServiceImpl implements IProductService {
 	}
 
 	@Override
-	public ServerResponse delete(ProductWithBLOBs product) {
+	public ServerResponse delete(Integer productId) {
 		// TODO Auto-generated method stub
-		return null;
+		if(productId!=null)
+		{
+			int n=productMapper.deleteByPrimaryKey(productId);
+			return  n>0?ServerResponse.createBySuccessMessage("删除成功"):ServerResponse.createByErrorMessage("删除失败");
+		}
+		return ServerResponse.createByErrorMessage("参数错误");
 	}
 
 	/**

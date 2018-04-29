@@ -74,6 +74,28 @@ public class ProductManageController {
 		}
 		return ServerResponse.createByErrorMessage("无权限操作");
 	}
+	
+	
+	/**
+	 * 设置产品状态（即设置产品的上下架） 作者:邵海楠
+	 * 
+	 * @param session
+	 * @param productId
+	 * @param proStatus
+	 * @return
+	 */
+	@RequestMapping("delete.do")
+	@ResponseBody
+	public ServerResponse delete(HttpSession session, Integer productId) {
+		User user = (User) session.getAttribute(Const.CURRENT_USER);
+		if (user == null) {
+			return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录，请先登录");
+		}
+		if (iUserService.checkAdminRole(user).isSuccess()) {
+			return iProductService.delete(productId);
+		}
+		return ServerResponse.createByErrorMessage("无权限操作");
+	}
 
 	@RequestMapping("detail.do")
 	@ResponseBody
@@ -160,12 +182,6 @@ public class ProductManageController {
 		return ServerResponse.createBySuccess(fileMap);
 	}
 
-@RequestMapping("tijiao")
-public void tijiao()
-{
-	System.out.print("运行了提交");
-}
-	
 
 
 }
