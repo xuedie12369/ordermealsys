@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <!-- saved from url=(0046)http://www.jq22.com/demo/formValidate20161108/ -->
-<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html lang="zh-CN"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <%@ page language="java" pageEncoding="UTF-8"%>
   <meta name="viewport" content="width=device-width, initial-scale=1">

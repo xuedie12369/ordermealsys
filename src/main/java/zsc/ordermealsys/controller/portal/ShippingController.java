@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -25,7 +26,7 @@ public class ShippingController {
 	private IShippingService iShippingService;
 
 	// Spring MVC 中的特殊的绑定方式，直接绑定对象
-	@RequestMapping("add.do")
+	@RequestMapping(value="add.do",method=RequestMethod.POST)
 	@ResponseBody
 	public ServerResponse add(HttpSession session, Address address) {
 		

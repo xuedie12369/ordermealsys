@@ -166,6 +166,9 @@ public class ProductServiceImpl implements IProductService {
 		productVo.setName(product.getName());
 		productVo.setPicHost(PropertiesUtil.getProperty("ftp.server.http.prefix", "http://img.ordermealsys.com/"));
 		productVo.setPro_status(product.getProStatus());
+		productVo.setSales(product.getSales());
+		productVo.setStock(product.getStock());
+		productVo.setPrice(product.getPrice());
 		return productVo;
 	}
 

@@ -271,9 +271,6 @@ public class OrderServiceImpl implements IOrderService {
 
 
 
-
-
->>>>>>> hjs-master
 	//1.生成订单
 	public  ServerResponse createOrder(Integer userId){
 		
@@ -464,8 +461,15 @@ public class OrderServiceImpl implements IOrderService {
 		for(int i=0;i<OrderList.size();i++){
 			Long orderNo=OrderList.get(i).getOrderNo();
 			List<OrderItemWithBLOBs> orderItemList=orderItemMapper.getByOrderNo(orderNo);
+		
 			OrderList.get(i).setOrderItem(orderItemList);
+			for(int j=0;j<orderItemList.size();j++){
+				System.out.println(OrderList.get(i).getOrderItem().get(j).getName().toString());
+			}
+		
 		}
+		
+		
 		return ServerResponse.createBySuccess(OrderList);
 	}
 	

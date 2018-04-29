@@ -59,25 +59,25 @@
 							</div>
 
 						</td>
-						<td style="vertical-align: middle;">商品名称</td>
-						<td style="vertical-align: middle;">11</td>
+						<td style="vertical-align: middle;">{{:name}}</td>
+						<td style="vertical-align: middle;">{{:price}}</td>
 
-						<td style="vertical-align: middle;">111</td>
-						<td style="vertical-align: middle;">11</td>
+						<td style="vertical-align: middle;">{{:stock}}</td>
+						<td style="vertical-align: middle;">{{:sales}}</td>
 						<td style="vertical-align: middle;">
 							<span class="productStatus" data-productId="1">
 							<a href="#" class="btn btn-info btn-group-sm" >
-								下架
+								下 架
 							</a>
 							</span>
 							<span class="productStatus" data-productId="2">
 						<a href="#" class="btn btn-info btn-group-sm">
-								<span class="glyphicon glyphicon-trash"></span> 删除
+								<span class="glyphicon glyphicon-trash"></span> 删 除
 							</a>
 							</span>
 							<span  class="productStatus" data-productId="3">
 										<a href="#" class="btn btn-info btn-group-sm">
-							编辑
+							编 辑
 							</a>
 							</span>
 						</td>
@@ -87,51 +87,7 @@
 		</script>
 		
 		
-		<script type="text/javascript" charset="utf-8">
-			$(function() {
-				var dataSrouce ={
-					jihe:[{
-						name: "张三"
-					},
-					 {
-						name: "zhangsi"
-					},
-					{
-						name: "张三"
-					},
-					{
-						name: "张三"
-					},
-					{
-						name: "张三"
-					},
-					{
-						name: "张三"
-					}, {
-						name: "张三"
-					}, {
-						name: "张三"
-					}, {
-						name: "张三"
-					}, {
-						name: "张三"
-					}, {
-						name: "张三"
-					}, 
-
-				]
-					
-				}
-				
-
-				var html = $("#listTmpl").render(dataSrouce.jihe);
-
-				$("#listDiv").append(html);
-			});
-		</script>
-	
-	
-<!-- 	<script type="application/javascript">
+	<script type="application/javascript">
 	$(function() {
 		/*    var fd = new FormData(document.querySelector("form")); */
 		$.ajax({
@@ -139,30 +95,20 @@
 			url : 'manage/product/list.do',
 			/*contentType : "application/json; charset=utf-8", */
 			contentType : "application/x-www-form-urlencoded",
-			/* 	data : $('#J-normal-form').serialize(), */
-			/*  data: fd,  */
 			dataType : "json",
 			success : function(data) {
 				if (data.status == 0) {
 					console.log(data.data)
-					var html = $("#productListTmpl").render(data.data);
+					var html = $("#listTmpl").render(data.data.list);
 					/* 追加内容 */
-					$("#productDiv").append(html);
-					/* 覆盖所有内容
-					$("#productDiv").html(html);
-					 */
-					/* 
-					 var html = $("#testTmpl").render(data);
-					 	$("#list1").html(html);  */
-
-
-				/* 	$("#list1").append(html);  */
-				/* $("#wenwebzhi").value(data.data.birth) */
-				/* window.location.href = "index.html"; */
-				} else {
+					$("#listDiv").append(html);
+				}
+				 else {
 					/* console.log(jsonObject); */
 					alert(data.msg);
+					window.location.href = "login.jsp";
 				}
+				
 			},
 			error : function() {
 				alert("提交数据失败");
@@ -172,7 +118,6 @@
 	});
 </script>
 
- -->
 
 	
 	
@@ -243,41 +188,6 @@
 
 			<!--一行模板-->
 				
-					<tr>
-
-						<td>
-							<div class="col-sm-6 col-md-5 checkbox-inline">
-								<!--<input type="checkbox" name="checkBox" />-->
-								<a href="#" class="thumbnail" style="text-align: right;">
-
-									<img src="1.png" alt="通用的占位符缩略图">
-								</a>
-							</div>
-
-						</td>
-						<td style="vertical-align: middle;">商品名称</td>
-						<td style="vertical-align: middle;">11</td>
-
-						<td style="vertical-align: middle;">111</td>
-						<td style="vertical-align: middle;">11</td>
-						<td style="vertical-align: middle;">
-							<span class="productStatus" data-productId="1">
-							<a href="#" class="btn btn-info btn-group-sm" >
-								下架
-							</a>
-							</span>
-							<span class="productStatus" data-productId="2">
-						<a href="#" class="btn btn-info btn-group-sm ">
-							<span class="glyphicon glyphicon-trash"></span>删除
-							</a>
-							</span>
-							<span  class="productStatus" data-productId="3">
-										<a href="#" class="btn btn-info btn-group-sm">
-							编辑
-							</a>
-							</span>
-						</td>
-					</tr>
 
 		
 				
