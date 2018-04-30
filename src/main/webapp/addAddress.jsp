@@ -13,12 +13,11 @@
 
 
 
-<!-- ajax异步登录跳转 -->
+<!-- ajax保存地址 -->
 <script>
 	$(document).ready(function() {
 		$("#save").click(function() {
 			/*    var fd = new FormData(document.querySelector("form")); */
-			alert("sadsad");
 			$.ajax({
 				type : "POST",
 				url : 'shipping/add.do',

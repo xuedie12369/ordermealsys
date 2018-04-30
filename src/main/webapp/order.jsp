@@ -15,7 +15,7 @@
 <script
 	src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!--详情页的-->
-
+	<script src="js/jquery-3.2.1.js"></script>
 <!--引入js模板-->
 <script src="js/jsviews.js"></script>
 
@@ -208,6 +208,7 @@
 </head>
 
 <body id="main">
+	<%@include file="header.jsp" %>
 	<div id="app">
 		<div class="page index" data-reactroot="">
 			<div class="orders-container">
@@ -280,7 +281,7 @@
 		</div>
 	</div>
 	</div>
-
+<%@include file="footer.jsp" %>
 </body>
 
 <!--点击订单状态筛选响应事件-->

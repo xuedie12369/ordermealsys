@@ -43,7 +43,7 @@
 						<p class="color-weak ng-binding" ng-bind="item.address + item.address_detail">{{:detailedAdd}}</p>
 					</div>
 					<div class="checkout-address-edit" >
-				<a  class="updateAddress" href="javascript:" ng-click="editAddress($event, item)">修改</a>
+				<a  class="updateAddress" href="updateAddress.jsp?id={{:id}}" ng-click="editAddress($event, item)">修改</a>
 						<a class="deleteAddress" data-addressId = "{{:id}}" style="color: red;" href="javascript:" ng-click="removeAddress($event, item)"><span class="glyphicon glyphicon-trash"></span></a>
 					</div>
 				</li>
@@ -82,35 +82,13 @@
 
 		];
 
-		var html = $("#productListTmpl").render(dataSrouce);
-
+		var html = $("#productListTmpl").render(dataSrouce)	
 		$("#orderItem").append(html);
 		reduceBtn();
 		addBtn();
 	});
 
 </script>
-
-<!--  
-<script type="text/javascript" charset="utf-8">
-	$(function() {
-		var dataSrouce = [ {
-			name : "张三"
-		},
-			{
-				name : "zhangsi"
-			},
-			
-
-		];
-		var html = $("#addressListTmpl").render(dataSrouce);
-
-		$("#addressList").append(html);
-		address();
-	});
-
-</script> -->
-
 
 
 <!--添加按钮开始-->
@@ -171,37 +149,31 @@
 				$("#addressId").val(this.dataset.addressid)
 				});
 				
-					$(".updateAddress").click(function() {
-						alert("asas")
-				});
 					$(".deleteAddress").click(function() {
 					   var addressId=this.dataset.addressid;
-					   alert(addressId)
-						deletePro(addressId);
+					deletePro(addressId);
 				});
 			}
 		</script>
 
 
-
+<!-- 异步查询收货地址开始 -->
 
 <script type="text/javascript" charset="utf-8">
 	
-
-	$(function() {
+	function addressList(){
 		$.ajax({
 			type : "GET",
 			url : 'shipping/list.do',
-			/*contentType : "application/json; charset=utf-8", */
 			contentType : "application/x-www-form-urlencoded",
-			/* 	data : $('#J-normal-form').serialize(), */
-			/*  data: fd,  */
 			dataType : "json",
 			success : function(data) {
 				if(data.status==0)
 				{
+				
 				var html = $("#addressListTmpl").render(data.data.list);
-				$("#addressList").append(html);
+				/* $("#addressList").append(html);  */
+				$("#addressList").html(html);
 				address(); 
 				}
 				else
@@ -217,20 +189,25 @@
 				alert("提交数据失败");
 			}
 		});
-	});
+};
+$(function(){
 
+addressList();
 
+}
+   );
 		
+
 
 </script>
 
 
+<!-- 异步查询收货地址开始结束 -->
 
 
 
 
-
-<!-- ajax异步更新-->
+<!-- ajax异步删除-->
 <script>
 	function deletePro( addressId) {
 			$.ajax({
@@ -242,7 +219,7 @@
 				success : function(data) {
 					if (data.status == 0) {
 						console.log(data)
-						alert("删除成功");
+						addressList();
 					} else {
 						alert(data.msg);
 					}
@@ -340,7 +317,7 @@
 		
 			<div ng-if="!loading &amp;&amp; !nofood " class="checkout-content ng-scope " style="height: auto;">
 				<div class="checkout-select ng-isolate-scope " checkout-address=" " checkout-data="checkoutData " address-list="addressList " address="address " isbaisheng="isBaishengRst ">
-					<h2>收货地址 <a ng-show="addressList.length " class="checkout-addaddress " href="javascript: " ng-click="addAddress() ">添加新地址</a></h2>
+					<h2>收货地址 <a ng-show="addressList.length " class="checkout-addaddress " href="addAddress.jsp" ng-click="addAddress() ">添加新地址</a></h2>
 
  	<input type="hidden" id="addressId" value="-1" />
 
