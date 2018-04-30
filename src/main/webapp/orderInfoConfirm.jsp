@@ -9,6 +9,8 @@
 <!--不可删除部分-->
 <link href="https://shadow.elemecdn.com/faas/desktop/vendor.606e96.css" rel="stylesheet">
 <link href="https://shadow.elemecdn.com/faas/desktop/main.fb5e6b.css" rel="stylesheet">
+<link href="css/order.css" rel="stylesheet">
+
 <!--不可删除部分结束-->
 
 <script src="js/jquery-3.2.1.js"></script>
@@ -17,16 +19,20 @@
 <script src="//www.jsviews.com/download/jsviews.js"></script>
 
 <script id="productListTmpl" type="text/x-jsrender">
-	<dd ng-repeat="item in basket" class="ng-scope" >
-							<div class="checkoutcart-tablerow">
-								<div class="cell itemname ng-binding" ng-bind="item.name" title="肉碎肠粉-超大份">肉碎肠粉-超大份</div>
-								<div class="cell itemquantity">
-									<button ng-click="cart.sub(item)" class="reduceBtn" data-cartitemid="cartItemId" type="button">-</button>
-									<input ng-model="item.quantity" id="3"min="1" value="1" ng-change="cart.update(item)" "="" class="ng-pristine ng-valid">
-									<button class="addBtn" data-cartitemid="cartItemId" type="button">+</button></div>
-								<div class="cell itemtotal ng-binding" ng-bind="'¥' + (item.price * item.quantity | number:2)">¥18.00</div>
-							</div>
-    </dd>
+	
+	<div ng-switch-when="food" class="orderprogress-totalrow ng-scope">
+
+
+
+
+
+<span class="cell name ng-binding" ng-bind="row.food.name">username</span>
+<span class="cell quantity ng-binding" ng-bind="row.food.quantity">1</span>
+<span class="cell price ng-binding" ng-bind="row.food.price * row.food.quantity | number:2">50</span>
+
+
+</div>
+
 
 </script>
 <script id="addressListTmpl" type="text/x-jsrender">
@@ -36,9 +42,9 @@
 					{{if age ==0}} 女 {{/if}} {{:tel}}</p>
 						<p class="color-weak ng-binding" ng-bind="item.address + item.address_detail">{{:detailedAdd}}</p>
 					</div>
-					<div class="checkout-address-edit">
-					<!--	<a href="javascript:" ng-click="editAddress($event, item)">修改</a>
-						<a href="javascript:" ng-click="removeAddress($event, item)">×</a>-->
+					<div class="checkout-address-edit" >
+				<a  class="updateAddress" href="javascript:" ng-click="editAddress($event, item)">修改</a>
+						<a class="deleteAddress" data-addressId = "{{:id}}" style="color: red;" href="javascript:" ng-click="removeAddress($event, item)"><span class="glyphicon glyphicon-trash"></span></a>
 					</div>
 				</li>
 </script>
@@ -78,7 +84,7 @@
 
 		var html = $("#productListTmpl").render(dataSrouce);
 
-		$("#productDiv").append(html);
+		$("#orderItem").append(html);
 		reduceBtn();
 		addBtn();
 	});
@@ -155,7 +161,7 @@
 		<script type="text/javascript">
 		function address() {
 				$(".checkout-address").click(function() {
-				var addressItems = document.getElementsByTagName("li")
+				var addressItems = document.getElementsByClassName("checkout-address ng-scope")
 //					var addressChecks = document.getElementsByClassName("fa")
 					for(var i = 0; i < addressItems.length; i++) {
 						addressItems[i].className = "checkout-address ng-scope ";
@@ -163,6 +169,15 @@
 					this.className = "checkout-address ng-scope  active"
 //					赋值给隐藏域
 				$("#addressId").val(this.dataset.addressid)
+				});
+				
+					$(".updateAddress").click(function() {
+						alert("asas")
+				});
+					$(".deleteAddress").click(function() {
+					   var addressId=this.dataset.addressid;
+					   alert(addressId)
+						deletePro(addressId);
 				});
 			}
 		</script>
@@ -208,6 +223,48 @@
 		
 
 </script>
+
+
+
+
+
+
+
+<!-- ajax异步更新-->
+<script>
+	function deletePro( addressId) {
+			$.ajax({
+				type : "GET",
+				url : 'shipping/delete.do',
+				contentType : "application/x-www-form-urlencoded",
+				dataType : "json",
+				data:{addressId:addressId},
+				success : function(data) {
+					if (data.status == 0) {
+						console.log(data)
+						alert("删除成功");
+					} else {
+						alert(data.msg);
+					}
+				},
+				error : function() {
+					alert("提交数据失败");
+				}
+			});
+
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
 </head>
 
 <body style="height: auto;" cute-title="">
@@ -220,50 +277,64 @@
 
 			<div ng-if="!loading &amp;&amp; !nofood" class="checkout-cart ng-scope ng-isolate-scope" checkout-cart="cart">
 				<div class="checkoutcart-container">
-					<div class="checkoutcart-title">
-						<h2>订单详情</h2>
-						<a ng-href="/shop/159433790" href="">&lt; 返回首页</a>
-					</div>
-					<div class="checkoutcart-tablerow tablehead">
-						<div class="cell itemname">商品</div>
-						<div class="cell itemquantity">份数</div>
-						<div class="cell itemtotal">小计（元）</div>
-					</div>
 					<!-- ngRepeat: basket in cart.vm.group -->
 					<!-- ngIf: basket.length -->
-							
-					<dl id="productDiv" ng-if="basket.length" ng-repeat="basket in cart.vm.group" class="checkoutcart-group ng-scope">
-						<!-- ngRepeat: item in basket -->
+				
+					
+						<div class="orderprogress-total" id="productDiv" >
+												<div class="orderprogress-totalrow orderprogress-totaltitle" style="width: ;"><span class="cell name">菜品</span> <span class="cell quantity">数量</span> <span class="cell price">单价（元）</span></div>
+												<!-- ngRepeat: row in totalList -->
+												<div ng-repeat="row in totalList" ng-switch="" on="row.type" class="ng-scope">
+													<!-- ngSwitchWhen: baseline -->
+													<!-- ngSwitchWhen: basketTitle -->
+													<!-- ngSwitchWhen: food -->
 
-						<!--购物车显示模块开始-->
-						<dd ng-repeat="item in basket" class="ng-scope" >
-							<div class="checkoutcart-tablerow">
-								<div class="cell itemname ng-binding" ng-bind="item.name" title="肉碎肠粉-超大份">肉碎肠粉-超大份</div>
-								<div class="cell itemquantity">
-									<button ng-click="cart.sub(item)" class="reduceBtn" data-cartitemid="cartItemId" type="button">-</button>
-									<input ng-model="item.quantity" id="cartItemId" min="1" value="1" ng-change="cart.update(item)" "="" class="ng-pristine ng-valid">
-									<button class="addBtn" data-cartitemid="cartItemId" type="button">+</button></div>
-								<div class="cell itemtotal ng-binding" ng-bind="'¥' + (item.price * item.quantity | number:2)">¥18.00</div>
-							</div>
-						</dd>
+															<div id="orderItem">
+															
+															</div>
+																											
+										
+
+													<!-- ngSwitchWhen: extra -->
+												</div>
+												<!-- end ngRepeat: row in totalList -->
+												<div ng-repeat="row in totalList" ng-switch="" on="row.type" class="ng-scope">
+													<!-- ngSwitchWhen: baseline -->
+													<div ng-switch-when="baseline" class="orderprogress-baseline ng-scope"></div>
+													<!-- ngSwitchWhen: basketTitle -->
+													<!-- ngSwitchWhen: food -->
+													<!-- ngSwitchWhen: extra -->
+												</div>
+												<!-- end ngRepeat: row in totalList -->
+												<div ng-repeat="row in totalList" ng-switch="" on="row.type" class="ng-scope">
+													<!-- ngSwitchWhen: baseline -->
+													<!-- ngSwitchWhen: basketTitle -->
+													<!-- ngSwitchWhen: food -->
+													<!-- ngSwitchWhen: extra -->
+													<div ng-switch-when="extra" class="orderprogress-totalrow ng-scope"><span class="cell name ng-binding" ng-bind="row.extra.name">餐盒</span> <span class="cell quantity"></span> <span class="cell price ng-binding" ng-class="{minus: row.extra.price < 0}" ng-bind="row.extra.price | number:2">2.00</span></div>
+												</div>
+												<!-- end ngRepeat: row in totalList -->
+												<div ng-repeat="row in totalList" ng-switch="" on="row.type" class="ng-scope">
+													<!-- ngSwitchWhen: baseline -->
+													<!-- ngSwitchWhen: basketTitle -->
+													<!-- ngSwitchWhen: food -->
+													<!-- ngSwitchWhen: extra -->
+													<div ng-switch-when="extra" class="orderprogress-totalrow ng-scope"><span class="cell name ng-binding" ng-bind="row.extra.name">配送费</span> <span class="cell quantity"></span> <span class="cell price ng-binding minus" ng-class="{minus: row.extra.price < 0}" ng-bind="row.extra.price | number:2">-4.00</span></div>
+												</div>
+												<!-- end ngRepeat: row in totalList -->
+												<div ng-repeat="row in totalList" ng-switch="" on="row.type" class="ng-scope">
+													<!-- ngSwitchWhen: baseline -->
+													<div ng-switch-when="baseline" class="orderprogress-baseline ng-scope"></div>
+													<!-- ngSwitchWhen: basketTitle -->
+													<!-- ngSwitchWhen: food -->
+													<!-- ngSwitchWhen: extra -->
+												</div>
+												<!-- end ngRepeat: row in totalList -->
+												<div class="orderprogress-totalactual">实际支付：<span ng-bind="order.total_amount | number:2" class="ng-binding">111</span></div>
+											</div>
 						<!--购物车显示模块结束-->
 
 					</dl>
-					<ul ng-if="cart.vm.extra || cart.vm.records " class="ng-scope ">
-						<!-- ngRepeat: item in cart.vm.extra -->
-						<li ng-repeat="item in cart.vm.extra " class="checkoutcart-tablerow extra ng-scope ">
-							<div class="cell itemname "><span ng-bind="item.name " title="配送费 " class="ng-binding ">配送费</span>
-								<!-- ngIf: item.name === '配送费' --><span ng-if="item.name==='配送费' " class="icon-circle-help ng-scope " tooltip=" " tooltip-placement="left "></span>
-								<!-- end ngIf: item.name === '配送费' -->
-							</div>
-							<div class="cell itemquantity "></div>
-							<div class="cell itemtotal ng-binding " ng-class="{minus: item.price < 0} " ng-bind=" '¥' + (item.price | number:2) ">¥4.00</div>
-						</li>
-					</ul>
-					<div class="checkoutcart-total color-stress ">¥<span class="num ng-binding " ng-bind="cart.vm.total | number: 2 ">35.90</span></div>
-					<div class="checkoutcart-totalextra ">共 <span ng-bind="cart.pieces " class="ng-binding ">3</span> 份商品
-						<!-- ngIf: cart.vm.benefit -->
-					</div>
 				</div>
 			</div>
 		

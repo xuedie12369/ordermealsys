@@ -40,9 +40,10 @@ public class ShippingController {
 
 	}
 
-	@RequestMapping("del.do")
+	@RequestMapping("delete.do")
 	@ResponseBody
-	public ServerResponse del(HttpSession session,Integer addressId){
+	public ServerResponse delete(HttpSession session,Integer addressId){
+		System.out.println("收货地址ID是:"+addressId);
 		User user=(User)session.getAttribute(Const.CURRENT_USER);
 		if(user==null){
 			return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), 
@@ -50,8 +51,7 @@ public class ShippingController {
 		}
 		return iShippingService.del(user.getId(),addressId);
 	}
-	
-	@RequestMapping("update.do")
+	@RequestMapping(value="update.do",method=RequestMethod.POST)
 	@ResponseBody
 	public ServerResponse update(HttpSession session,Address address){
 		User user=(User)session.getAttribute(Const.CURRENT_USER);
