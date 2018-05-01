@@ -67,8 +67,12 @@ public class OrderController {
 
 	
 	
-	
-	//作者：黄俊淞
+	/**
+	 * 创建订单
+	 * @param session
+	 * @param addressId
+	 * @return
+	 */
 	@RequestMapping("create.do")
 	@ResponseBody
 	public ServerResponse create(HttpSession session, Integer addressId){

@@ -63,7 +63,7 @@ public class CartController {
 	//删除购物车中的商品
 	@RequestMapping("delete_product.do")
 	@ResponseBody
-	public ServerResponse<ShoppingCartVo> deleteProduct(HttpSession session, String productIds){
+	public ServerResponse<ShoppingCartVo> deleteProduct(HttpSession session, Integer productIds){
 		System.out.println(productIds+"这是产品ID");
 		User user=(User)session.getAttribute(Const.CURRENT_USER);
 		if(user==null){

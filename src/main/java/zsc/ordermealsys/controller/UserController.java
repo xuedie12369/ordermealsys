@@ -1,14 +1,12 @@
 package zsc.ordermealsys.controller;
 
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import zsc.ordermealsys.common.Const;
 import zsc.ordermealsys.common.ServerResponse;
 import zsc.ordermealsys.pojo.User;

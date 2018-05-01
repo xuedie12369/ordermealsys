@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import zsc.ordermealsys.controller.portal.CartController;
 import zsc.ordermealsys.dao.AddressMapper;
 import zsc.ordermealsys.dao.OrderItemMapper;
 import zsc.ordermealsys.dao.OrderMapper;
@@ -22,38 +23,38 @@ public class MyTestShoppingCartService {
 	
 //	@Resource
 //	AddressMapper addressMapper;
-//	@Resource
-//	ShoppingCartMapper cartMapper;
+	@Resource
+	ShoppingCartMapper cartMapper;
 //	@Resource
 //	OrderMapper orderMapper;
 	@Resource
 //	AddressMapper addressMapper;
+
+//	OrderMapper orderMapper;
+//	OrderItemMapper orderItemMapper;
+//	
+//	public OrderMapper getOrderMapperDao(){
+//		return orderMapper;
+//	}
+//	
+//	public OrderItemMapper getOrderItemMapperDao(){
+//		return orderItemMapper;
+//	}
+//	
+//	public void OrderMapperDao(OrderMapper orderMapper){
+//		this.orderMapper=orderMapper;
+//	}
+//	
+//	public void OrderItemMapperDao(OrderItemMapper orderItemMapper){
+//		this.orderItemMapper=orderItemMapper;
+//	}
 	
-	OrderMapper orderMapper;
-	OrderItemMapper orderItemMapper;
-	
-	public OrderMapper getOrderMapperDao(){
-		return orderMapper;
-	}
-	
-	public OrderItemMapper getOrderItemMapperDao(){
-		return orderItemMapper;
-	}
-	
-	public void OrderMapperDao(OrderMapper orderMapper){
-		this.orderMapper=orderMapper;
-	}
-	
-	public void OrderItemMapperDao(OrderItemMapper orderItemMapper){
-		this.orderItemMapper=orderItemMapper;
-	}
-	
-//	public ShoppingCartMapper getShoppingMapperDao(){
-//		return cartMapper;
-//	}	
-//	public void ShoppingMapperDao(ShoppingCartMapper cartMapper) {
-//		this.cartMapper = cartMapper;
-//	} 
+	public ShoppingCartMapper getShoppingMapperDao(){
+		return cartMapper;
+	}	
+	public void ShoppingMapperDao(ShoppingCartMapper cartMapper) {
+		this.cartMapper = cartMapper;
+	} 
 	
 //	public OrderMapper getOrderMapperDao(){
 //		return orderMapper;
@@ -79,12 +80,18 @@ public class MyTestShoppingCartService {
 	@Test
 	public void main(){
 		ApplicationContext ac=new ClassPathXmlApplicationContext("applicationContext.xml");
-		OrderServiceImpl iOrderService=ac.getBean(OrderServiceImpl.class);
+//		OrderServiceImpl iOrderService=ac.getBean(OrderServiceImpl.class);
 //		OrderItemMapper orderMapper=ac.getBean(OrderItemMapper.class);
 //		ShippingServiceImpl iShippingService=ac.getBean(ShippingServiceImpl.class);
+		CartServiceImpl iCartServiceImpl=ac.getBean(CartServiceImpl.class);
+//		ShoppingCartMapper shoppingCartMapper=(ShoppingCartMapper) ac.getBean("shoppingCartMapper");
+//		shoppingCartMapper.selectCartByUserId(1);
+//		System.out.print(	shoppingCartMapper.selectCartByUserId(1));
+		iCartServiceImpl.add(1, 2, 100);
+//		iCartServiceImpl.deleteProduct(1, 2);
 		
 //		orderMapper.getByOrderNo((long) 47);
-		iOrderService.queryOrder(1);
+//		iOrderService.queryOrder(1);
 //		iOrderService.createOrder(1);
 //		iShippingService.selectAllAddressByUserId(1);
 //		IOrderService iOrderService=ac.getBean(IOrderService.class);

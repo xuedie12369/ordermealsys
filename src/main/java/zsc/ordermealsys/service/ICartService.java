@@ -3,6 +3,7 @@ package zsc.ordermealsys.service;
 import org.springframework.stereotype.Service;
 
 import zsc.ordermealsys.common.ServerResponse;
+import zsc.ordermealsys.pojo.ShoppingCart;
 import zsc.ordermealsys.vo.ShoppingCartVo;
 
 @Service("iCartService")
@@ -12,7 +13,9 @@ public interface ICartService {
 	
 	ServerResponse<ShoppingCartVo> update(Integer userId,Integer productId,Integer count);
 	
-	ServerResponse<ShoppingCartVo> deleteProduct(Integer userId,String productIds);
+	ServerResponse<ShoppingCartVo> deleteProduct(Integer userId,Integer productId);
+	
+	ServerResponse<ShoppingCartVo> deleteProducts(Integer userId,Integer productIds);
 	
 	ServerResponse<ShoppingCartVo> list (Integer userId);
 	
