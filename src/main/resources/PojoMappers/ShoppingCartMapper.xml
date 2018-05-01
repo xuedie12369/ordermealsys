@@ -42,8 +42,9 @@
 		update_time)
 		values
 		(#{userId,jdbcType=INTEGER},#{buyerName,jdbcType=VARCHAR},
-		#{sellerName,jdbcType=VARCHAR}, #{productId,jdbcType=INTEGER},
+		#{sellerName,jdbcType=VARCHAR}, 
 		#{checked,jdbcType=INTEGER},
+		#{productId,jdbcType=INTEGER},
 		#{productPrice,jdbcType=DECIMAL},
 		#{productNum,jdbcType=INTEGER},
 		now(),

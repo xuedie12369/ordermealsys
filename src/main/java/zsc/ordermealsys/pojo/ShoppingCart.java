@@ -5,7 +5,14 @@ import java.util.Date;
 
 public class ShoppingCart {
 	
-    private Integer id;
+    @Override
+	public String toString() {
+		return "ShoppingCart [id=" + id + ", userId=" + userId + ", buyerName=" + buyerName + ", sellerName="
+				+ sellerName + ", checked=" + checked + ", productId=" + productId + ", productPrice=" + productPrice
+				+ ", productNum=" + productNum + ", createTime=" + createTime + ", updateTime=" + updateTime + "]";
+	}
+
+	private Integer id;
     
     private Integer userId;
 

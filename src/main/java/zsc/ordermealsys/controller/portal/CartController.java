@@ -38,7 +38,7 @@ public class CartController {
 	
 	@RequestMapping("add.do")
 	@ResponseBody
-	public ServerResponse<ShoppingCartVo> add(HttpSession session, Integer count,Integer productId){
+	public ServerResponse<ShoppingCartVo> add(HttpSession session,Integer count,Integer productId){
 		User user=(User)session.getAttribute(Const.CURRENT_USER);
 		
 		System.out.println(count+"数量"+"产品的ID是:"+productId);
