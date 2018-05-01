@@ -49,7 +49,10 @@ public class FileServiceImpl  implements IFileService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return fileName;
+		
+		System.out.println("路径是:"+path.substring(path.lastIndexOf("\\")+1));
+		/*qrfilePath=path.substring(path.lastIndexOf("\\")+1);*/ 
+		return path.substring(path.lastIndexOf("\\")+1)+"/"+uploadFileName;
 	}
 
 }

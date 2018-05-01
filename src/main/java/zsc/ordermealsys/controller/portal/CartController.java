@@ -35,12 +35,13 @@ public class CartController {
 	}
 
 	//往购物车中添加商品的功能
+	
 	@RequestMapping("add.do")
 	@ResponseBody
 	public ServerResponse<ShoppingCartVo> add(HttpSession session, Integer count,Integer productId){
 		User user=(User)session.getAttribute(Const.CURRENT_USER);
 		
-		System.out.print(count+"数量"+"产品的ID是:"+productId);
+		System.out.println(count+"数量"+"产品的ID是:"+productId);
 		if(user==null){
 			return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), 
 					ResponseCode.NEED_LOGIN.getDesc());

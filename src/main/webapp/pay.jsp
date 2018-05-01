@@ -43,7 +43,6 @@
 				}
 			}
 		}
-		alert(id)
 		
 		/*    var fd = new FormData(document.querySelector("form")); */
 		$.ajax({
