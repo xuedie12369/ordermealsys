@@ -33,7 +33,7 @@ public class OrderManageController {
 
         User user = (User)session.getAttribute(Const.CURRENT_USER);
         if(user == null){
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登录,请登录管理员");
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登录,请登录卖家账户");
         }
         if(iUserService.checkAdminRole(user).isSuccess()){
             //填充我们增加产品的业务逻辑

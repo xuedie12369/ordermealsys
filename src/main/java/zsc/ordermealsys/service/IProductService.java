@@ -12,7 +12,7 @@ import zsc.ordermealsys.vo.ProductDetailVo;
 
 public interface IProductService {
 	public	ServerResponse saveOrUpdate(ProductWithBLOBs product);
-	public	ServerResponse delete(ProductWithBLOBs product);
+	public	ServerResponse delete(Integer productId);
 	public  ServerResponse setSaleStatus(Integer productId,Integer proStatus);
 	ServerResponse manageProductDetail(Integer productId);
 	ServerResponse getProductList(Integer pageNum, Integer pageSize);

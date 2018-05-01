@@ -28,37 +28,36 @@
 			padding: 9px 14.7px;
 		}
 		</style>
-		<script src="js/jquery-3.2.1.js"></script>
+		<!-- <script src="js/jquery-3.2.1.js"></script> -->
 	<!-- 	<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 		<!--详情页的-->
-
-		<!--引入js模板-->
-		<script src="js/jsviews.js"></script>
+		<!-- 引入js模板 -->
+		<script src="js/jsviews.js"></script> 
 
 		<!--引入模板-->
 
 		<!--商品模块模板-->
 		<script id="productListTmpl" type="text/x-jsrender">
 			<li data-animated="fadeInUp" class="wow animated fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
-					<a href="caipinxiangqing.html">
+					<a href="productDetail.jsp?id={{:id}}">
 						<div class="img ">
-							<img src="1.png">
+							<img src="{{:mainPic}}" style="width:300px;height:300px" >
 						</div>
 						<h2>
-												<p>鱼香肉丝</p>
+												<p>{{:name}}</p>
                                     <span href="/a/tesecaipin/caipinfenleiyi/37.html">
                                         <em>
                                   
      									     优惠
                                         </em>
                                         <i class="" style="color: black;">
-                                        	价格:12
+                                        	价格:{{:price}}
                                         </i>
                                     </span>
                         </h2>
 
-						<a class="btn btn-danger">
-							<h4 style="font-size: 30px; margin: 0px;">加入购物车</h4></a>
+						<a class="btn btn-info">
+							<h4 style="font-size: 30px; margin: 0px;" class="addToCart" data-id = "{{:id}}">加入购物车 <span class="glyphicon glyphicon-shopping-cart"></span></h4></a>
 					</a>
 				</li>
 		
@@ -111,6 +110,7 @@
 					var html = $("#productListTmpl").render(data.data);
 					/* 追加内容 */
 					$("#productDiv").append(html);
+					addToCart();
 					/* 覆盖所有内容
 					$("#productDiv").html(html);
 					 */
@@ -136,6 +136,44 @@
 </script>
  
 
+
+
+<!-- 异步添加商品到购物车 -->
+
+<script>
+	function addToCart() {
+		$(".addToCart").click(function() {
+			$.ajax({
+				type : "GET",
+				url : 'cart/add.do',
+				contentTyp : "application/x-www-form-urlencoded",
+				data : {
+					count : 1,
+					productId :this.dataset.id
+				},
+				dataType : "json",
+				success : function(data) {
+					if (data.status == 0) {
+						console.log(data.status)
+						alert("添加成功")
+
+					/* $("#wenwebzhi").value(data.data.birth) */
+					/* window.location.href = "index.jsp"; */
+					} else {
+						/* console.log(jsonObject); */
+						alert(data.msg);
+						 window.location.href = "login.jsp";
+					}
+				},
+				error : function() {
+					alert("提交数据失败");
+				}
+			});
+
+		});
+	}
+
+</script>
 
 	</head>
 

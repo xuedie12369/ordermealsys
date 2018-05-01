@@ -28,7 +28,7 @@
 						<div class="form-group">
 							<div class=" col-sm-9">
 								<h5>名称:{{:name}}</h5>
-								<input type="hidden" id="productId" value="1" />
+								<input type="hidden" id="productId" value="{{:id}}" />
 							</div>
 							<div class=" col-sm-9">
 								<h5>价格:{{:price}}</h5>

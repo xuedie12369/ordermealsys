@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50527
 File Encoding         : 65001
 
-Date: 2018-03-19 14:28:19
+Date: 2018-05-01 20:30:16
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -21,7 +21,7 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `address`;
 CREATE TABLE `address` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_name` varchar(50) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
   `consignee_name` varchar(50) DEFAULT NULL,
   `sex` int(11) DEFAULT NULL,
   `tel` varchar(255) DEFAULT NULL,
@@ -35,11 +35,13 @@ CREATE TABLE `address` (
   `create_time` datetime DEFAULT NULL,
   `update_time` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of address
 -- ----------------------------
+INSERT INTO `address` VALUES ('23', '1', '邵海楠', '1', '18924933537', null, null, null, null, null, null, '111', null, null);
+INSERT INTO `address` VALUES ('25', '1', '黄俊凇', '1', '18888888888', null, null, null, null, null, null, '岐头18', '2018-04-30 18:27:06', null);
 
 -- ----------------------------
 -- Table structure for `category`
@@ -54,11 +56,15 @@ CREATE TABLE `category` (
   `createtime` datetime DEFAULT NULL,
   `updatetime` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of category
 -- ----------------------------
+INSERT INTO `category` VALUES ('1', '1', null, 'qwe', '烧烤', null, '2018-04-22 14:03:13');
+INSERT INTO `category` VALUES ('2', '3', null, 'qweqe', '下午茶', null, '2018-04-22 14:03:21');
+INSERT INTO `category` VALUES ('3', '1', null, 'qweqe', '西餐', null, '2018-04-22 14:03:25');
+INSERT INTO `category` VALUES ('4', '2', null, 'qwe111', '面食', null, '2018-04-22 14:03:30');
 
 -- ----------------------------
 -- Table structure for `comment`
@@ -181,7 +187,8 @@ DROP TABLE IF EXISTS `order`;
 CREATE TABLE `order` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `seller_name` varchar(50) DEFAULT NULL,
-  `buyer_name` varchar(50) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `order_no` bigint(20) DEFAULT NULL,
   `total_price` decimal(10,2) DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
   `delivery_type` int(11) DEFAULT NULL,
@@ -198,11 +205,14 @@ CREATE TABLE `order` (
   `update_time` timestamp NULL DEFAULT NULL,
   `box_total_price` decimal(10,2) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of order
 -- ----------------------------
+INSERT INTO `order` VALUES ('1', '11', '1', '47', '111.00', '2018-03-14 19:38:08', null, null, '10', null, null, null, null, null, '2018-04-25 12:56:21', null, null, null, null);
+INSERT INTO `order` VALUES ('2', '11', '11', '2', '1.00', '2018-03-05 00:45:40', '1', '1', null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `order` VALUES ('3', '1', null, '11', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for `order_item`
@@ -210,23 +220,25 @@ CREATE TABLE `order` (
 DROP TABLE IF EXISTS `order_item`;
 CREATE TABLE `order_item` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `order_id` varchar(255) DEFAULT NULL,
-  `product_id` varchar(255) DEFAULT NULL,
-  `buyer_name` varchar(50) DEFAULT NULL,
+  `order_no` bigint(20) DEFAULT NULL,
+  `product_id` int(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
   `seller_name` varchar(50) DEFAULT NULL,
   `price` decimal(10,2) DEFAULT NULL,
-  `checked` int(11) DEFAULT NULL,
   `num` int(11) DEFAULT NULL,
   `product_pic` longtext,
   `product_detail` longtext,
   `create_time` datetime DEFAULT NULL,
   `update_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of order_item
 -- ----------------------------
+INSERT INTO `order_item` VALUES ('1', '47', '1111', 'username', '1', '1', '50.00', '1', '22', '详情', '2018-03-29 16:44:08', '2018-04-30 00:26:17');
+INSERT INTO `order_item` VALUES ('2', '47', '3', 'u2', '1', '222', '3333.00', '1', '1', '详情', '2018-03-05 16:44:05', '2018-04-30 00:33:41');
 
 -- ----------------------------
 -- Table structure for `order_pay`
@@ -234,21 +246,28 @@ CREATE TABLE `order_item` (
 DROP TABLE IF EXISTS `order_pay`;
 CREATE TABLE `order_pay` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `order_id` varchar(255) DEFAULT NULL,
-  `buyer_name` varchar(50) DEFAULT NULL,
-  `seller_name` varchar(50) DEFAULT NULL,
-  `third_party_username` varchar(255) DEFAULT NULL,
+  `order_no` bigint(20) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `third_party_username` int(11) DEFAULT NULL,
   `serial_number` varchar(255) DEFAULT NULL,
-  `pay_platform_name` varchar(255) DEFAULT NULL,
-  `pay_status` int(11) DEFAULT NULL,
+  `pay_platform_name` int(11) DEFAULT NULL,
+  `pay_status` varchar(255) DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
   `update_time` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of order_pay
 -- ----------------------------
+INSERT INTO `order_pay` VALUES ('1', '24', '11', null, '2018042521001004150200446211', '1', 'TRADE_SUCCESS', null, null);
+INSERT INTO `order_pay` VALUES ('2', '35', '11', null, '2018042521001004150200446547', '1', 'TRADE_SUCCESS', null, null);
+INSERT INTO `order_pay` VALUES ('3', '36', '11', null, '2018042521001004150200446552', '1', 'TRADE_SUCCESS', null, null);
+INSERT INTO `order_pay` VALUES ('4', '37', '11', null, '2018042521001004150200446555', '1', 'TRADE_SUCCESS', null, null);
+INSERT INTO `order_pay` VALUES ('5', '39', '11', null, '2018042521001004150200446432', '1', 'TRADE_SUCCESS', null, null);
+INSERT INTO `order_pay` VALUES ('6', '41', '11', null, '2018042521001004150200446558', '1', 'TRADE_SUCCESS', null, null);
+INSERT INTO `order_pay` VALUES ('7', '42', '11', null, '2018042521001004150200446434', '1', 'TRADE_SUCCESS', null, null);
+INSERT INTO `order_pay` VALUES ('8', '45', '11', null, '2018042521001004150200446438', '1', 'TRADE_SUCCESS', null, null);
 
 -- ----------------------------
 -- Table structure for `order_status`
@@ -273,17 +292,16 @@ CREATE TABLE `order_status` (
 DROP TABLE IF EXISTS `product`;
 CREATE TABLE `product` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `category_id` int(11) DEFAULT NULL,
   `seller_name` varchar(50) DEFAULT NULL,
   `name` varchar(50) DEFAULT NULL,
-  `main_pic` longtext,
-  `sub_pic1` longtext,
-  `sub_pic2` longtext,
-  `sub_pic3` longtext,
+  `main_pic` varchar(255) DEFAULT NULL,
+  `sub_pic` varchar(255) DEFAULT NULL,
   `detail` longtext,
   `price` decimal(10,2) DEFAULT NULL,
   `stock` int(11) DEFAULT NULL,
   `sales` int(11) DEFAULT NULL,
-  `pro_status` int(11) DEFAULT NULL,
+  `pro_status` int(11) DEFAULT '1',
   `del_status` int(11) DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
   `update_time` timestamp NULL DEFAULT NULL,
@@ -291,10 +309,56 @@ CREATE TABLE `product` (
   `box_fee` decimal(10,2) DEFAULT NULL,
   `box_price` decimal(10,2) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of product
+-- ----------------------------
+INSERT INTO `product` VALUES ('1', '3', '11', '产名称', 'ASDASDASD', '111,22', 'WEQWE', '11.00', '1111', '111', '1', null, '2018-03-05 20:12:04', '2018-03-14 19:36:10', null, null, null);
+INSERT INTO `product` VALUES ('2', '2', '1111', '商品名称', '333', '3', '3', '3.00', '33333', '333', '1', null, null, null, null, null, null);
+INSERT INTO `product` VALUES ('14', null, null, null, null, null, null, '1.00', null, null, '1', null, null, null, null, null, null);
+INSERT INTO `product` VALUES ('16', null, null, null, null, null, null, '1.00', null, null, '1', null, null, null, null, null, null);
+INSERT INTO `product` VALUES ('20', null, null, null, null, null, null, '1.00', null, null, '1', null, null, null, null, null, null);
+INSERT INTO `product` VALUES ('21', null, null, '爱迪生', null, null, null, '1111.00', '1111', null, '1', null, null, null, null, null, null);
+INSERT INTO `product` VALUES ('22', null, null, '', null, null, null, '1.00', null, null, '1', null, null, null, null, null, null);
+INSERT INTO `product` VALUES ('23', null, null, '111', '111', null, null, '1.00', null, null, '1', null, null, null, null, null, null);
+INSERT INTO `product` VALUES ('24', null, null, '的11', null, null, null, '1.00', null, null, '1', null, null, null, null, null, null);
+INSERT INTO `product` VALUES ('25', null, null, null, null, null, null, '1.00', null, null, '1', null, null, null, null, null, null);
+INSERT INTO `product` VALUES ('26', null, null, '萨达', null, null, '<p>阿萨德的撒萨达</p>', '111.00', '111', null, '11', null, null, null, null, null, null);
+INSERT INTO `product` VALUES ('27', null, null, 'sad', null, null, '<p>asd sad&nbsp;</p>', '111.00', '111', null, null, null, null, null, null, null, null);
+INSERT INTO `product` VALUES ('28', null, null, '111', null, null, '<p>sad ads 阿萨德的撒</p>', '111.00', '111', null, '1', null, null, null, null, null, null);
+INSERT INTO `product` VALUES ('29', null, null, '111', null, null, '<p>萨达萨达</p>', '11.00', '111', null, '1', null, null, null, null, null, null);
+INSERT INTO `product` VALUES ('30', '4', null, '蛋炒饭', null, null, '<p>这里是详情页</p>', '111.00', '11', null, '1', '1', null, null, null, null, null);
+INSERT INTO `product` VALUES ('31', '3', null, '11', null, null, '<p>萨达萨达的撒</p>', '11.00', '111', null, '1', null, null, null, null, null, null);
+INSERT INTO `product` VALUES ('32', null, null, 'SAD DSA', null, null, '<p>SAD SAD&nbsp;</p>', '11.00', '1', null, '1', null, null, null, null, null, '1.00');
+INSERT INTO `product` VALUES ('33', null, null, '111', null, null, '<p>DS DSDS</p>', '111.00', '11', null, '1', null, null, null, null, null, '11.00');
+INSERT INTO `product` VALUES ('34', '2', null, '的撒撒', null, null, '<p>萨达的撒的撒</p>', '111.00', '11', null, '1', null, null, null, null, null, '11.00');
+INSERT INTO `product` VALUES ('35', null, null, '邵海楠的产品', null, null, '<p>撒第三方</p>', '11.00', '11', null, '1', null, null, null, null, null, '11.00');
+INSERT INTO `product` VALUES ('36', null, null, '的撒的撒', null, null, '<p>萨达</p>', '111.00', '11', null, '1', null, null, null, null, null, '111.00');
+INSERT INTO `product` VALUES ('37', null, null, '撒萨达', null, null, '<p>阿萨德</p>', '11.00', '11', null, '1', null, null, null, null, null, null);
+INSERT INTO `product` VALUES ('38', '3', null, '11', null, null, '<p>asd sad&nbsp;</p>', '5.00', '11', null, null, null, null, null, null, null, '1.00');
+INSERT INTO `product` VALUES ('39', null, null, 'asd', null, null, '<p>asd dsa&nbsp;</p>', '11.00', '11111', null, null, null, null, null, null, null, '111.00');
+INSERT INTO `product` VALUES ('40', null, null, '111', null, null, '<p>asd sad&nbsp;</p>', '11.00', '11', null, null, null, null, null, null, null, '111.00');
+INSERT INTO `product` VALUES ('41', '4', null, 'asd a', null, null, '<p>adsd&nbsp;</p>', '11.00', '11', null, null, null, null, null, null, null, '111.00');
+
+-- ----------------------------
+-- Table structure for `receiving_info`
+-- ----------------------------
+DROP TABLE IF EXISTS `receiving_info`;
+CREATE TABLE `receiving_info` (
+  `id` int(11) NOT NULL,
+  `order_no` bigint(20) NOT NULL,
+  `consignee_name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `tel` varchar(255) NOT NULL,
+  `detailed_add` varchar(255) NOT NULL,
+  `creat_time` datetime NOT NULL,
+  `update_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of receiving_info
 -- ----------------------------
 
 -- ----------------------------
@@ -341,19 +405,33 @@ CREATE TABLE `refund_pic` (
 DROP TABLE IF EXISTS `shopping_cart`;
 CREATE TABLE `shopping_cart` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
   `buyer_name` varchar(50) DEFAULT NULL,
   `seller_name` varchar(50) DEFAULT NULL,
+  `checked` int(11) DEFAULT NULL,
   `product_id` int(11) DEFAULT NULL,
   `product_price` decimal(10,2) DEFAULT NULL,
   `product_num` int(11) DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
   `update_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of shopping_cart
 -- ----------------------------
+INSERT INTO `shopping_cart` VALUES ('14', '1', null, null, '1', '1', '11.00', '16', '2018-04-30 23:47:07', '2018-04-30 23:47:17');
+INSERT INTO `shopping_cart` VALUES ('17', '1', null, null, '2', '1', '3.00', '2', '2018-04-30 23:59:58', null);
+INSERT INTO `shopping_cart` VALUES ('18', '1', null, null, '2', '1', '3.00', '2', '2018-05-01 00:00:22', null);
+INSERT INTO `shopping_cart` VALUES ('19', '1', null, null, '2', '1', '3.00', '3', '2018-05-01 00:00:37', null);
+INSERT INTO `shopping_cart` VALUES ('20', '1', null, null, '2', '1', '3.00', '1', '2018-05-01 00:00:55', null);
+INSERT INTO `shopping_cart` VALUES ('21', '1', null, null, '20', '1', '1.00', '1', '2018-05-01 00:01:16', null);
+INSERT INTO `shopping_cart` VALUES ('22', '1', null, null, '20', '1', '1.00', '4', '2018-05-01 00:01:31', null);
+INSERT INTO `shopping_cart` VALUES ('23', '1', null, null, '20', '1', '1.00', '3', '2018-05-01 00:06:45', null);
+INSERT INTO `shopping_cart` VALUES ('24', '1', null, null, '20', '1', '1.00', '3', '2018-05-01 00:07:35', null);
+INSERT INTO `shopping_cart` VALUES ('25', '1', null, null, null, null, null, null, null, null);
+INSERT INTO `shopping_cart` VALUES ('26', null, null, null, null, null, null, null, null, null);
+INSERT INTO `shopping_cart` VALUES ('27', '1', null, null, '23', '1', '1.00', '1', '2018-05-01 14:33:16', null);
 
 -- ----------------------------
 -- Table structure for `store`
@@ -426,9 +504,48 @@ CREATE TABLE `user` (
   `status` int(11) DEFAULT '1',
   `update_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', 'shn', '123', '123', '1233', '邵海楠', '11', '2018-02-26', '1', '11', '1', '11', '11', '1.00', '2018-03-12 00:59:00', '1', '1', '2018-03-16 14:20:33');
+INSERT INTO `user` VALUES ('1', 'shn', '123', '123', '1233', '邵海楠', '11', '2018-02-26', '1', '11', '1', '11', '1', '1.00', '2018-03-12 00:59:00', '1', '1', '2018-04-13 19:05:19');
+INSERT INTO `user` VALUES ('2', null, null, null, '18888888888', null, null, null, null, '18888888888@qq.com', null, null, null, null, null, null, null, null);
+INSERT INTO `user` VALUES ('3', null, null, null, '18888888888', null, null, null, null, '18888888888@126.com', null, null, null, null, null, null, null, null);
+INSERT INTO `user` VALUES ('4', null, '1111111', null, '18888888888', null, null, null, null, '1@126.com', null, null, null, null, null, null, null, null);
+INSERT INTO `user` VALUES ('5', 'userName', '1123456', null, '18888888888', null, null, null, null, '1we@qq.com', null, null, null, null, null, null, null, null);
+INSERT INTO `user` VALUES ('6', '11111111as', '11111111as', null, '18888888888', null, null, null, null, '12z@126.com', null, null, null, null, null, null, null, null);
+INSERT INTO `user` VALUES ('7', '1111111', '123456', null, '18888888888', null, null, null, null, '111@qq.com', null, null, null, null, null, null, null, null);
+INSERT INTO `user` VALUES ('8', '11asdada', '111111111', null, '18888888888', null, null, null, null, '1@sina.com.cn', null, null, null, null, null, null, null, null);
+INSERT INTO `user` VALUES ('9', '11111', '11asdada', null, '18888888888', null, null, null, null, '133@163.com', null, null, null, null, null, null, null, null);
+INSERT INTO `user` VALUES ('10', '1111', '111111', null, '18888888888', null, null, null, null, '11@qq.com', null, null, null, null, null, null, null, null);
+INSERT INTO `user` VALUES ('11', '111111111111', '111111', null, '18888888888', null, null, null, null, '1@qq.com', null, null, null, null, null, null, null, null);
+INSERT INTO `user` VALUES ('12', '123456', '123456789', null, '18888888888', null, null, null, null, '50@163.com', null, null, null, null, null, null, null, null);
+INSERT INTO `user` VALUES ('13', '1234561', '123456789', null, '18888888888', null, null, null, null, '12121221sa@163.com', null, null, null, null, null, null, null, null);
+INSERT INTO `user` VALUES ('14', '123456789', '123456789', null, '18888888888', null, null, null, null, 'zxc@qq.com', null, null, null, null, null, null, null, null);
+INSERT INTO `user` VALUES ('15', '萨达萨达', '123456789', null, '18888888888', null, null, null, null, '1a@126.com', null, null, null, null, null, null, null, null);
+INSERT INTO `user` VALUES ('16', '12asdad', '123456789', null, '18888888888', null, null, null, null, 'asd212@qq.com', null, null, null, null, null, null, null, null);
+INSERT INTO `user` VALUES ('17', '123456asd', '123456', null, '18888888888', null, null, null, null, '1sadsadsad@126.com', null, null, null, null, null, null, null, null);
+INSERT INTO `user` VALUES ('18', '111111sdf', '123456', null, '18888888888', null, null, null, null, '5asda@qq.com', null, null, null, null, null, null, null, null);
+INSERT INTO `user` VALUES ('19', '661111111', '123456', null, '18888888888', null, null, null, null, '50sadsad@126.com', null, null, null, null, null, null, null, null);
+INSERT INTO `user` VALUES ('20', 'sadsadsa123', '123456', null, '18888888888', null, null, null, null, '5zsdsa@qq.com', null, null, null, null, null, null, null, null);
+INSERT INTO `user` VALUES ('21', '21311212', '123456', null, '18888888888', null, null, null, null, '1sadsad@163.com', null, null, null, null, null, null, null, null);
+INSERT INTO `user` VALUES ('22', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `user` VALUES ('23', '1545454', '123456', null, '18888888888', null, null, null, null, '5221@163.com', null, null, null, null, null, null, null, null);
+INSERT INTO `user` VALUES ('24', '1231234645', '123456789', null, '18888888888', null, null, null, null, '21211a@qq.com', null, null, null, null, null, null, null, null);
+
+-- ----------------------------
+-- Table structure for `user_security`
+-- ----------------------------
+DROP TABLE IF EXISTS `user_security`;
+CREATE TABLE `user_security` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  `question` varchar(255) DEFAULT NULL,
+  `answer` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of user_security
+-- ----------------------------

@@ -607,7 +607,6 @@ public class OrderServiceImpl implements IOrderService {
     }
 
 
-
     public ServerResponse<PageInfo> manageSearch(Long orderNo,int pageNum,int pageSize){
         PageHelper.startPage(pageNum,pageSize);
         Order order = orderMapper.selectByOrderNo(orderNo);
@@ -635,52 +634,6 @@ public class OrderServiceImpl implements IOrderService {
         }
         return ServerResponse.createByErrorMessage("订单不存在");
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	/*
-	 * List<OrderItemWithBLOBs> orderItemList
-	 * =orderItemMapper.getByOrderNoAndUserId(1L, 11);
-	 * for(OrderItemWithBLOBs orderItemWithBLOBs :orderItemList) {
-	 * System.out.print(orderItemWithBLOBs.getPrice().toString()+"添加的"+
-	 * orderItemWithBLOBs.getProductDetail()+"maij xingm ");
-	 * 
-	 * }
-	 */
 
 
 	/**

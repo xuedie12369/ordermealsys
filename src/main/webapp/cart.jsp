@@ -47,7 +47,7 @@ table-condensed {
 
 	function deleteItem() {
 		$(".deleteItem").click(function() {
-			var productIds = this.dataset.productid + ",";
+			var productIds = this.dataset.productid;
 			alert(productIds)
 			$.ajax({
 				type : "GET",
@@ -89,7 +89,7 @@ table-condensed {
 <div style="float: left;">								
 <input type="checkbox" name="productIds" value={{:id}} data-productId={{:id}}  /></div>
 <div style="float: right;">
-								<a href="#" class="thumbnail" style="text-align: right;">
+								<a href="productDetail.jsp?id={{:productId}}" class="thumbnail" style="text-align: right;">
 									<img src="1.png" alt="通用的占位符缩略图">
 								</a>
 </div>
@@ -238,7 +238,7 @@ function balance(){
 });	
 };
 
-
+/* 清空购物车 */
 function clear(){
 	$("#clear").click(function() {
 		var productIdss=document.getElementsByName("productIds");
@@ -253,6 +253,20 @@ function clear(){
 			}
 });	
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </script>
 </head>

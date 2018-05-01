@@ -39,9 +39,10 @@
 					</div>
 				</div>
 				<div class="order-price">总价: ￥{{:totalPrice}}</div>
-				<div class="order-status">
-					{{if payStatus == 20}} 已付款 {{/if}}
-					{{if payStatus == 10}} <a href="pay.jsp?id={{:orderNo}}" class="link" target="_blank" style="color:red">去付款</a> {{/if}}
+				<div class="order-status" >
+					{{if payStatus == 20}} <a href="#" data-id="{{:orderNo}}" class="delivery" target="_blank" style="color:red">发货</a> {{/if}}
+					{{if payStatus == 10}} 未付款 {{/if}}
+					{{if payStatus == 40}} 已发货 {{/if}}
 					<!--也可以吧他们扯开用,如：{{if fullprice}}html markup{{/if}}和{{if fullprice}}html markup{{else}}html markup{{/if}}。但是这里需要注意两点：-->
 				</div>
 				<div class="order-status">
@@ -204,6 +205,59 @@
 
 
 
+
+<!-- 异步查询数据库商品 -->
+<script type="application/javascript">
+	$(function() {
+		/*    var fd = new FormData(document.querySelector("form")); */
+		$.ajax({
+			type : "GET",
+			url : 'order/queryOrder.do',
+			/*contentType : "application/json; charset=utf-8", */
+			contentType : "application/x-www-form-urlencoded",
+			/* 	data : $('#J-normal-form').serialize(), */
+			/*  data: fd,  */
+			dataType : "json",
+			success : function(data) {
+				console.log(data)
+
+				var html = $("#productListTmpl").render(data.data);
+				/* 追加内容 */
+				$("#productDiv").append(html);
+				delivery();
+
+			},
+			error : function() {
+				alert("提交数据失败");
+			}
+		});
+
+	});
+</script>
+
+
+<script>
+	$(function(){
+	var currentUserRole='<%=session.getAttribute("currentUserRole")%>';
+	if(currentUserRole==1)
+	{
+		
+	}
+	else
+	{
+		window.location.href="login.jsp"
+	}
+	
+	});
+</script>
+
+
+<script>
+function delivery(){
+			$(".delivery").click(function() {
+				alert("asdsa")
+			})};
+</script>
 
 </head>
 

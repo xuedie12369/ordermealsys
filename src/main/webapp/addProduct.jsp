@@ -31,6 +31,7 @@
 	src="./ueditor/ueditor.config.js"></script>
 <script type="text/javascript" charset="utf-8"
 	src="./ueditor/ueditor.all.min.js"> </script>
+<script src="http://malsup.github.io/jquery.form.js"></script>
 <!-- 加入jsviews模板的js -->
 <script src="//www.jsviews.com/download/jsviews.js"></script>
 <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
@@ -103,9 +104,32 @@ div {
 
 <script>
 	$(document).ready(function() {
-		$("p").click(function() {
-			var con = UE.getEditor('editor').getAllHtml()
-			alert(con)
+		$("#uploadImg").click(function() {
+		$.ajax({
+				type : "POST",
+				url : 'manage/file/upload.do',
+				/*contentType : "application/json; charset=utf-8", */
+			
+				 data : $('#addProductForm').serialize(), 
+				enctype : 'multipart/form-data',
+				/* data:{file:$("#file").val()}, */
+				/*  data: fd,  */
+				dataType : "json",
+				success : function(data) {
+					if (data.status == 0) {
+						console.log(data.status)
+					alert("上传成功")
+					} else {
+						/* console.log(jsonObject); */
+						alert(data.msg);
+					}
+				},
+				error : function() {
+					alert("提交数据失败");
+				}
+			});
+		
+		
 		});
 	});
 </script>
@@ -151,6 +175,48 @@ div {
 	})
 </script>
 
+
+ 
+ <script type="text/javascript">  
+ 
+ 
+    function uploadPic() {  
+        // 上传设置  
+        var options = {  
+                // 规定把请求发送到那个URL  
+                url:'manage/file/upload.do',  
+                // 请求方式  
+                type: "post",  
+                // 服务器响应的数据类型  
+                dataType: "json",  
+                // 请求成功时执行的回调函数  
+                success: function(data) {  
+                    // 图片显示地址  
+                    /* $("#allUrl").attr("src", data.path); */
+                 	console.log(data)
+                 	$('#mainPic').attr("src", data.msg);
+                 	/* $('#productPic').val(data.msg) */
+                 	/* alert($('#productPic').va) */
+                 	document.getElementById("productPic").value=data.msg
+                   	$("#mainPic").removeAttr("hidden");
+                   	alert(document.getElementById("productPic").value)
+                  
+                   
+                }  
+        };  
+          
+        $("#addProductForm").ajaxSubmit(options);  
+      
+      	$(document).ready(function() {
+		$("#tijiao").click(function() {
+		uploadPic()
+
+		});
+
+	})
+    }  
+</script>  
+
 </head>
 
 
@@ -173,8 +239,8 @@ div {
 
 				<div class="form-group form-inline	">
 					<!-- 分类Div -->
-					<label class="btn-block "> 名称:
-						<div class="btn-group form-group form-inline " style="width:14.5%">
+					<label class="btn-block "> 分类:
+						<div class="btn-group form-group form-inline " style="width:12%">
 
 							<button class="btn btn-info dropdown-toggle btn-block "
 								data-toggle="dropdown" type="button" id="categoryBtn" value="-1">
@@ -191,14 +257,30 @@ div {
 				<!-- 商品分类 -->
 				</label>
 				<div class="form-group form-inline	">
-					<label for="">价格:</label> <input type="number" class="form-control"
+					<label for="">价格:</label> 
+					<input type="number" class="form-control"
 						min="0" id="" name="price" placeholder="请输入价格 ">
+						
+				</div>
+				
+				<div class="form-group form-inline	" style="">
+					<img src="1.png" id="mainPic" hidden style="width:200px;height:200px;margin-left: 40px">
+						<input hidden="hidden" value="null"  name="mainPic" id="productPic" />
+				</div>
+				<div class="form-group form-inline">
+					<label for="" >图片: </label>
+					<input type="file"  id="upload_file"  style="display: none;"  onchange="uploadPic()" name="file" style="" class="form-control"
+						min="0" id="" name="price" placeholder="请输入价格 ">
+					<p  style="width: 12.5%;" href=""  onclick="upload_file.click();"  id="" class="btn btn-info btn-group-lg">
+					<span class="glyphicon glyphicon-cloud-upload"> </span> 上 传 图 片
+				</p>
+					
 				</div>
 				<div class="form-group form-inline	">
 					<label for="">数量:</label> <input type="number" class="form-control"
 						min="1" id="" placeholder="请输入数量">
 				</div>
-
+			
 				<div class="form-group form-inline	">
 					<label for="">库存:</label> <input type="number" class="form-control"
 						id="" name="stock" placeholder="请输入库存 ">
@@ -402,11 +484,6 @@ div {
 		}
 	</script>
 
-	<p>asdsadsadsa第三方收费的但是</p>
-
-
-	<p>asdsadsadsa第三方收费的但是</p>
-
-	<p>asdsadsadsa第三方收费的但是</p>
+	
 </body>
 </html>
