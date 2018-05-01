@@ -5,32 +5,28 @@ import java.util.Date;
 import java.util.List;
 
 public class Order {
-    @Override
-	public String toString() {
-		return "Order [id=" + id + ", sellerName=" + sellerName + ", userId=" + userId + ", orderNo=" + orderNo
-				+ ", totalPrice=" + totalPrice + ", createTime=" + createTime + ", deliveryType=" + deliveryType
-				+ ", orderType=" + orderType + ", payStatus=" + payStatus + ", orderNotes=" + orderNotes
-				+ ", deliveryTime=" + deliveryTime + ", deleteStatus=" + deleteStatus + ", deliveryFee=" + deliveryFee
-				+ ", orderStatus=" + orderStatus + ", orderItem=" + orderItem + ", payTime=" + payTime
-				+ ", transactClosingTime=" + transactClosingTime + ", transactCompleTime=" + transactCompleTime
-				+ ", updateTime=" + updateTime + ", boxTotalPrice=" + boxTotalPrice + "]";
-	}
+ private List<OrderItemWithBLOBs> orderItem;
+	public List<OrderItemWithBLOBs> getOrderItem() {
+	return orderItem;
+}
+
+public void setOrderItem(List<OrderItemWithBLOBs> orderItem) {
+	this.orderItem = orderItem;
+}
 
 	private Integer id;
 
-    private String sellerName;
-    
+    private Integer shopId;
+
     private Integer userId;
     
     private Long orderNo;
-    
+
     private BigDecimal totalPrice;
 
     private Date createTime;
 
     private Integer deliveryType;
-
-    private Integer orderType;
 
     private Integer payStatus;
 
@@ -42,63 +38,42 @@ public class Order {
 
     private BigDecimal deliveryFee;
 
-    private Integer orderStatus;
-    
-    private List<OrderItemWithBLOBs> orderItem;
-
     private Date payTime;
-
-    private Date transactClosingTime;
-
-    private Date transactCompleTime;
 
     private Date updateTime;
 
     private BigDecimal boxTotalPrice;
-    
-    public Order(Integer id, String sellerName, Integer userId, Long orderNo, BigDecimal totalPrice, Date createTime,
-			Integer deliveryType, Integer orderType, Integer payStatus, String orderNotes, String deliveryTime,
-			Integer deleteStatus, BigDecimal deliveryFee, Integer orderStatus, Date payTime, Date transactClosingTime,
-			Date transactCompleTime, Date updateTime, BigDecimal boxTotalPrice) {
-		super();
-		System.out.print("执行了order表的 构造函数");
-		this.id = id;
-		this.sellerName = sellerName;
-		this.userId = userId;
-		this.orderNo = orderNo;
-		this.totalPrice = totalPrice;
-		this.createTime = createTime;
-		this.deliveryType = deliveryType;
-		this.orderType = orderType;
-		this.payStatus = payStatus;
-		this.orderNotes = orderNotes;
-		this.deliveryTime = deliveryTime;
-		this.deleteStatus = deleteStatus;
-		this.deliveryFee = deliveryFee;
-		this.orderStatus = orderStatus;
-		this.payTime = payTime;
-		this.transactClosingTime = transactClosingTime;
-		this.transactCompleTime = transactCompleTime;
-		this.updateTime = updateTime;
-		this.boxTotalPrice = boxTotalPrice;
-	}
 
-	public Long getOrderNo() {
-		return orderNo;
-	}
+    private String detaiAdd;
 
-	public void setOrderNo(Long orderNo) {
-		this.orderNo = orderNo;
-	}
+    private String tel;
 
-	public Integer getUserId() {
-		return userId;
-	}
+    private Integer sex;
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
-	}
-   
+    private String consigneeName;
+
+    public Order(Integer id, Integer shopId, Integer userId, Long orderNo, BigDecimal totalPrice, Date createTime, Integer deliveryType, Integer payStatus, String orderNotes, String deliveryTime, Integer deleteStatus, BigDecimal deliveryFee, Date payTime, Date updateTime, BigDecimal boxTotalPrice, String detaiAdd, String tel, Integer sex, String consigneeName) {
+        this.id = id;
+        this.shopId = shopId;
+        this.userId = userId;
+        this.orderNo = orderNo;
+        this.totalPrice = totalPrice;
+        this.createTime = createTime;
+        this.deliveryType = deliveryType;
+        this.payStatus = payStatus;
+        this.orderNotes = orderNotes;
+        this.deliveryTime = deliveryTime;
+        this.deleteStatus = deleteStatus;
+        this.deliveryFee = deliveryFee;
+        this.payTime = payTime;
+        this.updateTime = updateTime;
+        this.boxTotalPrice = boxTotalPrice;
+        this.detaiAdd = detaiAdd;
+        this.tel = tel;
+        this.sex = sex;
+        this.consigneeName = consigneeName;
+    }
+
     public Order() {
         super();
     }
@@ -111,12 +86,28 @@ public class Order {
         this.id = id;
     }
 
-    public String getSellerName() {
-        return sellerName;
+    public Integer getShopId() {
+        return shopId;
     }
 
-    public void setSellerName(String sellerName) {
-        this.sellerName = sellerName == null ? null : sellerName.trim();
+    public void setShopId(Integer shopId) {
+        this.shopId = shopId;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public Long getOrderNo() {
+        return orderNo;
+    }
+
+    public void setOrderNo(Long orderNo) {
+        this.orderNo = orderNo;
     }
 
     public BigDecimal getTotalPrice() {
@@ -141,14 +132,6 @@ public class Order {
 
     public void setDeliveryType(Integer deliveryType) {
         this.deliveryType = deliveryType;
-    }
-
-    public Integer getOrderType() {
-        return orderType;
-    }
-
-    public void setOrderType(Integer orderType) {
-        this.orderType = orderType;
     }
 
     public Integer getPayStatus() {
@@ -191,36 +174,12 @@ public class Order {
         this.deliveryFee = deliveryFee;
     }
 
-    public Integer getOrderStatus() {
-        return orderStatus;
-    }
-
-    public void setOrderStatus(Integer orderStatus) {
-        this.orderStatus = orderStatus;
-    }
-
     public Date getPayTime() {
         return payTime;
     }
 
     public void setPayTime(Date payTime) {
         this.payTime = payTime;
-    }
-
-    public Date getTransactClosingTime() {
-        return transactClosingTime;
-    }
-
-    public void setTransactClosingTime(Date transactClosingTime) {
-        this.transactClosingTime = transactClosingTime;
-    }
-
-    public Date getTransactCompleTime() {
-        return transactCompleTime;
-    }
-
-    public void setTransactCompleTime(Date transactCompleTime) {
-        this.transactCompleTime = transactCompleTime;
     }
 
     public Date getUpdateTime() {
@@ -239,11 +198,35 @@ public class Order {
         this.boxTotalPrice = boxTotalPrice;
     }
 
-	public List<OrderItemWithBLOBs> getOrderItem() {
-		return orderItem;
-	}
+    public String getDetaiAdd() {
+        return detaiAdd;
+    }
 
-	public void setOrderItem(List<OrderItemWithBLOBs> orderItem) {
-		this.orderItem = orderItem;
-	}
+    public void setDetaiAdd(String detaiAdd) {
+        this.detaiAdd = detaiAdd == null ? null : detaiAdd.trim();
+    }
+
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel == null ? null : tel.trim();
+    }
+
+    public Integer getSex() {
+        return sex;
+    }
+
+    public void setSex(Integer sex) {
+        this.sex = sex;
+    }
+
+    public String getConsigneeName() {
+        return consigneeName;
+    }
+
+    public void setConsigneeName(String consigneeName) {
+        this.consigneeName = consigneeName == null ? null : consigneeName.trim();
+    }
 }
