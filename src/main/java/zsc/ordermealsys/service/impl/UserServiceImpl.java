@@ -58,10 +58,10 @@ public class UserServiceImpl implements IUserService{
 	public ServerResponse<String> register(User user){
 
 		int resultCount=userMapper.checkUsername(user.getUserName());
-		/*if(resultCount>0){
+		if(resultCount>0){
 			System.out.print("fail!more username");
 			return ServerResponse.createByErrorMessage("用户名已存在");
-		}*/
+		}
 		ServerResponse validResponse=this.checkValid(user.getUserName(), Const.USERNAME);
 		if(!validResponse.isSuccess()){
 			return validResponse;
@@ -70,14 +70,14 @@ public class UserServiceImpl implements IUserService{
 		if(!validResponse.isSuccess()){
 			return validResponse;
 		}
-		/*resultCount=userMapper.checkEmail(user.getEmail());
-		/*if(resultCount>0){
+		resultCount=userMapper.checkEmail(user.getEmail());
+		if(resultCount>0){
 			System.out.print("fail!more email");
 			return ServerResponse.createByErrorMessage("email已存在");
-		}*/
-		/*user.setType(Const.Role.ROLE_CUSTOMER);
+		}
+		user.setRole(Const.Role.ROLE_CUSTOMER);
 		//MD5加密
-		user.setPwd(MD5Util.MD5EncodeUtf8(user.getPwd()));*/
+		user.setPwd(MD5Util.MD5EncodeUtf8(user.getPwd()));
 		
 		resultCount=userMapper.insert(user);
 		System.out.print("success");
@@ -150,6 +150,7 @@ public class UserServiceImpl implements IUserService{
 		if(StringUtils.isBlank(forgetToken)){
 			return ServerResponse.createByErrorMessage("参数错误，token需要传递！");
 		}
+		
 		ServerResponse validResponse=this.checkValid(username, Const.USERNAME);
 		if(validResponse.isSuccess()){
 			//用户不存在
@@ -161,6 +162,7 @@ public class UserServiceImpl implements IUserService{
 		if(StringUtils.isBlank(token)){
 			return ServerResponse.createByErrorMessage("token无效或者过期！");
 		}
+		
 		if(StringUtils.equals(forgetToken, token)){
 			String md5Password=MD5Util.MD5EncodeUtf8(passwordNew);
 			int rowCount=userMapper.updatePasswordByUsername(username, md5Password);
@@ -180,8 +182,6 @@ public class UserServiceImpl implements IUserService{
 		{
 			return ServerResponse.createBySuccess();
 		}
-		
-		
 		return null;
 	}
 }

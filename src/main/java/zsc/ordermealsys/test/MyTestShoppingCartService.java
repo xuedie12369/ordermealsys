@@ -5,21 +5,28 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import zsc.ordermealsys.controller.portal.CartController;
 import zsc.ordermealsys.dao.AddressMapper;
 import zsc.ordermealsys.dao.OrderItemMapper;
 import zsc.ordermealsys.dao.OrderMapper;
 import zsc.ordermealsys.dao.ShoppingCartMapper;
+import zsc.ordermealsys.dao.UserMapper;
 import zsc.ordermealsys.pojo.Address;
+import zsc.ordermealsys.pojo.User;
 import zsc.ordermealsys.service.ICartService;
 import zsc.ordermealsys.service.IOrderService;
 import zsc.ordermealsys.service.IShippingService;
 import zsc.ordermealsys.service.impl.CartServiceImpl;
 import zsc.ordermealsys.service.impl.OrderServiceImpl;
 import zsc.ordermealsys.service.impl.ShippingServiceImpl;
+import zsc.ordermealsys.service.impl.UserServiceImpl;
+import zsc.ordermealsys.util.MD5Util;
 
 
 public class MyTestShoppingCartService {
-	
+
+	@Resource
+	UserMapper userMapper;
 //	@Resource
 //	AddressMapper addressMapper;
 //	@Resource
@@ -28,25 +35,32 @@ public class MyTestShoppingCartService {
 //	OrderMapper orderMapper;
 	@Resource
 //	AddressMapper addressMapper;
+
+//	OrderMapper orderMapper;
+//	OrderItemMapper orderItemMapper;
 	
-	OrderMapper orderMapper;
-	OrderItemMapper orderItemMapper;
-	
-	public OrderMapper getOrderMapperDao(){
-		return orderMapper;
+	public UserMapper getUserMapperDao(){
+		return userMapper;
 	}
-	
-	public OrderItemMapper getOrderItemMapperDao(){
-		return orderItemMapper;
+	public void UserMapperDao(UserMapper userMapper){
+		this.userMapper=userMapper;
 	}
-	
-	public void OrderMapperDao(OrderMapper orderMapper){
-		this.orderMapper=orderMapper;
-	}
-	
-	public void OrderItemMapperDao(OrderItemMapper orderItemMapper){
-		this.orderItemMapper=orderItemMapper;
-	}
+//	
+//	public OrderMapper getOrderMapperDao(){
+//		return orderMapper;
+//	}
+//	
+//	public OrderItemMapper getOrderItemMapperDao(){
+//		return orderItemMapper;
+//	}
+//	
+//	public void OrderMapperDao(OrderMapper orderMapper){
+//		this.orderMapper=orderMapper;
+//	}
+//	
+//	public void OrderItemMapperDao(OrderItemMapper orderItemMapper){
+//		this.orderItemMapper=orderItemMapper;
+//	}
 	
 //	public ShoppingCartMapper getShoppingMapperDao(){
 //		return cartMapper;
@@ -76,15 +90,38 @@ public class MyTestShoppingCartService {
 //		this.addressMapper = addressMapper;
 //	} 
 	
+	
+	
 	@Test
 	public void main(){
 		ApplicationContext ac=new ClassPathXmlApplicationContext("applicationContext.xml");
-		OrderServiceImpl iOrderService=ac.getBean(OrderServiceImpl.class);
+//		OrderServiceImpl iOrderService=ac.getBean(OrderServiceImpl.class);
 //		OrderItemMapper orderMapper=ac.getBean(OrderItemMapper.class);
 //		ShippingServiceImpl iShippingService=ac.getBean(ShippingServiceImpl.class);
+//		CartServiceImpl iCartServiceImpl=ac.getBean(CartServiceImpl.class);
+//		MD5Util m=new MD5Util();
+//		System.out.println(m.MD5EncodeUtf8("shaohainan").toString());
+	
+		
+		UserServiceImpl iUserService=ac.getBean(UserServiceImpl.class);
+		
+		User user=new User();
+		user.setUserName("hjs");
+		user.setEmail("854208266");
+		user.setPwd("shaohainan");
+		iUserService.register(user);
+		
+		
+		
+		
+//		ShoppingCartMapper shoppingCartMapper=(ShoppingCartMapper) ac.getBean("shoppingCartMapper");
+//		shoppingCartMapper.selectCartByUserId(1);
+//		System.out.print(	shoppingCartMapper.selectCartByUserId(1));
+//		iCartServiceImpl.add(1, 2, 100);
+//		iCartServiceImpl.deleteProduct(1, 2);
 		
 //		orderMapper.getByOrderNo((long) 47);
-		iOrderService.queryOrder(1);
+//		iOrderService.queryOrder(1);
 //		iOrderService.createOrder(1);
 //		iShippingService.selectAllAddressByUserId(1);
 //		IOrderService iOrderService=ac.getBean(IOrderService.class);

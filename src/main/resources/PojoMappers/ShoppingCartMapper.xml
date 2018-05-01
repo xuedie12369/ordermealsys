@@ -111,6 +111,7 @@
 			</if>
 		</trim>
 	</insert>
+	
 	<update id="updateByPrimaryKeySelective" parameterType="zsc.ordermealsys.pojo.ShoppingCart">
 		update shopping_cart
 		<set>
@@ -144,6 +145,7 @@
 		</set>
 		where id = #{id,jdbcType=INTEGER}
 	</update>
+	
 	<update id="updateByPrimaryKey" parameterType="zsc.ordermealsys.pojo.ShoppingCart">
 		update
 		shopping_cart
@@ -188,13 +190,21 @@
 		and product_id = #{productId}
 	</select>
 
+	<select id="selectCartByUserIdAndProductId" resultMap="BaseResultMap"
+		parameterType="map">
+		SELECT
+		<include refid="Base_Column_List" />
+		from shopping_cart
+		where user_id = #{userId}
+		and product_id = #{productId}
+	</select>
+
 	<select id="selectCartByUserId" resultMap="BaseResultMap" parameterType="int">
 		select
 		<include refid="Base_Column_List" />
 		from shopping_cart
 		where user_id=#{userId}
 	</select>
-
 
 	<select id="selectCartProductCheckedStatusByUserId" resultType="int"
 		parameterType="int">
@@ -204,17 +214,29 @@
 		user_id=#{userId}
 	</select>
 
+	<delete id="deleteByUserIdProductId">
+		delete from shopping_cart
+		where user_id=#{userId} and product_id=#{productId}
+	</delete>
+
 	<delete id="deleteByUserIdProductIds" parameterType="map">
 		delete from shopping_cart
 		where user_id=#{userId}
 		<if test="productIdList != null">
-			and product_id
+			and product_id in
 			<foreach collection="productIdList" item="item" index="index"
 				open="(" separator="," close=")">
 				#{item}
 			</foreach>
 		</if>
 	</delete>
+	
+	<update id="updateProductsBySelective" parameterType="map">
+		update shopping_cart
+		set product_num=#{count},
+			update_time=now()
+		where user_id=#{userId} and product_id=#{productId}
+	</update>
 
 	<update id="checkedOrUncheckedProduct" parameterType="map">
 		update shopping_cart

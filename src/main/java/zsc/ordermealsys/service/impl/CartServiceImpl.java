@@ -121,8 +121,7 @@ public class CartServiceImpl implements ICartService{
 			//这个产品已经在购物车里了
 			//如果产品已存在，数量相加
 			count=cart.getProductNum()+count;
-			cart.setProductNum(count);
-			shoppingCartMapper.updateByPrimaryKeySelective(cart);
+			shoppingCartMapper.updateProductsBySelective(userId,productId,count);
 		}
 		return this.list(userId);
 	}
@@ -142,18 +141,42 @@ public class CartServiceImpl implements ICartService{
 		return this.list(userId);
 	}
 
-	
-	//删除购物车中指定商品的功能（删）
-	public ServerResponse<ShoppingCartVo> deleteProduct(Integer userId,String productIds){
-		
-		List<String> productList = Splitter.on(",").splitToList(productIds);
-		if(CollectionUtils.isEmpty(productList)){
-			return ServerResponse.createByErrorCodeMessage(ResponseCode.ILLEGAL_ARGUMENT.getCode(),ResponseCode.ILLEGAL_ARGUMENT.getDesc());
+	//删除购物车中商品（一个）的功能（删）
+	public ServerResponse<ShoppingCartVo> deleteProduct(Integer userId,Integer productId){
+		ShoppingCart product=shoppingCartMapper.selectCartByUserIdProductId(userId, productId);
+		if(product==null){
+			return ServerResponse.createByErrorMessage("未查到相关商品！");
+		}else{
+			shoppingCartMapper.deleteByUserIdProductId(userId, productId);
 		}
-		shoppingCartMapper.deleteByUserIdProductIds(userId,productList);
-		System.out.println("购物车删除成功");
-		return this.list(userId);
+		return ServerResponse.createBySuccessMessage("删除成功！");
 	}
+	
+	//删除购物车中指定商品（多个）的功能（删）
+	public ServerResponse<ShoppingCartVo> deleteProducts(Integer userId,Integer productId){
+		List<ShoppingCart> productList=shoppingCartMapper.selectCartByUserIdAndProductId(userId, productId);
+		if(productList.isEmpty()){
+			return ServerResponse.createByErrorMessage("未查到相关商品！");
+		}else{
+			for(int i=0;i<productList.size();i++){
+				shoppingCartMapper.deleteByUserIdProductId(userId, productList.get(i).getProductId());
+			}
+			System.out.println("删除成功");
+			return ServerResponse.createBySuccessMessage("删除成功！");
+		}
+		
+	}
+	
+//	public ServerResponse<ShoppingCartVo> deleteProduct(Integer userId,String productIds){
+//		
+//		List<String> productList = Splitter.on(",").splitToList(productIds);
+//		if(CollectionUtils.isEmpty(productList)){
+//			return ServerResponse.createByErrorCodeMessage(ResponseCode.ILLEGAL_ARGUMENT.getCode(),ResponseCode.ILLEGAL_ARGUMENT.getDesc());
+//		}
+//		shoppingCartMapper.deleteByUserIdProductIds(userId,productList);
+//		System.out.println("购物车删除成功");
+//		return this.list(userId);
+//	}
 	
 	
 	public ServerResponse<ShoppingCartVo> selectOrUnSelect (Integer userId,Integer productId,Integer checked){
