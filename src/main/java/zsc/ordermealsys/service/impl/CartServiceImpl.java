@@ -107,6 +107,7 @@ public class CartServiceImpl implements ICartService{
         }
 		
 		ShoppingCart cart=shoppingCartMapper.selectCartByUserIdProductId(userId, productId);
+	
 		if(cart==null){
 			Product product=productMapper.selectByPrimaryKey(productId);
 			//这个商品不在这个购物车里，需要新增一个这个商品的记录
@@ -116,7 +117,10 @@ public class CartServiceImpl implements ICartService{
 			cartItem.setProductId(productId);
 			cartItem.setUserId(userId);
 			cartItem.setProductPrice(product.getPrice());
+			System.out.println("123456");
+			System.out.println(cartItem.toString()+"规划局 ");
 			shoppingCartMapper.insert(cartItem);
+			
 		}else{
 			//这个产品已经在购物车里了
 			//如果产品已存在，数量相加

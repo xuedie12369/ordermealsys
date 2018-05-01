@@ -25,12 +25,12 @@ import zsc.ordermealsys.util.MD5Util;
 
 public class MyTestShoppingCartService {
 
-	@Resource
-	UserMapper userMapper;
+//	@Resource
+//	UserMapper userMapper;
 //	@Resource
 //	AddressMapper addressMapper;
-//	@Resource
-//	ShoppingCartMapper cartMapper;
+	@Resource
+	ShoppingCartMapper cartMapper;
 //	@Resource
 //	OrderMapper orderMapper;
 	@Resource
@@ -39,12 +39,12 @@ public class MyTestShoppingCartService {
 //	OrderMapper orderMapper;
 //	OrderItemMapper orderItemMapper;
 	
-	public UserMapper getUserMapperDao(){
-		return userMapper;
-	}
-	public void UserMapperDao(UserMapper userMapper){
-		this.userMapper=userMapper;
-	}
+//	public UserMapper getUserMapperDao(){
+//		return userMapper;
+//	}
+//	public void UserMapperDao(UserMapper userMapper){
+//		this.userMapper=userMapper;
+//	}
 //	
 //	public OrderMapper getOrderMapperDao(){
 //		return orderMapper;
@@ -62,12 +62,12 @@ public class MyTestShoppingCartService {
 //		this.orderItemMapper=orderItemMapper;
 //	}
 	
-//	public ShoppingCartMapper getShoppingMapperDao(){
-//		return cartMapper;
-//	}	
-//	public void ShoppingMapperDao(ShoppingCartMapper cartMapper) {
-//		this.cartMapper = cartMapper;
-//	} 
+	public ShoppingCartMapper getShoppingMapperDao(){
+		return cartMapper;
+	}	
+	public void ShoppingMapperDao(ShoppingCartMapper cartMapper) {
+		this.cartMapper = cartMapper;
+	} 
 	
 //	public OrderMapper getOrderMapperDao(){
 //		return orderMapper;
@@ -98,26 +98,27 @@ public class MyTestShoppingCartService {
 //		OrderServiceImpl iOrderService=ac.getBean(OrderServiceImpl.class);
 //		OrderItemMapper orderMapper=ac.getBean(OrderItemMapper.class);
 //		ShippingServiceImpl iShippingService=ac.getBean(ShippingServiceImpl.class);
-//		CartServiceImpl iCartServiceImpl=ac.getBean(CartServiceImpl.class);
+		CartServiceImpl iCartServiceImpl=ac.getBean(CartServiceImpl.class);
 //		MD5Util m=new MD5Util();
 //		System.out.println(m.MD5EncodeUtf8("shaohainan").toString());
 	
 		
-		UserServiceImpl iUserService=ac.getBean(UserServiceImpl.class);
-		
-		User user=new User();
-		user.setUserName("hjs");
-		user.setEmail("854208266");
-		user.setPwd("shaohainan");
-		iUserService.register(user);
-		
+//		UserServiceImpl iUserService=ac.getBean(UserServiceImpl.class);
+//		
+//		User user=new User();
+//		user.setUserName("hjs");
+//		user.setEmail("854208266");
+//		user.setPwd("shaohainan");
+//		iUserService.register(user);
+//		CartController cart=new CartController();
+//		cart.add(10, 10);
 		
 		
 		
 //		ShoppingCartMapper shoppingCartMapper=(ShoppingCartMapper) ac.getBean("shoppingCartMapper");
 //		shoppingCartMapper.selectCartByUserId(1);
 //		System.out.print(	shoppingCartMapper.selectCartByUserId(1));
-//		iCartServiceImpl.add(1, 2, 100);
+		iCartServiceImpl.add(1, 21, 10);
 //		iCartServiceImpl.deleteProduct(1, 2);
 		
 //		orderMapper.getByOrderNo((long) 47);
