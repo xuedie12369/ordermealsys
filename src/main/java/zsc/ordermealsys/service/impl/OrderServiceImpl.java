@@ -186,7 +186,7 @@ public class OrderServiceImpl implements IOrderService {
 				.setUndiscountableAmount(undiscountableAmount).setSellerId(sellerId).setBody(body)
 				.setOperatorId(operatorId).setStoreId(storeId).setExtendParams(extendParams)
 //				.setTimeoutExpress(timeoutExpress).setNotifyUrl(PropertiesUtil.getProperty("alipay.callback.url"))//支付宝服务器主动通知商户服务器里指定的页面http路径,根据需要设置
-				.setTimeoutExpress(timeoutExpress).setNotifyUrl("http://e458cr.natappfree.cc/ordermealsys/order/alipay_callback.do")//支付宝服务器主动通知商户服务器里指定的页面http路径,根据需要设置
+				.setTimeoutExpress(timeoutExpress).setNotifyUrl("http://aw4ryi.natappfree.cc/ordermealsys/order/alipay_callback.do")//支付宝服务器主动通知商户服务器里指定的页面http路径,根据需要设置
 				.setGoodsDetailList(goodsDetailList);
 
 
