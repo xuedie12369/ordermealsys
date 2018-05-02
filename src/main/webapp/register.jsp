@@ -57,13 +57,12 @@
 						/* 	$("#list1").append(html); */
 						/* $("#wenwebzhi").value(data.data.birth) */
 						 alert("注册成功");
-						 window.location.href = "/login.jsp"; 
+						 window.location.href = "login.jsp"; 
 					}
 					else
 					{
 						/* console.log(jsonObject); */
 						alert(data.msg);
-						 window.location.href = "/login.jsp";
 					}
 				},
 				error : function() {

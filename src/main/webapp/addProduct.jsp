@@ -118,7 +118,9 @@ div {
 				success : function(data) {
 					if (data.status == 0) {
 						console.log(data.status)
-					alert("上传成功")
+					 	document.getElementById("productPic").value=data.msg
+                   	$("#mainPic").removeAttr("hidden");
+					
 					} else {
 						/* console.log(jsonObject); */
 						alert(data.msg);
@@ -156,6 +158,8 @@ div {
 				success : function(data) {
 					if (data.status == 0) {
 						console.log(data.status)
+						console.log(data)
+					  /* window.location.href = "index.jsp";  */
 					/* 	  var html = $("#testTmpl").render(data.data); */
 					/* 	$("#list1").append(html); */
 					/* $("#wenwebzhi").value(data.data.birth) */
@@ -199,7 +203,6 @@ div {
                  	/* alert($('#productPic').va) */
                  	document.getElementById("productPic").value=data.msg
                    	$("#mainPic").removeAttr("hidden");
-                   	alert(document.getElementById("productPic").value)
                   
                    
                 }  
@@ -276,10 +279,7 @@ div {
 				</p>
 					
 				</div>
-				<div class="form-group form-inline	">
-					<label for="">数量:</label> <input type="number" class="form-control"
-						min="1" id="" placeholder="请输入数量">
-				</div>
+				
 			
 				<div class="form-group form-inline	">
 					<label for="">库存:</label> <input type="number" class="form-control"
