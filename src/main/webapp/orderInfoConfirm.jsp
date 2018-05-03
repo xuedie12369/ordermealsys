@@ -248,21 +248,19 @@ function orderItemList(){
 <script>
 	function submitOrder( addressId) {
 			$.ajax({
-				type : "GET",
+				type : "POST",
 				url : 'order/create.do',
 				contentType : "application/x-www-form-urlencoded",
 				dataType : "json",
 				data:{addressId:$('#addressId').val()},
 				success : function(data) {
-					if (data.status == 0) {
-						console.log(data)
-						/* addressList(); */
-					} else {
-						alert(data.msg);
-					}
+					var orderNo=data.data.orderNo;
+					console.log(data);
+					var str="pay.jsp?id="+orderNo+"";
+					 window.location.href =str; 
 				},
 				error : function() {
-					alert("提交数据失败");
+				 	alert("提交数据失败"); 
 				}
 			});
 
@@ -282,7 +280,7 @@ function orderItemList(){
 	
 <!-- 引入header -->
 <%@include file="header.jsp" %>
-	<form>
+	<div>
 
 		<div class="container clearfix ng-scope">
 
@@ -378,7 +376,7 @@ function orderItemList(){
 							</div>
 							<!-- end ngIf: !loading && !nofood -->
 				</div>
-	</form>
+	</div>
 
 <!-- 引入footer -->
 <%@include file="footer.jsp" %>

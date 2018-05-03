@@ -188,7 +188,7 @@ public class OrderServiceImpl implements IOrderService {
 				.setUndiscountableAmount(undiscountableAmount).setSellerId(sellerId).setBody(body)
 				.setOperatorId(operatorId).setStoreId(storeId).setExtendParams(extendParams)
 //				.setTimeoutExpress(timeoutExpress).setNotifyUrl(PropertiesUtil.getProperty("alipay.callback.url"))//支付宝服务器主动通知商户服务器里指定的页面http路径,根据需要设置
-				.setTimeoutExpress(timeoutExpress).setNotifyUrl("http://aw4ryi.natappfree.cc/ordermealsys/order/alipay_callback.do")//支付宝服务器主动通知商户服务器里指定的页面http路径,根据需要设置
+				.setTimeoutExpress(timeoutExpress).setNotifyUrl("http://vn2cai.natappfree.cc/ordermealsys/order/alipay_callback.do")//支付宝服务器主动通知商户服务器里指定的页面http路径,根据需要设置
 				.setGoodsDetailList(goodsDetailList);
 
 
@@ -374,11 +374,14 @@ public class OrderServiceImpl implements IOrderService {
 		//		BigDecimal boxTotalPrice=this.BoxFee(orderItemList);
 		long orderNo=this.generateOrderNo();
 		order.setOrderNo(orderNo);
+		
+		order.setUserId(userId);
 		order.setTotalPrice(payment);
 		order.setCreateTime(new Date());
 		order.setDeliveryType(0);
 		order.setOrderType(null);
-		order.setPayStatus(null);
+//		order.setPayStatus(null);
+		order.setPayStatus(Const.OrderStatusEnum.NO_PAY.getCode());
 		order.setOrderNotes("请尽快送达");
 		order.setDeliveryTime(null);
 		order.setOrderStatus(Const.OrderStatusEnum.NO_PAY.getCode());

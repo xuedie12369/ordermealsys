@@ -227,7 +227,6 @@ function Cartlist() {
 <script>
 
 	function productStatus() {
-		$(".productStatus").click(function() {
 			var productId = this.dataset.productid;
 			$.ajax({
 				type : "GET",
@@ -251,10 +250,6 @@ function Cartlist() {
 				}
 			});
 
-
-
-
-		});
 	}
 </script>
 

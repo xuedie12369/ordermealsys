@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -69,11 +70,12 @@ public class OrderController {
 	
 	/**
 	 * 创建订单
+
 	 * @param session
 	 * @param addressId
 	 * @return
 	 */
-	@RequestMapping("create.do")
+	@RequestMapping(value="create.do",method=RequestMethod.POST)
 	@ResponseBody
 	public ServerResponse create(HttpSession session, Integer addressId){
 		User user = (User)session.getAttribute(Const.CURRENT_USER);
