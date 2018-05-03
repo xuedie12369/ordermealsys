@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import zsc.ordermealsys.pojo.ShoppingCart;
+import zsc.ordermealsys.pojo.ShoppingCartExample;
 @Service("shoppingCartMapper")
 public interface ShoppingCartMapper {
 	
@@ -26,7 +27,7 @@ public interface ShoppingCartMapper {
     
     List<ShoppingCart> selectCartByUserIdAndProductId(@Param("userId")Integer userId,@Param("productId")Integer productId);
     
-    List<ShoppingCart>selectCartByUserId(Integer userId);
+    List<ShoppingCart> selectCartByUserId(@Param("userId")Integer userId);
     
     int selectCartProductCheckedStatusByUserId(Integer userId);
     
@@ -43,7 +44,7 @@ public interface ShoppingCartMapper {
     
     int selectCartProductCount(@Param("userId")Integer userId);
     
-    List<ShoppingCart>selectCheckedCartByUserId(Integer userId);
+    List<ShoppingCart>selectCheckedCartByUserId(@Param("userId")Integer userId);
     
     
 }

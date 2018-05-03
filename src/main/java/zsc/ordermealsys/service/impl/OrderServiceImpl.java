@@ -63,13 +63,15 @@ public class OrderServiceImpl implements IOrderService {
 	private static Log log = LogFactory.getLog(OrderServiceImpl.class);
 	@Autowired
 	OrderPayMapper orderPayMapper;
-
 	@Autowired
 	OrderMapper orderMapper;
 	@Autowired
 	OrderItemMapper orderItemMapper;
+	@Autowired
 	ShoppingCartMapper shoppingCartMapper;
+	@Autowired
 	ProductMapper productMapper;
+	@Autowired
 	UserMapper userMapper;
 
 	public Order selectByUserIdAndOrderId() {

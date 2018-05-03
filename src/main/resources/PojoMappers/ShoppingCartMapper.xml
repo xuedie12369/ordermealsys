@@ -257,11 +257,11 @@
 		user_id=#{userId}
 	</select>
 	
-	<select id="selectCheckedCartByUserId" resultMap="BaseResultMap" parameterType="int">
-		select
-		<include refid="Base_Column_List"/>
+	<select id="selectCheckedCartByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap" >
+		SELECT
+		<include refid="Base_Column_List" />
 		from shopping_cart
-		where user_id=#{userId}
+		where user_id=#{userId,jdbcType=INTEGER}
 		and checked=1
 	</select>
 </mapper>
