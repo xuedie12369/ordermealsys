@@ -18,7 +18,7 @@
 <!-- 引入jsrender插件 -->
 <script src="//www.jsviews.com/download/jsviews.js"></script>
 
-<script id="productListTmpl" type="text/x-jsrender">
+<script id="orderItemListTmpl" type="text/x-jsrender">
 	
 	<div ng-switch-when="food" class="orderprogress-totalrow ng-scope">
 
@@ -26,9 +26,9 @@
 
 
 
-<span class="cell name ng-binding" ng-bind="row.food.name">username</span>
-<span class="cell quantity ng-binding" ng-bind="row.food.quantity">1</span>
-<span class="cell price ng-binding" ng-bind="row.food.price * row.food.quantity | number:2">50</span>
+<span class="cell name ng-binding" ng-bind="row.food.name">{{:productName}}</span>
+<span class="cell quantity ng-binding" ng-bind="row.food.quantity">{{:productNum}}</span>
+<span class="cell price ng-binding" ng-bind="row.food.price * row.food.quantity | number:2">{{:productPrice}}</span>
 
 
 </div>
@@ -51,39 +51,8 @@
  
 <script type="text/javascript" charset="utf-8">
 	$(function() {
-		var dataSrouce = [ {
-			name : "张三"
-		},
-			{
-				name : "zhangsi"
-			},
-			{
-				name : "张三"
-			},
-			{
-				name : "张三"
-			},
-			{
-				name : "张三"
-			},
-			{
-				name : "张三"
-			}, {
-				name : "张三"
-			}, {
-				name : "张三"
-			}, {
-				name : "张三"
-			}, {
-				name : "张三"
-			}, {
-				name : "张三"
-			},
-
-		];
-
-		var html = $("#productListTmpl").render(dataSrouce)	
-		$("#orderItem").append(html);
+		
+		
 		reduceBtn();
 		addBtn();
 	});
@@ -128,6 +97,7 @@
 <script>
 	$(function() {
 		$("#submitOrder").click(function() {
+		submitOrder();
 		});
 
 	})
@@ -161,7 +131,7 @@
 
 <script type="text/javascript" charset="utf-8">
 	
-	function addressList(){
+function addressList(){
 		$.ajax({
 			type : "GET",
 			url : 'shipping/list.do',
@@ -193,14 +163,51 @@
 $(function(){
 
 addressList();
-
+/* orderItemList(); */
 }
-   );
-		
+);
 
 
 </script>
 
+<script>
+ orderItemList();
+		
+function orderItemList(){
+		$.ajax({
+			type : "GET",
+			url : 'cart/list.do',
+			contentType : "application/x-www-form-urlencoded",
+			dataType : "json",
+			success : function(data) {
+				if(data.status==0)
+				{
+					console.log(data);
+				var html = $("#orderItemListTmpl").render(data.data.cartProductVoList);
+				/* $("#addressList").append(html);  */
+				$("#addressList").html(html);
+				address(); 
+		var html = $("#orderItemListTmpl").render(data.data.cartProductVoList)	
+		$("#orderItem").append(html);
+				}
+				else
+				{
+					alert(data.msg)
+					window.location.href = "login.jsp"
+					
+				}
+				console.log(data);
+				console.log(data.data);
+			},
+			error : function() {
+				alert("提交数据失败");
+			}
+		});
+};
+
+
+
+</script>
 
 <!-- 异步查询收货地址开始结束 -->
 
@@ -234,6 +241,33 @@ addressList();
 
 
 
+
+
+
+<!-- ajax异步提交订单-->
+<script>
+	function submitOrder( addressId) {
+			$.ajax({
+				type : "GET",
+				url : 'order/create.do',
+				contentType : "application/x-www-form-urlencoded",
+				dataType : "json",
+				data:{addressId:$('#addressId').val()},
+				success : function(data) {
+					if (data.status == 0) {
+						console.log(data)
+						/* addressList(); */
+					} else {
+						alert(data.msg);
+					}
+				},
+				error : function() {
+					alert("提交数据失败");
+				}
+			});
+
+}
+</script>
 
 
 
@@ -288,7 +322,7 @@ addressList();
 													<!-- ngSwitchWhen: basketTitle -->
 													<!-- ngSwitchWhen: food -->
 													<!-- ngSwitchWhen: extra -->
-													<div ng-switch-when="extra" class="orderprogress-totalrow ng-scope"><span class="cell name ng-binding" ng-bind="row.extra.name">餐盒</span> <span class="cell quantity"></span> <span class="cell price ng-binding" ng-class="{minus: row.extra.price < 0}" ng-bind="row.extra.price | number:2">2.00</span></div>
+													<div ng-switch-when="extra" class="orderprogress-totalrow ng-scope"><span class="cell name ng-binding" ng-bind="row.extra.name">餐盒</span> <span class="cell quantity"></span> <span class="cell price ng-binding" ng-class="{minus: row.extra.price < 0}" ng-bind="row.extra.price | number:2">0.00</span></div>
 												</div>
 												<!-- end ngRepeat: row in totalList -->
 												<div ng-repeat="row in totalList" ng-switch="" on="row.type" class="ng-scope">
@@ -296,7 +330,7 @@ addressList();
 													<!-- ngSwitchWhen: basketTitle -->
 													<!-- ngSwitchWhen: food -->
 													<!-- ngSwitchWhen: extra -->
-													<div ng-switch-when="extra" class="orderprogress-totalrow ng-scope"><span class="cell name ng-binding" ng-bind="row.extra.name">配送费</span> <span class="cell quantity"></span> <span class="cell price ng-binding minus" ng-class="{minus: row.extra.price < 0}" ng-bind="row.extra.price | number:2">-4.00</span></div>
+													<div ng-switch-when="extra" class="orderprogress-totalrow ng-scope"><span class="cell name ng-binding" ng-bind="row.extra.name">配送费</span> <span class="cell quantity"></span> <span class="cell price ng-binding minus" ng-class="{minus: row.extra.price < 0}" ng-bind="row.extra.price | number:2">0.00</span></div>
 												</div>
 												<!-- end ngRepeat: row in totalList -->
 												<div ng-repeat="row in totalList" ng-switch="" on="row.type" class="ng-scope">
@@ -319,7 +353,7 @@ addressList();
 				<div class="checkout-select ng-isolate-scope " checkout-address=" " checkout-data="checkoutData " address-list="addressList " address="address " isbaisheng="isBaishengRst ">
 					<h2>收货地址 <a ng-show="addressList.length " class="checkout-addaddress " href="addAddress.jsp" ng-click="addAddress() ">添加新地址</a></h2>
 
- 	<input type="hidden" id="addressId" value="-1" />
+ 	<input type="hidden" id="addressId" value="-1" name="addressId" />
 
 		<ul  id="addressList"  ng-hide="!addressList.length" class="checkout-address-list showmore" ng-class="{ showmore: showMoreAddress, showfirst: noInitAddress }">
 				
@@ -339,7 +373,7 @@ addressList();
 									</div>
 
 								</div>
-								<div><button quicksubmit-trigger="" submit-visable="checkout.submitVisable" class="btn-stress btn-lg ng-binding ng-isolate-scope" ng-disabled="orderButton.disabled" ng-bind="orderButton.text" ng-click="orderSubmit()">确认下单</button>
+								<div><button quicksubmit-trigger="" submit-visable="checkout.submitVisable" class="btn-stress btn-lg ng-binding ng-isolate-scope" ng-disabled="orderButton.disabled" id="submitOrder" >确认下单</button>
 								</div>
 							</div>
 							<!-- end ngIf: !loading && !nofood -->

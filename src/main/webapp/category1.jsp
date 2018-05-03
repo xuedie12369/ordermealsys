@@ -65,7 +65,7 @@
 			<span class="table-item">甜品小食</span>
 			<span class="table-item">酒水饮料</span>
 			<span class="table-item">其他</span>
-			<div class="search clearfix" style="margin-left: auto;margin-right: auto; width:294.5px">
+			<div class="search clearfix" style="margin-left: auto;margin-right: auto; width:296px">
 				<input class="inp-txt" type="text" name="address" value="输入关键字" onfocus="if(this.value=='输入关键字'){this.value=''};this.style.color='black';" onblur="if(this.value==''||this.value=='输入关键字'){this.value='输入关键字';this.style.color='gray';}" 
 			
 					/>

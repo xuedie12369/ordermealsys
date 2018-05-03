@@ -77,7 +77,7 @@ public class UserServiceImpl implements IUserService{
 		}
 		user.setRole(Const.Role.ROLE_CUSTOMER);
 		//MD5加密
-		user.setPwd(MD5Util.MD5EncodeUtf8(user.getPwd()));
+//		user.setPwd(MD5Util.MD5EncodeUtf8(user.getPwd()));
 		
 		resultCount=userMapper.insert(user);
 		System.out.print("success");
