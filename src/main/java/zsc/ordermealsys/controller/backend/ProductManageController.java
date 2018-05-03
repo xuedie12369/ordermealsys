@@ -43,7 +43,6 @@ public class ProductManageController {
 		System.out.print("进入添加产品函数");
 		System.out.print("分类的ID是:"+product.getCategoryId());
 		User user = (User) session.getAttribute(Const.CURRENT_USER);
-		
 		System.out.print("用户账号是:"+user.getUserName());
 		if (user == null) {
 			return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录，请先登录");
@@ -87,6 +86,8 @@ public class ProductManageController {
 	@RequestMapping("delete.do")
 	@ResponseBody
 	public ServerResponse delete(HttpSession session, Integer productId) {
+		
+		
 		User user = (User) session.getAttribute(Const.CURRENT_USER);
 		if (user == null) {
 			return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录，请先登录");

@@ -73,7 +73,7 @@ div {
 			contentType : "application/x-www-form-urlencoded",
 			dataType : "json",
 			success : function(data) {
-				if (data.status == 0) {
+				
 					console.log(data.status)
 					var html = $("#categoryListTmpl").render(data.data);
 					$("#categoryLi").append(html);
@@ -87,10 +87,7 @@ div {
 						/* 给分类项目设置点击响应事件结束 */
 
 					});
-
-				} else {
-					alert(data.msg);
-				}
+					alert("添加产品成功");
 			},
 			error : function() {
 				alert("查询分类数据失败");

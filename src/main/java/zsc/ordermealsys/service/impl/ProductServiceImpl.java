@@ -37,10 +37,12 @@ public class ProductServiceImpl implements IProductService {
 	@Override
 	public ServerResponse saveOrUpdate(ProductWithBLOBs product) {
 		if (product != null) {
+			product.setProStatus(1);
 			if (product.getSubPic() != null) {
 				String[] subImageArray = product.getSubPic().split(",");
 				if (subImageArray.length > 0) {
 					product.setMainPic(subImageArray[0]);
+					
 				}
 			}
 			if (product.getId() == null) {

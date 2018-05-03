@@ -61,7 +61,7 @@ table-condensed {
 						<td style="vertical-align: middle;">{{:stock}}</td>
 						<td style="vertical-align: middle;">{{:sales}}</td>
 						<td style="vertical-align: middle;">
-							<span class="productStatus" data-productId="1"  >
+							<span class="productStatus" data-productId="{{:productId}}"  >
 							<a href="#" class="btn btn-info btn-group-sm" >
 								下 架
 							</a>
@@ -71,7 +71,7 @@ table-condensed {
 								<span class="glyphicon glyphicon-trash"></span> 删 除
 							</a>
 							</span>
-							<span  class="productStatus" data-productId="3">
+							<span  class="" data-productId="3">
 										<a href="#" class="btn btn-info btn-group-sm">
 							编 辑
 							</a>
@@ -112,8 +112,40 @@ table-condensed {
 		});
 
 	});
-</script>
 
+
+</script>
+<script type="text/javascript">
+
+
+function Cartlist() {
+		/*    var fd = new FormData(document.querySelector("form")); */
+		$.ajax({
+			type : "POST",
+			url : 'manage/product/list.do',
+			/*contentType : "application/json; charset=utf-8", */
+			contentType : "application/x-www-form-urlencoded",
+			dataType : "json",
+			success : function(data) {
+				if (data.status == 0) {
+					console.log(data.data)
+					var html = $("#listTmpl").render(data.data.list);
+					/* 追加内容 */
+					$("#listDiv").html(html);
+					deletePro();
+				} else {
+					/* console.log(jsonObject); */
+					alert(data.msg);
+					window.location.href = "login.jsp";
+				}
+
+			},
+			error : function() {
+				alert("提交数据失败");
+			}
+		});
+}
+</script>
 
 
 <!--改变购物车项目的处理函数开始-->
@@ -143,7 +175,6 @@ table-condensed {
 			/* 		 var cartItemId=this.dataset.productid */
 			/*var cartItemEle = document.getElementById(cartItemId);
 			var cartItemNum = parseInt(cartItemEle.value);*/
-			alert("asda");
 
 
 		});
@@ -159,21 +190,56 @@ table-condensed {
 
 	function deletePro() {
 		$(".deletePro").click(function() {
-			var productId = this.dataset.cartitemid;
+			var productId = this.dataset.productid;
 			$.ajax({
-				type : "POST",
+				type : "GET",
 				url : 'manage/product/delete.do',
 				/*contentType : "application/json; charset=utf-8", */
 				contentType : "application/x-www-form-urlencoded",
 				dataType : "json",
-				data:productId=this.dataset.productid,
+				data:{productId:productId},
 				success : function(data) {
 					if (data.status == 0) {
 						console.log(data.data)
-						var html = $("#listTmpl").render(data.data.list);
-						/* 追加内容 */
-						$("#listDiv").append(html);
-						deletePro();
+						Cartlist();
+					} else {
+						/* console.log(jsonObject); */
+						alert(data.msg);
+					}
+
+				},
+				error : function() {
+					alert("提交数据失败");
+				}
+			});
+
+
+
+
+		});
+	}
+</script>
+
+
+
+
+
+<script>
+
+	function productStatus() {
+		$(".productStatus").click(function() {
+			var productId = this.dataset.productid;
+			$.ajax({
+				type : "GET",
+				url : 'manage/product/set_sale_proStatus.do',
+				/*contentType : "application/json; charset=utf-8", */
+				contentType : "application/x-www-form-urlencoded",
+				dataType : "json",
+				data:{productId:productId},
+				success : function(data) {
+					if (data.status == 0) {
+						console.log(data.data)
+						Cartlist();
 					} else {
 						/* console.log(jsonObject); */
 						alert(data.msg);
