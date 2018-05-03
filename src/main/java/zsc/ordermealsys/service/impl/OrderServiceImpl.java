@@ -469,10 +469,7 @@ public class OrderServiceImpl implements IOrderService {
 			for(int j=0;j<orderItemList.size();j++){
 				System.out.println(OrderList.get(i).getOrderItem().get(j).getName().toString());
 			}
-		
 		}
-		
-		
 		return ServerResponse.createBySuccess(OrderList);
 	}
 	
@@ -518,10 +515,10 @@ public class OrderServiceImpl implements IOrderService {
 		return ServerResponse.createByError();
 	}
 
+	//3.从购物车中获取数据
 	public ServerResponse getOrderCartProduct(Integer userId){
 		OrderProductVo orderProductVo = new OrderProductVo();
-		//从购物车中获取数据
-
+		
 		List<ShoppingCart> cartList = shoppingCartMapper.selectCheckedCartByUserId(userId);
 		ServerResponse serverResponse =  this.getCartOrderItem(userId,cartList);
 		if(!serverResponse.isSuccess()){
@@ -544,7 +541,7 @@ public class OrderServiceImpl implements IOrderService {
 		return ServerResponse.createBySuccess(orderProductVo);
 	}
 
-	//获取订单详情
+	//4.获取订单详情
 	public ServerResponse<OrderVo> getOrderDetail(Integer userId,Long orderNo){
 		Order order = orderMapper.selectByUserIdAndOrderId(userId, orderNo);
 		if(order != null){
@@ -555,7 +552,7 @@ public class OrderServiceImpl implements IOrderService {
 		return  ServerResponse.createByErrorMessage("没有找到该订单");
 	}
 
-	//获取订单列表
+	//5.获取订单列表
 	public ServerResponse<PageInfo> getOrderList(Integer userId,int pageNum,int pageSize){
 		PageHelper.startPage(pageNum,pageSize);
 		List<Order> orderList = orderMapper.selectByUserId(userId);
