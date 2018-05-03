@@ -113,7 +113,7 @@ public class CartServiceImpl implements ICartService{
 			//这个商品不在这个购物车里，需要新增一个这个商品的记录
 			ShoppingCart cartItem=new ShoppingCart();
 			cartItem.setProductNum(count);
-			cartItem.setChecked(Const.ShoppingCart.CHECKED);
+			cartItem.setChecked(Const.ShoppingCart.UN_CHECKED);
 			cartItem.setProductId(productId);
 			cartItem.setUserId(userId);
 			cartItem.setProductPrice(product.getPrice());
@@ -128,6 +128,19 @@ public class CartServiceImpl implements ICartService{
 			shoppingCartMapper.updateProductsBySelective(userId,productId,count);
 		}
 		return this.list(userId);
+	}
+	
+	//修改购物车中商品的选中状态
+	public void changeChecked(Integer userId,Integer productId){
+		ShoppingCart shoppingCart=shoppingCartMapper.selectCartByUserIdProductId(userId, productId);
+		shoppingCart.setChecked(Const.ShoppingCart.CHECKED);
+		shoppingCartMapper.updateByPrimaryKey(shoppingCart);
+	}
+	
+	//查找购物车中已选中的商品
+	public ServerResponse<List<ShoppingCart>> selectProductByChecked(Integer userId){
+		List<ShoppingCart> cartList=shoppingCartMapper.selectCheckedCartByUserId(userId);
+		return ServerResponse.createBySuccess(cartList);
 	}
 	
 	//更新购物车中商品的功能（改）

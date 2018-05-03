@@ -44,7 +44,7 @@ public interface ShoppingCartMapper {
     
     int selectCartProductCount(@Param("userId")Integer userId);
     
-    List<ShoppingCart>selectCheckedCartByUserId(@Param("userId")Integer userId);
+    List<ShoppingCart> selectCheckedCartByUserId(@Param("userId")Integer userId);
     
     
 }

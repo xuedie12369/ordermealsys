@@ -1,5 +1,7 @@
 package zsc.ordermealsys.controller.portal;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import zsc.ordermealsys.common.Const;
 import zsc.ordermealsys.common.ResponseCode;
 import zsc.ordermealsys.common.ServerResponse;
+import zsc.ordermealsys.pojo.ShoppingCart;
 import zsc.ordermealsys.pojo.User;
 import zsc.ordermealsys.service.ICartService;
 import zsc.ordermealsys.vo.ShoppingCartVo;
@@ -35,7 +38,6 @@ public class CartController {
 	}
 
 	//往购物车中添加商品的功能
-	
 	@RequestMapping("add.do")
 	@ResponseBody
 	public ServerResponse<ShoppingCartVo> add(HttpSession session,Integer count,Integer productId){
@@ -49,6 +51,18 @@ public class CartController {
 		return iCartService.add(user.getId(), productId, count);
 	}
 
+	//查询购物车中选中的商品列表
+	@RequestMapping("selectcheckedproduct.do")
+	@ResponseBody
+	public ServerResponse<List<ShoppingCart>> update(HttpSession session){
+		User user=(User)session.getAttribute(Const.CURRENT_USER);
+		if(user==null){
+			return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), 
+					ResponseCode.NEED_LOGIN.getDesc());
+		}
+		return iCartService.selectProductByChecked(user.getId());
+	}
+	
 	//更新购物车中商品数据的功能
 	@RequestMapping("update.do")
 	@ResponseBody
