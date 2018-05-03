@@ -130,6 +130,19 @@ public class CartServiceImpl implements ICartService{
 		return this.list(userId);
 	}
 	
+	//修改购物车中商品的选中状态
+	public void changeChecked(Integer userId,Integer productId){
+		ShoppingCart shoppingCart=shoppingCartMapper.selectCartByUserIdProductId(userId, productId);
+		shoppingCart.setChecked(Const.ShoppingCart.CHECKED);
+		shoppingCartMapper.updateByPrimaryKey(shoppingCart);
+	}
+	
+	//查找购物车中已选中的商品
+	public ServerResponse<List<ShoppingCart>> selectProductByChecked(Integer userId){
+		List<ShoppingCart> cartList=shoppingCartMapper.selectCheckedCartByUserId(userId);
+		return ServerResponse.createBySuccess(cartList);
+	}
+	
 	//更新购物车中商品的功能（改）
 	public ServerResponse<ShoppingCartVo> update(Integer userId,Integer productId,Integer count){
 		if(productId == null || count == null){

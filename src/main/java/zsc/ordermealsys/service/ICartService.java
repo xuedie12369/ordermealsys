@@ -1,5 +1,7 @@
 package zsc.ordermealsys.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import zsc.ordermealsys.common.ServerResponse;
@@ -22,4 +24,8 @@ public interface ICartService {
 	ServerResponse<ShoppingCartVo> selectOrUnSelect (Integer userId,Integer productId,Integer checked);
 	
 	ServerResponse<Integer> getCartProductCount(Integer userId);
+	
+	void changeChecked(Integer userId,Integer productId);
+	
+	ServerResponse<List<ShoppingCart>> selectProductByChecked(Integer userId);
 }
