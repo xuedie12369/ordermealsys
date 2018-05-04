@@ -70,19 +70,18 @@ public class OrderController {
 	
 	/**
 	 * 创建订单
-
 	 * @param session
 	 * @param addressId
 	 * @return
 	 */
 	@RequestMapping(value="create.do",method=RequestMethod.POST)
 	@ResponseBody
-	public ServerResponse create(HttpSession session, Integer addressId){
+	public ServerResponse create(HttpSession session, Integer addressId, String note){
 		User user = (User)session.getAttribute(Const.CURRENT_USER);
 		if(user ==null){
 			return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
 		}
-		return iOrderService.createOrder(user.getId());
+		return iOrderService.createOrder(user.getId(),addressId,note);
 	}
 	
 	@RequestMapping("cancel.do")
@@ -126,7 +125,6 @@ public class OrderController {
 		Integer userId=user.getId();
 		return iOrderService.queryOrder(userId);
 	}
-	
 	
 	
 	

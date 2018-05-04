@@ -124,11 +124,11 @@ public class Order {
         this.createTime = createTime;
     }
 
-    public Integer getDeliveryType() {
+    public Integer getAddressId() {
         return addressId;
     }
 
-    public void setDeliveryType(Integer addressId) {
+    public void setAddressId(Integer addressId) {
         this.addressId = addressId;
     }
 

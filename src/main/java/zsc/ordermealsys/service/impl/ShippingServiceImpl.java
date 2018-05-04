@@ -80,4 +80,11 @@ public class ShippingServiceImpl implements IShippingService{
 		PageInfo pageInfo=new PageInfo(addressList);
 		return ServerResponse.createBySuccess(pageInfo);
 	}
+	
+	//根据地址ID查询详细地址
+	public ServerResponse<String>detailaddress(Integer addressId){
+		Address address=addressMapper.selectByPrimaryKey(addressId);
+		String addressdetail=address.getDetailedAdd();
+		return ServerResponse.createBySuccess(addressdetail);
+	}
 }

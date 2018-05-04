@@ -1,12 +1,13 @@
 package zsc.ordermealsys.vo;
 
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
+
+import zsc.ordermealsys.pojo.Address;
 
 public class OrderVo {
 
-    private String sellerName;
+	private String sellerName;
     
     private Integer userId;
     
@@ -16,7 +17,9 @@ public class OrderVo {
 
     private String createTime;
 
-    private Integer deliveryType;
+    private Integer addressId;
+    
+    private String address;
 
     private Integer orderType;
 
@@ -91,12 +94,12 @@ public class OrderVo {
 		this.createTime = createTime;
 	}
 
-	public Integer getDeliveryType() {
-		return deliveryType;
+	public Integer getAddressId() {
+		return addressId;
 	}
 
-	public void setDeliveryType(Integer deliveryType) {
-		this.deliveryType = deliveryType;
+	public void setAddressId(Integer addressId) {
+		this.addressId = addressId;
 	}
 
 	public Integer getOrderType() {
@@ -226,6 +229,15 @@ public class OrderVo {
 	public void setConsigneeName(String consigneeName) {
 		this.consigneeName = consigneeName;
 	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
     
     
 }

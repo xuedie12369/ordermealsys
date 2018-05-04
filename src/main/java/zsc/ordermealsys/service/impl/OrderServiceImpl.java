@@ -33,12 +33,14 @@ import com.google.common.collect.Maps;
 
 import zsc.ordermealsys.common.Const;
 import zsc.ordermealsys.common.ServerResponse;
+import zsc.ordermealsys.dao.AddressMapper;
 import zsc.ordermealsys.dao.OrderItemMapper;
 import zsc.ordermealsys.dao.OrderMapper;
 import zsc.ordermealsys.dao.OrderPayMapper;
 import zsc.ordermealsys.dao.ProductMapper;
 import zsc.ordermealsys.dao.ShoppingCartMapper;
 import zsc.ordermealsys.dao.UserMapper;
+import zsc.ordermealsys.pojo.Address;
 import zsc.ordermealsys.pojo.Order;
 import zsc.ordermealsys.pojo.OrderExample;
 import zsc.ordermealsys.pojo.OrderItemWithBLOBs;
@@ -73,6 +75,8 @@ public class OrderServiceImpl implements IOrderService {
 	ProductMapper productMapper;
 	@Autowired
 	UserMapper userMapper;
+	@Autowired
+	AddressMapper addressMapper;
 
 	public Order selectByUserIdAndOrderId() {
 		Order o = orderMapper.selectByPrimaryKey(1);
@@ -225,10 +229,7 @@ public class OrderServiceImpl implements IOrderService {
 			qrfilePath = String.format(path+"/qr-%s.png",response.getOutTradeNo());
 			System.out.print("生成的二维码路径为:"+qrfilePath);
 
-
 			ZxingUtils.getQRCodeImge(response.getQrCode(), 256, qrfilePath);
-
-
 
 			//没有写把二维码上传到ftp服务器的代码，待完善
 			
@@ -266,16 +267,16 @@ public class OrderServiceImpl implements IOrderService {
 	}
 
 
-
-
-
-
-
-
-
-
+	
+	
+	
+	
+	
+	
+	
+	
 	//1.生成订单
-	public  ServerResponse createOrder(Integer userId){
+	public  ServerResponse createOrder(Integer userId,Integer addressId,String note){
 		
 		System.out.println("未从购物车中获得数据");
 		//从购物车中获取数据
@@ -294,7 +295,7 @@ public class OrderServiceImpl implements IOrderService {
 		System.out.println("已计算出订单的总价");
 
 		//生成订单
-		Order order = this.assembleOrder(userId,payment,orderItemList);
+		Order order = this.assembleOrder(userId,addressId,payment,orderItemList,note);
 
 		if(order == null){
 			return ServerResponse.createByErrorMessage("生成订单错误");
@@ -321,8 +322,11 @@ public class OrderServiceImpl implements IOrderService {
 
 		//返回给前端数据
 		OrderVo orderVo = assembleOrderVo(order,orderItemList);
+		System.out.println(orderVo.getAddress().toString());
 		return ServerResponse.createBySuccess(orderVo);
 	}
+	
+	
 
 	//1.1获取购物车订单项
 	private ServerResponse getCartOrderItem(Integer userId,List<ShoppingCart> cartList){
@@ -369,23 +373,23 @@ public class OrderServiceImpl implements IOrderService {
 	}
 
 	//1.3添加订单
-	private Order assembleOrder(Integer userId,BigDecimal payment, List<OrderItemWithBLOBs> orderItemList){
+	private Order assembleOrder(Integer userId,Integer addressId,BigDecimal payment, List<OrderItemWithBLOBs> orderItemList,String note){
 		Order order=new Order();
-		//		BigDecimal boxTotalPrice=this.BoxFee(orderItemList);
+//		BigDecimal boxTotalPrice=this.BoxFee(orderItemList);
 		long orderNo=this.generateOrderNo();
 		order.setOrderNo(orderNo);
 		
 		order.setUserId(userId);
 		order.setTotalPrice(payment);
 		order.setCreateTime(new Date());
-		order.setDeliveryType(0);
+		order.setAddressId(addressId);
 		order.setOrderType(null);
 //		order.setPayStatus(null);
 		order.setPayStatus(Const.OrderStatusEnum.NO_PAY.getCode());
-		order.setOrderNotes("请尽快送达");
+		order.setOrderNotes(note);
 		order.setDeliveryTime(null);
 		order.setOrderStatus(Const.OrderStatusEnum.NO_PAY.getCode());
-		//		order.setBoxTotalPrice(boxTotalPrice);
+//		order.setBoxTotalPrice(boxTotalPrice);
 		int rowCount=orderMapper.insert(order);
 		if(rowCount>0){
 			return order;
@@ -412,12 +416,17 @@ public class OrderServiceImpl implements IOrderService {
 	//1.6获取订单信息
 	private OrderVo assembleOrderVo(Order order,List<OrderItemWithBLOBs> orderItemList){
 		OrderVo orderVo = new OrderVo();
+		int addressId=order.getAddressId();
+		
+		Address addre=addressMapper.selectByPrimaryKey(addressId);
+		String address=addre.getDetailedAdd();
+		orderVo.setAddress(address);
 		orderVo.setSellerName(order.getSellerName());
 		orderVo.setUserId(order.getUserId());
 		orderVo.setOrderNo(order.getOrderNo());
 		orderVo.setTotalPrice(order.getTotalPrice());
 		orderVo.setCreateTime(DateTimeUtil.dateToStr(order.getCreateTime()));
-		orderVo.setDeliveryType(order.getDeliveryType());
+		orderVo.setAddressId(order.getAddressId());
 		orderVo.setOrderType(order.getOrderType());
 		orderVo.setPayStatus(order.getPayStatus());
 		orderVo.setOrderNotes(order.getOrderNotes());
@@ -479,11 +488,6 @@ public class OrderServiceImpl implements IOrderService {
 	}
 	
 	
-	
-	
-	
-	
-	
 	//3.获取餐盒总费用的方法
 	//	public BigDecimal BoxFee(List<OrderItemWithBLOBs> orderItemList){
 	//		BigDecimal BoxFee=new BigDecimal("0");
@@ -498,8 +502,7 @@ public class OrderServiceImpl implements IOrderService {
 	//		}
 	//		return BoxFee;
 	//	}
-
-
+	
 	//2.取消订单功能
 	public ServerResponse<String> cancel(Integer userId,Long orderNo){
 		Order order  = orderMapper.selectByUserIdAndOrderId(userId,orderNo);
@@ -561,12 +564,15 @@ public class OrderServiceImpl implements IOrderService {
 	public ServerResponse<PageInfo> getOrderList(Integer userId,int pageNum,int pageSize){
 		PageHelper.startPage(pageNum,pageSize);
 		List<Order> orderList = orderMapper.selectByUserId(userId);
+		for(int i=0;i<orderList.size();i++){
+			
+		}
 		List<OrderVo> orderVoList = assembleOrderVoList(orderList,userId);
 		PageInfo pageResult = new PageInfo(orderList);
 		pageResult.setList(orderVoList);
 		return ServerResponse.createBySuccess(pageResult);
 	}
-
+	
 	
 	private List<OrderVo> assembleOrderVoList(List<Order> orderList,Integer userId){
 		List<OrderVo> orderVoList = Lists.newArrayList();
@@ -584,8 +590,6 @@ public class OrderServiceImpl implements IOrderService {
 		return orderVoList;
 	}
 
-	
-	
 	//backend
 
     public ServerResponse<PageInfo> manageList(int pageNum,int pageSize){
@@ -597,7 +601,7 @@ public class OrderServiceImpl implements IOrderService {
         return ServerResponse.createBySuccess(pageResult);
     }
 
-
+    //管理订单细节
     public ServerResponse<OrderVo> manageDetail(Long orderNo){
         Order order = orderMapper.selectByOrderNo(orderNo);
         if(order != null){
@@ -607,8 +611,8 @@ public class OrderServiceImpl implements IOrderService {
         }
         return ServerResponse.createByErrorMessage("订单不存在");
     }
-
-
+    
+    //查询订单项
     public ServerResponse<PageInfo> manageSearch(Long orderNo,int pageNum,int pageSize){
         PageHelper.startPage(pageNum,pageSize);
         Order order = orderMapper.selectByOrderNo(orderNo);
@@ -623,7 +627,7 @@ public class OrderServiceImpl implements IOrderService {
         return ServerResponse.createByErrorMessage("订单不存在");
     }
 
-
+    
     public ServerResponse<String> manageSendGoods(Long orderNo){
         Order order= orderMapper.selectByOrderNo(orderNo);
         if(order != null){

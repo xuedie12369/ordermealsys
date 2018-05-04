@@ -40,8 +40,8 @@ public class MyTestShoppingCartService {
 	
 
 	
-//	@Resource
-//	OrderMapper orderMapper;
+	@Resource
+	OrderMapper orderMapper;
 //	@Resource
 //	AddressMapper addressMapper;
 
@@ -78,12 +78,12 @@ public class MyTestShoppingCartService {
 		this.cartMapper = cartMapper;
 	} 
 	
-//	public OrderMapper getOrderMapperDao(){
-//		return orderMapper;
-//	}
-//	public void OrderMapperDao(OrderMapper orderMapper){
-//		this.orderMapper=orderMapper;
-//	}
+	public OrderMapper getOrderMapperDao(){
+		return orderMapper;
+	}
+	public void OrderMapperDao(OrderMapper orderMapper){
+		this.orderMapper=orderMapper;
+	}
 	
 //	public AddressMapper getAddressMapperDao(){
 //		return addressMapper;
@@ -104,10 +104,10 @@ public class MyTestShoppingCartService {
 	@Test
 	public void main(){
 		ApplicationContext ac=new ClassPathXmlApplicationContext("applicationContext.xml");
-//		OrderServiceImpl iOrderService=ac.getBean(OrderServiceImpl.class);
+		OrderServiceImpl iOrderService=ac.getBean(OrderServiceImpl.class);
 //		OrderItemMapper orderMapper=ac.getBean(OrderItemMapper.class);
 //		ShippingServiceImpl iShippingService=ac.getBean(ShippingServiceImpl.class);
-		CartServiceImpl iCartServiceImpl=ac.getBean(CartServiceImpl.class);
+//		CartServiceImpl iCartServiceImpl=ac.getBean(CartServiceImpl.class);
 //		MD5Util m=new MD5Util();
 //		System.out.println(m.MD5EncodeUtf8("shaohainan").toString());
 //		ShoppingCartMapper cartMapper=ac.getBean(ShoppingCartMapper.class);
@@ -133,10 +133,11 @@ public class MyTestShoppingCartService {
 //		System.out.print(	shoppingCartMapper.selectCartByUserId(1));
 //		iCartServiceImpl.add(1, 21, 10);
 //		iCartServiceImpl.deleteProduct(1, 2);
-		iCartServiceImpl.updatethechecked(1, 1);
+//		iCartServiceImpl.updatethechecked(1, 1);
 		
 		
 //		orderMapper.getByOrderNo((long) 47);
+		iOrderService.createOrder(1, 1, "随时送达");
 //		iOrderService.queryOrder(1);
 //		iOrderService.createOrder(1);
 //		iShippingService.selectAllAddressByUserId(1);

@@ -40,7 +40,8 @@ public class ShippingController {
 		return iShippingService.add(user.getId(), address);
 
 	}
-
+	
+	
 	@RequestMapping("delete.do")
 	@ResponseBody
 	public ServerResponse delete(HttpSession session,Integer addressId){
@@ -64,6 +65,7 @@ public class ShippingController {
 		return iShippingService.update(user.getId(), address);
 	}
 	
+	//根据用户ID和地址ID查询地址
 	@RequestMapping("select.do")
 	@ResponseBody
 	public ServerResponse<Address> select(HttpSession session,Integer addressId){

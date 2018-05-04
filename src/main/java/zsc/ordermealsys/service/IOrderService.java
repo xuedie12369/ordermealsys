@@ -20,7 +20,7 @@ public interface IOrderService {
 	
 	ServerResponse pay(Long order_no, Integer userId, String path);
 	
-	ServerResponse createOrder(Integer userId);
+	ServerResponse createOrder(Integer userId,Integer addressId,String note);
 
 	public ServerResponse aliCallback(Map<String, String> params);
 	
