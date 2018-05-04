@@ -17,7 +17,7 @@ public class Order {
 
     private Date createTime;
 
-    private Integer deliveryType;
+    private Integer addressId;
 
     private Integer orderType;
 
@@ -46,7 +46,7 @@ public class Order {
     private BigDecimal boxTotalPrice;
     
     public Order(Integer id, String sellerName, Integer userId, Long orderNo, BigDecimal totalPrice, Date createTime,
-			Integer deliveryType, Integer orderType, Integer payStatus, String orderNotes, String deliveryTime,
+			Integer addressId, Integer orderType, Integer payStatus, String orderNotes, String deliveryTime,
 			Integer deleteStatus, BigDecimal deliveryFee, Integer orderStatus, Date payTime, Date transactClosingTime,
 			Date transactCompleTime, Date updateTime, BigDecimal boxTotalPrice) {
 		super();
@@ -57,7 +57,7 @@ public class Order {
 		this.orderNo = orderNo;
 		this.totalPrice = totalPrice;
 		this.createTime = createTime;
-		this.deliveryType = deliveryType;
+		this.addressId = addressId;
 		this.orderType = orderType;
 		this.payStatus = payStatus;
 		this.orderNotes = orderNotes;
@@ -125,11 +125,11 @@ public class Order {
     }
 
     public Integer getDeliveryType() {
-        return deliveryType;
+        return addressId;
     }
 
-    public void setDeliveryType(Integer deliveryType) {
-        this.deliveryType = deliveryType;
+    public void setDeliveryType(Integer addressId) {
+        this.addressId = addressId;
     }
 
     public Integer getOrderType() {

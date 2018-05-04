@@ -3,7 +3,7 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<%@ page language="java" pageEncoding="UTF-8"%>
+<%@ page language="java" deferredSyntaxAllowedAsLiteral="true" pageEncoding="UTF-8"%>
 <link rel="stylesheet" type="text/css" href="css/main.css">
 <link rel="stylesheet" type="text/css" href="css/orders.css">
 <!--详情页的-->
@@ -28,7 +28,7 @@
 			<div class="order-item clearfix">
 				<div class="order-img">
 					<a href="https://www.meituan.com/order/view/4302648258/" class="link" target="_blank">
-						<div><img src="1.jpg" class="image"></div>
+						<div><img src="1.png" class="image"></div>
 					</a>
 				</div>
 				<div class="order-info">
@@ -46,7 +46,7 @@
 					<!--也可以吧他们扯开用,如：{{if fullprice}}html markup{{/if}}和{{if fullprice}}html markup{{else}}html markup{{/if}}。但是这里需要注意两点：-->
 				</div>
 				<div class="order-status">
-					<a data-toggle="collapse" data-parent="#accordion" href="#替换这里每个不一样">查看详情</a>
+					<a data-toggle="collapse" data-parent="#accordion" href="#{{:orderNo}}">查看详情</a>
 				</div>
 				<div class="order-btn"></div>
 			</div>
@@ -54,7 +54,7 @@
 			<div class="panel-group" id="accordion" style="margin-bottom: 0px">
 				<div class="panel ">
 					<!--订单详情页开始-->
-					<div id="替换这里每个不一样" class="panel-collapse collapse " aria-expanded="true">
+					<div id="{{:orderNo}}" class="panel-collapse collapse " aria-expanded="true">
 						<div class="panel-body">
 
 							<div class="profile-panelcontent" ng-transclude="">
@@ -65,7 +65,7 @@
 										<div class="orderprogress-rstinfo">
 											<a ng-href="/shop/161201517" href="/shop/161201517"><img class="orderprogress-rstimg" ng-src="//fuss10.elemecdn.com/4/59/ae4d0bc906e691f4614e11d4b5461jpeg.jpeg?imageMogr2/thumbnail/44x44/format/webp/quality/85" width="44" height="44" ng-alt="蘑菇爱上饭(中山店)" src="//fuss10.elemecdn.com/4/59/ae4d0bc906e691f4614e11d4b5461jpeg.jpeg?imageMogr2/thumbnail/44x44/format/webp/quality/85"></a>
 											<div class="orderprogress-rstgrid" style="margin: auto;">
-												<h4 class="orderprogress-rstname"><a class="inherit ng-binding" ng-href="/shop/161201517" ng-bind="restaurant.name" href="/shop/161201517">蘑菇爱上饭(中山店)</a> <span style="margin-left: auto; color: red;">订单编号:{{:orderNo}}</span> <span style="margin-left: auto; color: red;"></span></h4>
+												<h4 class="orderprogress-rstname"><a class="inherit ng-binding" ng-href="/shop/161201517" ng-bind="restaurant.name" href="/shop/161201517">蘑菇爱上饭(中山店)</a> <span style="margin-left: auto; color: red;"></span> <span style="margin-left: auto; color: red;"></span></h4>
 											</div>
 
 											<div class="orderprogress-rstoperate">
@@ -290,10 +290,10 @@ function delivery(){
 
 						<div class="link-group">
 							<p class="title">
-								<a href="http://www.meituan.com/rates/list/torate">我的评价</a>
+								<a href="productManage.jsp">菜品管理</a>
 							</p>
 							<ul class="link-ul">
-								<li><a href="http://www.meituan.com/rates/list/torate">待评价</a><span
+								<li><a href="addProduct.jsp">添加菜品</a><span
 									class="num"></span><i class="icon-right"></i></li>
 								<li><a href="http://www.meituan.com/rates/list/rated">已评价</a><span
 									class="num"></span><i class="icon-right"></i></li>
