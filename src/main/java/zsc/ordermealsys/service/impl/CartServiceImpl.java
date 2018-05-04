@@ -140,7 +140,7 @@ public class CartServiceImpl implements ICartService{
 	//查找购物车中已选中的商品
 	public ServerResponse<List<ShoppingCart>> selectProductByChecked(Integer userId){
 		List<ShoppingCart> cartList=shoppingCartMapper.selectCheckedCartByUserId(userId);
-		return ServerResponse.createBySuccess(cartList);
+		return ServerResponse.createBySuccess("查询成功",cartList);
 	}
 	
 	//更新购物车中商品的功能（改）

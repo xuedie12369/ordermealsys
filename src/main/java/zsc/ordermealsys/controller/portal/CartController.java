@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import zsc.ordermealsys.common.Const;
@@ -52,7 +53,7 @@ public class CartController {
 	}
 
 	//查询购物车中选中的商品列表
-	@RequestMapping("selectcheckedproduct.do")
+	@RequestMapping("select_checked_product.do")
 	@ResponseBody
 	public ServerResponse<List<ShoppingCart>> update(HttpSession session){
 		User user=(User)session.getAttribute(Const.CURRENT_USER);
@@ -113,9 +114,10 @@ public class CartController {
 	}
 
 	//单独选
-	@RequestMapping("select.do")
+	@RequestMapping(value="select.do",method=RequestMethod.POST)
 	@ResponseBody
 	public ServerResponse<ShoppingCartVo> select(HttpSession session, Integer productId){
+		System.out.print("传入的产品ID是:"+productId);
 		User user=(User)session.getAttribute(Const.CURRENT_USER);
 		if(user==null){
 			return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), 

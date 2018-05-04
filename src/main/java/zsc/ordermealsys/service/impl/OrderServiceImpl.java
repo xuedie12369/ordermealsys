@@ -109,15 +109,6 @@ public class OrderServiceImpl implements IOrderService {
 		}
 		resultMap.put("qrUrl", qrUrl);
 		return ServerResponse.createBySuccess(resultMap);
-
-
-		/*	 List<OrderItemWithBLOBs>	 orderItemList =orderItemMapper.getByOrderNoAndUserId(1L, 11);
-	 for(OrderItemWithBLOBs orderItemWithBLOBs :orderItemList)
-	 {
-		 System.out.print(orderItemWithBLOBs.getPrice().toString()+"添加的"+orderItemWithBLOBs.getProductDetail()+"maij xingm ");
-
-	 }
-		 */
 	}
 
 	// 测试当面付2.0生成支付二维码
@@ -160,10 +151,6 @@ public class OrderServiceImpl implements IOrderService {
 
 		// 商品明细列表，需填写购买商品详细信息，
 		List<GoodsDetail> goodsDetailList = new ArrayList<GoodsDetail>();
-
-		
-		
-		
 		List<OrderItemWithBLOBs> orderItemList=new ArrayList<OrderItemWithBLOBs>();
 		orderItemList=orderItemMapper.getByOrderNoAndUserId(order.getOrderNo(), userId);
 
@@ -202,11 +189,6 @@ public class OrderServiceImpl implements IOrderService {
 		 *  AlipayTradeService可以使用单例或者为静态成员对象，不需要反复new
 		 */
 		AlipayTradeService  tradeService = new AlipayTradeServiceImpl.ClientBuilder().build();
-
-
-
-
-
 		AlipayF2FPrecreateResult result = tradeService.tradePrecreate(builder);
 		switch (result.getTradeStatus()) {
 		case SUCCESS:
@@ -742,8 +724,14 @@ public class OrderServiceImpl implements IOrderService {
 				.setGoodsDetailList(goodsDetailList);
 
 		// 加载属性配置文件（从demo的main类的static块复制来的）
-	 *//**
-	 * 一定要在创建AlipayTradeService之前调用Configs.init()设置默认参数
+	 */
+	/**
+	
+
+ * 
+ * 
+ * 
+ * 一定要在创建AlipayTradeService之前调用Configs.init()设置默认参数
 	 * Configs会读取classpath下的zfbinfo.properties文件配置信息，
 	 * 如果找不到该文件则确认该文件是否在classpath目录
 	 *//*
