@@ -29,7 +29,7 @@ public interface ShoppingCartMapper {
     
     List<ShoppingCart> selectCartByUserId(@Param("userId")Integer userId);
     
-    int selectCartProductCheckedStatusByUserId(Integer userId);
+    int selectCartProductCheckedStatusByUserId(@Param("userId")Integer userId);
     
     int deleteByUserIdProduct(@Param("userId")Integer userId, @Param("productId")Integer productId);
     
@@ -41,10 +41,12 @@ public interface ShoppingCartMapper {
     
     int checkedOrUncheckedProduct(@Param("userId")Integer userId,@Param("productId")Integer productId,@Param("checked")Integer checked);
     
-    
     int selectCartProductCount(@Param("userId")Integer userId);
     
     List<ShoppingCart>selectCheckedCartByUserId(@Param("userId")Integer userId);
     
+    int changethechecked(@Param("userId")Integer userId,@Param("productId")Integer productId,@Param("checked")Integer checked);
+    
+    int selectCheckedStatus(@Param("userId")Integer userId,@Param("productId")Integer productId);
     
 }

@@ -26,6 +26,7 @@ public class ShippingController {
 	private IShippingService iShippingService;
 
 	// Spring MVC 中的特殊的绑定方式，直接绑定对象
+	
 	@RequestMapping(value="add.do",method=RequestMethod.POST)
 	@ResponseBody
 	public ServerResponse add(HttpSession session, Address address) {
@@ -51,6 +52,7 @@ public class ShippingController {
 		}
 		return iShippingService.del(user.getId(),addressId);
 	}
+	
 	@RequestMapping(value="update.do",method=RequestMethod.POST)
 	@ResponseBody
 	public ServerResponse update(HttpSession session,Address address){

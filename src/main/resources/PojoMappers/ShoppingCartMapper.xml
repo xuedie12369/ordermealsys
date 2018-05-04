@@ -181,6 +181,11 @@
 
 
 
+	<select id="selectCheckedStatus" parameterType="map" resultType="int">
+		select checked from shopping_cart
+		where user_id = #{userId}
+		and product_id = #{productId}
+	</select>
 
 	<select id="selectCartByUserIdProductId" resultMap="BaseResultMap"
 		parameterType="map">
@@ -264,4 +269,15 @@
 		where user_id=#{userId,jdbcType=INTEGER}
 		and checked=1
 	</select>
+	
+	<update id="changethechecked" parameterType="map">
+		update shopping_cart
+		set checked=#{checked},
+		update_time= now()
+		where
+		user_id=#{userId}
+		<if test="productId != null">
+			and product_id=#{productId}
+		</if>
+	</update>
 </mapper>

@@ -22,4 +22,6 @@ public interface ICartService {
 	ServerResponse<ShoppingCartVo> selectOrUnSelect (Integer userId,Integer productId,Integer checked);
 	
 	ServerResponse<Integer> getCartProductCount(Integer userId);
+	
+	void updatethechecked(Integer userId,Integer productId);
 }

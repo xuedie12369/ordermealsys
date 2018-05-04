@@ -32,6 +32,7 @@ public class CartServiceImpl implements ICartService{
 	@Autowired
 	private ProductMapper productMapper;
 
+	//获取购物车下单数量的限制
 	private ShoppingCartVo getShoppingCartVoLimit(Integer userId){
 		ShoppingCartVo cartVo=new ShoppingCartVo();
 		List<ShoppingCart>cartList=shoppingCartMapper.selectCartByUserId(userId);
@@ -39,12 +40,14 @@ public class CartServiceImpl implements ICartService{
 		BigDecimal cartTotalPrice=new BigDecimal("0");
 
 		if(CollectionUtils.isNotEmpty(cartList)){
-			for(ShoppingCart cartItem:cartList){//for(object a:list)循环取出list中的每一个元素
+			for(ShoppingCart cartItem:cartList){
+				//for(object a:list)循环取出list中的每一个元素
 				CartProductVo cartProductVo=new CartProductVo();
 				cartProductVo.setId(cartItem.getId());
 				cartProductVo.setUserId(userId);
 				cartProductVo.setProductId(cartItem.getProductId());
-				ProductWithBLOBs product=productMapper.selectByPrimaryKey(cartItem.getProductId());
+				ProductWithBLOBs product=productMapper.
+						selectByPrimaryKey(cartItem.getProductId());
 				if(product!=null){
 					cartProductVo.setProductMainPic(product.getMainPic());
 					cartProductVo.setProductName(product.getName());
@@ -56,11 +59,13 @@ public class CartServiceImpl implements ICartService{
 					if(product.getStock() >= cartItem.getProductNum()){
 						//库存充足的时候
 						buyLimitCount = cartItem.getProductNum();
-						cartProductVo.setLimitQuantity(Const.ShoppingCart.LIMIT_NUM_SUCCESS);
+						cartProductVo.
+						setLimitQuantity(Const.ShoppingCart.LIMIT_NUM_SUCCESS);
 					}else{
-						//库存不足时将商品库存量更新到购买限制数量
+						//库存不足时将菜品库存量更新到购买限制数量
 						buyLimitCount = product.getStock();
-						cartProductVo.setLimitQuantity(Const.ShoppingCart.LIMIT_NUM_FAIL);
+						cartProductVo.setLimitQuantity(Const.
+								ShoppingCart.LIMIT_NUM_FAIL);
 						//购物车中更新有效库存
 						ShoppingCart cartForNum = new ShoppingCart();
 						cartForNum.setId(cartItem.getId());
@@ -82,7 +87,7 @@ public class CartServiceImpl implements ICartService{
 		return cartVo;
 	}
 
-	//判断购物车中的商品是否被全选
+	//判断购物车中的菜品是否被全选
 	private boolean getAllCheckedStatus(Integer userId){
 		if(userId == null){
 			return false;
@@ -90,7 +95,7 @@ public class CartServiceImpl implements ICartService{
 		return shoppingCartMapper.selectCartProductCheckedStatusByUserId(userId) == 0;
 	}
 	
-	//购物车中商品的查询功能（查）
+	//购物车中菜品的查询功能（查）
 	public ServerResponse<ShoppingCartVo> list (Integer userId){
 		ShoppingCartVo cartVo = this.getShoppingCartVoLimit(userId);
 		System.out.println("购物车查找成功");
@@ -98,19 +103,20 @@ public class CartServiceImpl implements ICartService{
 		return ServerResponse.createBySuccess(cartVo);
 	}
 	
-	//购物车添加商品功能（增）
+	//购物车添加菜品功能（增）
 	public ServerResponse<ShoppingCartVo> add(Integer userId,Integer productId,Integer count){
 		
 		//校验productId和count是否为空，若为空则返回参数错误
 		if(productId == null || count == null){
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.ILLEGAL_ARGUMENT.getCode(),ResponseCode.ILLEGAL_ARGUMENT.getDesc());
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.ILLEGAL_ARGUMENT.
+            		getCode(),ResponseCode.ILLEGAL_ARGUMENT.getDesc());
         }
 		
 		ShoppingCart cart=shoppingCartMapper.selectCartByUserIdProductId(userId, productId);
 	
 		if(cart==null){
 			Product product=productMapper.selectByPrimaryKey(productId);
-			//这个商品不在这个购物车里，需要新增一个这个商品的记录
+			//这个菜品不在这个购物车里，需要新增一个这个菜品的记录
 			ShoppingCart cartItem=new ShoppingCart();
 			cartItem.setProductNum(count);
 			cartItem.setChecked(Const.ShoppingCart.UN_CHECKED);
@@ -130,37 +136,39 @@ public class CartServiceImpl implements ICartService{
 		return this.list(userId);
 	}
 	
-	//更新购物车中商品的功能（改）
+	//更新购物车中菜品的功能（改）
 	public ServerResponse<ShoppingCartVo> update(Integer userId,Integer productId,Integer count){
 		if(productId == null || count == null){
-			return ServerResponse.createByErrorCodeMessage(ResponseCode.ILLEGAL_ARGUMENT.getCode(),ResponseCode.ILLEGAL_ARGUMENT.getDesc());
+			return ServerResponse.createByErrorCodeMessage(ResponseCode.ILLEGAL_ARGUMENT.
+					getCode(),ResponseCode.ILLEGAL_ARGUMENT.getDesc());
 		}
 		ShoppingCart cart = shoppingCartMapper.selectCartByUserIdProductId(userId,productId);
 		if(cart != null){
 			cart.setProductNum(count);
 		}
 		shoppingCartMapper.updateByPrimaryKeySelective(cart);
-		System.out.println("购物车中商品修改成功");
+		System.out.println("购物车中菜品修改成功");
 		//shoppingCartMapper.updateByPrimaryKey(cart);
 		return this.list(userId);
 	}
 
-	//删除购物车中商品（一个）的功能（删）
+	//删除购物车中菜品（一个）的功能（删）
 	public ServerResponse<ShoppingCartVo> deleteProduct(Integer userId,Integer productId){
 		ShoppingCart product=shoppingCartMapper.selectCartByUserIdProductId(userId, productId);
 		if(product==null){
-			return ServerResponse.createByErrorMessage("未查到相关商品！");
+			return ServerResponse.createByErrorMessage("未查到相关菜品！");
 		}else{
 			shoppingCartMapper.deleteByUserIdProductId(userId, productId);
 		}
 		return ServerResponse.createBySuccessMessage("删除成功！");
 	}
 	
-	//删除购物车中指定商品（多个）的功能（删）
+	//删除购物车中指定菜品（多个）的功能（删）
 	public ServerResponse<ShoppingCartVo> deleteProducts(Integer userId,Integer productId){
-		List<ShoppingCart> productList=shoppingCartMapper.selectCartByUserIdAndProductId(userId, productId);
+		List<ShoppingCart> productList=shoppingCartMapper.
+				selectCartByUserIdAndProductId(userId, productId);
 		if(productList.isEmpty()){
-			return ServerResponse.createByErrorMessage("未查到相关商品！");
+			return ServerResponse.createByErrorMessage("未查到相关菜品！");
 		}else{
 			for(int i=0;i<productList.size();i++){
 				shoppingCartMapper.deleteByUserIdProductId(userId, productList.get(i).getProductId());
@@ -169,6 +177,21 @@ public class CartServiceImpl implements ICartService{
 			return ServerResponse.createBySuccessMessage("删除成功！");
 		}
 		
+	}
+	
+	//改变购物车中菜品的选中状态
+	public void updatethechecked(Integer userId,Integer productId){
+		ShoppingCart cart=shoppingCartMapper.selectCartByUserIdProductId(userId, productId);
+		
+//		System.out.println(cart.getProductId().toString());
+		int checked=cart.getChecked();
+		if(checked==1){
+			cart.setChecked(0);
+		}else{
+			cart.setChecked(1);
+		}
+		shoppingCartMapper.changethechecked(userId, productId, cart.getChecked());
+		System.out.println("修改完成");
 	}
 	
 //	public ServerResponse<ShoppingCartVo> deleteProduct(Integer userId,String productIds){
@@ -182,13 +205,13 @@ public class CartServiceImpl implements ICartService{
 //		return this.list(userId);
 //	}
 	
-	
+	//
 	public ServerResponse<ShoppingCartVo> selectOrUnSelect (Integer userId,Integer productId,Integer checked){
 		shoppingCartMapper.checkedOrUncheckedProduct(userId,productId,checked);
 		return this.list(userId);
 	}
 
-	
+	//获取购物车中商品的数量
 	public ServerResponse<Integer> getCartProductCount(Integer userId){
 		if(userId == null){
 			return ServerResponse.createBySuccess(0);

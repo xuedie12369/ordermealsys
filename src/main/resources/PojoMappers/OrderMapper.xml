@@ -10,7 +10,7 @@
      <arg column="order_no" jdbcType="BIGINT" javaType="java.lang.Long" />
       <arg column="total_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
       <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="delivery_type" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="address_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="order_type" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="pay_status" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="order_notes" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -26,7 +26,7 @@
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    id,order_no, seller_name, user_id, total_price, create_time, delivery_type, order_type, 
+    id,order_no, seller_name, user_id, total_price, create_time, address_id, order_type, 
     pay_status, order_notes, delivery_time, delete_status, delivery_fee, order_status, 
     pay_time, transact_closing_time, transact_comple_time, update_time, box_total_price
   </sql>
@@ -40,13 +40,13 @@
   </delete>
   <insert id="insert" parameterType="zsc.ordermealsys.pojo.Order" useGeneratedKeys="true" keyProperty="id" >
     insert into `order` (order_no,seller_name, user_id, total_price, 
-      create_time, delivery_type, order_type, 
+      create_time, address_id, order_type, 
       pay_status, order_notes, delivery_time, 
       delete_status, delivery_fee, order_status, 
       pay_time, transact_closing_time, transact_comple_time, 
       update_time, box_total_price)
     values (#{orderNo,jdbcType=BIGINT},#{sellerName,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, #{totalPrice,jdbcType=DECIMAL}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{deliveryType,jdbcType=INTEGER}, #{orderType,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{addressId,jdbcType=INTEGER}, #{orderType,jdbcType=INTEGER}, 
       #{payStatus,jdbcType=INTEGER}, #{orderNotes,jdbcType=VARCHAR}, #{deliveryTime,jdbcType=VARCHAR}, 
       #{deleteStatus,jdbcType=INTEGER}, #{deliveryFee,jdbcType=DECIMAL}, #{orderStatus,jdbcType=INTEGER}, 
       #{payTime,jdbcType=TIMESTAMP}, #{transactClosingTime,jdbcType=TIMESTAMP}, #{transactCompleTime,jdbcType=TIMESTAMP}, 
@@ -71,8 +71,8 @@
       <if test="createTime != null" >
         create_time,
       </if>
-      <if test="deliveryType != null" >
-        delivery_type,
+      <if test="addressId != null" >
+        address_id,
       </if>
       <if test="orderType != null" >
         order_type,
@@ -124,8 +124,8 @@
       <if test="createTime != null" >
         #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="deliveryType != null" >
-        #{deliveryType,jdbcType=INTEGER},
+      <if test="addressId != null" >
+        #{addressId,jdbcType=INTEGER},
       </if>
       <if test="orderType != null" >
         #{orderType,jdbcType=INTEGER},
@@ -183,8 +183,8 @@
       <if test="createTime != null" >
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="deliveryType != null" >
-        delivery_type = #{deliveryType,jdbcType=INTEGER},
+      <if test="addressId != null" >
+        address_id = #{addressId,jdbcType=INTEGER},
       </if>
       <if test="orderType != null" >
         order_type = #{orderType,jdbcType=INTEGER},
@@ -232,7 +232,7 @@
       user_id = #{userId,jdbcType=INTEGER},
       total_price = #{totalPrice,jdbcType=DECIMAL},
       create_time = #{createTime,jdbcType=TIMESTAMP},
-      delivery_type = #{deliveryType,jdbcType=INTEGER},
+      address_id = #{addressId,jdbcType=INTEGER},
       order_type = #{orderType,jdbcType=INTEGER},
       pay_status = #{payStatus,jdbcType=INTEGER},
       order_notes = #{orderNotes,jdbcType=VARCHAR},
