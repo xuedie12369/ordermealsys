@@ -200,7 +200,6 @@ div {
                  	/* alert($('#productPic').va) */
                  	document.getElementById("productPic").value=data.msg
                    	$("#mainPic").removeAttr("hidden");
-                  
                    
                 }  
         };  

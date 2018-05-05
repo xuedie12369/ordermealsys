@@ -62,7 +62,8 @@ public class UserServiceImpl implements IUserService{
 			System.out.print("fail!more username");
 			return ServerResponse.createByErrorMessage("用户名已存在");
 		}
-		ServerResponse validResponse=this.checkValid(user.getUserName(), Const.USERNAME);
+		ServerResponse validResponse=this.
+				checkValid(user.getUserName(), Const.USERNAME);
 		if(!validResponse.isSuccess()){
 			return validResponse;
 		}
@@ -146,7 +147,8 @@ public class UserServiceImpl implements IUserService{
 	/**
 	 * 忘记密码，重置密码用户接口的实现方式
 	 */
-	public ServerResponse<String> forgetResetPassword(String username,String passwordNew,String forgetToken){
+	public ServerResponse<String> forgetResetPassword(String username,
+			String passwordNew,String forgetToken){
 		if(StringUtils.isBlank(forgetToken)){
 			return ServerResponse.createByErrorMessage("参数错误，token需要传递！");
 		}

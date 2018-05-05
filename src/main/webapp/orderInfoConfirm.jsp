@@ -16,7 +16,7 @@
 <script src="js/jquery-3.2.1.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <!-- 引入jsrender插件 -->
-<script src="//www.jsviews.com/download/jsviews.js"></script>
+<script src="js/jsviews.js"></script>
 
 <script id="orderItemListTmpl" type="text/x-jsrender">
 	
@@ -26,9 +26,9 @@
 
 
 
-<span class="cell name ng-binding" ng-bind="row.food.name">{{:productName}}</span>
-<span class="cell quantity ng-binding" ng-bind="row.food.quantity">{{:productNum}}</span>
-<span class="cell price ng-binding" ng-bind="row.food.price * row.food.quantity | number:2">{{:productPrice}}</span>
+<span class="cell name ng-binding" ng-bind="row.food.name">这里是名称</span>
+<span class="cell quantity ng-binding" ng-bind="row.food.quantity">这里是数量</span>
+<span class="cell price ng-binding" ng-bind="row.food.price * row.food.quantity | number:2">这里价格</span>
 
 
 </div>
@@ -176,18 +176,16 @@ addressList();
 function orderItemList(){
 		$.ajax({
 			type : "GET",
-			url : 'cart/list.do',
+			url : 'cart/select_checked_product.do',
 			contentType : "application/x-www-form-urlencoded",
 			dataType : "json",
 			success : function(data) {
 				if(data.status==0)
 				{
-					console.log(data);
-				var html = $("#orderItemListTmpl").render(data.data.cartProductVoList);
-				/* $("#addressList").append(html);  */
-				$("#addressList").html(html);
+				console.log(data);
+				
 				address(); 
-		var html = $("#orderItemListTmpl").render(data.data.cartProductVoList)	
+		var html = $("#orderItemListTmpl").render(data.data)	
 		$("#orderItem").append(html);
 				}
 				else

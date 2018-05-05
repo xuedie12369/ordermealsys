@@ -209,27 +209,21 @@ $(function(){
 
 function balance(){
 	$("#balance").click(function() {
-		alert("点击了提交")
+	alert("进来 了")
 		$.ajax({
-			type : "GET",
-			url : 'cart/list.do',
+			type : "POST",
+			url : 'cart/select.do',
 			/*contentType : "application/json; charset=utf-8", */
 			contentType : "application/x-www-form-urlencoded",
 			/* 	data : $('#J-normal-form').serialize(), */
-			/*  data: fd,  */
+			data: {productId:50}, 
 			dataType : "json",
 			success : function(data) {
 				if (data.status == 10) {
 					alert(data.msg);
-					window.location.href = "login.jsp"
+					/* window.location.href = "login.jsp" */
 				}
-				var html = $("#productListTmpl").render(data.data.cartProductVoList);
-				/* 追加内容 */
-				$("#productDiv").append(html);
-				console.log(data.data);
-				addBtn();
-				deleteItem();
-				
+			
 			},
 			error : function() {
 				alert("提交数据失败");
@@ -237,6 +231,11 @@ function balance(){
 		});
 });	
 };
+
+
+
+
+
 
 /* 清空购物车 */
 function clear(){
@@ -297,7 +296,7 @@ function clear(){
 	</table>
 	<div style="text-align: right;margin-top: 5px">
 		<tr>
-			<button class="btn btn-danger " href="" id="balance">结算</button>
+			<button class="btn btn-danger " href="" id="balance" onclick="">结算</button>
 		</tr>
 		<tr>
 			<button class="btn btn-danger " href="" id="clear">清空</button>
