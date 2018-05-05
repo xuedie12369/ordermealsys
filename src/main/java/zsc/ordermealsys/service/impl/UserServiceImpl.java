@@ -39,8 +39,8 @@ public class UserServiceImpl implements IUserService{
 			return ServerResponse.createByErrorMessage("用户名不存在！");
 		}
 		//密码登录MD5
-		//String md5Password=MD5Util.MD5EncodeUtf8(password);
-		User user=userMapper.selectLogin(username, pwd);
+		String md5Password=MD5Util.MD5EncodeUtf8(pwd);
+		User user=userMapper.selectLogin(username, md5Password);
 		if(user==null){
 			System.out.println("pwd failed");
 			return ServerResponse.createByErrorMessage("密码错误！");
@@ -77,7 +77,7 @@ public class UserServiceImpl implements IUserService{
 		}
 		user.setRole(Const.Role.ROLE_CUSTOMER);
 		//MD5加密
-//		user.setPwd(MD5Util.MD5EncodeUtf8(user.getPwd()));
+		user.setPwd(MD5Util.MD5EncodeUtf8(user.getPwd()));
 		
 		resultCount=userMapper.insert(user);
 		System.out.print("success");
