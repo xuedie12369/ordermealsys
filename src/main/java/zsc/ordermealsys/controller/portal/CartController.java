@@ -1,15 +1,19 @@
 package zsc.ordermealsys.controller.portal;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import zsc.ordermealsys.common.Const;
 import zsc.ordermealsys.common.ResponseCode;
 import zsc.ordermealsys.common.ServerResponse;
+import zsc.ordermealsys.pojo.ShoppingCart;
 import zsc.ordermealsys.pojo.User;
 import zsc.ordermealsys.service.ICartService;
 import zsc.ordermealsys.vo.ShoppingCartVo;
@@ -34,8 +38,6 @@ public class CartController {
 		return iCartService.list(user.getId());
 	}
 
-	//往购物车中添加菜品的功能
-	
 	@RequestMapping("add.do")
 	@ResponseBody
 	public ServerResponse<ShoppingCartVo> add(HttpSession session,Integer count,Integer productId){
@@ -49,7 +51,23 @@ public class CartController {
 		return iCartService.add(user.getId(), productId, count);
 	}
 
+<<<<<<< HEAD
+	//查询购物车中选中的商品列表
+	@RequestMapping("select_checked_product.do")
+	@ResponseBody
+	public ServerResponse<List<ShoppingCart>> update(HttpSession session){
+		User user=(User)session.getAttribute(Const.CURRENT_USER);
+		if(user==null){
+			return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), 
+					ResponseCode.NEED_LOGIN.getDesc());
+		}
+		return iCartService.selectProductByChecked(user.getId());
+	}
+	
+	//更新购物车中商品数据的功能
+=======
 	//更新购物车中菜品数据的功能
+>>>>>>> 2d5d81e927abe938cc663940acdf940a1c345a03
 	@RequestMapping("update.do")
 	@ResponseBody
 	public ServerResponse<ShoppingCartVo> update(HttpSession session, Integer count,Integer productId){
@@ -107,9 +125,10 @@ public class CartController {
 	}
 
 	//单独选
-	@RequestMapping("select.do")
+	@RequestMapping(value="select.do",method=RequestMethod.POST)
 	@ResponseBody
 	public ServerResponse<ShoppingCartVo> select(HttpSession session, Integer productId){
+		System.out.print("传入的产品ID是:"+productId);
 		User user=(User)session.getAttribute(Const.CURRENT_USER);
 		if(user==null){
 			return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), 

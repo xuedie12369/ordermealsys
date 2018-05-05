@@ -50,7 +50,7 @@ table-condensed {
 								<!--<input type="checkbox" name="checkBox" />-->
 								<a href="#" class="thumbnail" style="text-align: right;">
 
-									<img src="1.png" alt="通用的占位符缩略图">
+									<img src="{{:mainPic}}" alt="通用的占位符缩略图">
 								</a>
 							</div>
 
@@ -256,6 +256,8 @@ function Cartlist() {
 </head>
 
 <body>
+<!-- 引入header -->
+<%@include file="header.jsp" %>
 
 	<form>
 		<table class="table   table-hover table-condensed table-responsive "
@@ -285,7 +287,7 @@ function Cartlist() {
 		</table>
 
 	</form>
-
+<%@include file="footer.jsp" %>
 </body>
 
 </html>

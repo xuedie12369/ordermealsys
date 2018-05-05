@@ -3,7 +3,7 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<%@ page language="java" pageEncoding="UTF-8"%>
+<%@ page language="java" deferredSyntaxAllowedAsLiteral="true" pageEncoding="UTF-8"%>
 <link rel="stylesheet" type="text/css" href="css/main.css">
 <link rel="stylesheet" type="text/css" href="css/orders.css">
 <!--详情页的-->
@@ -45,7 +45,7 @@
 					<!--也可以吧他们扯开用,如：{{if fullprice}}html markup{{/if}}和{{if fullprice}}html markup{{else}}html markup{{/if}}。但是这里需要注意两点：-->
 				</div>
 				<div class="order-status">
-					<a data-toggle="collapse" data-parent="#accordion" href="#替换这里每个不一样">查看详情</a>
+					<a data-toggle="collapse" data-parent="#accordion" href="#{{:orderNo}}">查看详情</a>
 				</div>
 				<div class="order-btn"></div>
 			</div>
@@ -53,7 +53,7 @@
 			<div class="panel-group" id="accordion" style="margin-bottom: 0px">
 				<div class="panel ">
 					<!--订单详情页开始-->
-					<div id="替换这里每个不一样" class="panel-collapse collapse " aria-expanded="true">
+					<div id="{{:orderNo}}" class="panel-collapse collapse " aria-expanded="true">
 						<div class="panel-body">
 
 							<div class="profile-panelcontent" ng-transclude="">
@@ -296,7 +296,7 @@
 					itmes[i].className = "order-condition ";
 				}
 				this.className = "order-condition active"
-				alert(clickIndex)
+				/* alert(clickIndex) */
 
 			});
 
